@@ -497,6 +497,7 @@ function renderHead({ title, description, canonicalPath, ogType = "website", sch
     <meta name="author" content="PrimeGent Editorial">
     <meta name="theme-color" content="#11100d">
     <meta name="pinterest-rich-pin" content="true">
+    <meta name="p:domain_verify" content="f9546a6294ecb3866f4ae528723c3661">
     <meta name="google-site-verification" content="REPLACE_ME">
     <link rel="canonical" href="${canonical}">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="${siteUrl}/sitemap.xml">
