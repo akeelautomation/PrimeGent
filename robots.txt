@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://primegent.pages.dev/sitemap.xml
