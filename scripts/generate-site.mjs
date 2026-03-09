@@ -349,8 +349,6 @@ const testimonials = [
   },
 ];
 
-const livePickSlugs = ["adidas-basic-3-stripes-tricot-track-suit"];
-
 const styleCategories = [
   { slug: "shirts", label: "Shirts", icon: "SH", blurb: "Oxford cloth, linen, and easy layers." },
   { slug: "pants", label: "Pants", icon: "PT", blurb: "Chinos, denim, and tailored options." },
@@ -368,6 +366,25 @@ function getPickMap() {
   return new Map(picks.map((pick) => [pick.slug, pick]));
 }
 
+function getManualAffiliateCards() {
+  try {
+    const picksPage = readFileSync(path.join(root, "picks.html"), "utf8");
+    const matches = picksPage.match(/<article class="card pick-card pick-card--affiliate"[\s\S]*?<\/article>/g);
+    return matches
+      ? matches
+          .map((card) =>
+            card.replace(
+              /<img class="pick-card__image"([^>]*?)>/g,
+              '<img class="pick-card__image"$1 onerror="this.onerror=null;this.src=\'./static/og-cover.svg\'">',
+            ),
+          )
+          .join("")
+      : "";
+  } catch {
+    return "";
+  }
+}
+
 function renderTags(items) {
   return items
     .map((item) => `<span class="tag">${escapeHtml(labelize(item))}</span>`)
@@ -375,11 +392,12 @@ function renderTags(items) {
 }
 
 function renderPickCard(pick) {
+  const pickImage = pick.image || "";
   return `
     <article class="card pick-card" data-pick-card data-category="${pick.category}" data-price="${pick.priceBucket}" data-brand="${pick.brand}" data-style="${pick.styles.join("|")}" data-name="${escapeHtml(pick.name.toLowerCase())}">
-      <div class="card-visual card-visual--${categoryTone(pick.category)}" aria-hidden="true">
+      ${pickImage ? `<a class="pick-card__media" href="./pick-${pick.slug}.html" aria-label="View ${escapeHtml(pick.name)} details"><img class="pick-card__image" src="${escapeHtml(pickImage)}" alt="${escapeHtml(pick.name)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./static/og-cover.svg'"></a>` : `<div class="card-visual card-visual--${categoryTone(pick.category)}" aria-hidden="true">
         <span>${escapeHtml(pick.visual)}</span>
-      </div>
+      </div>`}
       <div class="pick-card__body">
         <div class="pick-card__meta">
           <span class="badge">${escapeHtml(categoryLabel(pick.category))}</span>
@@ -672,8 +690,9 @@ function renderIndexPage() {
 }
 
 function renderPicksPage() {
-  const pickMap = getPickMap();
-  const liveCards = livePickSlugs.map((slug) => pickMap.get(slug)).filter(Boolean).map(renderPickCard).join("");
+  const manualAffiliateCards = getManualAffiliateCards();
+  const generatedCards = picks.map(renderPickCard).join("");
+  const allCards = [manualAffiliateCards, generatedCards].filter(Boolean).join("");
   return renderPage({
     pageId: "picks",
     title: "PrimeGent Picks | Curated Men's Clothing and Outfit Staples",
@@ -692,9 +711,9 @@ function renderPicksPage() {
         <section class="section section--tight">
           <div class="container">
             <div class="section-heading">
-              <div><p class="eyebrow">Current picks</p><h2>Live on the affiliate side now</h2></div>
+              <div><p class="eyebrow">Current picks</p><h2>All PrimeGent product picks</h2></div>
             </div>
-            <div class="card-grid card-grid--picks" data-picks-grid>${liveCards}</div>
+            <div class="card-grid card-grid--picks" data-picks-grid>${allCards}</div>
           </div>
         </section>
       </main>
@@ -764,7 +783,7 @@ function renderPrivacyPage() {
 
 function renderPickPage(pick) {
   const { lowPrice, highPrice } = parsePriceRange(pick.priceLabel);
-  const description = `${pick.description} Learn why PrimeGent recommends ${pick.name}, how to style it, and who it fits best.`;
+  const description = `${pick.description} Learn why PrimeGent recommends ${pick.name} and review the key details before you buy.`;
   const productImage = pick.image || ogImage;
   const imageAlt = pick.imageAlt || pick.name;
   const offerSchema =
@@ -825,14 +844,12 @@ function renderPickPage(pick) {
         <section class="section section--tight">
           <div class="container article-grid">
             <article class="article-content">
-              <section class="card card--prose"><h2>Why We Love It</h2><ul class="bullet-list">${pick.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
-              <section class="card card--prose"><h2>How to Style It</h2><div class="stack-cards">${pick.outfits.map((item) => `<article class="style-note"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.description)}</p></article>`).join("")}</div></section>
-              <section class="card card--prose"><h2>Who It's For</h2><div class="info-grid"><div><h3>Body type</h3><p>${escapeHtml(pick.who.bodyType)}</p></div><div><h3>Occasion</h3><p>${escapeHtml(pick.who.occasion)}</p></div><div><h3>Style notes</h3><p>${escapeHtml(pick.who.styleNote)}</p></div></div></section>
-              <section class="card card--prose"><h2>Specs at a Glance</h2><div class="spec-grid"><div><span>Material</span><strong>${escapeHtml(pick.material)}</strong></div><div><span>Fit</span><strong>${escapeHtml(pick.fit)}</strong></div><div><span>Retailer</span><strong>Check Latest Price of Amazon</strong></div><div><span>Care</span><strong>${escapeHtml(pick.care)}</strong></div></div></section>
-            </article>
-            <aside class="sidebar"><div class="card sidebar-card"><h2>Quick take</h2><p>${escapeHtml(pick.name)} works best when you need one piece that can repeat across multiple outfits without feeling generic.</p></div><div class="card sidebar-card"><h2>Best paired with</h2><div class="tag-row">${renderTags(pick.styles)}</div></div></aside>
-          </div>
-        </section>
+            <section class="card card--prose"><h2>Why We Love It</h2><ul class="bullet-list">${pick.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
+            <section class="card card--prose"><h2>Specs at a Glance</h2><div class="spec-grid"><div><span>Material</span><strong>${escapeHtml(pick.material)}</strong></div><div><span>Fit</span><strong>${escapeHtml(pick.fit)}</strong></div><div><span>Retailer</span><strong>Check Latest Price of Amazon</strong></div><div><span>Care</span><strong>${escapeHtml(pick.care)}</strong></div></div></section>
+          </article>
+          <aside class="sidebar"><div class="card sidebar-card"><h2>Quick take</h2><p>${escapeHtml(pick.name)} works best when you need one piece that can repeat across multiple outfits without feeling generic.</p></div></aside>
+        </div>
+      </section>
         <section class="section section--soft"><div class="container"><div class="section-heading"><div><p class="eyebrow">You might also like</p><h2>Related picks</h2></div><a class="text-link" href="./picks.html?category=${pick.category}">See more ${escapeHtml(categoryLabel(pick.category).toLowerCase())} -></a></div><div class="card-grid card-grid--picks">${renderRelatedPicks(pick.related)}</div></div></section>
       </main>
     `,
