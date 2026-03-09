@@ -34,6 +34,10 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
+function safeJson(value) {
+  return JSON.stringify(value, null, 2).replace(/<\/script/gi, "<\\/script");
+}
+
 function categoryLabel(category) {
   return labelize(category);
 }
@@ -48,6 +52,24 @@ function categoryTone(category) {
     basics: "basics",
     activewear: "activewear",
   }[category];
+}
+
+function extractImageSize(url) {
+  const square = String(url || "").match(/_SL(\d+)_/i);
+  if (square) {
+    return { width: square[1], height: square[1] };
+  }
+
+  const dimension = String(url || "").match(/_SX(\d+)_.*?_SY(\d+)_/i);
+  if (dimension) {
+    return { width: dimension[1], height: dimension[2] };
+  }
+
+  return { width: "", height: "" };
+}
+
+function normalizeProductAvailabilityContent(availability) {
+  return availability === "https://schema.org/InStock" || availability === "InStock" ? "instock" : "oos";
 }
 
 const picks = [];
@@ -504,7 +526,18 @@ function renderFooter() {
   `;
 }
 
-function renderHead({ title, description, canonicalPath, ogType = "website", schema, extraHead = "", imageUrl = ogImage, imageAlt = title }) {
+function renderHead({
+  title,
+  description,
+  canonicalPath,
+  ogType = "website",
+  schema,
+  extraHead = "",
+  imageUrl = ogImage,
+  imageAlt = title,
+  imageWidth = "",
+  imageHeight = "",
+}) {
   const canonical = canonicalPath ? `${siteUrl}/${canonicalPath}` : `${siteUrl}/`;
   return `
     <meta charset="utf-8">
@@ -530,6 +563,8 @@ function renderHead({ title, description, canonicalPath, ogType = "website", sch
     <meta property="og:image" content="${escapeHtml(imageUrl)}">
     <meta property="og:image:secure_url" content="${escapeHtml(imageUrl)}">
     <meta property="og:image:alt" content="${escapeHtml(imageAlt)}">
+    ${imageWidth && imageHeight ? `<meta property="og:image:width" content="${escapeHtml(imageWidth)}">
+    <meta property="og:image:height" content="${escapeHtml(imageHeight)}">` : ""}
     <meta property="og:type" content="${escapeHtml(ogType)}">
     <meta property="og:url" content="${canonical}">
     <meta name="twitter:card" content="summary_large_image">
@@ -538,16 +573,30 @@ function renderHead({ title, description, canonicalPath, ogType = "website", sch
     <meta name="twitter:image" content="${escapeHtml(imageUrl)}">
     <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}">
     ${extraHead}
-    <script type="application/ld+json">${JSON.stringify(schema, null, 2)}</script>
+    <script type="application/ld+json">${safeJson(schema)}</script>
   `;
 }
 
-function renderPage({ pageId, title, description, canonicalPath, schema, body, ogType, extraHead, bodyClass = "", imageUrl, imageAlt }) {
+function renderPage({
+  pageId,
+  title,
+  description,
+  canonicalPath,
+  schema,
+  body,
+  ogType,
+  extraHead,
+  bodyClass = "",
+  imageUrl,
+  imageAlt,
+  imageWidth,
+  imageHeight,
+}) {
   return `
     <!DOCTYPE html>
     <html lang="en">
       <head>
-        ${renderHead({ title, description, canonicalPath, ogType, schema, extraHead, imageUrl, imageAlt })}
+        ${renderHead({ title, description, canonicalPath, ogType, schema, extraHead, imageUrl, imageAlt, imageWidth, imageHeight })}
       </head>
       <body data-page="${pageId}" class="${bodyClass}">
         ${renderHeader()}
@@ -790,10 +839,14 @@ function renderPickPage(pick) {
   const description = `${pick.description} Learn why PrimeGent recommends ${pick.name} and review the key details before you buy.`;
   const productImage = pick.image || ogImage;
   const imageAlt = pick.imageAlt || pick.name;
+  const imageSize = extractImageSize(productImage);
+  const pageTitle = `${pick.name} | PrimeGent`;
+  const productAvailability = normalizeProductAvailabilityContent("InStock");
   const offerSchema =
     lowPrice === highPrice
       ? {
           "@type": "Offer",
+          itemCondition: "https://schema.org/NewCondition",
           priceCurrency: "USD",
           price: lowPrice,
           availability: "https://schema.org/InStock",
@@ -809,13 +862,15 @@ function renderPickPage(pick) {
         };
   return renderPage({
     pageId: "picks",
-    title: `${pick.name} Review and Styling Guide | PrimeGent`,
+    title: pageTitle,
     description,
     canonicalPath: `pick-${pick.slug}.html`,
     ogType: "product",
     imageUrl: productImage,
     imageAlt,
-    extraHead: `<meta property="product:price:amount" content="${lowPrice}"><meta property="product:price:currency" content="USD"><meta property="product:availability" content="in stock"><meta property="product:retailer_item_id" content="${escapeHtml(pick.asin || pick.slug)}">`,
+    imageWidth: imageSize.width,
+    imageHeight: imageSize.height,
+    extraHead: `<meta property="product:price:amount" content="${lowPrice}"><meta property="product:price:currency" content="USD"><meta property="product:brand" content="${escapeHtml(pick.brandName)}"><meta property="product:condition" content="new"><meta property="product:availability" content="${productAvailability}"><meta property="product:retailer_item_id" content="${escapeHtml(pick.asin || pick.slug)}">`,
     schema: {
       "@context": "https://schema.org",
       "@type": "Product",

@@ -189,6 +189,10 @@ function truncate(value, maxLength) {
   return `${short.slice(0, Math.max(lastSpace, 0))}...`;
 }
 
+function normalizeProductAvailabilityContent(availability) {
+  return availability === "InStock" ? "instock" : "oos";
+}
+
 function normalizeMoneyValue(value) {
   const match = String(value ?? "").match(/([0-9][0-9,]*)(?:\.([0-9]{1,2}))?/);
   if (!match) {
@@ -260,6 +264,10 @@ function extractMoney(html) {
 }
 
 function extractAvailability(html) {
+  if (/id="outOfStockBuyBox_feature_div"/i.test(html) || /currently unavailable/i.test(html) || /out of stock/i.test(html)) {
+    return "OutOfStock";
+  }
+
   const match =
     html.match(/<div id="availability"[\s\S]*?<span[^>]*>([\s\S]*?)<\/span>/i) ||
     html.match(/<div id="availabilityInsideBuyBox_feature_div"[\s\S]*?<span[^>]*>([\s\S]*?)<\/span>/i);
@@ -385,8 +393,8 @@ function deriveSummary(bullets, shortTitle) {
   return `${shortTitle} with affiliate-ready product details, clean metadata, and a PrimeGent styling angle.`;
 }
 
-function deriveMetaDescription(shortTitle, cardCopy) {
-  return truncate(`Affiliate pick: ${shortTitle}. ${cardCopy}`, 158);
+function deriveMetaDescription(shortTitle, summary) {
+  return truncate(`Affiliate pick: ${shortTitle}. ${summary}`, 158);
 }
 
 function getCategories() {
@@ -870,6 +878,7 @@ ${thumbButtons}
 
 function renderPickPage(data) {
   const gallery = renderGalleryMarkup(data);
+  const pageTitle = `${data.shortTitle} | PrimeGent`;
   const productJson = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -898,7 +907,7 @@ function renderPickPage(data) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${escapeHtml(data.shortTitle)} Review and Styling Guide | PrimeGent</title>
+    <title>${escapeHtml(pageTitle)}</title>
     <meta name="description" content="${escapeHtml(data.metaDescription)}">
     <meta name="robots" content="index,follow">
     <meta name="author" content="PrimeGent Editorial">
@@ -914,17 +923,19 @@ function renderPickPage(data) {
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/style.css">
     <meta property="og:site_name" content="PrimeGent">
-    <meta property="og:title" content="${escapeHtml(data.shortTitle)} Review and Styling Guide | PrimeGent">
+    <meta property="og:title" content="${escapeHtml(pageTitle)}">
     <meta property="og:description" content="${escapeHtml(data.metaDescription)}">
 ${renderOgImageTags(data)}
     <meta property="og:type" content="product">
     <meta property="og:url" content="${escapeHtml(data.productUrl)}">
     ${data.price ? `<meta property="product:price:amount" content="${escapeHtml(data.price)}">
     <meta property="product:price:currency" content="USD">` : ""}
-    <meta property="product:availability" content="${data.availability === "InStock" ? "in stock" : "out of stock"}">
+    <meta property="product:brand" content="${escapeHtml(data.brand)}">
+    <meta property="product:condition" content="new">
+    <meta property="product:availability" content="${normalizeProductAvailabilityContent(data.availability)}">
     <meta property="product:retailer_item_id" content="${escapeHtml(data.asin)}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${escapeHtml(data.shortTitle)} Review and Styling Guide | PrimeGent">
+    <meta name="twitter:title" content="${escapeHtml(pageTitle)}">
     <meta name="twitter:description" content="${escapeHtml(data.metaDescription)}">
     <meta name="twitter:image" content="${escapeHtml(data.imageUrl)}">
     <meta name="twitter:image:alt" content="${escapeHtml(data.altText)}">
@@ -1088,7 +1099,7 @@ function createAnalysis(input, amazonData) {
     availability: amazonData.availability,
     pageFile,
     productUrl,
-    metaDescription: deriveMetaDescription(shortTitle, cardCopy),
+    metaDescription: deriveMetaDescription(shortTitle, pageSummary),
     ogTitle: `${shortTitle} | PrimeGent`,
     altText: input.altText?.trim() || `${shortTitle} product photo`,
     styles,
