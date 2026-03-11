@@ -52,6 +52,7 @@ function formPayload() {
     pageSummary: data.get("pageSummary")?.trim(),
     styleTags: data.get("styleTags")?.trim(),
     brandTier: data.get("brandTier")?.trim(),
+    price: data.get("price")?.trim(),
     material: data.get("material")?.trim(),
     fit: data.get("fit")?.trim(),
     care: data.get("care")?.trim(),
@@ -73,9 +74,13 @@ function renderAnalysis(analysis) {
   els.previewTitle.textContent = analysis.shortTitle;
   els.previewSection.textContent = `Category: ${analysis.categoryLabel}`;
   els.previewAsin.textContent = `ASIN: ${analysis.asin}`;
-  els.previewPrice.textContent = analysis.price
-    ? `Price found: $${analysis.price}`
-    : "Price not found. The page can still publish and will omit price metadata.";
+  if (analysis.price) {
+    const sourceLabel = analysis.priceSource === "manual" ? "manual override" : "Amazon";
+    els.previewPrice.textContent = `Price found: $${analysis.price} (${sourceLabel})`;
+  } else {
+    els.previewPrice.textContent =
+      "Price not found. The page can still publish and will omit price metadata.";
+  }
   els.previewFile.textContent = analysis.pageFile;
   els.previewUrl.textContent = analysis.productUrl;
   els.previewImageCount.textContent = `${analysis.imageUrls.length} image${analysis.imageUrls.length === 1 ? "" : "s"}`;

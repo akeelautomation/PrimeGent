@@ -51,7 +51,20 @@ const CATEGORY_DEFS = [
     id: "accessories",
     label: "Accessories",
     tone: "accessories",
-    keywords: ["watch", "sunglasses", "belt", "beanie", "hat", "wallet", "bag", "cap"],
+    keywords: [
+      "watch",
+      "sunglasses",
+      "glasses",
+      "eyeglasses",
+      "eyewear",
+      "frames",
+      "belt",
+      "beanie",
+      "hat",
+      "wallet",
+      "bag",
+      "cap",
+    ],
     styles: ["casual", "minimal", "weekend"],
   },
   {
@@ -243,6 +256,11 @@ function extractMoney(html) {
 
   const fallbackPatterns = [
     /"priceAmount"\s*:\s*"?([0-9][0-9,]*(?:\.[0-9]{1,2})?)"?/i,
+    /"priceToPay"\s*:\s*{[\s\S]*?"price"\s*:\s*"?\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)"?/i,
+    /"priceToPay"\s*:\s*{[\s\S]*?"value"\s*:\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/i,
+    /data-a-price="\{&quot;amount&quot;:([0-9][0-9,]*(?:\.[0-9]{1,2})?)&quot;/i,
+    /data-a-price="\{\"amount\":([0-9][0-9,]*(?:\.[0-9]{1,2})?)/i,
+    /<span class="a-price[^"]*"[^>]*>[\s\S]*?<span class="a-offscreen">\s*\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/i,
     /"displayPrice"\s*:\s*"\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)"/i,
     /"buyingPrice"\s*:\s*"\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)"/i,
     /id="priceblock_(?:our|deal|sale|pospromoprice)"[^>]*>\s*\$?\s*([0-9][0-9,]*(?:\.[0-9]{1,2})?)/i,
@@ -404,13 +422,31 @@ function getCategories() {
 function inferCategoryId(productText) {
   const haystack = productText.toLowerCase();
 
-  for (const category of CATEGORY_DEFS) {
-    if (category.keywords.some((keyword) => haystack.includes(keyword))) {
-      return category.id;
-    }
-  }
+  const scored = CATEGORY_DEFS.map((category) => {
+    let score = 0;
+    let matched = 0;
 
-  return "basics";
+    for (const keyword of category.keywords) {
+      if (haystack.includes(keyword)) {
+        score += keyword.length >= 6 ? 2 : 1;
+        matched += 1;
+      }
+    }
+
+    return { id: category.id, score, matched };
+  });
+
+  scored.sort((a, b) => {
+    if (b.score !== a.score) {
+      return b.score - a.score;
+    }
+    if (b.matched !== a.matched) {
+      return b.matched - a.matched;
+    }
+    return 0;
+  });
+
+  return scored[0].score > 0 ? scored[0].id : "basics";
 }
 
 function inferStyles(categoryId, fullTitle, bullets, styleTags) {
@@ -1064,6 +1100,9 @@ function createAnalysis(input, amazonData) {
     throw new Error("At least one image URL is required.");
   }
 
+  const manualPrice = normalizeMoneyValue(input.price);
+  const resolvedPrice = manualPrice || amazonData.price;
+  const priceSource = manualPrice ? "manual" : amazonData.price ? "amazon" : "missing";
   const shortTitle = input.shortTitle?.trim() || titleFromAmazonTitle(amazonData.fullTitle, amazonData.brand);
   const categoryId = input.sectionId || inferCategoryId(`${shortTitle} ${amazonData.slugHint} ${amazonData.bullets.join(" ")}`);
   const category = CATEGORY_DEFS.find((item) => item.id === categoryId) || CATEGORY_DEFS[0];
@@ -1094,8 +1133,9 @@ function createAnalysis(input, amazonData) {
     cardCopy,
     pageSummary,
     bullets: amazonData.bullets.length ? amazonData.bullets : [cardCopy],
-    price: amazonData.price,
-    priceBucket: derivePriceBucket(amazonData.price),
+    price: resolvedPrice,
+    priceBucket: derivePriceBucket(resolvedPrice),
+    priceSource,
     availability: amazonData.availability,
     pageFile,
     productUrl,
