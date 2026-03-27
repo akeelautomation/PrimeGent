@@ -380,8 +380,41 @@ const styleCategories = [
   { slug: "basics", label: "Basics", icon: "BS", blurb: "Tee-and-knit foundations for daily wear." },
 ];
 
-function getLatestPosts() {
-  return [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
+const editorialCategories = [
+  {
+    slug: "style-guides",
+    label: "Style Guides",
+    icon: "SG",
+    blurb: "Sharper fundamentals, cleaner silhouettes, and mistakes worth fixing early.",
+  },
+  {
+    slug: "wardrobe-basics",
+    label: "Wardrobe Basics",
+    icon: "WB",
+    blurb: "Capsules, color systems, and the repeatable pieces that do most of the work.",
+  },
+  {
+    slug: "outfit-ideas",
+    label: "Outfit Ideas",
+    icon: "OI",
+    blurb: "Practical formulas for weekends, offices, travel, and warmer weather.",
+  },
+  {
+    slug: "buying-guides",
+    label: "Buying Guides",
+    icon: "BG",
+    blurb: "What to buy, what to skip, and how to spend with more discipline.",
+  },
+];
+
+const homeFeaturedPickSlugs = [
+  "muji-french-linen-shirt",
+  "everlane-the-slim-fit-chino",
+  "veja-v10-sneaker",
+];
+
+function getLatestPosts(limit = 3) {
+  return [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, limit);
 }
 
 function getPickMap() {
@@ -466,7 +499,7 @@ function renderHeader() {
           <a href="./index.html" data-nav-link="home">Home</a>
           <a href="./picks.html" data-nav-link="picks">Outfits</a>
           <a href="./blog.html" data-nav-link="blog">Journal</a>
-          <a href="./privacy.html" data-nav-link="privacy">Privacy</a>
+          <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
         </nav>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
           <span></span>
@@ -489,7 +522,7 @@ function renderHeader() {
             <a href="./index.html" data-nav-link="home">Home</a>
             <a href="./picks.html" data-nav-link="picks">Outfits</a>
             <a href="./blog.html" data-nav-link="blog">Journal</a>
-            <a href="./privacy.html" data-nav-link="privacy">Privacy</a>
+            <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
           </nav>
         </div>
       </div>
@@ -510,12 +543,18 @@ function renderFooter() {
         </div>
         <div>
           <h2>Explore</h2>
+          <a href="./blog.html">Journal</a>
           <a href="./picks.html">Curated picks</a>
-          <a href="./blog.html">Style guides</a>
         </div>
         <div>
-          <h2>Trust</h2>
-          <a href="./privacy.html">Privacy policy</a>
+          <h2>Company</h2>
+          <a href="./about.html">About us</a>
+          <a href="./contact.html">Contact us</a>
+        </div>
+        <div>
+          <h2>Legal</h2>
+          <a href="./privacy-policy.html">Privacy policy</a>
+          <a href="./affiliate-disclosure.html">Affiliate disclosure</a>
           <p class="footer-note">PrimeGent may earn commissions from qualifying purchases through affiliate links.</p>
         </div>
       </div>
@@ -653,13 +692,19 @@ function renderArticleContent(post) {
 }
 
 function renderIndexPage() {
-  const previewPosts = getLatestPosts().map(renderBlogCard).join("");
+  const previewPosts = getLatestPosts(6).map(renderBlogCard).join("");
+  const pickMap = getPickMap();
+  const homePickCards = homeFeaturedPickSlugs
+    .map((slug) => pickMap.get(slug))
+    .filter(Boolean)
+    .map(renderPickCard)
+    .join("");
 
   return renderPage({
     pageId: "home",
-    title: "PrimeGent | Dress Better. Every Day.",
+    title: "PrimeGent | Men's Style Journal and Outfit Picks",
     description:
-      "PrimeGent curates men's outfit combinations, wardrobe guides, and affiliate-ready clothing picks that help you dress better with less guesswork.",
+      "PrimeGent leads with men's style guides, outfit ideas, and disciplined buying advice, then backs it up with curated outfit picks.",
     canonicalPath: "",
     ogType: "website",
     schema: {
@@ -668,7 +713,7 @@ function renderIndexPage() {
       name: "PrimeGent",
       url: `${siteUrl}/`,
       description:
-        "Curated men's outfit combinations, practical style guides, and clothing picks for everyday dress better decisions.",
+        "Editorial men's style guidance, repeatable outfit formulas, and curated clothing picks for everyday better-dressed decisions.",
       potentialAction: {
         "@type": "SearchAction",
         target: `${siteUrl}/blog.html?q={search_term_string}`,
@@ -680,31 +725,44 @@ function renderIndexPage() {
         <section class="hero hero--home">
           <div class="container hero-grid">
             <div>
-              <p class="eyebrow">Seasonal Edit</p>
-              <h1>Seasonal Outfit Curations</h1>
-              <p class="hero-copy">PrimeGent frames menswear through sharper layering, grounded neutrals, and practical pieces that feel premium without performing for attention.</p>
+              <p class="eyebrow">Editorial-first menswear</p>
+              <h1>Start With the Journal</h1>
+              <p class="hero-copy">PrimeGent puts the blog first: practical style guides, outfit formulas, and buying advice that make the shopping part easier and far less random.</p>
               <div class="hero-actions">
-                <a class="btn btn-primary" href="./picks.html">Explore the Picks</a>
-                <a class="btn btn-ghost" href="./blog.html">Open the Journal</a>
+                <a class="btn btn-primary" href="./blog.html">Read the Journal</a>
+                <a class="btn btn-ghost" href="./picks.html">Browse the Picks</a>
               </div>
             </div>
             <div class="hero-panel card">
-              <div class="hero-panel__row"><span class="metric">01</span><span>Tailored layering, cleaner silhouettes, and muted contrast.</span></div>
-              <div class="hero-panel__row"><span class="metric">02</span><span>Outfit formulas that move from office hours into evening without friction.</span></div>
-              <div class="hero-panel__row"><span class="metric">03</span><span>Quiet essentials chosen for texture, repetition, and real wardrobe mileage.</span></div>
-              <p class="hero-panel__note">Built as a dark editorial catalogue of outfit picks, style notes, and disciplined buying guidance.</p>
+              <div class="hero-panel__row"><span class="metric">${blogPosts.length}</span><span>Editorial articles covering smart casual, summer outfits, wardrobe basics, and better buying habits.</span></div>
+              <div class="hero-panel__row"><span class="metric">${editorialCategories.length}</span><span>Core journal tracks so readers can move from broad style advice to a specific problem fast.</span></div>
+              <div class="hero-panel__row"><span class="metric">02</span><span>Read first, shop second: the site explains the outfit logic before it asks anyone to click a product link.</span></div>
+              <p class="hero-panel__note">PrimeGent is built for men who want a more repeatable wardrobe, not a louder one.</p>
             </div>
           </div>
         </section>
 
         <section class="section section--soft">
           <div class="container">
-            <div class="section-heading"><div><p class="eyebrow">Wardrobe pillars</p><h2>Shop by the role each piece plays</h2></div></div>
+            <div class="section-heading">
+              <div><p class="eyebrow">Latest reading</p><h2>The newest articles lead the homepage</h2></div>
+              <a class="text-link" href="./blog.html">Browse all articles -></a>
+            </div>
+            <div class="card-grid card-grid--blog">${previewPosts}</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-heading">
+              <div><p class="eyebrow">Journal categories</p><h2>Choose the kind of guidance you need</h2></div>
+              <a class="text-link" href="./blog.html">Open the full journal -></a>
+            </div>
             <div class="category-grid">
-              ${styleCategories
+              ${editorialCategories
                 .map(
                   (item) => `
-                    <a class="category-card card" href="./picks.html?category=${item.slug}">
+                    <a class="category-card card" href="./blog.html?category=${item.slug}">
                       <span class="category-card__icon">${escapeHtml(item.icon)}</span>
                       <h3>${escapeHtml(item.label)}</h3>
                       <p>${escapeHtml(item.blurb)}</p>
@@ -716,20 +774,29 @@ function renderIndexPage() {
           </div>
         </section>
 
-        <section class="section">
+        <section class="section section--soft">
           <div class="container">
             <div class="section-heading">
-              <div><p class="eyebrow">Journal</p><h2>Style guidance with a quieter point of view</h2></div>
-              <a class="text-link" href="./blog.html">Browse the journal -></a>
+              <div><p class="eyebrow">When you're ready to shop</p><h2>Use the picks after the outfit logic is clear</h2></div>
+              <a class="text-link" href="./picks.html">See all curated picks -></a>
             </div>
-            <div class="card-grid card-grid--blog">${previewPosts}</div>
+            <div class="card-grid card-grid--picks">${homePickCards}</div>
           </div>
         </section>
 
         <section class="section">
           <div class="container mission-grid">
-            <div><p class="eyebrow">About PrimeGent</p><h2>We curate the pieces worth repeating</h2></div>
-            <p class="mission-copy">PrimeGent focuses on fit, proportion, fabric, and repetition. The goal is not louder style. It is a wardrobe that feels more exact, more masculine, and easier to wear on ordinary days.</p>
+            <div>
+              <p class="eyebrow">About PrimeGent</p>
+              <h2>We publish style guidance built for repetition</h2>
+            </div>
+            <div>
+              <p class="mission-copy">PrimeGent focuses on fit, proportion, fabric, and repeat wear. The goal is a sharper everyday wardrobe that feels easier to use, not a feed full of one-off statement outfits.</p>
+              <div class="hero-actions">
+                <a class="btn btn-ghost" href="./about.html">About us</a>
+                <a class="btn btn-ghost" href="./contact.html">Contact us</a>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -812,26 +879,165 @@ function renderBlogPage() {
   });
 }
 
-function renderPrivacyPage() {
+function renderContentPage({
+  pageId,
+  title,
+  description,
+  canonicalPath,
+  heroEyebrow,
+  heroTitle,
+  heroCopy,
+  bodyContent,
+}) {
   return renderPage({
-    pageId: "privacy",
-    title: "PrimeGent Privacy Policy | Affiliate, Analytics, and Newsletter Disclosure",
-    description:
-      "Read PrimeGent's privacy policy, affiliate disclosure, newsletter handling, and data usage notes for this static men's outfit website.",
-    canonicalPath: "privacy.html",
+    pageId,
+    title,
+    description,
+    canonicalPath,
     ogType: "website",
     schema: webPageSchema({
-      name: "PrimeGent Privacy Policy",
-      description: "Privacy policy and affiliate disclosure for PrimeGent's static men's style website.",
-      pathName: "privacy.html",
+      name: title,
+      description,
+      pathName: canonicalPath,
     }),
     body: `
       <main>
-        <section class="page-hero"><div class="container page-hero__content"><p class="eyebrow">Trust and disclosure</p><h1>Privacy Policy</h1><p>PrimeGent is a static site with affiliate links, analytics-ready placeholders, and a newsletter signup form.</p></div></section>
-        <section class="section"><div class="container prose card card--prose"><h2>Overview</h2><p>PrimeGent provides men's style content, product recommendations, and affiliate links. This page explains what data may be collected, how affiliate relationships work, and what to update before launch.</p><h2>Affiliate disclosure</h2><p>Some links on PrimeGent are affiliate links. If you click through and make a qualifying purchase, PrimeGent may earn a commission at no extra cost to you. Product recommendations are still curated based on fit, value, versatility, and style relevance.</p><h2>Analytics and cookies</h2><p>This static site can be deployed with analytics tools such as Cloudflare Web Analytics or another privacy-conscious platform. If you add analytics or cookie-based tools, update this policy to explain what is collected and how users can opt out.</p><h2>Newsletter submissions</h2><p>The newsletter form on the homepage points to a placeholder form service endpoint. If you replace it with Formspree, Mailchimp, or another provider, that provider may collect your email address and related metadata according to its own policy.</p><h2>Contact and data requests</h2><p>Before launch, replace placeholder contact details with a monitored email address so visitors can request data access, correction, or deletion where applicable.</p><h2>Third-party websites</h2><p>PrimeGent links out to Amazon and potentially other merchants. Once you leave the site, those platforms handle their own privacy practices and purchase flows.</p><h2>Policy updates</h2><p>Update this policy whenever analytics tooling, newsletter providers, affiliate relationships, or data handling practices change.</p></div></section>
+        <section class="page-hero"><div class="container page-hero__content"><p class="eyebrow">${escapeHtml(heroEyebrow)}</p><h1>${escapeHtml(heroTitle)}</h1><p>${escapeHtml(heroCopy)}</p></div></section>
+        <section class="section"><div class="container prose card card--prose">${bodyContent}</div></section>
       </main>
     `,
   });
+}
+
+function renderAboutPage() {
+  return renderContentPage({
+    pageId: "about",
+    title: "About PrimeGent | Editorial Men's Style Guidance",
+    description:
+      "Learn what PrimeGent covers, how the editorial process works, and why the site leads with practical men's style guidance before product picks.",
+    canonicalPath: "about.html",
+    heroEyebrow: "About PrimeGent",
+    heroTitle: "A clearer way to build a men's wardrobe",
+    heroCopy:
+      "PrimeGent is an editorial men's style site focused on repeatable outfits, cleaner shopping decisions, and advice that helps normal wardrobes work harder.",
+    bodyContent: `
+      <h2>What PrimeGent is</h2>
+      <p>PrimeGent publishes men's style guidance built around everyday use. The site covers wardrobe basics, outfit ideas, buying discipline, and product picks that support a cleaner, more repeatable closet.</p>
+      <h2>What we focus on</h2>
+      <p>The editorial point of view stays narrow on purpose: fit, proportion, fabric, color control, and pieces that can be worn often without feeling stale. The goal is not trend chasing. It is sharper daily dressing with less guesswork.</p>
+      <h2>How the site works</h2>
+      <p>The journal is the center of the site. Articles explain the logic behind outfits, categories, and buying choices. Product picks come after that, so readers can understand why a piece matters before they click an affiliate link.</p>
+      <h2>Who it is for</h2>
+      <p>PrimeGent is for men who want their wardrobe to look more intentional without turning style into a full-time hobby. That includes first-job wardrobes, smart-casual offices, travel capsules, date-night upgrades, and general closet clean-up.</p>
+      <h2>How to reach us</h2>
+      <p>If you need to get in touch about editorial questions, corrections, partnerships, or policy requests, use the details on <a href="./contact.html">the contact page</a>.</p>
+    `,
+  });
+}
+
+function renderContactPage() {
+  return renderContentPage({
+    pageId: "contact",
+    title: "Contact PrimeGent | Editorial, Business, and Privacy Requests",
+    description:
+      "Contact PrimeGent for editorial feedback, corrections, affiliate questions, business inquiries, and privacy-related requests.",
+    canonicalPath: "contact.html",
+    heroEyebrow: "Contact us",
+    heroTitle: "Get in touch with PrimeGent",
+    heroCopy:
+      "Use this page for editorial questions, corrections, partnership conversations, or privacy-related requests tied to the site.",
+    bodyContent: `
+      <h2>Primary contact</h2>
+      <p><a href="mailto:akeelautomation@gmail.com">akeelautomation@gmail.com</a></p>
+      <p>This inbox handles editorial questions, business inquiries, affiliate questions, and privacy-related requests for PrimeGent.</p>
+      <h2>What to use this inbox for</h2>
+      <p>Send messages about article corrections, product-page issues, partnership or affiliate questions, data requests, or general editorial feedback.</p>
+      <h2>Business and affiliate inquiries</h2>
+      <p>If your message relates to a brand, merchant, sponsorship, or affiliate relationship, include the company name, website, and the exact page or campaign you are referencing so the request can be reviewed faster.</p>
+      <h2>Privacy requests</h2>
+      <p>If you are contacting PrimeGent about data access, correction, deletion, or policy questions, mention that explicitly in the subject line and review the <a href="./privacy-policy.html">privacy policy</a> first.</p>
+      <h2>Response expectations</h2>
+      <p>This is a small editorial site, so response times may vary. If the site later adds a contact form, update this page and the privacy policy to reflect how form submissions are handled.</p>
+    `,
+  });
+}
+
+function renderPrivacyPolicyPage() {
+  return renderContentPage({
+    pageId: "privacy",
+    title: "PrimeGent Privacy Policy | Data, Analytics, and Affiliate Links",
+    description:
+      "Read PrimeGent's privacy policy covering information collection, analytics, cookies, affiliate links, third-party sites, and contact options.",
+    canonicalPath: "privacy-policy.html",
+    heroEyebrow: "Privacy policy",
+    heroTitle: "How PrimeGent handles privacy",
+    heroCopy:
+      "This page explains what information the site may collect, how third-party tools can affect visitors, and how PrimeGent handles affiliate-linked content.",
+    bodyContent: `
+      <h2>Last updated</h2>
+      <p>March 27, 2026.</p>
+      <h2>Overview</h2>
+      <p>PrimeGent is a content-driven men's style website. It publishes articles, curated product picks, and affiliate links. This policy explains what information may be collected through the site and what to update if you add new tools or services later.</p>
+      <h2>Information collected</h2>
+      <p>Because PrimeGent is primarily a static site, it may collect little or no personal information by default. If you add analytics, newsletter tools, contact forms, or other embedded services, those services may collect data such as IP address, browser information, referral source, or submitted contact details.</p>
+      <h2>How information is used</h2>
+      <p>Information may be used to understand site performance, respond to inquiries, improve content, prevent abuse, and manage any newsletter or contact submissions you later add. PrimeGent should only collect data that supports operating and improving the site.</p>
+      <h2>Cookies and analytics</h2>
+      <p>If analytics or advertising tools are installed, those tools may use cookies or similar technologies. Update this page whenever a new analytics platform, consent tool, or tracking script is added so visitors understand what is being measured and why.</p>
+      <h2>Affiliate links and third-party sites</h2>
+      <p>Some PrimeGent links lead to Amazon or other merchants. If a visitor clicks one of those links, the merchant may track the referral and handle any resulting purchase under its own privacy policy and terms. PrimeGent does not control those third-party policies.</p>
+      <h2>Your choices</h2>
+      <p>Visitors can choose not to submit information through email or future forms, and they can review browser settings or extensions that limit cookies and other trackers. If consent tools are added later, this policy should be updated to explain those options clearly.</p>
+      <h2>Contact for privacy questions</h2>
+      <p>For privacy-related questions or requests, use the details on <a href="./contact.html">the contact page</a>. If you operate the site publicly, replace any placeholder inboxes with a monitored address before launch.</p>
+    `,
+  });
+}
+
+function renderAffiliateDisclosurePage() {
+  return renderContentPage({
+    pageId: "affiliate",
+    title: "PrimeGent Affiliate Disclosure | How Product Links Work",
+    description:
+      "Read PrimeGent's affiliate disclosure explaining how commissions work, how products are selected, and how editorial judgment is separated from monetization.",
+    canonicalPath: "affiliate-disclosure.html",
+    heroEyebrow: "Affiliate disclosure",
+    heroTitle: "How PrimeGent makes money from product links",
+    heroCopy:
+      "PrimeGent may earn commissions from qualifying purchases made through some outbound product links. This page explains what that means and what it does not mean.",
+    bodyContent: `
+      <h2>Affiliate relationship notice</h2>
+      <p>Some links on PrimeGent are affiliate links. If you click one of those links and make a qualifying purchase, PrimeGent may earn a commission from the retailer at no additional cost to you.</p>
+      <h2>Why this disclosure exists</h2>
+      <p>Affiliate compensation can create a commercial relationship between a publisher and a retailer. Readers should know when that relationship exists so they can evaluate recommendations with the right context.</p>
+      <h2>How products are chosen</h2>
+      <p>PrimeGent aims to recommend products based on usefulness, versatility, fit, category relevance, and how well a piece supports the wardrobe advice published in the journal. A commission opportunity should not be the only reason a product appears on the site.</p>
+      <h2>No extra cost to readers</h2>
+      <p>Using an affiliate link does not increase the listed purchase price for the visitor. The commission is paid by the retailer when the retailer's qualifying terms are met.</p>
+      <h2>Retailers and third parties</h2>
+      <p>Once you click through to Amazon or another merchant, that platform controls the shopping experience, pricing, availability, and any data collection tied to the transaction. Review the merchant's own policies before buying.</p>
+      <h2>Questions about disclosures</h2>
+      <p>If you need clarification about affiliate links or how PrimeGent handles monetized recommendations, use <a href="./contact.html">the contact page</a> and include the page URL you are asking about.</p>
+    `,
+  });
+}
+
+function renderLegacyPrivacyRedirectPage() {
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="refresh" content="0; url=./privacy-policy.html">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>PrimeGent Privacy Policy Redirect</title>
+        <link rel="canonical" href="${siteUrl}/privacy-policy.html">
+      </head>
+      <body>
+        <p>Redirecting to <a href="./privacy-policy.html">the PrimeGent privacy policy</a>.</p>
+      </body>
+    </html>
+  `;
 }
 
 function renderPickPage(pick) {
@@ -962,7 +1168,17 @@ function renderBlogPost(post) {
 }
 
 function renderSitemap() {
-  const urls = ["", "picks.html", "blog.html", "privacy.html", ...picks.map((pick) => `pick-${pick.slug}.html`), ...blogPosts.map((post) => `${post.slug}.html`)];
+  const urls = [
+    "",
+    "blog.html",
+    "picks.html",
+    "about.html",
+    "contact.html",
+    "privacy-policy.html",
+    "affiliate-disclosure.html",
+    ...picks.map((pick) => `pick-${pick.slug}.html`),
+    ...blogPosts.map((post) => `${post.slug}.html`),
+  ];
   return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>${url ? `${siteUrl}/${url}` : `${siteUrl}/`}</loc></url>`).join("")}</urlset>`;
 }
 
@@ -1070,7 +1286,11 @@ function writeOutput() {
   writeFile("index.html", renderIndexPage());
   writeFile("picks.html", renderPicksPage());
   writeFile("blog.html", renderBlogPage());
-  writeFile("privacy.html", renderPrivacyPage());
+  writeFile("about.html", renderAboutPage());
+  writeFile("contact.html", renderContactPage());
+  writeFile("privacy-policy.html", renderPrivacyPolicyPage());
+  writeFile("affiliate-disclosure.html", renderAffiliateDisclosurePage());
+  writeFile("privacy.html", renderLegacyPrivacyRedirectPage());
   for (const pick of picks) writeFile(`pick-${pick.slug}.html`, renderPickPage(pick));
   for (const post of blogPosts) writeFile(`${post.slug}.html`, renderBlogPost(post));
   console.log(`Generated ${picks.length} pick pages and ${blogPosts.length} blog posts.`);
