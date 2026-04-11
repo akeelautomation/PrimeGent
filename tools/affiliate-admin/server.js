@@ -1,14 +1,55 @@
 const http = require("http");
+const fsSync = require("fs");
 const fs = require("fs/promises");
 const path = require("path");
 const { URL } = require("url");
 
 const ROOT_DIR = path.resolve(__dirname, "..", "..");
+
+function loadEnvFile(filePath) {
+  if (!fsSync.existsSync(filePath)) {
+    return;
+  }
+
+  const lines = fsSync.readFileSync(filePath, "utf8").split(/\r?\n/);
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) {
+      continue;
+    }
+
+    const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+    if (!match) {
+      continue;
+    }
+
+    const [, key, rawValue] = match;
+    let value = rawValue.trim();
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+
+    if (!(key in process.env)) {
+      process.env[key] = value.replace(/\\n/g, "\n");
+    }
+  }
+}
+
+loadEnvFile(path.join(ROOT_DIR, ".env"));
+
 const PUBLIC_DIR = path.join(__dirname, "public");
 const PICKS_PATH = path.join(ROOT_DIR, "picks.html");
 const SITEMAP_PATH = path.join(ROOT_DIR, "sitemap.xml");
 const SITE_URL = "https://primegent.pages.dev";
 const PORT = Number(process.env.PORT || 4311);
+const EDITORIAL_API_URL = process.env.EDITORIAL_API_URL || `${SITE_URL}/api/editorial`;
+const OPENROUTER_API_URL = process.env.OPENROUTER_API_URL || "https://openrouter.ai/api/v1/chat/completions";
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || "nvidia/nemotron-3-super-120b-a12b:free";
+const OPENROUTER_REFERER = process.env.OPENROUTER_HTTP_REFERER || SITE_URL;
+const OPENROUTER_TITLE = "PrimeGent Affiliate Admin";
 
 const AMAZON_HEADERS = {
   "user-agent":
@@ -600,6 +641,289 @@ function deriveCare(shortTitle, bullets, override) {
   return "Follow the retailer care label and wash gently to preserve fit";
 }
 
+function stripMarkdownFences(value) {
+  return String(value ?? "")
+    .trim()
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "")
+    .trim();
+}
+
+function parseJsonObject(value) {
+  const candidate = stripMarkdownFences(value);
+  try {
+    return JSON.parse(candidate);
+  } catch {
+    const start = candidate.indexOf("{");
+    const end = candidate.lastIndexOf("}");
+    if (start < 0 || end <= start) {
+      throw new Error("The model response did not contain a JSON object.");
+    }
+    return JSON.parse(candidate.slice(start, end + 1));
+  }
+}
+
+function editorialReference(categoryLabel) {
+  const normalized = cleanText(categoryLabel).toLowerCase();
+  const labels = {
+    shirts: "this shirt",
+    pants: "these pants",
+    shoes: "these shoes",
+    jackets: "this jacket",
+    accessories: "this accessory",
+    basics: "this piece",
+    activewear: "this activewear piece",
+  };
+
+  return labels[normalized] || "this item";
+}
+
+function stripTitleEcho(value, { shortTitle, fullTitle, brand, categoryLabel }) {
+  let text = cleanText(String(value ?? "").replace(/^[-*]\s+/, "").replace(/^[A-Za-z ]+:\s+/, ""));
+  const reference = editorialReference(categoryLabel);
+  const candidates = [
+    fullTitle,
+    shortTitle,
+    brand && shortTitle ? `${brand} ${shortTitle}` : "",
+    brand,
+  ]
+    .map((item) => cleanText(item))
+    .filter(Boolean)
+    .filter((item) => item.length >= 5)
+    .sort((a, b) => b.length - a.length);
+
+  for (const phrase of candidates) {
+    text = text.replace(new RegExp(escapeRegExp(phrase), "gi"), reference);
+  }
+
+  text = text
+    .replace(new RegExp(`^(?:the\\s+)?${escapeRegExp(reference)}\\s*(?:is|works|fits|suits)?\\s*-?\\s*`, "i"), (match) => {
+      if (/\bis\b/i.test(match)) {
+        return `${reference.charAt(0).toUpperCase() + reference.slice(1)} is `;
+      }
+      return `${reference.charAt(0).toUpperCase() + reference.slice(1)} `;
+    })
+    .replace(/\bthe this\b/gi, "this")
+    .replace(/\bthe these\b/gi, "these")
+    .replace(/\bthis item piece\b/gi, "this piece")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return text;
+}
+
+function normalizeEditorialText(value, maxLength, context) {
+  return truncate(stripTitleEcho(value, context), maxLength);
+}
+
+function normalizeEditorialList(values, minimum, maximum, maxItemLength, context) {
+  const normalized = [];
+
+  for (const value of Array.isArray(values) ? values : []) {
+    const item = normalizeEditorialText(value, maxItemLength, context);
+    if (!item || normalized.includes(item)) {
+      continue;
+    }
+    normalized.push(item);
+    if (normalized.length >= maximum) {
+      break;
+    }
+  }
+
+  if (normalized.length < minimum) {
+    throw new Error("The model did not return enough list items.");
+  }
+
+  return normalized;
+}
+
+function buildEditorialMessages({ shortTitle, fullTitle, brand, categoryLabel, styles, bullets, material, fit, care }) {
+  return [
+    {
+      role: "system",
+      content:
+        "You write concise menswear affiliate editorial copy for PrimeGent. Respond with valid JSON only. Never use markdown fences. Use the source bullets only as research input and do not copy their phrasing verbatim. Do not mention Amazon, affiliate links, reviews, ratings, shipping, or prices.",
+    },
+    {
+      role: "user",
+      content: `Return a JSON object with exactly these keys: "best_for", "skip_for", "works_best", "pros", "cons".
+
+Rules:
+- Write fresh editorial copy in plain English.
+- "best_for", "skip_for", and "works_best" must each be 1-2 sentences.
+- "pros" must contain 2 or 3 concise strings.
+- "cons" must contain 1 or 2 concise strings.
+- Keep the tone practical, specific, and non-hype.
+- Never repeat, quote, or paraphrase the exact product title.
+- Do not start any field with the product title or brand name.
+- Refer to the item generically, like "this shirt", "these shoes", "this jacket", or "this piece".
+
+Product data:
+${JSON.stringify(
+  {
+    shortTitle,
+    fullTitle,
+    brand,
+    category: categoryLabel,
+    styles: styles.map(labelize),
+    material,
+    fit,
+    care,
+    amazonBullets: bullets,
+  },
+  null,
+  2,
+)}`,
+    },
+  ];
+}
+
+function extractAssistantContent(payload) {
+  const message = payload?.choices?.[0]?.message;
+  const content = message?.content;
+  if (Array.isArray(content)) {
+    const joined = content.map((part) => part?.text || part?.content || "").join("").trim();
+    if (joined) {
+      return joined;
+    }
+  } else if (typeof content === "string" && content.trim()) {
+    return content;
+  }
+
+  if (typeof message?.reasoning_content === "string" && message.reasoning_content.trim()) {
+    return message.reasoning_content;
+  }
+
+  return "";
+}
+
+function parseEditorialResponse(rawText, context) {
+  if (!rawText) {
+    throw new Error("The model returned an empty editorial response.");
+  }
+
+  const parsed = parseJsonObject(rawText);
+  const editorial = {
+    bestFor: normalizeEditorialText(parsed.best_for || parsed.bestFor, 240, context),
+    skipFor: normalizeEditorialText(parsed.skip_for || parsed.skipFor, 240, context),
+    worksBest: normalizeEditorialText(parsed.works_best || parsed.worksBest, 240, context),
+    pros: normalizeEditorialList(parsed.pros, 2, 3, 120, context),
+    cons: normalizeEditorialList(parsed.cons, 1, 2, 120, context),
+  };
+
+  if (!editorial.bestFor || !editorial.skipFor || !editorial.worksBest) {
+    throw new Error("The model omitted one or more required editorial fields.");
+  }
+
+  return editorial;
+}
+
+async function generateEditorialViaOpenRouter(input) {
+  const apiKey = process.env.OPENROUTER_API_KEY?.trim();
+  if (!apiKey) {
+    throw new Error("OPENROUTER_API_KEY is required when EDITORIAL_PROVIDER=openrouter. Add it to .env before previewing or publishing.");
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 45000);
+
+  try {
+    const response = await fetch(OPENROUTER_API_URL, {
+      method: "POST",
+      signal: controller.signal,
+      headers: {
+        authorization: `Bearer ${apiKey}`,
+        "content-type": "application/json",
+        "HTTP-Referer": OPENROUTER_REFERER,
+        "X-Title": OPENROUTER_TITLE,
+      },
+      body: JSON.stringify({
+        model: OPENROUTER_MODEL,
+        temperature: 0,
+        max_tokens: 450,
+        response_format: { type: "json_object" },
+        messages: buildEditorialMessages(input),
+      }),
+    });
+
+    if (!response.ok) {
+      const rawError = await response.text();
+      const details = truncate(cleanText(rawError), 220);
+      if (response.status === 401) {
+        throw new Error(
+          "OpenRouter rejected the API key. Generate a fresh OpenRouter API key, update .env, restart the affiliate admin server, and try again.",
+        );
+      }
+      throw new Error(`OpenRouter returned ${response.status}${details ? `: ${details}` : ""}`);
+    }
+
+    const payload = await response.json();
+    return parseEditorialResponse(extractAssistantContent(payload), input);
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      throw new Error("OpenRouter timed out while generating affiliate editorial copy.");
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function generateEditorialViaProxy(input) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 45000);
+
+  try {
+    const response = await fetch(EDITORIAL_API_URL, {
+      method: "POST",
+      signal: controller.signal,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ ...input, model: OPENROUTER_MODEL }),
+    });
+
+    if (!response.ok) {
+      const details = truncate(cleanText(await response.text()), 220);
+      if (response.status === 404) {
+        throw new Error(`Cloudflare editorial endpoint was not found at ${EDITORIAL_API_URL}. Deploy Pages Functions first, then try again.`);
+      }
+      throw new Error(`Cloudflare editorial endpoint returned ${response.status}${details ? `: ${details}` : ""}`);
+    }
+
+    const payload = await response.json();
+    return parseEditorialResponse(JSON.stringify(payload?.editorial || payload), input);
+  } catch (error) {
+    if (error?.name === "AbortError") {
+      throw new Error("Cloudflare editorial endpoint timed out while generating affiliate editorial copy.");
+    }
+    if (String(error?.message || "").includes("fetch failed") || String(error?.message || "").includes("ECONNREFUSED")) {
+      throw new Error(`Could not reach the Cloudflare editorial endpoint at ${EDITORIAL_API_URL}.`);
+    }
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+async function generateEditorialCopy(input) {
+  if (process.env.OPENROUTER_API_KEY?.trim()) {
+    return generateEditorialViaOpenRouter(input);
+  }
+
+  return generateEditorialViaProxy(input);
+}
+
+function deriveEditorialCardCopy(editorial, shortTitle) {
+  const summary = `${editorial.bestFor} ${editorial.pros[0] ? `Top upside: ${editorial.pros[0]}.` : ""}`.trim();
+  return truncate(summary, 165) || `A practical ${shortTitle.toLowerCase()} pick that sharpens everyday outfits without overcomplicating the wardrobe.`;
+}
+
+function deriveEditorialSummary(editorial, shortTitle) {
+  const summary = `${editorial.bestFor} ${editorial.worksBest}`.trim();
+  return truncate(summary, 170) || `${shortTitle} with affiliate-ready product details, clean metadata, and a PrimeGent styling angle.`;
+}
+
 function buildWhoCopy(categoryId, styles) {
   const joinedStyles = styles.map(labelize).join(", ").toLowerCase();
 
@@ -998,7 +1322,8 @@ ${renderOgImageTags(data)}
       <section class="section section--tight">
         <div class="container article-grid">
           <article class="article-content">
-            <section class="card card--prose"><h2>Why We Like It</h2><ul class="bullet-list">${data.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
+            <section class="card card--prose"><h2>Who It's Best For</h2><p>${escapeHtml(data.editorial.bestFor)}</p><h2>Who Should Skip It</h2><p>${escapeHtml(data.editorial.skipFor)}</p><h2>Where It Works Best</h2><p>${escapeHtml(data.editorial.worksBest)}</p></section>
+            <section class="card card--prose"><h2>Pros</h2><ul class="bullet-list">${data.editorial.pros.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul><h2>Cons</h2><ul class="bullet-list">${data.editorial.cons.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
             <section class="card card--prose"><h2>Specs at a Glance</h2><div class="spec-grid"><div><span>Brand</span><strong>${escapeHtml(data.brand)}</strong></div><div><span>Category</span><strong>${escapeHtml(data.categoryLabel)}</strong></div><div><span>Material</span><strong>${escapeHtml(data.material)}</strong></div><div><span>Fit</span><strong>${escapeHtml(data.fit)}</strong></div><div><span>Care</span><strong>${escapeHtml(data.care)}</strong></div><div><span>Retailer</span><strong>Check Latest Price on Amazon</strong></div></div></section>
           </article>
           <aside class="sidebar"><div class="card sidebar-card"><h2>Quick take</h2><p>${escapeHtml(data.cardCopy)}</p></div></aside>
@@ -1094,7 +1419,7 @@ async function fetchAmazonHtml(canonicalUrl) {
   return response.text();
 }
 
-function createAnalysis(input, amazonData) {
+async function createAnalysis(input, amazonData) {
   const imageUrls = normalizeImageUrls(input.imageUrls?.length ? input.imageUrls : input.imageUrl);
   if (!imageUrls.length) {
     throw new Error("At least one image URL is required.");
@@ -1107,14 +1432,28 @@ function createAnalysis(input, amazonData) {
   const categoryId = input.sectionId || inferCategoryId(`${shortTitle} ${amazonData.slugHint} ${amazonData.bullets.join(" ")}`);
   const category = CATEGORY_DEFS.find((item) => item.id === categoryId) || CATEGORY_DEFS[0];
   const styles = inferStyles(categoryId, shortTitle, amazonData.bullets, input.styleTags);
-  const cardCopy = input.cardCopy?.trim() || deriveCardCopy(amazonData.bullets, shortTitle);
-  const pageSummary = input.pageSummary?.trim() || deriveSummary(amazonData.bullets, shortTitle);
   const pageSlug = slugify(shortTitle) || slugify(amazonData.slugHint) || amazonData.asin.toLowerCase();
   const pageFile = `pick-${pageSlug}.html`;
   const primaryImageUrl = imageUrls[0];
   const imageSize = extractImageSize(primaryImageUrl);
   const brandTier = inferBrandTier(amazonData.brand, input.brandTier);
   const productUrl = `${SITE_URL}/${pageFile}`;
+  const material = deriveMaterial(shortTitle, amazonData.bullets, input.material);
+  const fit = deriveFit(shortTitle, amazonData.bullets, input.fit);
+  const care = deriveCare(shortTitle, amazonData.bullets, input.care);
+  const editorial = await generateEditorialCopy({
+    shortTitle,
+    fullTitle: amazonData.fullTitle,
+    brand: amazonData.brand,
+    categoryLabel: category.label,
+    styles,
+    bullets: amazonData.bullets,
+    material,
+    fit,
+    care,
+  });
+  const cardCopy = input.cardCopy?.trim() || deriveEditorialCardCopy(editorial, shortTitle);
+  const pageSummary = input.pageSummary?.trim() || deriveEditorialSummary(editorial, shortTitle);
 
   return {
     affiliateUrl: input.affiliateUrl,
@@ -1132,7 +1471,8 @@ function createAnalysis(input, amazonData) {
     shortTitle,
     cardCopy,
     pageSummary,
-    bullets: amazonData.bullets.length ? amazonData.bullets : [cardCopy],
+    editorial,
+    bullets: amazonData.bullets,
     price: resolvedPrice,
     priceBucket: derivePriceBucket(resolvedPrice),
     priceSource,
@@ -1144,9 +1484,9 @@ function createAnalysis(input, amazonData) {
     altText: input.altText?.trim() || `${shortTitle} product photo`,
     styles,
     visual: deriveVisual(shortTitle, categoryId),
-    material: deriveMaterial(shortTitle, amazonData.bullets, input.material),
-    fit: deriveFit(shortTitle, amazonData.bullets, input.fit),
-    care: deriveCare(shortTitle, amazonData.bullets, input.care),
+    material,
+    fit,
+    care,
     who: buildWhoCopy(categoryId, styles),
     outfits: buildOutfitNotes(categoryId, shortTitle, styles),
   };
@@ -1189,7 +1529,7 @@ async function analyzeAffiliateInput(input) {
     throw new Error("Could not read the Amazon product title.");
   }
 
-  const analysis = createAnalysis(input, {
+  const analysis = await createAnalysis(input, {
     asin: pathInfo.asin,
     slugHint: pathInfo.slugHint,
     fullTitle,

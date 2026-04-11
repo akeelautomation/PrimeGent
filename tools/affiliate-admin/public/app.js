@@ -15,6 +15,11 @@ const els = {
   previewImageCount: document.querySelector("#previewImageCount"),
   previewMetaDescription: document.querySelector("#previewMetaDescription"),
   previewOgTitle: document.querySelector("#previewOgTitle"),
+  previewBestFor: document.querySelector("#previewBestFor"),
+  previewSkipFor: document.querySelector("#previewSkipFor"),
+  previewWorksBest: document.querySelector("#previewWorksBest"),
+  previewPros: document.querySelector("#previewPros"),
+  previewCons: document.querySelector("#previewCons"),
   previewBullets: document.querySelector("#previewBullets"),
 };
 
@@ -65,6 +70,16 @@ function setStatus(message, tone = "") {
   els.status.className = `status ${tone}`.trim();
 }
 
+function renderList(listEl, items) {
+  listEl.replaceChildren(
+    ...(items || []).map((value) => {
+      const item = document.createElement("li");
+      item.textContent = value;
+      return item;
+    }),
+  );
+}
+
 function renderAnalysis(analysis) {
   els.emptyState.hidden = true;
   els.preview.hidden = false;
@@ -86,13 +101,12 @@ function renderAnalysis(analysis) {
   els.previewImageCount.textContent = `${analysis.imageUrls.length} image${analysis.imageUrls.length === 1 ? "" : "s"}`;
   els.previewMetaDescription.textContent = analysis.metaDescription;
   els.previewOgTitle.textContent = analysis.ogTitle;
-  els.previewBullets.replaceChildren(
-    ...analysis.bullets.map((bullet) => {
-      const item = document.createElement("li");
-      item.textContent = bullet;
-      return item;
-    }),
-  );
+  els.previewBestFor.textContent = analysis.editorial.bestFor;
+  els.previewSkipFor.textContent = analysis.editorial.skipFor;
+  els.previewWorksBest.textContent = analysis.editorial.worksBest;
+  renderList(els.previewPros, analysis.editorial.pros);
+  renderList(els.previewCons, analysis.editorial.cons);
+  renderList(els.previewBullets, analysis.bullets);
 }
 
 async function loadSections() {
@@ -114,7 +128,7 @@ async function loadSections() {
 }
 
 async function analyze() {
-  setStatus("Analyzing Amazon product and building preview...");
+  setStatus("Analyzing Amazon product and generating AI editorial preview...");
   const { analysis } = await requestJson("/api/analyze", {
     method: "POST",
     body: JSON.stringify(formPayload()),
@@ -124,7 +138,7 @@ async function analyze() {
 }
 
 async function publish() {
-  setStatus("Writing product page, updating picks.html, and syncing sitemap.xml...");
+  setStatus("Writing AI-backed product page, updating picks.html, and syncing sitemap.xml...");
   const { analysis, pagePath, picksPath, sitemapPath } = await requestJson("/api/publish", {
     method: "POST",
     body: JSON.stringify(formPayload()),
