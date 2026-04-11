@@ -72,6 +72,110 @@ function normalizeProductAvailabilityContent(availability) {
   return availability === "https://schema.org/InStock" || availability === "InStock" ? "instock" : "oos";
 }
 
+function normalizeCopy(value) {
+  return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function ensureSentence(value) {
+  const text = normalizeCopy(value);
+  if (!text) {
+    return "";
+  }
+
+  return /[.!?]$/.test(text) ? text : `${text}.`;
+}
+
+function truncate(value, maxLength) {
+  const text = normalizeCopy(value);
+  if (!text || text.length <= maxLength) {
+    return text;
+  }
+
+  const short = text.slice(0, maxLength - 1);
+  const lastSpace = short.lastIndexOf(" ");
+  return `${short.slice(0, Math.max(lastSpace, 0))}...`;
+}
+
+function buildLegacySkipFor(pick) {
+  const skipByCategory = {
+    shirts:
+      "Skip it if you prefer oversized proportions, technical fabric, or a shirt that needs almost no upkeep to look sharp.",
+    pants:
+      "Skip it if you want a fuller leg, a more formal trouser drape, or a pair built mainly for statement styling.",
+    shoes:
+      "Skip it if you want sneaker-level comfort, zero maintenance, or a finish that stays strictly casual.",
+    jackets:
+      "Skip it if you need serious winter insulation or a sharply tailored outer layer with a dressier line.",
+    accessories:
+      "Skip it if you want a louder statement piece or something that changes the outfit more than it refines it.",
+    basics:
+      "Skip it if you want chunky texture, trend-driven proportions, or a layer that carries the whole outfit on its own.",
+    activewear:
+      "Skip it if you need office-ready structure or gear that reads sharper than relaxed and sporty.",
+  };
+
+  return skipByCategory[pick.category] || "Skip it if you want a louder statement piece instead of a steady everyday option.";
+}
+
+function buildLegacyCons(pick) {
+  const consByCategory = {
+    shirts: [
+      "Needs some care and light pressing if you want it to stay crisp",
+      "Less appealing if your wardrobe leans oversized or trend-heavy",
+    ],
+    pants: [
+      "Fit can feel limiting if you prefer a roomier break through the leg",
+      "More dependable than expressive if you want standout styling",
+    ],
+    shoes: [
+      "Needs regular care to keep the finish looking sharp",
+      "Less forgiving than sneakers on long walking days",
+    ],
+    jackets: [
+      "Not ideal when you need true cold-weather insulation",
+      "Works best over simple layers rather than bulkier outfits",
+    ],
+    accessories: [
+      "Adds polish, but it will not rescue a weak outfit on its own",
+      "Best value comes from repeat wear rather than novelty",
+    ],
+    basics: [
+      "Can feel plain if you want heavier texture or standout detailing",
+      "Usually needs thoughtful washing to keep the shape clean",
+    ],
+    activewear: [
+      "Leans casual, so it will not cover smarter dress codes",
+      "More about comfort and utility than refined drape",
+    ],
+  };
+
+  return consByCategory[pick.category] || ["Better for repeat wear than bold statement dressing"];
+}
+
+function buildLegacyEditorial(pick) {
+  const bestFor = ensureSentence(pick.who?.bodyType || pick.description);
+  const worksBest = [pick.who?.occasion, pick.who?.styleNote].map(ensureSentence).filter(Boolean).join(" ");
+  const pros = (Array.isArray(pick.why) ? pick.why : [])
+    .slice(0, 3)
+    .map((item) => normalizeCopy(item))
+    .filter(Boolean);
+  const cons = buildLegacyCons(pick).map((item) => normalizeCopy(item)).filter(Boolean).slice(0, 2);
+  const topPro = pros[0] ? `Top upside: ${pros[0]}.` : "";
+  const quickTake =
+    truncate(`${bestFor} ${topPro}`, 165) ||
+    truncate(pick.description, 165) ||
+    `${pick.name} is a dependable pick for men who want repeat wear without overthinking the outfit.`;
+
+  return {
+    bestFor,
+    skipFor: ensureSentence(buildLegacySkipFor(pick)),
+    worksBest: worksBest || ensureSentence(pick.description),
+    pros: pros.length ? pros : [normalizeCopy(pick.description)],
+    cons: cons.length ? cons : ["Better for steady rotation than dramatic outfit impact"],
+    quickTake,
+  };
+}
+
 const picks = [];
 const blogPosts = [];
 
@@ -448,6 +552,7 @@ function renderTags(items) {
 
 function renderPickCard(pick) {
   const pickImage = pick.image || "";
+  const editorial = buildLegacyEditorial(pick);
   return `
     <article class="card pick-card" data-pick-card data-category="${pick.category}" data-price="${pick.priceBucket}" data-brand="${pick.brand}" data-style="${pick.styles.join("|")}" data-name="${escapeHtml(pick.name.toLowerCase())}">
       ${pickImage ? `<a class="pick-card__media" href="./pick-${pick.slug}.html" aria-label="View ${escapeHtml(pick.name)} details"><img class="pick-card__image" src="${escapeHtml(pickImage)}" alt="${escapeHtml(pick.name)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./static/og-cover.svg'"></a>` : `<div class="card-visual card-visual--${categoryTone(pick.category)}" aria-hidden="true">
@@ -459,7 +564,7 @@ function renderPickCard(pick) {
           <span class="price-chip">Check Latest Price of Amazon</span>
         </div>
         <h3>${escapeHtml(pick.name)}</h3>
-        <p>${escapeHtml(pick.description)}</p>
+        <p>${escapeHtml(editorial.quickTake)}</p>
         <div class="tag-row">${renderTags(pick.styles)}</div>
         <a class="text-link" href="./pick-${pick.slug}.html">View Pick -></a>
       </div>
@@ -1042,6 +1147,7 @@ function renderLegacyPrivacyRedirectPage() {
 
 function renderPickPage(pick) {
   const { lowPrice, highPrice } = parsePriceRange(pick.priceLabel);
+  const editorial = buildLegacyEditorial(pick);
   const description = `${pick.description} Learn why PrimeGent recommends ${pick.name} and review the key details before you buy.`;
   const productImage = pick.image || ogImage;
   const imageAlt = pick.imageAlt || pick.name;
@@ -1098,9 +1204,9 @@ function renderPickPage(pick) {
               <p class="eyebrow">${escapeHtml(categoryLabel(pick.category))} pick</p>
               <h1>${escapeHtml(pick.name)}</h1>
               <p>${escapeHtml(pick.description)}</p>
-              <div class="product-hero__meta"><span class="badge">Check Latest Price of Amazon</span><span class="badge badge--muted">${escapeHtml(labelize(pick.brand))}</span></div>
+              <div class="product-hero__meta"><span class="badge">Check Latest Price on Amazon</span><span class="badge badge--muted">${escapeHtml(labelize(pick.brand))}</span></div>
               <div class="tag-row">${renderTags(pick.styles)}</div>
-              <div class="hero-actions"><a class="btn btn-primary" href="${pick.amazon}" target="_blank" rel="noopener noreferrer sponsored">Check Latest Price of Amazon -></a><button class="btn btn-ghost" type="button" data-share-url>Share</button></div>
+              <div class="hero-actions"><a class="btn btn-primary" href="${pick.amazon}" target="_blank" rel="noopener noreferrer sponsored">Check Latest Price on Amazon -></a><button class="btn btn-ghost" type="button" data-share-url>Share</button></div>
               <p class="microcopy">Affiliate note: this page links to Amazon via PrimeGent's affiliate URL.</p>
             </div>
             <div class="card product-aside">${pick.image ? `<img class="product-image" src="${escapeHtml(pick.image)}" alt="${escapeHtml(imageAlt)}" loading="eager" decoding="async">` : `<div class="card-visual card-visual--${categoryTone(pick.category)} card-visual--large" aria-hidden="true"><span>${escapeHtml(pick.visual)}</span></div>`}</div>
@@ -1109,10 +1215,11 @@ function renderPickPage(pick) {
         <section class="section section--tight">
           <div class="container article-grid">
             <article class="article-content">
-            <section class="card card--prose"><h2>Why We Love It</h2><ul class="bullet-list">${pick.why.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
-            <section class="card card--prose"><h2>Specs at a Glance</h2><div class="spec-grid"><div><span>Material</span><strong>${escapeHtml(pick.material)}</strong></div><div><span>Fit</span><strong>${escapeHtml(pick.fit)}</strong></div><div><span>Retailer</span><strong>Check Latest Price of Amazon</strong></div><div><span>Care</span><strong>${escapeHtml(pick.care)}</strong></div></div></section>
+            <section class="card card--prose"><h2>Who It's Best For</h2><p>${escapeHtml(editorial.bestFor)}</p><h2>Who Should Skip It</h2><p>${escapeHtml(editorial.skipFor)}</p><h2>Where It Works Best</h2><p>${escapeHtml(editorial.worksBest)}</p></section>
+            <section class="card card--prose"><h2>Pros</h2><ul class="bullet-list">${editorial.pros.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul><h2>Cons</h2><ul class="bullet-list">${editorial.cons.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul></section>
+            <section class="card card--prose"><h2>Specs at a Glance</h2><div class="spec-grid"><div><span>Brand</span><strong>${escapeHtml(pick.brandName)}</strong></div><div><span>Category</span><strong>${escapeHtml(categoryLabel(pick.category))}</strong></div><div><span>Material</span><strong>${escapeHtml(pick.material)}</strong></div><div><span>Fit</span><strong>${escapeHtml(pick.fit)}</strong></div><div><span>Retailer</span><strong>Check Latest Price on Amazon</strong></div><div><span>Care</span><strong>${escapeHtml(pick.care)}</strong></div></div></section>
           </article>
-          <aside class="sidebar"><div class="card sidebar-card"><h2>Quick take</h2><p>${escapeHtml(pick.name)} works best when you need one piece that can repeat across multiple outfits without feeling generic.</p></div></aside>
+          <aside class="sidebar"><div class="card sidebar-card"><h2>Quick take</h2><p>${escapeHtml(editorial.quickTake)}</p></div></aside>
         </div>
       </section>
         <section class="section section--soft"><div class="container"><div class="section-heading"><div><p class="eyebrow">You might also like</p><h2>Related picks</h2></div><a class="text-link" href="./picks.html?category=${pick.category}">See more ${escapeHtml(categoryLabel(pick.category).toLowerCase())} -></a></div><div class="card-grid card-grid--picks">${renderRelatedPicks(pick.related)}</div></div></section>
