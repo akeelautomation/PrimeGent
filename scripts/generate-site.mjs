@@ -1187,11 +1187,11 @@ function renderRobots() {
 }
 
 function renderGitignore() {
-  return `.wrangler/\nnode_modules/\n.env\n`;
+  return `.wrangler/\nnode_modules/\n.env\n.env.*\n!.env.example\n.dev.vars\n.dev.vars.*\n.envrc\n`;
 }
 
 function renderEnvExample() {
-  return `AFFILIATE_TAG=yoursite-20\n`;
+  return `# Copy this file to .env.local for local-only values.\n# Never put real secrets in .env.example or any other tracked file.\nAFFILIATE_TAG=yoursite-20\nEDITORIAL_API_URL=https://primegent.pages.dev/api/editorial\nOPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b:free\n# Only use a local OpenRouter key if you explicitly need direct local calls.\n# Preferred setup: keep the real key in Cloudflare Pages secrets instead.\n# OPENROUTER_API_KEY=\n`;
 }
 
 function renderWrangler() {
@@ -1217,6 +1217,8 @@ The repository also includes a generator script for the individual content pages
 node scripts/generate-site.mjs
 \`\`\`
 
+For the affiliate publisher, copy \`.env.example\` to \`.env.local\` for local-only values. Keep real secrets out of tracked files and use Cloudflare Pages secrets for \`OPENROUTER_API_KEY\` whenever possible.
+
 ## How to add a new pick
 
 1. Open \`scripts/generate-site.mjs\`.
@@ -1235,9 +1237,16 @@ node scripts/generate-site.mjs
 
 The generated pick pages use placeholder Amazon URLs with \`AFFILIATE_TAG\`.
 
-1. Update \`.env.example\` as a local reference if helpful.
+1. Copy \`.env.example\` to \`.env.local\` and update \`AFFILIATE_TAG\` there if you want a local reference.
 2. Find and replace \`AFFILIATE_TAG\` across the generated HTML files and \`scripts/generate-site.mjs\`.
 3. Re-run the generator if you changed the source data file.
+
+## Secret safety
+
+- \`.env.local\`, \`.env.*\`, and \`.dev.vars.*\` are ignored by git; keep real keys there, not in tracked files.
+- The repo includes a pre-commit hook at \`.githooks/pre-commit\` that blocks obvious OpenRouter secrets before commit.
+- Enable it once per clone with \`git config core.hooksPath .githooks\`.
+- If a key was ever pushed to GitHub, rotate it in OpenRouter and remove the leaked commit from history before reusing the repo.
 
 ## Deployment
 

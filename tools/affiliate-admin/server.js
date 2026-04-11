@@ -38,6 +38,7 @@ function loadEnvFile(filePath) {
   }
 }
 
+loadEnvFile(path.join(ROOT_DIR, ".env.local"));
 loadEnvFile(path.join(ROOT_DIR, ".env"));
 
 const PUBLIC_DIR = path.join(__dirname, "public");

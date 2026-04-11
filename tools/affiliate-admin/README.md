@@ -8,12 +8,19 @@ node tools/affiliate-admin/server.js
 
 Then open `http://localhost:4311`.
 
+Local config:
+
+- Copy `.env.example` to `.env.local` for local-only values
+- Never put a real OpenRouter key in `.env.example`, `README.md`, or any other tracked file
+- Preferred setup: keep `OPENROUTER_API_KEY` only in Cloudflare Pages secrets and let the local tool call the deployed `/api/editorial` endpoint
+
 Required setup:
 
 - Deploy the Pages Function at `functions/api/editorial.js`
 - In Cloudflare Pages, set `OPENROUTER_API_KEY` as a secret under `Settings > Variables and Secrets`
 - Optional: set `OPENROUTER_MODEL` in Cloudflare if you want a model other than `nvidia/nemotron-3-super-120b-a12b:free`
-- Optional local override: set `EDITORIAL_API_URL` in `D:\Prime Gent\PrimeGent\.env` if your deployed Pages URL is not `https://primegent.pages.dev`
+- Optional local override: set `EDITORIAL_API_URL` in `D:\Prime Gent\PrimeGent\.env.local` if your deployed Pages URL is not `https://primegent.pages.dev`
+- Optional direct local mode: set `OPENROUTER_API_KEY` in `D:\Prime Gent\PrimeGent\.env.local`
 
 What it does:
 
@@ -27,6 +34,7 @@ What it does:
 Notes:
 
 - The local affiliate admin server does not need the OpenRouter key if it can reach the deployed Cloudflare `/api/editorial` endpoint
+- Enable the repo hook once per clone with `git config core.hooksPath .githooks` to block obvious secrets before commit
 - If Amazon does not expose a live price, the page still publishes and simply omits price metadata
 - The tool is designed for the current static PrimeGent site structure
 - If `scripts/generate-site.mjs` is re-run later, manually published cards/pages may need to be re-applied
