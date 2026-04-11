@@ -642,6 +642,36 @@ function deriveCare(shortTitle, bullets, override) {
   return "Follow the retailer care label and wash gently to preserve fit";
 }
 
+const EDITORIAL_STOP_WORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "as",
+  "at",
+  "by",
+  "for",
+  "from",
+  "in",
+  "of",
+  "on",
+  "or",
+  "the",
+  "to",
+  "with",
+  "men",
+  "mens",
+  "women",
+  "womens",
+  "shirt",
+  "shirts",
+  "pants",
+  "shoes",
+  "jacket",
+  "jackets",
+  "piece",
+  "item",
+]);
+
 function stripMarkdownFences(value) {
   return String(value ?? "")
     .trim()
@@ -679,9 +709,47 @@ function editorialReference(categoryLabel) {
   return labels[normalized] || "this item";
 }
 
-function stripTitleEcho(value, { shortTitle, fullTitle, brand, categoryLabel }) {
+function significantEditorialWords(value) {
+  return cleanText(value)
+    .toLowerCase()
+    .split(/\s+/)
+    .filter((word) => word.length >= 3)
+    .filter((word) => !EDITORIAL_STOP_WORDS.has(word));
+}
+
+function buildForbiddenEditorialPhrases(context) {
+  const sources = [
+    context.fullTitle,
+    context.shortTitle,
+    context.brand && context.shortTitle ? `${context.brand} ${context.shortTitle}` : "",
+    ...(Array.isArray(context.bullets) ? context.bullets : []),
+  ];
+
+  const phrases = new Set();
+
+  for (const source of sources) {
+    const words = cleanText(source).toLowerCase().split(/\s+/).filter(Boolean);
+    const maxSize = Math.min(5, words.length);
+
+    for (let size = maxSize; size >= 3; size -= 1) {
+      for (let index = 0; index <= words.length - size; index += 1) {
+        const slice = words.slice(index, index + size);
+        const significant = slice.filter((word) => word.length >= 3 && !EDITORIAL_STOP_WORDS.has(word));
+        if (significant.length < 2) {
+          continue;
+        }
+        phrases.add(slice.join(" "));
+      }
+    }
+  }
+
+  return [...phrases].sort((a, b) => b.length - a.length);
+}
+
+function stripTitleEcho(value, { shortTitle, fullTitle, brand, categoryLabel, bullets }) {
   let text = cleanText(String(value ?? "").replace(/^[-*]\s+/, "").replace(/^[A-Za-z ]+:\s+/, ""));
   const reference = editorialReference(categoryLabel);
+  const forbiddenPhrases = buildForbiddenEditorialPhrases({ shortTitle, fullTitle, brand, categoryLabel, bullets });
   const candidates = [
     fullTitle,
     shortTitle,
@@ -697,6 +765,10 @@ function stripTitleEcho(value, { shortTitle, fullTitle, brand, categoryLabel }) 
     text = text.replace(new RegExp(escapeRegExp(phrase), "gi"), reference);
   }
 
+  for (const phrase of forbiddenPhrases) {
+    text = text.replace(new RegExp(`\\b${escapeRegExp(phrase)}\\b`, "gi"), reference);
+  }
+
   text = text
     .replace(new RegExp(`^(?:the\\s+)?${escapeRegExp(reference)}\\s*(?:is|works|fits|suits)?\\s*-?\\s*`, "i"), (match) => {
       if (/\bis\b/i.test(match)) {
@@ -704,24 +776,102 @@ function stripTitleEcho(value, { shortTitle, fullTitle, brand, categoryLabel }) 
       }
       return `${reference.charAt(0).toUpperCase() + reference.slice(1)} `;
     })
+    .replace(new RegExp(`(?:${escapeRegExp(reference)}\\s+){2,}`, "gi"), `${reference} `)
     .replace(/\bthe this\b/gi, "this")
     .replace(/\bthe these\b/gi, "these")
     .replace(/\bthis item piece\b/gi, "this piece")
+    .replace(/\b(this (?:shirt|jacket|piece|accessory|item)|these (?:pants|shoes|pieces))\s+(?:with|for|in)\s+\1\b/gi, "$1")
+    .replace(/\s+([,.;:!?])/g, "$1")
     .replace(/\s+/g, " ")
     .trim();
 
   return text;
 }
 
-function normalizeEditorialText(value, maxLength, context) {
-  return truncate(stripTitleEcho(value, context), maxLength);
+function hasHeavySourceOverlap(value, context) {
+  const words = significantEditorialWords(value);
+  if (words.length < 4) {
+    return false;
+  }
+
+  const sourceWords = new Set([
+    ...significantEditorialWords(context.fullTitle),
+    ...significantEditorialWords(context.shortTitle),
+    ...(Array.isArray(context.bullets) ? context.bullets.flatMap((bullet) => significantEditorialWords(bullet)) : []),
+  ]);
+
+  const overlap = words.filter((word) => sourceWords.has(word)).length;
+  return overlap / words.length >= 0.75;
 }
 
-function normalizeEditorialList(values, minimum, maximum, maxItemLength, context) {
+function containsForbiddenEditorialPhrase(value, context) {
+  const normalized = cleanText(value).toLowerCase();
+  return buildForbiddenEditorialPhrases(context).some((phrase) => normalized.includes(phrase));
+}
+
+function materialHint(material) {
+  const normalized = cleanText(material).toLowerCase();
+  if (!normalized || normalized.includes("see amazon")) {
+    return "grounded materials";
+  }
+
+  return normalized;
+}
+
+function fitHint(fit) {
+  const normalized = cleanText(fit).toLowerCase();
+  if (!normalized || normalized.includes("check amazon")) {
+    return "a practical fit";
+  }
+
+  return normalized;
+}
+
+function styleHint(styles) {
+  const labels = (Array.isArray(styles) ? styles : [])
+    .map((style) => labelize(style).toLowerCase())
+    .filter(Boolean);
+
+  return labels.slice(0, 2).join(" and ") || "everyday";
+}
+
+function buildFallbackEditorial(context) {
+  const reference = editorialReference(context.categoryLabel);
+  const referenceLead = reference.charAt(0).toUpperCase() + reference.slice(1);
+  const styles = styleHint(context.styles);
+  const fit = fitHint(context.fit);
+  const material = materialHint(context.material);
+
+  return {
+    bestFor: `${referenceLead} suits men who want a dependable ${styles} option with ${fit}. It makes more sense in a repeatable wardrobe than in a trend-driven one.`,
+    skipFor: `Skip ${reference} if you want a louder statement piece or exaggerated proportions. It is a steadier buy than an expressive one.`,
+    worksBest: `${referenceLead} works best with clean basics, simple layers, and outfits that stay controlled. It earns its keep in low-friction daily styling.`,
+    pros: [
+      `Easy to work into repeat ${styles} outfits`,
+      `${referenceLead} leans practical instead of flashy`,
+      `${material.charAt(0).toUpperCase() + material.slice(1)} keep the feel grounded`,
+    ],
+    cons: [
+      `May feel too safe if your wardrobe leans trend-heavy`,
+      `Less appealing if you want standout detailing`,
+    ],
+  };
+}
+
+function normalizeEditorialText(value, maxLength, context, fallback) {
+  const cleaned = truncate(stripTitleEcho(value, context), maxLength);
+  if (!cleaned || containsForbiddenEditorialPhrase(cleaned, context) || hasHeavySourceOverlap(cleaned, context)) {
+    return truncate(fallback, maxLength);
+  }
+
+  return cleaned;
+}
+
+function normalizeEditorialList(values, minimum, maximum, maxItemLength, context, fallbackValues) {
   const normalized = [];
 
   for (const value of Array.isArray(values) ? values : []) {
-    const item = normalizeEditorialText(value, maxItemLength, context);
+    const item = normalizeEditorialText(value, maxItemLength, context, "");
     if (!item || normalized.includes(item)) {
       continue;
     }
@@ -732,7 +882,7 @@ function normalizeEditorialList(values, minimum, maximum, maxItemLength, context
   }
 
   if (normalized.length < minimum) {
-    throw new Error("The model did not return enough list items.");
+    return fallbackValues.slice(0, maximum);
   }
 
   return normalized;
@@ -756,8 +906,10 @@ Rules:
 - "cons" must contain 1 or 2 concise strings.
 - Keep the tone practical, specific, and non-hype.
 - Never repeat, quote, or paraphrase the exact product title.
+- Do not reuse any 3-word phrase from the title or source bullets.
 - Do not start any field with the product title or brand name.
 - Refer to the item generically, like "this shirt", "these shoes", "this jacket", or "this piece".
+- Rewrite the source information into original editorial language, not catalog copy.
 
 Product data:
 ${JSON.stringify(
@@ -804,12 +956,13 @@ function parseEditorialResponse(rawText, context) {
   }
 
   const parsed = parseJsonObject(rawText);
+  const fallback = buildFallbackEditorial(context);
   const editorial = {
-    bestFor: normalizeEditorialText(parsed.best_for || parsed.bestFor, 240, context),
-    skipFor: normalizeEditorialText(parsed.skip_for || parsed.skipFor, 240, context),
-    worksBest: normalizeEditorialText(parsed.works_best || parsed.worksBest, 240, context),
-    pros: normalizeEditorialList(parsed.pros, 2, 3, 120, context),
-    cons: normalizeEditorialList(parsed.cons, 1, 2, 120, context),
+    bestFor: normalizeEditorialText(parsed.best_for || parsed.bestFor, 240, context, fallback.bestFor),
+    skipFor: normalizeEditorialText(parsed.skip_for || parsed.skipFor, 240, context, fallback.skipFor),
+    worksBest: normalizeEditorialText(parsed.works_best || parsed.worksBest, 240, context, fallback.worksBest),
+    pros: normalizeEditorialList(parsed.pros, 2, 3, 120, context, fallback.pros),
+    cons: normalizeEditorialList(parsed.cons, 1, 2, 120, context, fallback.cons),
   };
 
   if (!editorial.bestFor || !editorial.skipFor || !editorial.worksBest) {
@@ -822,7 +975,7 @@ function parseEditorialResponse(rawText, context) {
 async function generateEditorialViaOpenRouter(input) {
   const apiKey = process.env.OPENROUTER_API_KEY?.trim();
   if (!apiKey) {
-    throw new Error("OPENROUTER_API_KEY is required when EDITORIAL_PROVIDER=openrouter. Add it to .env before previewing or publishing.");
+    throw new Error("OPENROUTER_API_KEY is required when EDITORIAL_PROVIDER=openrouter. Add it to .env.local before previewing or publishing.");
   }
 
   const controller = new AbortController();
