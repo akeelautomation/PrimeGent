@@ -1261,6 +1261,7 @@ function renderBlogPost(post) {
             <h1>${escapeHtml(post.title)}</h1>
             <div class="article-meta"><span>${escapeHtml(formatDate(post.date))}</span><span>${escapeHtml(post.readTime)}</span></div>
             <p class="hero-copy">${escapeHtml(post.excerpt)}</p>
+            <p class="microcopy">Editorial note: related product links on PrimeGent may be affiliate links. Read the <a href="./affiliate-disclosure.html">affiliate disclosure</a>.</p>
           </div>
         </section>
         <section class="section section--tight">
@@ -3709,6 +3710,556 @@ blogPosts.push(
         paragraphs: [
           `Minimal casual wardrobes are repeatable because the pieces are chosen to work in multiple combinations. Once your shirts, trousers, layers, and shoes all share a similar visual language, getting dressed becomes a matter of choosing from a small stable group instead of solving a new puzzle every day.`,
           `That repeatability is the real strength of minimal style. It makes simple clothes feel smarter because they keep working without much effort.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-loafer-outfits-men",
+    title: "Loafer Outfits for Men That Feel Relaxed but Sharp",
+    category: "Outfit Ideas",
+    date: "2026-04-21",
+    readTime: "8 min read",
+    excerpt:
+      "Loafers work best when the outfit stays clean, easy, and just structured enough to let the shoe feel intentional.",
+    description:
+      "How to wear loafers with chinos, dark denim, knitwear, and lightweight tailoring for relaxed but sharp men's outfits.",
+    heroLabel: "Loafer outfits",
+    tags: ["loafer outfits", "smart casual", "mens shoes", "outfit ideas"],
+    relatedPickSlugs: [
+      "banana-republic-slim-fit-ocbd-shirt",
+      "dockers-alpha-khaki-slim-fit-chinos",
+      "cole-haan-men-s-go-to-plain-toe",
+    ],
+    sections: [
+      {
+        heading: "Loafers are easiest when the outfit already has calm structure",
+        paragraphs: [
+          `Men usually struggle with loafers when they try to force them into an outfit that is either too formal or too lazy. The sweet spot is cleaner casual: trousers or jeans with shape, a shirt or knit with some presence, and footwear that looks deliberate instead of decorative.`,
+          `That is why loafers pair so naturally with oxford shirts, knit polos, fine-gauge sweaters, and trim chinos. They are not trying to be loud. They just raise the floor of the whole outfit.`,
+        ],
+      },
+      {
+        heading: "Formula 1: oxford shirt, chinos, loafers",
+        paragraphs: [
+          `This is the easiest entry point because it gives the loafers the right amount of support. A crisp shirt, controlled trouser line, and clean leather shoe create a combination that feels polished without looking stiff.`,
+          `A dependable setup built around the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a>, <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha chinos</a>, and a sleek leather loafer will handle dinners, casual offices, and weekend plans with almost no adjustment.`,
+        ],
+      },
+      {
+        heading: "Formula 2: dark denim with a knit up top",
+        paragraphs: [
+          `Loafers also work well with dark denim if the top half stays refined. A merino crew, knit polo, or overshirt keeps the outfit from feeling split between dressy shoes and casual pants.`,
+          `This is often the best way to make loafers feel modern. The denim keeps them grounded, while the knitwear keeps the whole look intentional.`,
+        ],
+      },
+      {
+        heading: "Keep the hem and leather finish under control",
+        paragraphs: [
+          `Loafers look better when the trouser break is light and the leather finish is not overly glossy. Heavy stacking and mirror-shine usually make the outfit feel older than it needs to.`,
+          `The strongest loafer outfits are quiet. Clean ankle line, simple belt, restrained color palette, and one shirt or knit that looks like it belongs there.`,
+        ],
+      },
+      {
+        heading: "Why loafers become a repeat shoe once they click",
+        paragraphs: [
+          `Once you understand the balance, loafers become one of the easiest shoes to repeat. They make simple outfits feel more composed without forcing you into full business casual.`,
+          `That is their real value. They sharpen the outfit while still leaving room for the rest of the wardrobe to stay easy.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-light-jacket-outfits-men",
+    title: "Light Jacket Outfits for Men That Work From Morning to Night",
+    category: "Outfit Ideas",
+    date: "2026-04-22",
+    readTime: "8 min read",
+    excerpt:
+      "A good light jacket gives casual clothes enough structure to look complete without making the outfit feel heavy.",
+    description:
+      "Light jacket outfit ideas for men using bombers, cotton jackets, tees, chinos, denim, and clean sneakers.",
+    heroLabel: "Light jackets",
+    tags: ["light jacket outfits", "casual layers", "mens jackets", "outfit ideas"],
+    relatedPickSlugs: [
+      "amazon-essentials-men-s-relaxed-fit-stretch-cotton-utility-jacket",
+      "everlane-the-slim-fit-chino",
+      "new-balance-574-sneaker",
+    ],
+    sections: [
+      {
+        heading: "A light jacket fixes the half-dressed problem",
+        paragraphs: [
+          `Many casual outfits fail because they stop one layer too early. A tee and trousers can be fine, but they often look unfinished unless something gives the outfit shape. That is where a light jacket earns its place.`,
+          `You get structure, pockets, and a clearer silhouette without the weight or seriousness of a coat. For most men, that makes it one of the most useful categories in the closet.`,
+        ],
+      },
+      {
+        heading: "Formula 1: tee, chinos, cotton jacket",
+        paragraphs: [
+          `This is the cleanest everyday version because the pieces are simple and easy to repeat. A plain tee keeps the base quiet, chinos provide the line, and the jacket acts as the frame.`,
+          `A straightforward piece like the <a href="./pick-amazon-essentials-men-s-relaxed-fit-stretch-cotton-utility-jacket.html">Amazon Essentials utility jacket</a> over the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane chino</a> works because it gives the outfit presence without trying too hard.`,
+        ],
+      },
+      {
+        heading: "Formula 2: bomber with denim and sneakers",
+        paragraphs: [
+          `If you want something slightly sportier, a light bomber with jeans and understated sneakers usually lands well. The jacket adds shape, the denim keeps the look grounded, and the shoes keep it usable for real life.`,
+          `This is especially useful for days that start casual and end somewhere social. The outfit stays comfortable, but it does not look like you gave up on getting dressed.`,
+        ],
+      },
+      {
+        heading: "Color and texture do more than extra detail",
+        paragraphs: [
+          `Light jackets work best when the palette stays controlled. Olive, navy, tan, charcoal, and faded black all make the piece easy to repeat across multiple outfits.`,
+          `Once the jacket already brings texture and shape, the rest of the look benefits from restraint. Clean pants, simple shirt, steady footwear. That is enough.`,
+        ],
+      },
+      {
+        heading: "Why this is one of the best low-effort upgrades",
+        paragraphs: [
+          `A light jacket is one of the fastest ways to make ordinary basics look more intentional. You do not need a new identity or a complicated formula. You just need one layer that gives the outfit a better outline.`,
+          `That is why the category is so dependable. It keeps basic clothes basic, but makes them read much better.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-rainy-day-style-men",
+    title: "Rainy Day Style for Men Without Looking Overbuilt",
+    category: "Style Guides",
+    date: "2026-04-23",
+    readTime: "9 min read",
+    excerpt:
+      "Rainy-day outfits should handle wet weather without turning into hiking gear or bulky emergency layers.",
+    description:
+      "A practical rainy-day style guide for men using lightweight jackets, dark denim, boots, and simple knitwear.",
+    heroLabel: "Rainy day",
+    tags: ["rainy day style", "mens outerwear", "casual boots", "style guide"],
+    relatedPickSlugs: [
+      "patagonia-better-sweater-fleece-jacket",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
+      "levis-511-slim-fit-jeans",
+    ],
+    sections: [
+      {
+        heading: "Rain style works best when the outfit stays ordinary",
+        paragraphs: [
+          `The main mistake men make in wet weather is dressing like the forecast has cancelled the rest of the day. Unless you are actually hiking through weather, rainy-day style usually looks better when it stays close to a normal outfit and just swaps in smarter fabrics and footwear.`,
+          `That means darker pants, a practical outer layer, and shoes or boots that can handle wet pavement without dragging the whole outfit into survival mode.`,
+        ],
+      },
+      {
+        heading: "Start with darker, sturdier foundations",
+        paragraphs: [
+          `Dark denim and matte boots are usually the easiest rainy-day base because they hide splash marks better and keep the outfit looking grounded. Straight or slim denim works especially well because it sits cleanly over boots without bunching.`,
+          `A reliable pairing like <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain boot</a> gives you that balance of weather-readiness and normal-looking style.`,
+        ],
+      },
+      {
+        heading: "Keep the outer layer clean and functional",
+        paragraphs: [
+          `Rain outfits fall apart when the jacket becomes too technical for the rest of the clothes. Clean fleeces, simple shell layers, and restrained field jackets tend to blend into a casual wardrobe much better than loud sport outerwear.`,
+          `Even a practical layer like the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater</a> works best when the rest of the outfit stays simple and controlled.`,
+        ],
+      },
+      {
+        heading: "Avoid making every piece weather-coded",
+        paragraphs: [
+          `You do not need waterproof everything. In fact, once every item starts screaming function, the outfit loses its shape and becomes harder to wear anywhere else.`,
+          `Better to keep one or two practical upgrades in place and let the rest of the outfit stay familiar. That makes rainy-day style feel like style instead of damage control.`,
+        ],
+      },
+      {
+        heading: "The goal is still to arrive looking ready",
+        paragraphs: [
+          `A good rainy-day outfit should let you walk into a cafe, office, or dinner and still look like yourself. Weather gear is a tool, not the entire identity of the outfit.`,
+          `Once you treat it that way, rainy-day dressing gets much simpler and much better.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-elevated-basics-men",
+    title: "Elevated Basics for Men: The Pieces That Make Simple Outfits Look Better",
+    category: "Wardrobe Basics",
+    date: "2026-04-24",
+    readTime: "9 min read",
+    excerpt:
+      "The difference between basic and forgettable usually comes down to fit, fabric, and one or two better-made staples.",
+    description:
+      "A guide to elevated basics for men, including oxford shirts, merino sweaters, straight denim, chinos, and understated watches.",
+    heroLabel: "Better basics",
+    tags: ["elevated basics", "wardrobe essentials", "mens style", "casual basics"],
+    relatedPickSlugs: [
+      "banana-republic-slim-fit-ocbd-shirt",
+      "uniqlo-merino-crew-neck-sweater",
+      "fossil-minimalist-watch",
+    ],
+    sections: [
+      {
+        heading: "Basic pieces do most of the real work",
+        paragraphs: [
+          `Most wardrobes are built on ordinary items: shirts, sweaters, denim, chinos, sneakers, and one or two jackets. The problem is not that these pieces are basic. It is that men often buy versions that do not hold their shape, fit well, or improve with repetition.`,
+          `Elevated basics are simply the versions that make everyday outfits look calmer and more considered. They are not flashy. They just perform better.`,
+        ],
+      },
+      {
+        heading: "Start with the pieces that touch everything else",
+        paragraphs: [
+          `The smartest upgrades are the items that interact with the largest share of the wardrobe. A strong oxford shirt, a good merino knit, and one clean accessory will show up across far more outfits than a statement jacket ever will.`,
+          `That is why pieces like the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a> or the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a> tend to earn their place so quickly. They make everything around them look more settled.`,
+        ],
+      },
+      {
+        heading: "Fabric and surface finish matter more than logos",
+        paragraphs: [
+          `When an outfit is simple, the eye notices texture and finish immediately. Crisp oxford cloth, smooth merino, matte leather, and denim with some body all make basics feel more serious without making them feel formal.`,
+          `That is also why a restrained accessory such as the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist watch</a> works better than louder jewelry or oversized hardware in a simple outfit.`,
+        ],
+      },
+      {
+        heading: "Use better basics to reduce outfit noise",
+        paragraphs: [
+          `Men often add more detail when the real problem is that the foundation feels weak. Better basics solve that by giving the outfit cleaner lines and better texture, so you no longer need extra visual help.`,
+          `Once the basics are strong, repeating them does not feel repetitive. It feels consistent.`,
+        ],
+      },
+      {
+        heading: "Why this approach saves money over time",
+        paragraphs: [
+          `Elevated basics are a budget strategy as much as a style strategy. Pieces that integrate easily and wear often tend to justify their cost much faster than one-off trend buys.`,
+          `That is why a wardrobe built around better fundamentals usually ends up looking sharper while involving fewer total purchases.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-dinner-outfits-men",
+    title: "Casual Dinner Outfits for Men That Do Not Feel Overdressed",
+    category: "Outfit Ideas",
+    date: "2026-04-18",
+    readTime: "8 min read",
+    excerpt:
+      "The best dinner outfits feel intentional and confident without looking like you dressed for a completely different event.",
+    description:
+      "Casual dinner outfit ideas for men using knitwear, dark denim, refined boots, chinos, and lightweight jackets.",
+    heroLabel: "Dinner casual",
+    tags: ["dinner outfits", "casual menswear", "date style", "outfit ideas"],
+    relatedPickSlugs: [
+      "uniqlo-merino-crew-neck-sweater",
+      "levis-511-slim-fit-jeans",
+      "thursday-scout-chelsea-boot",
+    ],
+    sections: [
+      {
+        heading: "Dinner outfits work best in the middle",
+        paragraphs: [
+          `Most casual dinners call for something more polished than daytime errand clothes, but less rigid than full business casual. That middle zone is where men tend to either underdress or overcompensate.`,
+          `The easiest fix is to start with familiar pieces and make one or two of them cleaner than usual. A better sweater, darker denim, or sharper footwear often handles the whole job.`,
+        ],
+      },
+      {
+        heading: "Formula 1: merino sweater, dark jeans, Chelsea boots",
+        paragraphs: [
+          `This combination works because every piece feels easy on its own, but together they look composed. The knit adds softness, the denim keeps the outfit grounded, and the boots bring enough polish for the evening.`,
+          `A setup with the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a>, <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a>, and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea boot</a> lands in that sweet spot naturally.`,
+        ],
+      },
+      {
+        heading: "Formula 2: chinos, button-down, light jacket",
+        paragraphs: [
+          `If the restaurant is brighter or slightly more polished, chinos with a button-down and a clean jacket usually feel right. This keeps the outfit structured without drifting into officewear.`,
+          `The best version is calm and restrained. Let the fit and fabric carry the look instead of trying to impress with louder details.`,
+        ],
+      },
+      {
+        heading: "Avoid making the outfit too daytime or too corporate",
+        paragraphs: [
+          `Athletic sneakers, faded tees, and soft jogger-type trousers can make an evening outfit feel accidental. On the other side, formal shoes and stiff shirts can make a casual dinner feel overmanaged.`,
+          `The middle route almost always wins: dark colors, controlled fit, and one piece that feels a little sharper than what you would wear during the day.`,
+        ],
+      },
+      {
+        heading: "Evening casual is mostly about confidence through restraint",
+        paragraphs: [
+          `The strongest dinner outfits are rarely memorable because of one loud item. They work because the whole combination feels coherent and easy to wear.`,
+          `That is the standard to chase. Not dressed up, not thrown on, just clearly considered.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-spring-weekend-uniform-men",
+    title: "A Spring Weekend Uniform for Men That Works Every Time",
+    category: "Wardrobe Basics",
+    date: "2026-04-16",
+    readTime: "8 min read",
+    excerpt:
+      "Spring weekends are easier when you have one reliable outfit formula that can flex across coffee, errands, lunch, and late-afternoon plans.",
+    description:
+      "A practical spring weekend outfit formula for men using overshirts, chinos, tees, sneakers, and sunglasses.",
+    heroLabel: "Weekend uniform",
+    tags: ["spring outfits", "weekend style", "wardrobe basics", "mens casual"],
+    relatedPickSlugs: [
+      "roark-revival-open-road-overshirt",
+      "everlane-the-slim-fit-chino",
+      "ray-ban-rb2140-wayfarer-sunglasses",
+    ],
+    sections: [
+      {
+        heading: "Uniform thinking makes weekends easier",
+        paragraphs: [
+          `Weekend style gets better when you stop trying to invent a fresh look every Saturday. A simple seasonal uniform removes decision fatigue and makes it much easier to stay sharp through low-stakes plans.`,
+          `Spring is especially suited to that approach because the weather usually calls for light layers, not full coats or stripped-down summer clothes.`,
+        ],
+      },
+      {
+        heading: "The core formula: tee, chinos, overshirt, sneakers",
+        paragraphs: [
+          `This is one of the easiest spring combinations because it covers comfort, structure, and mild weather in one move. The tee keeps things casual, chinos clean up the line, and the overshirt brings enough shape to make the outfit feel finished.`,
+          `A useful version starts with the <a href="./pick-roark-revival-open-road-overshirt.html">Roark overshirt</a> and the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane chino</a>, then lets understated sneakers and sunglasses finish the rest.`,
+        ],
+      },
+      {
+        heading: "Why accessories matter more in spring",
+        paragraphs: [
+          `Because the clothes are lighter, accessories become more visible. A pair of sunglasses, a clean watch, or a better belt can quietly upgrade the whole outfit without adding weight.`,
+          `That is where classics like the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban Wayfarer</a> keep earning space. They do not change the outfit's identity, but they do sharpen the final impression.`,
+        ],
+      },
+      {
+        heading: "The point is flexibility, not novelty",
+        paragraphs: [
+          `A good weekend uniform should survive a temperature shift, a last-minute plan change, and a few hours out of the house without falling apart. That is why repeatable pieces matter more than creative styling here.`,
+          `When the formula works, you stop thinking about the outfit and just wear it.`,
+        ],
+      },
+      {
+        heading: "Uniforms make shopping cleaner too",
+        paragraphs: [
+          `Once you know your spring formula, new purchases become easier to judge. If a piece does not strengthen the uniform, it probably does not need to come home.`,
+          `That one filter saves money and keeps the wardrobe more coherent over time.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-daytime-date-outfits-men",
+    title: "Daytime Date Outfits for Men That Feel Easy and Intentional",
+    category: "Outfit Ideas",
+    date: "2026-04-13",
+    readTime: "8 min read",
+    excerpt:
+      "Daytime dates call for clothes that look considered in natural light without feeling rehearsed or too formal.",
+    description:
+      "Daytime date outfit ideas for men using chinos, knitwear, oxford shirts, clean sneakers, and understated accessories.",
+    heroLabel: "Daytime date",
+    tags: ["daytime date outfits", "mens style", "casual date style", "outfit ideas"],
+    relatedPickSlugs: [
+      "banana-republic-slim-fit-ocbd-shirt",
+      "new-balance-574-sneaker",
+      "fossil-minimalist-watch",
+    ],
+    sections: [
+      {
+        heading: "Daylight rewards clean details",
+        paragraphs: [
+          `Daytime dates are less forgiving than evening ones because the light is clearer and the setting is usually more casual. That means the outfit cannot rely on darkness or atmosphere to look better than it is.`,
+          `The answer is not to dress up harder. It is to wear simple pieces that fit well and look like you chose them on purpose.`,
+        ],
+      },
+      {
+        heading: "Formula 1: oxford shirt, chinos, clean sneakers",
+        paragraphs: [
+          `This formula works because it feels social without trying too hard. The shirt brings polish, the chinos keep the line tidy, and the sneakers stop the outfit from becoming stiff.`,
+          `A combination built around the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a> and clean casual sneakers such as the <a href="./pick-new-balance-574-sneaker.html">New Balance 574</a> usually gets the tone right immediately.`,
+        ],
+      },
+      {
+        heading: "Let one small accessory do the finishing",
+        paragraphs: [
+          `A simple accessory can help a daytime outfit feel complete without making it look styled to death. The key is choosing something restrained enough that it disappears into the overall look.`,
+          `A watch like the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist</a> works because it supports the outfit instead of becoming the conversation.`,
+        ],
+      },
+      {
+        heading: "Avoid looking too relaxed or too managed",
+        paragraphs: [
+          `Gym sneakers, oversized hoodies, and shapeless tees can make the outfit feel accidental. At the other extreme, dress shoes and formal shirting can read like you planned for an interview instead of a date.`,
+          `The best middle ground is clean casual with one polished signal. That is enough to show effort without putting the effort on display.`,
+        ],
+      },
+      {
+        heading: "Aim for steady confidence",
+        paragraphs: [
+          `The best daytime date outfit should feel normal when you are wearing it. If you feel self-conscious, there is a good chance the clothing is working too hard.`,
+          `Calm pieces, good fit, and one clear direction usually outperform a more theatrical approach.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-smart-casual-summer-night-men",
+    title: "Smart Casual Summer Night Outfits for Men",
+    category: "Outfit Ideas",
+    date: "2026-04-10",
+    readTime: "8 min read",
+    excerpt:
+      "Warm evenings need outfits that stay light and breathable while still feeling more refined than daytime casual.",
+    description:
+      "Smart casual summer night outfit ideas for men using linen shirts, lightweight trousers, loafers, and understated accessories.",
+    heroLabel: "Summer nights",
+    tags: ["summer night outfits", "smart casual", "mens summer style", "outfit ideas"],
+    relatedPickSlugs: [
+      "muji-french-linen-shirt",
+      "boss-slim-fit-trousers",
+      "ray-ban-rb2140-wayfarer-sunglasses",
+    ],
+    sections: [
+      {
+        heading: "Summer evenings need lighter polish",
+        paragraphs: [
+          `The challenge with summer night style is that evening plans often call for a step up in polish, while the weather still punishes heavy fabrics and extra layers. That means the outfit needs to feel refined through fabric choice and silhouette instead of sheer clothing weight.`,
+          `Linen, open collars, light knits, and cleaner trousers usually solve this better than adding more pieces.`,
+        ],
+      },
+      {
+        heading: "Formula 1: linen shirt with sharper trousers",
+        paragraphs: [
+          `One of the easiest warm-evening combinations is a linen shirt with trim trousers and simple loafers or sleek sneakers. The shirt keeps the outfit breathable, while the trousers add enough shape to make it feel evening-ready.`,
+          `A piece like the <a href="./pick-muji-french-linen-shirt.html">MUJI French linen shirt</a> paired with <a href="./pick-boss-slim-fit-trousers.html">BOSS slim-fit trousers</a> gets that balance right without forcing the outfit into formal territory.`,
+        ],
+      },
+      {
+        heading: "Accessories should stay restrained",
+        paragraphs: [
+          `Summer outfits already have less clothing to work with, so accessories show up faster. That does not mean adding more of them. It means choosing one or two that sharpen the look without crowding it.`,
+          `Sunglasses and a simple watch usually do enough. Anything louder starts to compete with the ease that makes summer dressing attractive in the first place.`,
+        ],
+      },
+      {
+        heading: "Keep the palette quiet and the fabrics alive",
+        paragraphs: [
+          `Summer night outfits often look best in soft neutrals, washed navy, olive, stone, and black. The interest comes from fabric movement and texture, not bright color.`,
+          `That is why linen, matte cotton, and light wool blends tend to outperform stiffer materials in this setting.`,
+        ],
+      },
+      {
+        heading: "The strongest version still feels effortless",
+        paragraphs: [
+          `A good summer night outfit should not feel fragile or overassembled. It should feel like something you can wear for drinks, dinner, and the walk between them without thinking about the clothes again.`,
+          `That sense of ease is what makes the outfit convincing.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-better-accessories-men",
+    title: "The Small Accessories That Quietly Improve a Man's Outfit",
+    category: "Buying Guides",
+    date: "2026-04-09",
+    readTime: "9 min read",
+    excerpt:
+      "Most outfits do not need more clothing. They need one or two quieter accessories that clean up the final impression.",
+    description:
+      "A buying guide to men's accessories that actually improve outfits, including watches, belts, sunglasses, and beanies.",
+    heroLabel: "Accessory guide",
+    tags: ["mens accessories", "buying guide", "watches", "sunglasses"],
+    relatedPickSlugs: [
+      "fossil-minimalist-watch",
+      "ray-ban-rb2140-wayfarer-sunglasses",
+      "carhartt-wip-watch-hat-beanie",
+    ],
+    sections: [
+      {
+        heading: "Accessories should finish the outfit, not rescue it",
+        paragraphs: [
+          `A weak outfit does not become strong because you added more things to it. Accessories work best when the clothes already make sense and just need a cleaner final edge.`,
+          `That is why the most useful accessories are often the quietest ones. They support the outfit's tone instead of dragging attention toward themselves.`,
+        ],
+      },
+      {
+        heading: "A simple watch is usually the best first move",
+        paragraphs: [
+          `Watches help because they bring intention to an outfit without changing its category. A clean dial and restrained strap can make even basic casual clothes feel more settled.`,
+          `That is also why something like the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist watch</a> tends to work across many different outfits. It does not ask the rest of the wardrobe to do anything special.`,
+        ],
+      },
+      {
+        heading: "Sunglasses should fit the face and the wardrobe",
+        paragraphs: [
+          `Sunglasses are one of the fastest ways to improve a daytime outfit, but only when the frame shape and finish feel consistent with the clothes. Loud novelty frames can dominate a simple outfit in the wrong way.`,
+          `Classic shapes such as the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban Wayfarer</a> keep showing up because they sharpen the look without forcing a complete style shift.`,
+        ],
+      },
+      {
+        heading: "Cold-weather accessories are better when they stay plain",
+        paragraphs: [
+          `Beanies, scarves, and gloves should usually keep a low profile. Their job is to support the outfit and the weather, not become the main event.`,
+          `That is why a clean option like the <a href="./pick-carhartt-wip-watch-hat-beanie.html">Carhartt WIP beanie</a> works better than something louder in most everyday wardrobes.`,
+        ],
+      },
+      {
+        heading: "Buy accessories for repetition",
+        paragraphs: [
+          `The right accessory is the one you forget to take off because it keeps working. That means neutral colors, straightforward finishes, and a shape that does not fight the rest of the closet.`,
+          `Once you buy for repetition, accessories stop being clutter and start becoming part of your standard uniform.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-transitional-weather-wardrobe-men",
+    title: "What to Wear in Transitional Weather Without Owning Too Much",
+    category: "Wardrobe Basics",
+    date: "2026-04-04",
+    readTime: "9 min read",
+    excerpt:
+      "Transitional weather rewards a small group of adaptable layers more than a closet full of hyper-specific pieces.",
+    description:
+      "A wardrobe basics guide for transitional weather using overshirts, merino sweaters, light jackets, denim, and versatile boots.",
+    heroLabel: "Transitional weather",
+    tags: ["transitional weather", "wardrobe basics", "layering", "mens essentials"],
+    relatedPickSlugs: [
+      "roark-revival-open-road-overshirt",
+      "uniqlo-merino-crew-neck-sweater",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
+    ],
+    sections: [
+      {
+        heading: "The problem is not temperature, it is fluctuation",
+        paragraphs: [
+          `Transitional weather is difficult because the day refuses to stay in one category. A cold morning, mild afternoon, and cool evening can all happen in a single outfit cycle.`,
+          `That is why the solution is not more clothing. It is smarter layers that can come on and off without making the outfit collapse.`,
+        ],
+      },
+      {
+        heading: "Build around three adaptable pieces",
+        paragraphs: [
+          `Most men can solve transitional weather with an overshirt, a lightweight knit, and one dependable pair of boots or sturdy sneakers. Those three categories cover a surprising amount of range when the colors and fit stay controlled.`,
+          `Pieces like the <a href="./pick-roark-revival-open-road-overshirt.html">Roark overshirt</a>, <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a>, and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain</a> are useful because they do not feel locked to one exact forecast.`,
+        ],
+      },
+      {
+        heading: "Keep the base outfit stable",
+        paragraphs: [
+          `The easiest way to layer well is to make sure the outfit underneath already works. Tee or shirt, clean trousers or denim, and decent shoes should still make sense if the outer layer comes off.`,
+          `That way the day can change without forcing a full reset on the outfit.`,
+        ],
+      },
+      {
+        heading: "Avoid buying for one narrow weather window",
+        paragraphs: [
+          `A lot of wasted wardrobe spending comes from pieces that only work in a tiny weather band. Transitional dressing is cleaner when you buy layers that overlap across seasons instead of solving one exact temperature.`,
+          `The more flexible the layer, the more often it earns its space.`,
+        ],
+      },
+      {
+        heading: "Good layering feels calm, not complicated",
+        paragraphs: [
+          `The best transitional-weather outfits do not look technical or overthought. They look like normal clothes with enough range to handle a changing day.`,
+          `That is the right standard. Not cleverness, just coverage.`,
         ],
       },
     ],
