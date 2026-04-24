@@ -1145,6 +1145,25 @@ function renderLegacyPrivacyRedirectPage() {
   `;
 }
 
+function renderRedirectPage(targetPath, title) {
+  const canonicalUrl = new URL(targetPath, `${siteUrl}/`).toString();
+  return `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="refresh" content="0; url=${targetPath}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>${escapeHtml(title)}</title>
+        <link rel="canonical" href="${canonicalUrl}">
+      </head>
+      <body>
+        <p>Redirecting to <a href="${targetPath}">${escapeHtml(title)}</a>.</p>
+      </body>
+    </html>
+  `;
+}
+
 function renderPickPage(pick) {
   const { lowPrice, highPrice } = parsePriceRange(pick.priceLabel);
   const editorial = buildLegacyEditorial(pick);
@@ -1403,6 +1422,7 @@ function writeOutput() {
   writeFile("index.html", renderIndexPage());
   writeFile("picks.html", renderPicksPage());
   writeFile("blog.html", renderBlogPage());
+  writeFile("blog/index.html", renderRedirectPage("../blog.html", "the PrimeGent journal"));
   writeFile("about.html", renderAboutPage());
   writeFile("contact.html", renderContactPage());
   writeFile("privacy-policy.html", renderPrivacyPolicyPage());
