@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
@@ -1406,6 +1406,76 @@ function renderStyleCss() {
 
 function renderAppJs() {
   return readFileSync(path.join(root, "static/app.js"), "utf8");
+}
+
+function normalizeGeneratedBlogPost(post, fallbackIndex) {
+  const slug = normalizeCopy(post?.slug)
+    .toLowerCase()
+    .replace(/[^a-z0-9-]+/g, "-")
+    .replace(/-{2,}/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const title = normalizeCopy(post?.title);
+  const sections = (Array.isArray(post?.sections) ? post.sections : [])
+    .map((section) => ({
+      heading: truncate(normalizeCopy(section?.heading), 90),
+      paragraphs: (Array.isArray(section?.paragraphs) ? section.paragraphs : [])
+        .map((paragraph) => String(paragraph || "").trim())
+        .filter(Boolean)
+        .slice(0, 6),
+    }))
+    .filter((section) => section.heading && section.paragraphs.length);
+
+  if (!slug || !title || !sections.length) {
+    return null;
+  }
+
+  return {
+    slug,
+    title,
+    category: normalizeCopy(post?.category) || "Style Guides",
+    date: /^\d{4}-\d{2}-\d{2}$/.test(normalizeCopy(post?.date)) ? normalizeCopy(post.date) : "2026-01-01",
+    readTime: normalizeCopy(post?.readTime) || "8 min read",
+    excerpt: truncate(normalizeCopy(post?.excerpt) || normalizeCopy(post?.description) || `Generated article ${fallbackIndex + 1}`, 170),
+    description:
+      truncate(normalizeCopy(post?.description) || normalizeCopy(post?.excerpt) || `Generated article ${fallbackIndex + 1}`, 220),
+    heroLabel: truncate(normalizeCopy(post?.heroLabel) || "Generated post", 24),
+    tags: (Array.isArray(post?.tags) ? post.tags : [])
+      .map((tag) => normalizeCopy(tag))
+      .filter(Boolean)
+      .slice(0, 5),
+    relatedPickSlugs: (Array.isArray(post?.relatedPickSlugs) ? post.relatedPickSlugs : [])
+      .map((slugValue) => normalizeCopy(slugValue).replace(/[^a-z0-9-]+/g, "-"))
+      .filter(Boolean)
+      .slice(0, 4),
+    sections,
+  };
+}
+
+function loadGeneratedBlogPosts() {
+  const generatedPostsPath = path.join(root, "blog", "generated-posts.json");
+  if (!existsSync(generatedPostsPath)) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(readFileSync(generatedPostsPath, "utf8"));
+    return (Array.isArray(parsed) ? parsed : [])
+      .map((post, index) => normalizeGeneratedBlogPost(post, index))
+      .filter(Boolean);
+  } catch (error) {
+    console.warn(`Could not load generated posts from ${generatedPostsPath}: ${error.message}`);
+    return [];
+  }
+}
+
+function mergeGeneratedBlogPosts() {
+  const mergedPosts = new Map(blogPosts.map((post) => [post.slug, post]));
+  loadGeneratedBlogPosts().forEach((post) => {
+    mergedPosts.set(post.slug, post);
+  });
+
+  blogPosts.length = 0;
+  blogPosts.push(...mergedPosts.values());
 }
 
 function writeOutput() {
@@ -4285,4 +4355,5 @@ blogPosts.push(
     ],
   },
 );
+mergeGeneratedBlogPosts();
 writeOutput();

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Affiliate Publisher | PrimeGent</title>
+    <meta
+      name="description"
+      content="Generate multiple blog-ready affiliate articles from a simple description using only products already listed in the PrimeGent picks catalog."
+    >
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="theme-color" content="#11100d">
+    <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="./static/style.css">
+  </head>
+  <body data-page="publisher">
+    <header class="site-header">
+      <div class="container nav-shell">
+        <a class="brand" href="./index.html" aria-label="PrimeGent home">
+          <span class="brand-mark">PG</span>
+          <span>PrimeGent</span>
+        </a>
+        <nav class="desktop-nav" aria-label="Primary">
+          <a href="./index.html" data-nav-link="home">Home</a>
+          <a href="./picks.html" data-nav-link="picks">Outfits</a>
+          <a href="./blog.html" data-nav-link="blog">Journal</a>
+          <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only">Toggle menu</span>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+        <div class="mobile-menu__backdrop" data-menu-close></div>
+        <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+          <div class="mobile-menu__head">
+            <span class="brand brand--small">
+              <span class="brand-mark">PG</span>
+              <span>PrimeGent</span>
+            </span>
+            <button class="menu-close" type="button" aria-label="Close menu" data-menu-close>Close</button>
+          </div>
+          <nav class="mobile-nav" aria-label="Mobile primary">
+            <a href="./index.html" data-nav-link="home">Home</a>
+            <a href="./picks.html" data-nav-link="picks">Outfits</a>
+            <a href="./blog.html" data-nav-link="blog">Journal</a>
+            <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main data-publisher-page>
+      <section class="page-hero">
+        <div class="container page-hero__content">
+          <p class="eyebrow">Editorial tool</p>
+          <h1>Affiliate Publisher</h1>
+          <p>
+            Describe the kind of article series you want, choose how many drafts to make, and the app will generate
+            titles, match catalog products, and write the articles for you. If you want to force titles, add them
+            optionally.
+          </p>
+        </div>
+      </section>
+
+      <section class="section section--tight">
+        <div class="container publisher-grid">
+          <section class="card publisher-panel">
+            <div class="publisher-panel__head">
+              <div>
+                <p class="eyebrow">Set the brief</p>
+                <h2>Describe the article batch</h2>
+              </div>
+              <p class="microcopy">The app reads `picks.html`, generates titles if needed, and matches products automatically.</p>
+            </div>
+
+            <form class="publisher-form" data-publisher-form>
+              <div class="publisher-field">
+                <label for="publisher-description">Describe what you want</label>
+                <textarea
+                  id="publisher-description"
+                  name="description"
+                  rows="6"
+                  maxlength="520"
+                  required
+                  placeholder="Example: Create practical men's summer smart casual articles focused on clean outfits, breathable shirts, easy shoes, and repeatable wardrobe formulas."
+                >Create practical men's summer smart casual articles focused on clean outfits, breathable shirts, easy shoes, and repeatable wardrobe formulas.</textarea>
+              </div>
+
+              <div class="publisher-form__row">
+                <div class="publisher-field">
+                  <label for="publisher-article-count">How many articles</label>
+                  <select id="publisher-article-count" name="articleCount">
+                    <option value="1">1 article</option>
+                    <option value="2" selected>2 articles</option>
+                    <option value="3">3 articles</option>
+                    <option value="4">4 articles</option>
+                    <option value="5">5 articles</option>
+                    <option value="6">6 articles</option>
+                  </select>
+                </div>
+
+                <div class="publisher-field publisher-field--meta">
+                  <span class="publisher-stat-label">Catalog source</span>
+                  <strong data-publisher-catalog-source>Loading picks.html...</strong>
+                  <span class="microcopy">Only products parsed from your local `picks.html` can be used.</span>
+                </div>
+              </div>
+
+              <div class="publisher-field">
+                <label for="publisher-titles">Custom titles (optional)</label>
+                <textarea
+                  id="publisher-titles"
+                  name="customTitles"
+                  rows="4"
+                  maxlength="900"
+                  placeholder="Optional: one title per line. Leave blank and the app will make the titles for you."
+                ></textarea>
+              </div>
+
+              <div class="publisher-actions">
+                <button class="btn btn-primary" type="submit" data-publisher-generate>Generate articles</button>
+              </div>
+
+              <p class="publisher-status" data-publisher-status>Loading the live catalog from picks.html.</p>
+            </form>
+          </section>
+
+          <aside class="card publisher-panel publisher-panel--notes">
+            <div class="publisher-panel__head">
+              <div>
+                <p class="eyebrow">Automatic</p>
+                <h2>What the app handles</h2>
+              </div>
+            </div>
+            <div class="publisher-notes">
+              <div class="publisher-note">
+                <h3>Titles when you skip them</h3>
+                <p>The tool can build the titles from your description and only uses your own titles when you paste them.</p>
+              </div>
+              <div class="publisher-note">
+                <h3>Product matching</h3>
+                <p>Each article gets its own matched picks from the catalog so the recommendations stay on-theme.</p>
+              </div>
+              <div class="publisher-note">
+                <h3>No made-up products</h3>
+                <p>Every product mention comes from the local PrimeGent picks catalog, never from an invented list.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Output</p>
+              <h2>Generated articles</h2>
+            </div>
+            <div class="publisher-output-actions hidden" data-publisher-output-actions>
+              <button class="btn btn-primary" type="button" data-publisher-publish-all>Publish all to blog</button>
+              <button class="btn btn-ghost" type="button" data-publisher-copy-text>Copy all text</button>
+              <button class="btn btn-ghost" type="button" data-publisher-copy-html>Copy all HTML</button>
+            </div>
+          </div>
+
+          <div class="publisher-preview-shell" data-publisher-preview-shell>
+            <div class="publisher-empty">
+              <h3>No articles yet</h3>
+              <p>Describe what you want, choose the number of articles, and generate the batch.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a class="brand brand--small" href="./index.html">
+            <span class="brand-mark">PG</span>
+            <span>PrimeGent</span>
+          </a>
+          <p class="footer-copy">Curated men's outfit ideas, better basics, and practical picks that earn their place.</p>
+        </div>
+        <div>
+          <h2>Explore</h2>
+          <a href="./blog.html">Journal</a>
+          <a href="./picks.html">Curated picks</a>
+        </div>
+        <div>
+          <h2>Company</h2>
+          <a href="./about.html">About us</a>
+          <a href="./contact.html">Contact us</a>
+        </div>
+        <div>
+          <h2>Legal</h2>
+          <a href="./privacy-policy.html">Privacy policy</a>
+          <a href="./affiliate-disclosure.html">Affiliate disclosure</a>
+          <p class="footer-note">PrimeGent may earn commissions from qualifying purchases through affiliate links.</p>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 PrimeGent. Dress better. Every day.</p>
+      </div>
+    </footer>
+
+    <button class="back-to-top" type="button" aria-label="Back to top" data-back-to-top>Top</button>
+    <script src="./static/app.js" defer></script>
+    <script src="./static/publisher.js" defer></script>
+  </body>
+</html>
