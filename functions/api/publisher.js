@@ -171,8 +171,203 @@ const CATEGORY_ALIASES = {
   activewear: ["track", "activewear", "athletic", "sporty", "trainer", "running", "gym"],
 };
 
-function scoreProduct(product, queryText) {
-  const tokens = tokenize(queryText);
+const CATEGORY_PATTERNS = [
+  { category: "shirts", patterns: [/\bshirt\b/, /\bshirts\b/, /\blinen\b/, /\boxford\b(?!\s+shoe)/, /\bpolo\b/, /\btee\b/, /\bt[-\s]?shirt\b/] },
+  { category: "pants", patterns: [/\bpant\b/, /\bpants\b/, /\bchino\b/, /\bchinos\b/, /\bjean\b/, /\bjeans\b/, /\btrouser\b/, /\btrousers\b/, /\bcargo\b/] },
+  { category: "shoes", patterns: [/\bshoe\b/, /\bshoes\b/, /\bsneaker\b/, /\bsneakers\b/, /\bboot\b/, /\bboots\b/, /\bloafer\b/, /\bloafers\b/, /\boxford shoe\b/] },
+  { category: "jackets", patterns: [/\bjacket\b/, /\bjackets\b/, /\bcoat\b/, /\bouterwear\b/, /\bovershirt\b/, /\bwindbreaker\b/, /\bbomber\b/] },
+  { category: "accessories", patterns: [/\bwatch\b/, /\bwatches\b/, /\bbelt\b/, /\bbeanie\b/, /\bsunglasses\b/, /\baccessor(?:y|ies)\b/, /\bbag\b/] },
+  { category: "basics", patterns: [/\bsweater\b/, /\bmerino\b/, /\bhoodie\b/, /\bhoodies\b/, /\bknit\b/, /\bknitwear\b/, /\bcardigan\b/, /\bcrewneck\b/] },
+  { category: "activewear", patterns: [/\bactivewear\b/, /\bathletic\b/, /\bsporty\b/, /\brunning\b/, /\bgym\b/, /\btrack\b/] },
+];
+
+const STYLE_SIGNAL_PATTERNS = [
+  { style: "smart-casual", patterns: [/smart casual/, /elevated casual/, /polished casual/] },
+  { style: "office", patterns: [/office/, /work/, /business casual/, /commute/] },
+  { style: "weekend", patterns: [/weekend/, /off duty/, /everyday/, /daily wear/] },
+  { style: "date-night", patterns: [/date night/, /\bdate\b/, /dinner/, /wedding/, /night out/] },
+  { style: "travel", patterns: [/travel/, /airport/, /vacation/, /getaway/] },
+  { style: "minimal", patterns: [/minimal/, /minimalist/, /clean/, /quiet/, /simple/, /understated/] },
+  { style: "rugged", patterns: [/rugged/, /workwear/, /outdoor/, /field/, /utilitarian/, /camp/] },
+  { style: "casual", patterns: [/\bcasual\b/, /easy/, /relaxed/] },
+];
+
+const MATERIAL_SIGNAL_PATTERNS = [
+  { label: "linen", patterns: [/linen/, /breathable/] },
+  { label: "merino", patterns: [/merino/, /wool/] },
+  { label: "denim", patterns: [/denim/, /jean/, /jeans/] },
+  { label: "suede", patterns: [/suede/] },
+  { label: "leather", patterns: [/leather/] },
+  { label: "oxford", patterns: [/\boxford\b/] },
+  { label: "polo", patterns: [/\bpolo\b/] },
+  { label: "cargo", patterns: [/\bcargo\b/] },
+  { label: "sweater", patterns: [/\bsweater\b/, /\bknit\b/, /\bcrewneck\b/] },
+];
+
+const SEASON_SIGNAL_PATTERNS = [
+  { season: "winter", patterns: [/\bwinter\b/, /cold[-\s]?weather/, /\bsnow(?:y)?\b/, /\bfreez(?:e|ing)\b/] },
+  { season: "summer", patterns: [/\bsummer\b/, /warm[-\s]?weather/, /hot[-\s]?weather/, /\bbeach\b/, /\bheat\b/, /\bhumid\b/] },
+  { season: "fall", patterns: [/\bfall\b/, /\bautumn\b/, /cool[-\s]?weather/] },
+  { season: "spring", patterns: [/\bspring\b/, /transitional/] },
+];
+
+const SEASONAL_CATEGORY_ORDER = {
+  winter: ["jackets", "basics", "shoes", "pants", "shirts", "accessories"],
+  summer: ["shirts", "pants", "shoes", "accessories", "jackets", "basics"],
+  fall: ["jackets", "shirts", "pants", "shoes", "basics", "accessories"],
+  spring: ["shirts", "jackets", "pants", "shoes", "accessories", "basics"],
+};
+
+const PRODUCT_SEASON_SIGNALS = {
+  winter: {
+    positive: [
+      /\bwinter\b/,
+      /cold[-\s]?weather/,
+      /\bfleece\b/,
+      /\bflannel\b/,
+      /\bwool\b/,
+      /\bmerino\b/,
+      /\bsweater\b/,
+      /\bhood(?:ie|ed)\b/,
+      /\bcardigan\b/,
+      /mock[-\s]?neck/,
+      /\bturtleneck\b/,
+      /shawl[-\s]?collar/,
+      /\bheavyweight\b/,
+      /\bthick\b/,
+      /\bwaterproof\b/,
+      /\bboots?\b/,
+      /\bcoat\b/,
+      /\bcorduroy\b/,
+      /\bduck\b/,
+      /\bquilted\b/,
+      /\bparka\b/,
+      /autumn and winter/,
+      /long[-\s]?sleeve/,
+    ],
+    negative: [
+      /\blinen\b/,
+      /\blightweight\b/,
+      /\bbreathable\b/,
+      /\bquick[-\s]?dry\b/,
+      /\bcamp shirt\b/,
+      /\bwindbreaker\b/,
+      /mild weather/,
+      /light layer/,
+      /packs easily/,
+    ],
+    criticalNegative: [
+      /short[-\s]?sleeve/,
+      /\bsleeveless\b/,
+      /\bbeach\b/,
+      /\bsummer\b/,
+      /warm[-\s]?weather/,
+      /hot[-\s]?weather/,
+      /\bconvertible\b/,
+      /zip[-\s]?off/,
+    ],
+  },
+  summer: {
+    positive: [
+      /\bsummer\b/,
+      /warm[-\s]?weather/,
+      /hot[-\s]?weather/,
+      /\bbeach\b/,
+      /\blinen\b/,
+      /short[-\s]?sleeve/,
+      /\bsleeveless\b/,
+      /\bbreathable\b/,
+      /\blightweight\b/,
+      /\bquick[-\s]?dry\b/,
+      /\bairy\b/,
+      /\bcamp shirt\b/,
+      /\bpolo\b/,
+    ],
+    negative: [/\bboots?\b/, /\bwaterproof\b/, /\bheavyweight\b/, /\bthick\b/],
+    criticalNegative: [
+      /\bwinter\b/,
+      /cold[-\s]?weather/,
+      /\bfleece\b/,
+      /\bflannel\b/,
+      /\bwool\b/,
+      /\bmerino\b/,
+      /\bsweater\b/,
+      /\bhood(?:ie|ed)\b/,
+      /mock[-\s]?neck/,
+      /\bturtleneck\b/,
+      /\bquilted\b/,
+      /\bparka\b/,
+    ],
+  },
+  fall: {
+    positive: [
+      /\bfall\b/,
+      /\bautumn\b/,
+      /\bflannel\b/,
+      /\bovershirt\b/,
+      /\bcorduroy\b/,
+      /\btrucker\b/,
+      /\bsuede\b/,
+      /\bboots?\b/,
+      /\bjacket\b/,
+      /long[-\s]?sleeve/,
+      /\bknit\b/,
+    ],
+    negative: [/\blightweight\b/, /\bquick[-\s]?dry\b/],
+    criticalNegative: [/\bsummer\b/, /\bbeach\b/, /short[-\s]?sleeve/, /\bconvertible\b/, /zip[-\s]?off/],
+  },
+  spring: {
+    positive: [/\bspring\b/, /\bovershirt\b/, /\boxford\b/, /\bchinos?\b/, /\bsneakers?\b/, /\blightweight jacket\b/],
+    negative: [/\bwaterproof\b/, /\bboots?\b/],
+    criticalNegative: [/\bwinter\b/, /\bparka\b/, /\bquilted\b/, /\bheavyweight fleece\b/, /snow[-\s]?boot/],
+  },
+};
+
+const DEFAULT_CATEGORY_ORDER = ["shirts", "pants", "shoes", "jackets", "basics", "accessories"];
+
+const GENERIC_SIGNAL_TOKENS = new Set([
+  "actually",
+  "article",
+  "articles",
+  "build",
+  "clean",
+  "current",
+  "draft",
+  "easy",
+  "feel",
+  "good",
+  "guide",
+  "guides",
+  "how",
+  "look",
+  "looks",
+  "make",
+  "men",
+  "mens",
+  "modern",
+  "not",
+  "outfit",
+  "outfits",
+  "post",
+  "posts",
+  "real",
+  "really",
+  "repeatable",
+  "style",
+  "that",
+  "the",
+  "these",
+  "this",
+  "version",
+  "wear",
+  "what",
+  "with",
+  "without",
+  "work",
+  "works",
+]);
+
+function scoreProductTokens(product, tokens, weight = 1) {
   if (!tokens.length) {
     return 1;
   }
@@ -190,45 +385,305 @@ function scoreProduct(product, queryText) {
 
   tokens.forEach((token) => {
     if (haystack.name.includes(token)) {
-      score += 8;
+      score += 8 * weight;
     }
     if (haystack.category.includes(token)) {
-      score += 7;
+      score += 7 * weight;
     }
     if (haystack.styles.includes(token)) {
-      score += 5;
+      score += 5 * weight;
     }
     if (haystack.tags.includes(token)) {
-      score += 4;
+      score += 4 * weight;
     }
     if (haystack.description.includes(token)) {
-      score += 2;
+      score += 2 * weight;
     }
     if (haystack.brand.includes(token)) {
-      score += 1;
+      score += 1 * weight;
     }
   });
 
   (CATEGORY_ALIASES[product.category] || []).forEach((alias) => {
     if (tokens.includes(alias)) {
-      score += 5;
+      score += 5 * weight;
     }
   });
 
   product.styles.forEach((style) => {
     if (tokens.includes(style)) {
-      score += 4;
+      score += 4 * weight;
     }
   });
 
   product.tags.forEach((tag) => {
     tokenize(tag).forEach((token) => {
       if (tokens.includes(token)) {
-        score += 3;
+        score += 3 * weight;
       }
     });
   });
 
+  return score;
+}
+
+function matchesAnyPattern(text, patterns) {
+  return patterns.some((pattern) => pattern.test(text));
+}
+
+function extractMatchedCategories(text) {
+  return CATEGORY_PATTERNS.filter((entry) => matchesAnyPattern(text, entry.patterns)).map((entry) => entry.category);
+}
+
+function extractStyleSignals(text) {
+  return STYLE_SIGNAL_PATTERNS.filter((entry) => matchesAnyPattern(text, entry.patterns)).map((entry) => entry.style);
+}
+
+function extractMaterialSignals(text) {
+  return MATERIAL_SIGNAL_PATTERNS.filter((entry) => matchesAnyPattern(text, entry.patterns)).map((entry) => entry.label);
+}
+
+function extractSeasonSignals(text) {
+  return SEASON_SIGNAL_PATTERNS.filter((entry) => matchesAnyPattern(text, entry.patterns)).map((entry) => entry.season);
+}
+
+function buildSeasonCategoryOrder(seasons) {
+  const ordered = [];
+
+  seasons.forEach((season) => {
+    (SEASONAL_CATEGORY_ORDER[season] || []).forEach((category) => ordered.push(category));
+  });
+
+  return uniqueList([...ordered, ...DEFAULT_CATEGORY_ORDER], DEFAULT_CATEGORY_ORDER.length);
+}
+
+function scoreSeasonFit(productText, seasons) {
+  let score = 0;
+
+  seasons.forEach((season) => {
+    const config = PRODUCT_SEASON_SIGNALS[season];
+    if (!config) {
+      return;
+    }
+
+    config.positive.forEach((pattern) => {
+      if (pattern.test(productText)) {
+        score += 11;
+      }
+    });
+
+    config.negative.forEach((pattern) => {
+      if (pattern.test(productText)) {
+        score -= 14;
+      }
+    });
+
+    config.criticalNegative.forEach((pattern) => {
+      if (pattern.test(productText)) {
+        score -= 70;
+      }
+    });
+  });
+
+  return score;
+}
+
+function buildAngleContext(description) {
+  const text = cleanText(description).toLowerCase();
+  const parts = [];
+
+  if (/\bmen'?s\b|\bmens\b|\bmale\b/.test(text)) {
+    parts.push("Men's");
+  }
+
+  const season = ["spring", "summer", "fall", "winter"].find((item) => text.includes(item));
+  if (season) {
+    parts.push(titleCase(season));
+  }
+
+  const styleLabels = [
+    { pattern: /smart casual/, label: "Smart Casual" },
+    { pattern: /business casual/, label: "Business Casual" },
+    { pattern: /date night/, label: "Date Night" },
+    { pattern: /weekend/, label: "Weekend" },
+    { pattern: /travel|airport/, label: "Travel" },
+    { pattern: /minimalist|minimal/, label: "Minimal" },
+    { pattern: /rugged|workwear/, label: "Rugged" },
+  ];
+
+  const styleMatch = styleLabels.find((item) => item.pattern.test(text));
+  if (styleMatch) {
+    parts.push(styleMatch.label);
+  }
+
+  return titleCase(parts.join(" ").trim() || "Men's Style");
+}
+
+function extractThemeAngles(description) {
+  const text = cleanText(description).toLowerCase();
+  const angles = [];
+
+  const candidates = [
+    { key: "outfits", label: "Outfits", patterns: [/outfit/, /what to wear/, /look/, /looks/] },
+    { key: "shirts", label: "Shirts", patterns: [/\bshirt\b/, /\bshirts\b/, /\blinen\b/, /\boxford\b(?!\s+shoe)/, /\bpolo\b/, /\bpolo shirts?\b/, /\btee\b/, /\btees\b/] },
+    { key: "shoes", label: "Shoes", patterns: [/\bshoe\b/, /\bshoes\b/, /\bsneaker\b/, /\bsneakers\b/, /\bloafer\b/, /\bloafers\b/, /\bboot\b/, /\bboots\b/] },
+    { key: "pants", label: "Pants", patterns: [/\bpant\b/, /\bpants\b/, /\bchino\b/, /\bchinos\b/, /\bjean\b/, /\bjeans\b/, /\btrouser\b/, /\btrousers\b/, /\bcargo\b/] },
+    { key: "jackets", label: "Jackets", patterns: [/\bjacket\b/, /\bjackets\b/, /\bovershirt\b/, /\bouterwear\b/, /\bcoat\b/, /\bcoats\b/] },
+    { key: "accessories", label: "Accessories", patterns: [/\bwatch\b/, /\bwatches\b/, /\bbelt\b/, /\bbelts\b/, /\bsunglasses\b/, /\baccessor/] },
+    { key: "travel", label: "Travel Style", patterns: [/travel/, /airport/, /vacation/] },
+    { key: "office", label: "Office Style", patterns: [/office/, /business casual/, /work/] },
+    { key: "date-night", label: "Date Night Style", patterns: [/date night/, /\bdate\b/, /dinner/, /wedding/] },
+    { key: "wardrobe", label: "Wardrobe Formulas", patterns: [/repeatable/, /formula/, /capsule/, /wardrobe/] },
+  ];
+
+  candidates.forEach((candidate) => {
+    if (matchesAnyPattern(text, candidate.patterns)) {
+      angles.push(candidate);
+    }
+  });
+
+  if (!angles.length) {
+    angles.push({ key: "outfits", label: "Outfits" });
+  }
+
+  return angles;
+}
+
+function buildAngleTitle(context, angle, index) {
+  const extendContext = (suffix) => {
+    const normalizedContext = context.toLowerCase();
+    const contextWords = new Set(normalizedContext.split(/\s+/).filter(Boolean));
+    const remainder = suffix
+      .split(/\s+/)
+      .filter((word) => word && !contextWords.has(word.toLowerCase()));
+
+    return remainder.length ? `${context} ${remainder.join(" ")}` : context;
+  };
+
+  const templates = {
+    outfits: [
+      `${extendContext("Outfits")} That Feel Current, Not Forced`,
+      `How to Build ${extendContext("Outfits")} That Actually Repeat`,
+      `${extendContext("Outfits")} for Real Life, Not Just Inspiration`,
+    ],
+    shirts: [
+      `${extendContext("Shirts")} That Stay Sharp Without Feeling Stiff`,
+      `The Best ${extendContext("Shirts")} for a Cleaner Wardrobe`,
+      `How ${extendContext("Shirts")} Should Fit and Work Together`,
+    ],
+    shoes: [
+      `The Shoes That Make ${extendContext("Outfits")} Feel Finished`,
+      `${extendContext("Shoes")} That Keep the Outfit Clean, Not Try-Hard`,
+      `How to Pick ${extendContext("Shoes")} That Actually Work`,
+    ],
+    pants: [
+      `${extendContext("Pants")} That Make the Rest of the Outfit Easier`,
+      `The Best ${extendContext("Pants")} for Repeatable Daily Wear`,
+      `How to Wear ${extendContext("Pants")} Without Falling Back on Boring Defaults`,
+    ],
+    jackets: [
+      `${extendContext("Jackets")} That Add Shape Without Extra Noise`,
+      `The Easiest ${extendContext("Jackets")} to Build Outfits Around`,
+      `How to Use ${extendContext("Jackets")} Without Overlayering`,
+    ],
+    accessories: [
+      `${extendContext("Accessories")} That Finish the Outfit Without Overdoing It`,
+      `The Small ${extendContext("Accessories")} That Change the Whole Look`,
+      `How to Choose ${extendContext("Accessories")} That Actually Earn Their Place`,
+    ],
+    wardrobe: [
+      `${extendContext("Wardrobe Formulas")} That Actually Repeat`,
+      `How to Build a ${extendContext("Wardrobe")} That Feels Easy, Not Random`,
+      `${extendContext("Wardrobe Rules")} That Keep Every Outfit Cleaner`,
+    ],
+    office: [
+      `${extendContext("Office Outfits")} That Look Intentional, Not Corporate`,
+      `What ${extendContext("Office Style")} Should Look Like Now`,
+      `How to Build ${extendContext("Office Looks")} Without the Old Stiffness`,
+    ],
+    travel: [
+      `${extendContext("Travel Outfits")} That Stay Comfortable and Sharp`,
+      `The Easiest ${extendContext("Travel Pieces")} to Rely On`,
+      `How to Pack a ${extendContext("Travel Uniform")} That Works`,
+    ],
+    "date-night": [
+      `${extendContext("Date Night Outfits")} That Feel Relaxed but Pulled Together`,
+      `How to Dress for ${extendContext("Date Nights")} Without Looking Overdone`,
+      `${extendContext("Date Night Pieces")} That Actually Set the Right Tone`,
+    ],
+  };
+
+  const choices = templates[angle.key] || templates.outfits;
+  return choices[index % choices.length];
+}
+
+function buildArticleProfile(title, description) {
+  const titleText = cleanText(title).toLowerCase();
+  const descriptionText = cleanText(description).toLowerCase();
+  const combinedText = `${titleText} ${descriptionText}`.trim();
+
+  const categoriesFromTitle = extractMatchedCategories(titleText);
+  const categoriesFromDescription = extractMatchedCategories(descriptionText);
+  const styles = uniqueList([...extractStyleSignals(titleText), ...extractStyleSignals(descriptionText)], 6);
+  const materials = uniqueList([...extractMaterialSignals(titleText), ...extractMaterialSignals(descriptionText)], 6);
+  const seasons = uniqueList([...extractSeasonSignals(titleText), ...extractSeasonSignals(descriptionText)], 4);
+  const titleTokens = tokenize(titleText).filter((token) => !GENERIC_SIGNAL_TOKENS.has(token));
+  const descriptionTokens = tokenize(descriptionText).filter((token) => !GENERIC_SIGNAL_TOKENS.has(token));
+  const seasonCategoryOrder = buildSeasonCategoryOrder(seasons);
+
+  const preferredCategories = uniqueList(
+    [...categoriesFromTitle, ...categoriesFromDescription, ...seasonCategoryOrder, ...DEFAULT_CATEGORY_ORDER],
+    seasonCategoryOrder.length,
+  );
+
+  return {
+    titleText,
+    descriptionText,
+    combinedText,
+    titleTokens,
+    descriptionTokens,
+    preferredCategories,
+    styles,
+    materials,
+    seasons,
+  };
+}
+
+function scoreProductForProfile(product, profile, selectedProducts, usedProductCounts) {
+  const productText = `${product.name} ${product.description} ${product.category} ${product.categoryLabel} ${product.styles.join(" ")} ${product.tags.join(" ")}`.toLowerCase();
+
+  let score = 0;
+  score += scoreProductTokens(product, profile.titleTokens, 2.6);
+  score += scoreProductTokens(product, profile.descriptionTokens, 0.8);
+
+  profile.preferredCategories.forEach((category, index) => {
+    if (product.category === category) {
+      score += Math.max(18 - index * 4, 4);
+    }
+  });
+
+  profile.styles.forEach((style) => {
+    if (product.styles.includes(style)) {
+      score += 8;
+    }
+  });
+
+  profile.materials.forEach((material) => {
+    if (productText.includes(material)) {
+      score += 6;
+    }
+  });
+
+  score += scoreSeasonFit(productText, profile.seasons);
+
+  const sameCategoryCount = selectedProducts.filter((item) => item.category === product.category).length;
+  if (sameCategoryCount) {
+    const isPrimaryCategory = profile.preferredCategories[0] === product.category;
+    score -= isPrimaryCategory ? 3 + sameCategoryCount * 4 : 10 + sameCategoryCount * 6;
+  }
+
+  const reusePenalty = profile.seasons.length ? 18 : 30;
+  score -= (usedProductCounts.get(product.id) || 0) * reusePenalty;
   return score;
 }
 
@@ -251,48 +706,13 @@ function chooseCategory(title, description) {
 }
 
 function buildThemePhrase(description) {
+  const context = buildAngleContext(description);
+  const primaryAngle = extractThemeAngles(description)[0];
+  if (primaryAngle?.label) {
+    return truncate(`${context} ${primaryAngle.label}`, 70);
+  }
+
   const text = cleanText(description).toLowerCase();
-  const parts = [];
-
-  if (/\bmen'?s\b|\bmens\b|\bmale\b/.test(text)) {
-    parts.push("Men's");
-  }
-
-  const season = ["spring", "summer", "fall", "winter"].find((item) => text.includes(item));
-  if (season) {
-    parts.push(titleCase(season));
-  }
-
-  const styleLabels = [
-    { pattern: /smart casual/, label: "Smart Casual" },
-    { pattern: /business casual/, label: "Business Casual" },
-    { pattern: /date night/, label: "Date Night" },
-    { pattern: /weekend/, label: "Weekend" },
-    { pattern: /travel/, label: "Travel" },
-    { pattern: /minimalist|minimal/, label: "Minimal" },
-  ];
-  const styleMatch = styleLabels.find((item) => item.pattern.test(text));
-  if (styleMatch) {
-    parts.push(styleMatch.label);
-  }
-
-  const topicLabels = [
-    { pattern: /outfit|what to wear|wardrobe/, label: "Outfits" },
-    { pattern: /shirt|linen|oxford|polo|tee/, label: "Shirts" },
-    { pattern: /shoe|sneaker|boot|loafer|oxford shoe/, label: "Shoes" },
-    { pattern: /pant|trouser|jean|chino|cargo/, label: "Pants" },
-    { pattern: /jacket|overshirt|outerwear|coat/, label: "Jackets" },
-    { pattern: /watch|accessor|belt|sunglasses/, label: "Accessories" },
-  ];
-  const topicMatch = topicLabels.find((item) => item.pattern.test(text));
-  if (topicMatch) {
-    parts.push(topicMatch.label);
-  }
-
-  if (parts.length) {
-    return truncate(parts.join(" "), 70);
-  }
-
   const focusedMatch = text.match(/\b(?:focused on|about|around|covering)\s+(.+)$/i);
   if (focusedMatch?.[1]) {
     return truncate(titleCase(focusedMatch[1]), 70);
@@ -308,39 +728,86 @@ function buildThemePhrase(description) {
 }
 
 function buildAutoTitles(description, articleCount, customTitles) {
-  const phrase = buildThemePhrase(description);
-  const titlePhrase = titleCase(phrase);
   const titles = uniqueList(customTitles || [], articleCount);
-  const templates = [
-    `${titlePhrase} That Feel Current, Not Forced`,
-    `How to Wear ${titlePhrase} Without Looking Overdone`,
-    `${titlePhrase}: The Clean, Repeatable Version`,
-    `The Easiest Way to Build ${titlePhrase}`,
-    `${titlePhrase} That Actually Work in Real Life`,
-    `A Cleaner Approach to ${titlePhrase}`,
-    `What ${titlePhrase} Should Look Like Now`,
-    `${titlePhrase} That Feel Easy, Not Lazy`,
-  ];
+  const context = buildAngleContext(description);
+  const themeAngles = extractThemeAngles(description);
+  const seen = new Set(titles.map((title) => title.toLowerCase()));
 
-  templates.forEach((title) => {
+  const pushTitle = (value) => {
+    const cleaned = cleanText(value);
+    if (!cleaned) {
+      return;
+    }
+
+    let candidate = cleaned;
+    let counter = 2;
+    while (seen.has(candidate.toLowerCase())) {
+      candidate = `${cleaned} ${counter}`;
+      counter += 1;
+    }
+
+    seen.add(candidate.toLowerCase());
+    titles.push(candidate);
+  };
+
+  themeAngles.forEach((angle, index) => {
     if (titles.length < articleCount) {
-      titles.push(title);
+      pushTitle(buildAngleTitle(context, angle, index));
     }
   });
 
+  let angleIndex = 0;
   while (titles.length < articleCount) {
-    titles.push(`${titlePhrase}: Article ${titles.length + 1}`);
+    const angle = themeAngles[angleIndex % themeAngles.length];
+    pushTitle(buildAngleTitle(context, angle, Math.floor(angleIndex / Math.max(themeAngles.length, 1)) + angleIndex));
+    angleIndex += 1;
   }
 
-  return uniqueList(titles, articleCount).slice(0, articleCount);
+  while (titles.length < articleCount) {
+    pushTitle(`${buildThemePhrase(description)} Article ${titles.length + 1}`);
+  }
+
+  return titles.slice(0, articleCount);
 }
 
-function matchProducts(catalog, title, description, limit) {
-  return catalog
-    .map((product) => ({ ...product, score: scoreProduct(product, `${title} ${description}`) }))
-    .sort((left, right) => right.score - left.score || left.name.localeCompare(right.name))
-    .slice(0, limit)
-    .map(({ score, ...product }) => product);
+function matchProducts(catalog, title, description, limit, usedProductCounts = new Map()) {
+  const profile = buildArticleProfile(title, description);
+  const selectedProducts = [];
+
+  while (selectedProducts.length < limit) {
+    const candidate = catalog
+      .filter((product) => !selectedProducts.some((item) => item.id === product.id))
+      .map((product) => ({
+        ...product,
+        score: scoreProductForProfile(product, profile, selectedProducts, usedProductCounts),
+      }))
+      .sort((left, right) => right.score - left.score || left.name.localeCompare(right.name))[0];
+
+    if (!candidate) {
+      break;
+    }
+
+    selectedProducts.push(candidate);
+  }
+
+  return selectedProducts.map(({ score, ...product }) => product);
+}
+
+function buildBriefs(catalog, titles, description) {
+  const usedProductCounts = new Map();
+
+  return titles.map((title) => {
+    const products = matchProducts(catalog, title, description, 4, usedProductCounts);
+    products.forEach((product) => {
+      usedProductCounts.set(product.id, (usedProductCounts.get(product.id) || 0) + 1);
+    });
+
+    return {
+      title,
+      description,
+      products,
+    };
+  });
 }
 
 function buildTags(title, products) {
@@ -599,11 +1066,7 @@ export async function onRequestPost(context) {
   }
 
   const titles = buildAutoTitles(description, articleCount, customTitles);
-  const briefs = titles.map((title) => ({
-    title,
-    description,
-    products: matchProducts(catalog, title, description, 4),
-  }));
+  const briefs = buildBriefs(catalog, titles, description);
   const fallbackArticles = briefs.map((brief) => buildFallbackArticle(brief));
   const apiKey = env.OPENROUTER_API_KEY;
 

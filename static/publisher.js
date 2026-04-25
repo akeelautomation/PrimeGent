@@ -324,306 +324,15 @@ function buildPublisherHtmlBundle(articles, catalog) {
     .join("\n\n");
 }
 
-function buildPublisherHeroLabel(title) {
-  const stopWords = new Set(["a", "an", "and", "for", "from", "how", "in", "of", "on", "or", "that", "the", "to", "with"]);
-  const words = cleanPublisherText(title)
-    .replace(/men'?s/gi, "")
-    .split(" ")
-    .map((word) => word.trim())
-    .filter((word) => word && !stopWords.has(word.toLowerCase()));
+const publisherSyncBaseUrl = "http://127.0.0.1:8791";
 
-  return titleCasePublisher(words.slice(0, 2).join(" ") || "New Post");
-}
-
-function buildPublisherExcerpt(article) {
-  return truncatePublisherText(article.dek || article.summary || article.conclusion, 150);
-}
-
-function buildPublisherDescription(article) {
-  return truncatePublisherText(`${article.summary} ${article.conclusion}`, 190);
-}
-
-function buildPublisherReadTime(article) {
-  const totalWords =
-    countPublisherWords(article.title) +
-    countPublisherWords(article.dek) +
-    countPublisherWords(article.summary) +
-    countPublisherWords(article.conclusion) +
-    countPublisherWords(article.affiliateNote) +
-    (article.sections || []).reduce((sum, section) => {
-      return sum + countPublisherWords(section.heading) + (section.paragraphs || []).reduce((inner, paragraph) => inner + countPublisherWords(paragraph), 0);
-    }, 0);
-
-  return `${Math.max(6, Math.round(totalWords / 200))} min read`;
-}
-
-function buildPublisherMentionParagraph(mentions, products) {
-  const sentences = (mentions || [])
-    .map((mention) => {
-      const product = products.find((item) => item.id === mention.productId);
-      if (!product) {
-        return "";
-      }
-
-      return `One product that fits this point well is the <a href="./${escapePublisherHtml(product.id)}.html">${escapePublisherHtml(
-        product.name,
-      )}</a>. ${escapePublisherHtml(cleanPublisherText(mention.rationale))}`;
-    })
-    .filter(Boolean);
-
-  return sentences.join(" ");
-}
-
-function buildPublishedSections(article, products) {
-  const sections = (article.sections || []).map((section) => {
-    const paragraphs = (section.paragraphs || []).map((paragraph) => escapePublisherHtml(cleanPublisherText(paragraph)));
-    const mentionParagraph = buildPublisherMentionParagraph(section.productMentions || [], products);
-
-    return {
-      heading: cleanPublisherText(section.heading),
-      paragraphs: mentionParagraph ? [...paragraphs, mentionParagraph] : paragraphs,
-    };
-  });
-
-  sections.push({
-    heading: "Closing thought",
-    paragraphs: [
-      escapePublisherHtml(cleanPublisherText(article.conclusion)),
-      escapePublisherHtml(cleanPublisherText(article.affiliateNote)),
-    ],
-  });
-
-  return sections;
-}
-
-function buildPublisherBaseSlug(title) {
-  const raw = slugifyPublisherValue(title).replace(/^blog-/, "");
-  const trimmed = raw.slice(0, 56).replace(/-+$/g, "");
-  return `blog-${trimmed || "generated-post"}`;
-}
-
-function reservePublisherSlug(baseSlug, reservedSlugs) {
-  let candidate = baseSlug;
-  let counter = 2;
-
-  while (reservedSlugs.has(candidate)) {
-    candidate = `${baseSlug.slice(0, Math.max(1, 56 - String(counter).length))}-${counter}`;
-    counter += 1;
+async function isPublisherSyncOnline() {
+  try {
+    const response = await fetch(`${publisherSyncBaseUrl}/health`, { cache: "no-store" });
+    return response.ok;
+  } catch {
+    return false;
   }
-
-  reservedSlugs.add(candidate);
-  return candidate;
-}
-
-function buildPublishedPostRecord(article, catalog, slug, dateString) {
-  const products = (article.productIds || [])
-    .map((id) => catalog.find((product) => product.id === id))
-    .filter(Boolean);
-  const relatedPickSlugs = uniquePublisherList(
-    products.map((product) => product.id.replace(/^pick-/, "")),
-    4,
-  );
-
-  return {
-    slug,
-    title: cleanPublisherText(article.title),
-    category: cleanPublisherText(article.category || "Style Guides"),
-    date: dateString,
-    readTime: buildPublisherReadTime(article),
-    excerpt: buildPublisherExcerpt(article),
-    description: buildPublisherDescription(article),
-    heroLabel: truncatePublisherText(buildPublisherHeroLabel(article.title), 24),
-    tags: uniquePublisherList(article.tags || [], 5),
-    relatedPickSlugs,
-    sections: buildPublishedSections(article, products),
-  };
-}
-
-function sortPublishedPosts(posts) {
-  return [...posts].sort((left, right) => {
-    const dateCompare = new Date(`${right.date}T00:00:00`) - new Date(`${left.date}T00:00:00`);
-    if (dateCompare !== 0) {
-      return dateCompare;
-    }
-
-    return left.title.localeCompare(right.title);
-  });
-}
-
-function buildPublishedCardMarkup(post) {
-  return `
-    <article class="card blog-card" data-blog-card data-category="${escapePublisherHtml(
-      post.category.toLowerCase().replace(/\s+/g, "-"),
-    )}" data-title="${escapePublisherHtml(post.title.toLowerCase())}" data-tags="${escapePublisherHtml(
-      (post.tags || []).join("|").toLowerCase(),
-    )}">
-      <div class="card-visual card-visual--article" aria-hidden="true">
-        <span>${escapePublisherHtml(post.heroLabel)}</span>
-      </div>
-      <div class="blog-card__body">
-        <div class="blog-card__eyebrow">
-          <span class="badge">${escapePublisherHtml(post.category)}</span>
-          <span>${escapePublisherHtml(formatPublisherDate(post.date))}</span>
-          <span>${escapePublisherHtml(post.readTime)}</span>
-        </div>
-        <h3>${escapePublisherHtml(post.title)}</h3>
-        <p>${escapePublisherHtml(post.excerpt)}</p>
-        <a class="text-link" href="./${escapePublisherHtml(post.slug)}.html">Read Article -></a>
-      </div>
-    </article>
-  `;
-}
-
-function buildPublishedArticleBody(post, catalog) {
-  const relatedProducts = (post.relatedPickSlugs || [])
-    .map((slug) => catalog.find((product) => product.id === `pick-${slug}`))
-    .filter(Boolean);
-
-  const sections = (post.sections || [])
-    .map((section) => {
-      const paragraphs = (section.paragraphs || []).map((paragraph) => `<p>${paragraph}</p>`).join("");
-      return `<section><h2>${escapePublisherHtml(section.heading)}</h2>${paragraphs}</section>`;
-    })
-    .join("");
-
-  const tagMarkup = (post.tags || []).map((tag) => `<span class="tag">${escapePublisherHtml(tag)}</span>`).join("");
-  const pickMarkup = relatedProducts.length
-    ? `<div class="card sidebar-card"><h2>Related picks</h2><ul class="bullet-list">${relatedProducts
-        .map((product) => `<li><a href="./${escapePublisherHtml(product.id)}.html">${escapePublisherHtml(product.name)}</a></li>`)
-        .join("")}</ul></div>`
-    : "";
-
-  return `
-      <div class="reading-progress" aria-hidden="true"><span data-reading-progress></span></div>
-      <main>
-        <section class="page-hero page-hero--article">
-          <div class="container article-hero">
-            <nav class="breadcrumb" aria-label="Breadcrumb"><a href="./index.html">Home</a><span>/</span><a href="./blog.html">Blog</a><span>/</span><span>${escapePublisherHtml(post.title)}</span></nav>
-            <p class="eyebrow">${escapePublisherHtml(post.category)}</p>
-            <h1>${escapePublisherHtml(post.title)}</h1>
-            <div class="article-meta"><span>${escapePublisherHtml(formatPublisherDate(post.date))}</span><span>${escapePublisherHtml(post.readTime)}</span></div>
-            <p class="hero-copy">${escapePublisherHtml(post.excerpt)}</p>
-            <p class="microcopy">Editorial note: related product links on PrimeGent may be affiliate links. Read the <a href="./affiliate-disclosure.html">affiliate disclosure</a>.</p>
-          </div>
-        </section>
-        <section class="section section--tight">
-          <div class="container article-grid article-grid--post">
-            <article class="article-content card card--prose" data-article-content>${sections}</article>
-            <aside class="sidebar">
-              <div class="card sidebar-card"><h2>Quick context</h2><p>${escapePublisherHtml(post.description)}</p></div>
-              <div class="card sidebar-card"><h2>Tags</h2><div class="tag-row">${tagMarkup}</div></div>
-              ${pickMarkup}
-            </aside>
-          </div>
-        </section>
-      </main>
-  `;
-}
-
-function buildPublishedPageHtml(post, catalog) {
-  return `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>${escapePublisherHtml(post.title)} | PrimeGent</title>
-    <meta name="description" content="${escapePublisherHtml(post.description)}">
-    <meta name="robots" content="index,follow">
-    <meta name="author" content="PrimeGent Editorial">
-    <meta name="theme-color" content="#11100d">
-    <link rel="canonical" href="https://primegent.pages.dev/${escapePublisherHtml(post.slug)}.html">
-    <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./static/style.css">
-    <meta property="og:site_name" content="PrimeGent">
-    <meta property="og:title" content="${escapePublisherHtml(post.title)} | PrimeGent">
-    <meta property="og:description" content="${escapePublisherHtml(post.description)}">
-    <meta property="og:image" content="https://primegent.pages.dev/static/og-cover.svg">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://primegent.pages.dev/${escapePublisherHtml(post.slug)}.html">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${escapePublisherHtml(post.title)} | PrimeGent">
-    <meta name="twitter:description" content="${escapePublisherHtml(post.description)}">
-    <meta name="twitter:image" content="https://primegent.pages.dev/static/og-cover.svg">
-  </head>
-  <body data-page="blog" class="page-article">
-    <header class="site-header">
-      <div class="container nav-shell">
-        <a class="brand" href="./index.html" aria-label="PrimeGent home">
-          <span class="brand-mark">PG</span>
-          <span>PrimeGent</span>
-        </a>
-        <nav class="desktop-nav" aria-label="Primary">
-          <a href="./index.html" data-nav-link="home">Home</a>
-          <a href="./picks.html" data-nav-link="picks">Outfits</a>
-          <a href="./blog.html" data-nav-link="blog">Journal</a>
-          <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
-        </nav>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span class="sr-only">Toggle menu</span>
-        </button>
-      </div>
-      <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
-        <div class="mobile-menu__backdrop" data-menu-close></div>
-        <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-          <div class="mobile-menu__head">
-            <span class="brand brand--small">
-              <span class="brand-mark">PG</span>
-              <span>PrimeGent</span>
-            </span>
-            <button class="menu-close" type="button" aria-label="Close menu" data-menu-close>Close</button>
-          </div>
-          <nav class="mobile-nav" aria-label="Mobile primary">
-            <a href="./index.html" data-nav-link="home">Home</a>
-            <a href="./picks.html" data-nav-link="picks">Outfits</a>
-            <a href="./blog.html" data-nav-link="blog">Journal</a>
-            <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
-          </nav>
-        </div>
-      </div>
-    </header>
-    ${buildPublishedArticleBody(post, catalog)}
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <a class="brand brand--small" href="./index.html">
-            <span class="brand-mark">PG</span>
-            <span>PrimeGent</span>
-          </a>
-          <p class="footer-copy">Curated men's outfit ideas, better basics, and practical picks that earn their place.</p>
-        </div>
-        <div>
-          <h2>Explore</h2>
-          <a href="./blog.html">Journal</a>
-          <a href="./picks.html">Curated picks</a>
-        </div>
-        <div>
-          <h2>Company</h2>
-          <a href="./about.html">About us</a>
-          <a href="./contact.html">Contact us</a>
-        </div>
-        <div>
-          <h2>Legal</h2>
-          <a href="./privacy-policy.html">Privacy policy</a>
-          <a href="./affiliate-disclosure.html">Affiliate disclosure</a>
-          <p class="footer-note">PrimeGent may earn commissions from qualifying purchases through affiliate links.</p>
-        </div>
-      </div>
-      <div class="container footer-bottom">
-        <p>&copy; ${new Date().getFullYear()} PrimeGent. Dress better. Every day.</p>
-      </div>
-    </footer>
-
-    <button class="back-to-top" type="button" aria-label="Back to top" data-back-to-top>Top</button>
-    <script src="./static/app.js" defer></script>
-  </body>
-</html>
-`;
 }
 
 async function copyPublisherValue(value, button, originalLabel) {
@@ -686,120 +395,6 @@ async function loadPublisherCatalog() {
     .filter(Boolean);
 }
 
-async function getPublisherFileHandle(rootHandle, relativePath, create = false) {
-  const segments = relativePath.split("/").filter(Boolean);
-  let currentHandle = rootHandle;
-
-  for (const segment of segments.slice(0, -1)) {
-    currentHandle = await currentHandle.getDirectoryHandle(segment, { create });
-  }
-
-  return currentHandle.getFileHandle(segments[segments.length - 1], { create });
-}
-
-async function readPublisherFile(rootHandle, relativePath) {
-  const fileHandle = await getPublisherFileHandle(rootHandle, relativePath, false);
-  const file = await fileHandle.getFile();
-  return file.text();
-}
-
-async function writePublisherFile(rootHandle, relativePath, contents) {
-  const fileHandle = await getPublisherFileHandle(rootHandle, relativePath, true);
-  const writable = await fileHandle.createWritable();
-  await writable.write(contents);
-  await writable.close();
-}
-
-async function ensurePublisherSiteHandle(state) {
-  if (!("showDirectoryPicker" in window)) {
-    throw new Error("This browser cannot write local files. Open the app in a Chromium-based browser to publish.");
-  }
-
-  if (state.siteHandle) {
-    return state.siteHandle;
-  }
-
-  const handle = await window.showDirectoryPicker({ mode: "readwrite" });
-
-  try {
-    await handle.getFileHandle("blog.html");
-    await handle.getFileHandle("picks.html");
-  } catch {
-    throw new Error("Choose the PrimeGent project folder that contains blog.html and picks.html.");
-  }
-
-  state.siteHandle = handle;
-  return handle;
-}
-
-function parsePublisherSiteSlugs(blogHtml) {
-  const documentNode = new DOMParser().parseFromString(blogHtml, "text/html");
-  const links = Array.from(documentNode.querySelectorAll("[data-blog-grid] a[href$='.html']"));
-  return new Set(
-    links
-      .map((link) => (link.getAttribute("href") || "").replace(/^\.\//, "").replace(/\.html$/i, ""))
-      .filter((slug) => slug.startsWith("blog-")),
-  );
-}
-
-function updatePublisherBlogIndex(blogHtml, generatedPosts) {
-  const documentNode = new DOMParser().parseFromString(blogHtml, "text/html");
-  const grid = documentNode.querySelector("[data-blog-grid]");
-  if (!grid) {
-    throw new Error("Could not find the blog grid inside blog.html.");
-  }
-
-  const generatedSlugs = new Set(generatedPosts.map((post) => post.slug));
-  Array.from(grid.querySelectorAll("[data-blog-card]")).forEach((card) => {
-    const href = card.querySelector("a[href$='.html']")?.getAttribute("href") || "";
-    const slug = href.replace(/^\.\//, "").replace(/\.html$/i, "");
-    if (generatedSlugs.has(slug)) {
-      card.remove();
-    }
-  });
-
-  sortPublishedPosts(generatedPosts)
-    .reverse()
-    .forEach((post) => {
-      grid.insertAdjacentHTML("afterbegin", buildPublishedCardMarkup(post));
-    });
-
-  const totalCards = grid.querySelectorAll("[data-blog-card]").length;
-  const resultsCopy = documentNode.querySelector("[data-blog-results-copy]");
-  if (resultsCopy) {
-    resultsCopy.textContent = `Showing all ${totalCards} articles.`;
-  }
-
-  return `<!DOCTYPE html>\n${documentNode.documentElement.outerHTML}\n`;
-}
-
-function normalizePublisherManifest(manifest) {
-  return Array.isArray(manifest)
-    ? manifest
-        .map((post) => ({
-          slug: cleanPublisherText(post?.slug),
-          title: cleanPublisherText(post?.title),
-          category: cleanPublisherText(post?.category),
-          date: cleanPublisherText(post?.date),
-          readTime: cleanPublisherText(post?.readTime),
-          excerpt: cleanPublisherText(post?.excerpt),
-          description: cleanPublisherText(post?.description),
-          heroLabel: cleanPublisherText(post?.heroLabel),
-          tags: uniquePublisherList(post?.tags || [], 5),
-          relatedPickSlugs: uniquePublisherList(post?.relatedPickSlugs || [], 4),
-          sections: Array.isArray(post?.sections)
-            ? post.sections
-                .map((section) => ({
-                  heading: cleanPublisherText(section?.heading),
-                  paragraphs: uniquePublisherList(section?.paragraphs || [], 6),
-                }))
-                .filter((section) => section.heading && section.paragraphs.length)
-            : [],
-        }))
-        .filter((post) => post.slug && post.title && post.sections.length)
-    : [];
-}
-
 function initPublisherPage() {
   const root = document.querySelector("[data-publisher-page]");
   if (!root) {
@@ -819,7 +414,6 @@ function initPublisherPage() {
   const state = {
     catalog: [],
     articles: [],
-    siteHandle: null,
   };
 
   const renderPreview = () => {
@@ -845,7 +439,10 @@ function initPublisherPage() {
     try {
       state.catalog = await loadPublisherCatalog();
       catalogSource.textContent = `${state.catalog.length} products parsed from picks.html`;
-      status.textContent = "Ready. Describe the article batch, generate drafts, then publish them to the blog when one is worth keeping.";
+      const syncOnline = await isPublisherSyncOnline();
+      status.textContent = syncOnline
+        ? "Ready. Generate articles and the app will publish them straight into blog.html."
+        : "Ready. Generate articles and the app will try to publish them into blog.html. If publish fails, start start-publisher.bat.";
     } catch (error) {
       status.textContent = error.message.includes("fetch")
         ? "Could not load picks.html. Run the site through a local server instead of opening the file directly."
@@ -899,8 +496,9 @@ function initPublisherPage() {
       renderPreview();
       status.textContent =
         payload.source === "fallback"
-          ? `Generated ${state.articles.length} articles in fallback mode using the live catalog. Publish will add them to blog.html and write the article files.`
-          : `Generated ${state.articles.length} articles from the live catalog. Publish will add them to blog.html and write the article files.`;
+          ? `Generated ${state.articles.length} articles in fallback mode using the live catalog. Publishing them into blog.html now.`
+          : `Generated ${state.articles.length} articles from the live catalog. Publishing them into blog.html now.`;
+      await publishArticles({ auto: true });
     } catch (error) {
       state.articles = [];
       renderPreview();
@@ -913,78 +511,63 @@ function initPublisherPage() {
     }
   };
 
-  const publishArticles = async () => {
+  const publishArticles = async ({ auto = false } = {}) => {
     if (!state.articles.length) {
       status.textContent = "Generate at least one article before publishing.";
-      return;
-    }
-
-    if (!publishButton) {
-      return;
+      return false;
     }
 
     publishButton.disabled = true;
-    generateButton.disabled = true;
-    status.textContent = "Choose the PrimeGent project folder so the app can update blog.html and write the article pages.";
+    if (!auto) {
+      generateButton.disabled = true;
+    }
+    status.textContent = auto
+      ? "Writing the generated articles into blog.html and saving the new post pages."
+      : "Retrying publish into blog.html and saving the new post pages.";
 
     try {
-      const rootHandle = await ensurePublisherSiteHandle(state);
-      const blogHtml = await readPublisherFile(rootHandle, "blog.html");
-      const existingSiteSlugs = parsePublisherSiteSlugs(blogHtml);
+      const response = await fetch(`${publisherSyncBaseUrl}/publish`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          articles: state.articles,
+          catalog: state.catalog,
+        }),
+      });
 
-      let manifest = [];
-      try {
-        manifest = normalizePublisherManifest(JSON.parse(await readPublisherFile(rootHandle, "blog/generated-posts.json")));
-      } catch {
-        manifest = [];
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload.error || "Publishing failed.");
       }
 
-      const reservedSlugs = new Set(existingSiteSlugs);
-      manifest.forEach((post) => reservedSlugs.add(post.slug));
-
-      const generatedByTitle = new Map(
-        manifest.map((post) => [normalizePublisherText(post.title), post.slug]),
+      const publishedPosts = Array.isArray(payload.posts) ? payload.posts : [];
+      const publishedByTitle = new Map(
+        publishedPosts.map((post) => [normalizePublisherText(post.title), post]),
       );
-      const dateString = getPublisherLocalDate();
-      const publishedPosts = state.articles.map((article) => {
-        const titleKey = normalizePublisherText(article.title);
-        const existingSlug = generatedByTitle.get(titleKey);
-        const slug = existingSlug || reservePublisherSlug(buildPublisherBaseSlug(article.title), reservedSlugs);
-        return buildPublishedPostRecord(article, state.catalog, slug, dateString);
-      });
-
-      const manifestBySlug = new Map(manifest.map((post) => [post.slug, post]));
-      publishedPosts.forEach((post) => {
-        manifestBySlug.set(post.slug, post);
-      });
-      manifest = sortPublishedPosts([...manifestBySlug.values()]);
-
-      await writePublisherFile(rootHandle, "blog/generated-posts.json", `${JSON.stringify(manifest, null, 2)}\n`);
-
-      for (const post of manifest) {
-        await writePublisherFile(rootHandle, `${post.slug}.html`, buildPublishedPageHtml(post, state.catalog));
-      }
-
-      const updatedBlogHtml = updatePublisherBlogIndex(blogHtml, manifest);
-      await writePublisherFile(rootHandle, "blog.html", updatedBlogHtml);
 
       state.articles = state.articles.map((article) => {
-        const matchingPost = publishedPosts.find((post) => normalizePublisherText(post.title) === normalizePublisherText(article.title));
+        const matchingPost = publishedByTitle.get(normalizePublisherText(article.title));
         return matchingPost
           ? {
               ...article,
               publishedSlug: matchingPost.slug,
-              publishedPath: `./${matchingPost.slug}.html`,
+              publishedPath: matchingPost.path || `./${matchingPost.slug}.html`,
             }
           : article;
       });
       renderPreview();
-      status.textContent = `Published ${publishedPosts.length} article${publishedPosts.length === 1 ? "" : "s"} to blog.html. Reload file:///D:/Prime%20Gent/PrimeGent/blog.html to see them at the top.`;
+      status.textContent = `Published ${publishedPosts.length} article${publishedPosts.length === 1 ? "" : "s"} into blog.html. Reload file:///D:/Prime%20Gent/PrimeGent/blog.html and the new posts will be at the top.`;
+      return true;
     } catch (error) {
-      status.textContent = error.message || "Publishing failed.";
+      status.textContent = auto
+        ? `${error.message || "Publishing failed."} The drafts were generated, but they were not written into blog.html. Start start-publisher.bat, then press Retry publish.`
+        : error.message || "Publishing failed.";
+      return false;
     } finally {
       publishButton.disabled = !state.articles.length;
-      generateButton.disabled = false;
+      if (!auto) {
+        generateButton.disabled = false;
+      }
     }
   };
 
