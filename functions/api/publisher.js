@@ -80,6 +80,39 @@ function uniqueList(values, limit) {
   return result;
 }
 
+function randomFraction() {
+  if (globalThis.crypto?.getRandomValues) {
+    const values = new Uint32Array(1);
+    globalThis.crypto.getRandomValues(values);
+    return values[0] / 4294967296;
+  }
+
+  return Math.random();
+}
+
+function randomIndex(length) {
+  if (!length) {
+    return 0;
+  }
+
+  return Math.floor(randomFraction() * length);
+}
+
+function pickRandom(values) {
+  return values[randomIndex(values.length)] || "";
+}
+
+function shuffleList(values) {
+  const result = [...values];
+
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const swapIndex = randomIndex(index + 1);
+    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+  }
+
+  return result;
+}
+
 function titleCase(value) {
   const lower = cleanText(value).toLowerCase();
   if (!lower) {
@@ -130,6 +163,25 @@ function extractAssistantContent(payload) {
   }
 
   return "";
+}
+
+async function fetchWithTimeout(url, options, timeoutMs) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  let timeoutReject;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutReject = setTimeout(() => reject(new Error(`Request timed out after ${timeoutMs}ms`)), timeoutMs + 250);
+  });
+
+  try {
+    return await Promise.race([
+      fetch(url, { ...options, signal: controller.signal }),
+      timeoutPromise,
+    ]);
+  } finally {
+    clearTimeout(timeout);
+    clearTimeout(timeoutReject);
+  }
 }
 
 function sanitizeCatalog(catalog) {
@@ -509,6 +561,7 @@ function buildAngleContext(description) {
     { pattern: /travel|airport/, label: "Travel" },
     { pattern: /minimalist|minimal/, label: "Minimal" },
     { pattern: /rugged|workwear/, label: "Rugged" },
+    { pattern: /\bcasual\b/, label: "Casual" },
   ];
 
   const styleMatch = styleLabels.find((item) => item.pattern.test(text));
@@ -529,6 +582,7 @@ function extractThemeAngles(description) {
     { key: "shoes", label: "Shoes", patterns: [/\bshoe\b/, /\bshoes\b/, /\bsneaker\b/, /\bsneakers\b/, /\bloafer\b/, /\bloafers\b/, /\bboot\b/, /\bboots\b/] },
     { key: "pants", label: "Pants", patterns: [/\bpant\b/, /\bpants\b/, /\bchino\b/, /\bchinos\b/, /\bjean\b/, /\bjeans\b/, /\btrouser\b/, /\btrousers\b/, /\bcargo\b/] },
     { key: "jackets", label: "Jackets", patterns: [/\bjacket\b/, /\bjackets\b/, /\bovershirt\b/, /\bouterwear\b/, /\bcoat\b/, /\bcoats\b/] },
+    { key: "basics", label: "Layers", patterns: [/\bsweater\b/, /\bhoodie\b/, /\bhoodies\b/, /\bknit\b/, /\bknitwear\b/, /\bcardigan\b/, /\blayer\b/, /\blayers\b/] },
     { key: "accessories", label: "Accessories", patterns: [/\bwatch\b/, /\bwatches\b/, /\bbelt\b/, /\bbelts\b/, /\bsunglasses\b/, /\baccessor/] },
     { key: "travel", label: "Travel Style", patterns: [/travel/, /airport/, /vacation/] },
     { key: "office", label: "Office Style", patterns: [/office/, /business casual/, /work/] },
@@ -542,79 +596,262 @@ function extractThemeAngles(description) {
     }
   });
 
-  if (!angles.length) {
-    angles.push({ key: "outfits", label: "Outfits" });
+  const angleMap = new Map(angles.map((angle) => [angle.key, angle]));
+  const addAngle = (key, label) => {
+    if (!angleMap.has(key)) {
+      angleMap.set(key, { key, label });
+    }
+  };
+
+  if (!angleMap.size) {
+    addAngle("outfits", "Outfits");
   }
 
-  return angles;
+  const seasons = extractSeasonSignals(text);
+  if (angleMap.size <= 2) {
+    if (seasons.includes("winter")) {
+      addAngle("basics", "Layers");
+      addAngle("jackets", "Jackets");
+      addAngle("shoes", "Shoes");
+    } else if (seasons.includes("summer")) {
+      addAngle("shirts", "Shirts");
+      addAngle("shoes", "Shoes");
+      addAngle("travel", "Travel Style");
+    } else {
+      addAngle("shirts", "Shirts");
+      addAngle("pants", "Pants");
+      addAngle("shoes", "Shoes");
+    }
+
+    addAngle("wardrobe", "Wardrobe Formulas");
+  }
+
+  return [...angleMap.values()];
 }
 
-function buildAngleTitle(context, angle, index) {
-  const extendContext = (suffix) => {
-    const normalizedContext = context.toLowerCase();
-    const contextWords = new Set(normalizedContext.split(/\s+/).filter(Boolean));
-    const remainder = suffix
-      .split(/\s+/)
-      .filter((word) => word && !contextWords.has(word.toLowerCase()));
+const TITLE_SUBJECT_SUFFIXES = {
+  outfits: ["Outfits", "Looks", "Style", "Outfit Formulas", "Uniforms"],
+  shirts: ["Shirts", "Button-Downs", "Shirt Rotation", "Layering Shirts"],
+  shoes: ["Shoes", "Footwear", "Boot and Sneaker Rotation", "Shoe Rotation"],
+  pants: ["Pants", "Trouser Rotation", "Everyday Bottoms", "Off-Duty Trousers"],
+  jackets: ["Jackets", "Outer Layers", "Jacket Rotation", "Layering Pieces"],
+  basics: ["Layers", "Knitwear", "Sweaters and Hoodies", "Core Layers"],
+  accessories: ["Accessories", "Finishing Pieces", "Small Details", "Extras That Matter"],
+  wardrobe: ["Wardrobe", "Closet Formula", "Style Rules", "Core Rotation"],
+  office: ["Office Style", "Work Outfits", "Business-Casual Fits", "Commuter Wardrobe"],
+  travel: ["Travel Style", "Airport Outfits", "Travel Uniform", "Weekend Packing List"],
+  "date-night": ["Date-Night Style", "Dinner Outfits", "Going-Out Looks", "Night-Out Rotation"],
+};
 
-    return remainder.length ? `${context} ${remainder.join(" ")}` : context;
-  };
+const TITLE_DIRECT_ENDINGS = {
+  common: [
+    "That Feel More Intentional",
+    "That Actually Work in Real Life",
+    "That Make Casual Style Look Sharper",
+    "That Do More Than One Good Outfit",
+    "That Feel Easier to Reach For",
+    "That Stop the Outfit From Looking Flat",
+  ],
+  winter: [
+    "That Stay Warm Without Looking Bulky",
+    "That Keep Cold-Weather Style Clean",
+    "That Work When the Temperature Drops",
+    "That Make Layering Feel More Controlled",
+  ],
+  summer: [
+    "That Stay Light Without Looking Thin",
+    "That Handle Heat Without Looking Sloppy",
+    "That Keep Warm-Weather Style Crisp",
+    "That Work When the Day Gets Hot",
+  ],
+  fall: [
+    "That Make Transitional Dressing Easier",
+    "That Add Texture Without Extra Noise",
+    "That Make Cool-Weather Style Feel Richer",
+  ],
+  spring: [
+    "That Make Transitional Outfits Feel Lighter",
+    "That Clean Up Spring Layers Fast",
+    "That Work When the Weather Keeps Shifting",
+  ],
+};
 
-  const templates = {
-    outfits: [
-      `${extendContext("Outfits")} That Feel Current, Not Forced`,
-      `How to Build ${extendContext("Outfits")} That Actually Repeat`,
-      `${extendContext("Outfits")} for Real Life, Not Just Inspiration`,
-    ],
-    shirts: [
-      `${extendContext("Shirts")} That Stay Sharp Without Feeling Stiff`,
-      `The Best ${extendContext("Shirts")} for a Cleaner Wardrobe`,
-      `How ${extendContext("Shirts")} Should Fit and Work Together`,
-    ],
-    shoes: [
-      `The Shoes That Make ${extendContext("Outfits")} Feel Finished`,
-      `${extendContext("Shoes")} That Keep the Outfit Clean, Not Try-Hard`,
-      `How to Pick ${extendContext("Shoes")} That Actually Work`,
-    ],
-    pants: [
-      `${extendContext("Pants")} That Make the Rest of the Outfit Easier`,
-      `The Best ${extendContext("Pants")} for Repeatable Daily Wear`,
-      `How to Wear ${extendContext("Pants")} Without Falling Back on Boring Defaults`,
-    ],
-    jackets: [
-      `${extendContext("Jackets")} That Add Shape Without Extra Noise`,
-      `The Easiest ${extendContext("Jackets")} to Build Outfits Around`,
-      `How to Use ${extendContext("Jackets")} Without Overlayering`,
-    ],
-    accessories: [
-      `${extendContext("Accessories")} That Finish the Outfit Without Overdoing It`,
-      `The Small ${extendContext("Accessories")} That Change the Whole Look`,
-      `How to Choose ${extendContext("Accessories")} That Actually Earn Their Place`,
-    ],
-    wardrobe: [
-      `${extendContext("Wardrobe Formulas")} That Actually Repeat`,
-      `How to Build a ${extendContext("Wardrobe")} That Feels Easy, Not Random`,
-      `${extendContext("Wardrobe Rules")} That Keep Every Outfit Cleaner`,
-    ],
-    office: [
-      `${extendContext("Office Outfits")} That Look Intentional, Not Corporate`,
-      `What ${extendContext("Office Style")} Should Look Like Now`,
-      `How to Build ${extendContext("Office Looks")} Without the Old Stiffness`,
-    ],
-    travel: [
-      `${extendContext("Travel Outfits")} That Stay Comfortable and Sharp`,
-      `The Easiest ${extendContext("Travel Pieces")} to Rely On`,
-      `How to Pack a ${extendContext("Travel Uniform")} That Works`,
-    ],
-    "date-night": [
-      `${extendContext("Date Night Outfits")} That Feel Relaxed but Pulled Together`,
-      `How to Dress for ${extendContext("Date Nights")} Without Looking Overdone`,
-      `${extendContext("Date Night Pieces")} That Actually Set the Right Tone`,
-    ],
-  };
+const ANGLE_DIRECT_ENDINGS = {
+  outfits: ["That Are Worth Repeating All Season", "That Look Styled Without Looking Busy"],
+  shirts: ["That Look Better Than the Standard Basics", "That Pull More Weight Than You Expect"],
+  shoes: ["That Finish the Outfit Instead of Dragging It Down", "That Make the Rest of the Look Easier"],
+  pants: ["That Keep the Whole Outfit Steadier", "That Make the Rest of the Wardrobe Simpler"],
+  jackets: ["That Give the Outfit Some Shape", "That Do the Heavy Lifting on Flat Days"],
+  basics: ["That Make Simple Layers Look Better", "That Keep the Foundation Strong"],
+  accessories: ["That Quietly Finish the Whole Look", "That Earn Their Place Fast"],
+  wardrobe: ["That Make Getting Dressed Less Random", "That Keep the Closet Working Harder"],
+  office: ["That Look Intentional, Not Corporate", "That Clean Up Workwear Without Stiffness"],
+  travel: ["That Stay Comfortable Without Losing Shape", "That Make Packing More Predictable"],
+  "date-night": ["That Feel Relaxed but Pulled Together", "That Set the Tone Without Looking Overdone"],
+};
 
-  const choices = templates[angle.key] || templates.outfits;
-  return choices[index % choices.length];
+const TITLE_GUIDE_ENDINGS = {
+  common: [
+    "for Easier Everyday Dressing",
+    "Without Defaulting to the Same Old Outfit",
+    "for a Cleaner Wardrobe",
+    "When You Want Repeatable Style",
+    "for Real Days, Not Mood Boards",
+  ],
+  winter: ["for Cold Mornings and Long Days", "When Every Layer Has to Earn Its Place"],
+  summer: ["for Hot Days and Late Nights", "When Breathability Actually Matters"],
+  fall: ["for the First Weeks of Real Layers", "When Texture Starts Doing the Work"],
+  spring: ["for Unpredictable Weather", "When the Temperature Keeps Moving"],
+};
+
+const ANGLE_GUIDE_ENDINGS = {
+  outfits: ["Without Making Every Look Feel the Same", "When You Need the Outfit to Work Fast"],
+  shirts: ["Without Falling Back on Stiff Dress Shirts", "When the Top Half Needs More Range"],
+  shoes: ["Without Guessing at the Last Step", "When the Outfit Dies at the Bottom"],
+  pants: ["Without Leaning on Boring Defaults", "When Proportion Matters More Than Trend"],
+  jackets: ["Without Overlayering", "When One Layer Has to Change the Whole Outfit"],
+  basics: ["Without Looking Like You Gave Up", "When Simple Pieces Need Better Shape"],
+  accessories: ["Without Making the Outfit Feel Too Busy", "When the Finishing Details Actually Matter"],
+  wardrobe: ["Without Buying a Bunch of Random Pieces", "When the Closet Needs Better Logic"],
+  office: ["Without Falling Into Corporate Uniform Energy", "When the Dress Code Is Loose but Still Real"],
+  travel: ["Without Packing Like Every Trip Is the Same", "When Comfort Has to Still Look Intentional"],
+  "date-night": ["Without Looking Like You Tried Too Hard", "When the Night Needs a Better First Read"],
+};
+
+const TITLE_COLON_ENDINGS = {
+  common: [
+    "the cleaner way to get dressed right now",
+    "what makes them feel current again",
+    "the small shift that changes the whole outfit",
+    "why they work better than the obvious default",
+  ],
+  winter: [
+    "the pieces that keep cold-weather dressing sharp",
+    "how to stay warm without getting bulky",
+  ],
+  summer: [
+    "the easy way to stay sharp in the heat",
+    "how to keep the outfit light without going flat",
+  ],
+};
+
+const ANGLE_COLON_ENDINGS = {
+  outfits: ["the formulas worth repeating this season", "how to make them feel less predictable"],
+  shirts: ["the versions that give outfits more lift", "how to make the top half work harder"],
+  shoes: ["the pairs that stop the look from falling apart", "what separates clean footwear from filler"],
+  pants: ["the cuts that make the rest of the wardrobe easier", "where most casual outfits go wrong"],
+  jackets: ["the layers that create shape fast", "what gives simple outfits real structure"],
+  basics: ["the pieces that stop simple outfits from feeling dead", "how better layers fix weak outfits"],
+  accessories: ["the details that make an outfit feel finished", "what is worth adding and what is not"],
+  wardrobe: ["the rules that make style feel easier", "how to stop the closet from feeling random"],
+  office: ["what modern workwear should actually look like", "how to look sharp without looking formal"],
+  travel: ["the formula for looking composed in transit", "what actually earns a place in the bag"],
+  "date-night": ["what makes going-out style feel natural", "how to look better without looking rehearsed"],
+};
+
+const TITLE_SCENARIOS = {
+  common: ["busy weekdays", "weekend plans", "days when you want to look more awake", "normal life, not special occasions"],
+  winter: ["cold mornings", "weekend errands in the cold", "office days with actual weather", "nights out when the temperature drops"],
+  summer: ["hot afternoons", "humid weekends", "travel days in the heat", "late dinners after warm days"],
+  fall: ["cool mornings", "weekends with changing weather", "the first real layer days"],
+  spring: ["mixed-weather weeks", "days that start cold and end warm", "rainy commutes and mild afternoons"],
+};
+
+function extendContextWithSuffix(context, suffix) {
+  const normalizedContext = cleanText(context).toLowerCase();
+  const contextWords = new Set(normalizedContext.split(/\s+/).filter(Boolean));
+  const remainder = cleanText(suffix)
+    .split(/\s+/)
+    .filter((word) => word && !contextWords.has(word.toLowerCase()));
+
+  return remainder.length ? `${cleanText(context)} ${remainder.join(" ")}` : cleanText(context);
+}
+
+function buildContextVariants(context, description) {
+  const text = cleanText(description).toLowerCase();
+  const base = cleanText(context);
+  const variants = [base];
+  const withoutMens = base.replace(/^men'?s\s+/i, "").trim();
+
+  if (withoutMens) {
+    variants.push(withoutMens);
+  }
+
+  if (/\bwinter\b/.test(text)) {
+    variants.push(base.replace(/\bwinter\b/i, "Cold-Weather"));
+    if (withoutMens) {
+      variants.push(withoutMens.replace(/\bwinter\b/i, "Cold-Weather"));
+    }
+  }
+
+  if (/\bsummer\b/.test(text)) {
+    variants.push(base.replace(/\bsummer\b/i, "Warm-Weather"));
+    if (withoutMens) {
+      variants.push(withoutMens.replace(/\bsummer\b/i, "Warm-Weather"));
+    }
+  }
+
+  if (/\bcasual\b/.test(text) && !/\bcasual\b/i.test(base)) {
+    variants.push(`${withoutMens || base} Casual`);
+  }
+
+  return uniqueList(variants.map((value) => titleCase(value)).filter(Boolean), 6);
+}
+
+function buildAngleTitleCandidates(context, angle, description) {
+  const text = cleanText(description).toLowerCase();
+  const seasons = extractSeasonSignals(text);
+  const subjectSuffixes = TITLE_SUBJECT_SUFFIXES[angle.key] || TITLE_SUBJECT_SUFFIXES.outfits;
+  const contexts = shuffleList(buildContextVariants(context, description));
+  const subjects = uniqueList(
+    contexts.flatMap((variant) => subjectSuffixes.map((suffix) => extendContextWithSuffix(variant, suffix))),
+    24,
+  );
+
+  const directEndings = uniqueList(
+    [
+      ...ANGLE_DIRECT_ENDINGS[angle.key] || [],
+      ...seasons.flatMap((season) => TITLE_DIRECT_ENDINGS[season] || []),
+      ...TITLE_DIRECT_ENDINGS.common,
+    ],
+    18,
+  );
+
+  const guideEndings = uniqueList(
+    [
+      ...ANGLE_GUIDE_ENDINGS[angle.key] || [],
+      ...seasons.flatMap((season) => TITLE_GUIDE_ENDINGS[season] || []),
+      ...TITLE_GUIDE_ENDINGS.common,
+    ],
+    18,
+  );
+
+  const colonEndings = uniqueList(
+    [
+      ...ANGLE_COLON_ENDINGS[angle.key] || [],
+      ...seasons.flatMap((season) => TITLE_COLON_ENDINGS[season] || []),
+      ...TITLE_COLON_ENDINGS.common,
+    ],
+    18,
+  );
+
+  const scenarios = uniqueList(
+    [...seasons.flatMap((season) => TITLE_SCENARIOS[season] || []), ...TITLE_SCENARIOS.common],
+    12,
+  );
+
+  const candidates = [];
+
+  subjects.forEach((subject) => {
+    directEndings.forEach((ending) => candidates.push(truncate(`${subject} ${ending}`, 96)));
+    guideEndings.forEach((ending) => candidates.push(truncate(`How to Build ${subject} ${ending}`, 96)));
+    colonEndings.forEach((ending) => candidates.push(truncate(`${subject}: ${titleCase(ending)}`, 96)));
+    scenarios.forEach((scenario) => candidates.push(truncate(`What to Wear for ${titleCase(scenario)}: ${subject}`, 96)));
+    candidates.push(truncate(`What Makes ${subject} Work Better Than the Usual Default`, 96));
+    candidates.push(truncate(`A Smarter Take on ${subject}`, 96));
+  });
+
+  return uniqueList(shuffleList(candidates), 160);
 }
 
 function buildArticleProfile(title, description) {
@@ -730,44 +967,100 @@ function buildThemePhrase(description) {
 function buildAutoTitles(description, articleCount, customTitles) {
   const titles = uniqueList(customTitles || [], articleCount);
   const context = buildAngleContext(description);
-  const themeAngles = extractThemeAngles(description);
+  const themeAngles = shuffleList(extractThemeAngles(description));
   const seen = new Set(titles.map((title) => title.toLowerCase()));
 
   const pushTitle = (value) => {
     const cleaned = cleanText(value);
-    if (!cleaned) {
-      return;
+    if (!cleaned || seen.has(cleaned.toLowerCase())) {
+      return false;
     }
 
-    let candidate = cleaned;
-    let counter = 2;
-    while (seen.has(candidate.toLowerCase())) {
-      candidate = `${cleaned} ${counter}`;
-      counter += 1;
-    }
-
-    seen.add(candidate.toLowerCase());
-    titles.push(candidate);
+    seen.add(cleaned.toLowerCase());
+    titles.push(cleaned);
+    return true;
   };
 
-  themeAngles.forEach((angle, index) => {
+  const candidatePools = new Map(
+    themeAngles.map((angle) => [angle.key, buildAngleTitleCandidates(context, angle, description)]),
+  );
+
+  const takeNextCandidate = (angle) => {
+    const pool = candidatePools.get(angle.key) || [];
+
+    while (pool.length) {
+      const candidate = pool.shift();
+      if (candidate && !seen.has(candidate.toLowerCase())) {
+        return candidate;
+      }
+    }
+
+    return "";
+  };
+
+  let cycleIndex = 0;
+  while (titles.length < articleCount && themeAngles.length) {
+    const angle = themeAngles[cycleIndex % themeAngles.length];
+    const candidate = takeNextCandidate(angle);
+
+    if (!candidate) {
+      cycleIndex += 1;
+      if (cycleIndex > themeAngles.length * 4) {
+        break;
+      }
+      continue;
+    }
+
+    pushTitle(candidate);
+    cycleIndex += 1;
+  }
+
+  const fallbackPool = uniqueList(
+    shuffleList(
+      themeAngles.flatMap((angle) => buildAngleTitleCandidates(buildThemePhrase(description), angle, description)),
+    ),
+    120,
+  );
+
+  fallbackPool.forEach((candidate) => {
     if (titles.length < articleCount) {
-      pushTitle(buildAngleTitle(context, angle, index));
+      pushTitle(candidate);
     }
   });
 
-  let angleIndex = 0;
   while (titles.length < articleCount) {
-    const angle = themeAngles[angleIndex % themeAngles.length];
-    pushTitle(buildAngleTitle(context, angle, Math.floor(angleIndex / Math.max(themeAngles.length, 1)) + angleIndex));
-    angleIndex += 1;
-  }
-
-  while (titles.length < articleCount) {
-    pushTitle(`${buildThemePhrase(description)} Article ${titles.length + 1}`);
+    const fallback = truncate(`${buildThemePhrase(description)} ${pickRandom(["Guide", "Ideas", "Formula", "Edit", "Playbook"])}`, 96);
+    if (!pushTitle(fallback)) {
+      pushTitle(truncate(`${buildThemePhrase(description)} ${Date.now().toString().slice(-4)} ${titles.length + 1}`, 96));
+    }
   }
 
   return titles.slice(0, articleCount);
+}
+
+const TITLE_STYLE_HINTS = [
+  "search-friendly and direct",
+  "editorial and conversational",
+  "practical how-to",
+  "clean and understated",
+  "magazine-style but grounded",
+  "specific and modern",
+  "plainspoken and useful",
+  "sharp and compact",
+];
+
+function buildVarietyToken() {
+  if (globalThis.crypto?.randomUUID) {
+    return globalThis.crypto.randomUUID().slice(0, 8);
+  }
+
+  return `${Date.now().toString(36)}${Math.floor(randomFraction() * 1679616)
+    .toString(36)
+    .padStart(4, "0")}`.slice(-8);
+}
+
+function buildTitleStyleHint() {
+  return pickRandom(TITLE_STYLE_HINTS);
 }
 
 function matchProducts(catalog, title, description, limit, usedProductCounts = new Map()) {
@@ -793,17 +1086,23 @@ function matchProducts(catalog, title, description, limit, usedProductCounts = n
   return selectedProducts.map(({ score, ...product }) => product);
 }
 
-function buildBriefs(catalog, titles, description) {
+function buildBriefs(catalog, titles, description, lockedTitles = []) {
   const usedProductCounts = new Map();
 
-  return titles.map((title) => {
-    const products = matchProducts(catalog, title, description, 4, usedProductCounts);
+  return titles.map((title, index) => {
+    const lockedTitle = cleanText(lockedTitles[index]);
+    const effectiveTitle = lockedTitle || title;
+    const products = matchProducts(catalog, effectiveTitle, description, 4, usedProductCounts);
     products.forEach((product) => {
       usedProductCounts.set(product.id, (usedProductCounts.get(product.id) || 0) + 1);
     });
 
     return {
-      title,
+      title: effectiveTitle,
+      planningTitle: effectiveTitle,
+      lockedTitle,
+      titleStyleHint: buildTitleStyleHint(),
+      varietyToken: buildVarietyToken(),
       description,
       products,
     };
@@ -916,7 +1215,7 @@ function buildPublisherMessages(briefs) {
     {
       role: "system",
       content:
-        "You write concise men's style blog drafts for PrimeGent. Respond with valid JSON only. No markdown fences. Do not invent products, brands, links, prices, or availability. The prose paragraphs must stay editorial and generic; do not mention exact product names or brands in the article body. Concrete product promotion must happen only through the product_mentions array using the provided product_id values.",
+        "You write concise men's style blog drafts for PrimeGent. Respond with valid JSON only. No markdown fences. Do not invent products, brands, links, prices, or availability. The prose paragraphs must stay editorial and generic; do not mention exact product names or brands in the article body. Concrete product promotion must happen only through the product_mentions array using the provided product_id values. When a title is not locked, you must create a fresh, natural title that fits the requested description and feels non-formulaic.",
     },
     {
       role: "user",
@@ -924,6 +1223,7 @@ function buildPublisherMessages(briefs) {
 {
   "articles": [
     {
+      "title": "...",
       "dek": "...",
       "summary": "...",
       "category": "...",
@@ -945,7 +1245,12 @@ function buildPublisherMessages(briefs) {
 
 Rules:
 - Return exactly ${briefs.length} articles in the same order as the input briefs.
-- Do not rewrite or return the titles; titles are handled separately.
+- "title" is required and must be at most 96 characters.
+- If a brief includes a non-empty "locked_title", return that exact text as the title.
+- If "locked_title" is empty, create a fresh original title that fits the description, focus, and matched products.
+- Generated titles must feel natural, specific, and different from each other in both wording and structure.
+- Avoid recycling stock patterns like repeating the same opener or ending across the batch.
+- Use "title_style_hint" and "variety_token" only as hidden cues to vary the title. Do not mention them in the title or article body.
 - "dek" must be 1 sentence, max 170 characters.
 - "summary" must be 1-2 sentences, max 220 characters.
 - "category" must be one of: "Style Guides", "Wardrobe Basics", "Outfit Ideas", "Buying Guides".
@@ -964,12 +1269,61 @@ Rules:
 Input briefs:
 ${JSON.stringify(
   briefs.map((brief) => ({
-    title: brief.title,
+    locked_title: brief.lockedTitle,
+    focus_title: brief.planningTitle,
+    title_style_hint: brief.titleStyleHint,
+    variety_token: brief.varietyToken,
     description: brief.description,
     products: brief.products.map((product) => ({
       id: product.id,
       name: product.name,
       category: product.categoryLabel,
+      description: product.description,
+      styles: product.styles,
+      tags: product.tags,
+    })),
+  })),
+  null,
+  2,
+)}`,
+    },
+  ];
+}
+
+function buildTitleMessages(briefs) {
+  return [
+    {
+      role: "system",
+      content:
+        "You write titles for men's style blog articles for PrimeGent. Respond with valid JSON only. No markdown fences. When a title is not locked, choose a fresh, natural title that fits the request and does not sound templated or repetitive.",
+    },
+    {
+      role: "user",
+      content: `Return a JSON object with exactly this shape:
+{
+  "titles": ["...", "..."]
+}
+
+Rules:
+- Return exactly ${briefs.length} titles in the same order as the input briefs.
+- Every title must be at most 96 characters.
+- If a brief includes a non-empty "locked_title", return that exact text.
+- If "locked_title" is empty, create one fresh original title that fits the description, focus, and matched products.
+- Keep the titles varied. Do not reuse the same opener, structure, or ending across the batch.
+- Use "title_style_hint" and "variety_token" only as hidden cues to vary phrasing. Do not mention them.
+- Avoid clickbait, all-caps, brackets, numbering, and obvious template phrases.
+
+Input briefs:
+${JSON.stringify(
+  briefs.map((brief) => ({
+    locked_title: brief.lockedTitle,
+    focus_title: brief.planningTitle,
+    title_style_hint: brief.titleStyleHint,
+    variety_token: brief.varietyToken,
+    description: brief.description,
+    products: brief.products.map((product) => ({
+      category: product.categoryLabel,
+      name: product.name,
       description: product.description,
       styles: product.styles,
       tags: product.tags,
@@ -1003,15 +1357,55 @@ function normalizeSection(section, validIds, fallbackSection) {
   };
 }
 
+function ensureUniqueTitles(titles, fallbackTitles) {
+  const seen = new Set();
+
+  return titles.map((title, index) => {
+    const fallbackTitle = truncate(cleanText(fallbackTitles[index]), 96);
+    let candidate = truncate(cleanText(title), 96) || fallbackTitle;
+    let suffix = 2;
+
+    while (candidate && seen.has(candidate.toLowerCase())) {
+      if (fallbackTitle && !seen.has(fallbackTitle.toLowerCase())) {
+        candidate = fallbackTitle;
+        break;
+      }
+
+      candidate = truncate(`${fallbackTitle || candidate} ${suffix}`, 96);
+      suffix += 1;
+    }
+
+    if (candidate) {
+      seen.add(candidate.toLowerCase());
+    }
+
+    return candidate || fallbackTitle || `Article ${index + 1}`;
+  });
+}
+
+function ensureUniqueArticleTitles(articles, fallbackArticles) {
+  const uniqueTitles = ensureUniqueTitles(
+    articles.map((article) => article.title),
+    fallbackArticles.map((article) => article.title),
+  );
+
+  return articles.map((article, index) => ({
+    ...article,
+    title: uniqueTitles[index],
+  }));
+}
+
 function normalizeArticle(aiArticle, brief, fallbackArticle) {
   const validIds = new Set(brief.products.map((product) => product.id));
   const sections = (Array.isArray(aiArticle?.sections) ? aiArticle.sections : [])
     .slice(0, fallbackArticle.sections.length)
     .map((section, index) => normalizeSection(section, validIds, fallbackArticle.sections[index] || fallbackArticle.sections[0]))
     .filter(Boolean);
+  const lockedTitle = truncate(cleanText(brief.lockedTitle), 96);
+  const aiTitle = truncate(cleanText(aiArticle?.title), 96);
 
   return {
-    title: brief.title,
+    title: lockedTitle || aiTitle || fallbackArticle.title,
     dek: truncate(cleanText(aiArticle?.dek), 170) || fallbackArticle.dek,
     summary: truncate(cleanText(aiArticle?.summary), 220) || fallbackArticle.summary,
     category: ["Style Guides", "Wardrobe Basics", "Outfit Ideas", "Buying Guides"].includes(cleanText(aiArticle?.category))
@@ -1038,7 +1432,28 @@ function normalizeArticleArrayResponse(rawText, briefs, fallbackArticles) {
     return fallbackArticles;
   }
 
-  return briefs.map((brief, index) => normalizeArticle(articles[index], brief, fallbackArticles[index]));
+  return ensureUniqueArticleTitles(
+    briefs.map((brief, index) => normalizeArticle(articles[index], brief, fallbackArticles[index])),
+    fallbackArticles,
+  );
+}
+
+function normalizeTitleArrayResponse(rawText, briefs) {
+  if (!rawText) {
+    return null;
+  }
+
+  const parsed = parseJsonObject(rawText);
+  const titles = Array.isArray(parsed?.titles) ? parsed.titles : [];
+
+  if (titles.length !== briefs.length) {
+    return null;
+  }
+
+  return ensureUniqueTitles(
+    briefs.map((brief, index) => brief.lockedTitle || titles[index] || brief.title),
+    briefs.map((brief) => brief.title),
+  );
 }
 
 export async function onRequestPost(context) {
@@ -1065,47 +1480,93 @@ export async function onRequestPost(context) {
     return json({ error: "A valid product catalog is required." }, 400);
   }
 
-  const titles = buildAutoTitles(description, articleCount, customTitles);
-  const briefs = buildBriefs(catalog, titles, description);
-  const fallbackArticles = briefs.map((brief) => buildFallbackArticle(brief));
+  const planningTitles = buildAutoTitles(description, articleCount, []);
+  const baseBriefs = buildBriefs(catalog, planningTitles, description, customTitles);
   const apiKey = env.OPENROUTER_API_KEY;
 
   if (!apiKey) {
-    return json({ articles: fallbackArticles, source: "fallback" });
+    const fallbackArticles = baseBriefs.map((brief) => buildFallbackArticle(brief));
+    return json({ articles: fallbackArticles, source: "fallback", titleSource: "fallback" });
   }
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 18000);
+  let briefs = baseBriefs;
+  let titleSource = "fallback";
 
   try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      signal: controller.signal,
-      headers: {
-        authorization: `Bearer ${apiKey}`,
-        "content-type": "application/json",
-        "HTTP-Referer": new URL(request.url).origin,
-        "X-Title": "PrimeGent Affiliate Publisher",
+    const titleResponse = await fetchWithTimeout(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${apiKey}`,
+          "content-type": "application/json",
+          "HTTP-Referer": new URL(request.url).origin,
+          "X-Title": "PrimeGent Affiliate Publisher",
+        },
+        body: JSON.stringify({
+          model: env.OPENROUTER_MODEL || "nvidia/nemotron-3-super-120b-a12b:free",
+          temperature: 1,
+          max_tokens: 500,
+          response_format: { type: "json_object" },
+          messages: buildTitleMessages(baseBriefs),
+        }),
       },
-      body: JSON.stringify({
-        model: env.OPENROUTER_MODEL || "nvidia/nemotron-3-super-120b-a12b:free",
-        temperature: 0.4,
-        max_tokens: 3200,
-        response_format: { type: "json_object" },
-        messages: buildPublisherMessages(briefs),
-      }),
-    });
+      15000,
+    );
+
+    if (titleResponse.ok) {
+      const titlePayload = await titleResponse.json();
+      const generatedTitles = normalizeTitleArrayResponse(extractAssistantContent(titlePayload), baseBriefs);
+
+      if (generatedTitles) {
+        briefs = baseBriefs.map((brief, index) => {
+          const resolvedTitle = generatedTitles[index];
+          return {
+            ...brief,
+            title: resolvedTitle,
+            planningTitle: resolvedTitle,
+            lockedTitle: resolvedTitle,
+          };
+        });
+        titleSource = "ai";
+      }
+    }
+
+    const fallbackArticles = briefs.map((brief) => buildFallbackArticle(brief));
+    const response = await fetchWithTimeout(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${apiKey}`,
+          "content-type": "application/json",
+          "HTTP-Referer": new URL(request.url).origin,
+          "X-Title": "PrimeGent Affiliate Publisher",
+        },
+        body: JSON.stringify({
+          model: env.OPENROUTER_MODEL || "nvidia/nemotron-3-super-120b-a12b:free",
+          temperature: 0.85,
+          max_tokens: 3200,
+          response_format: { type: "json_object" },
+          messages: buildPublisherMessages(briefs),
+        }),
+      },
+      35000,
+    );
 
     if (!response.ok) {
-      return json({ articles: fallbackArticles, source: "fallback" });
+      return json({ articles: fallbackArticles, source: "fallback", titleSource });
     }
 
     const payload = await response.json();
     const articles = normalizeArticleArrayResponse(extractAssistantContent(payload), briefs, fallbackArticles);
-    return json({ articles, source: articles.some((article) => article.source === "ai") ? "ai" : "fallback" });
+    return json({
+      articles,
+      source: articles.some((article) => article.source === "ai") ? "ai" : "fallback",
+      titleSource,
+    });
   } catch {
-    return json({ articles: fallbackArticles, source: "fallback" });
-  } finally {
-    clearTimeout(timeout);
+    const fallbackArticles = briefs.map((brief) => buildFallbackArticle(brief));
+    return json({ articles: fallbackArticles, source: "fallback", titleSource });
   }
 }
