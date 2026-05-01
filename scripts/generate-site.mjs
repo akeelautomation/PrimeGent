@@ -1473,9 +1473,155 @@ function mergeGeneratedBlogPosts() {
   loadGeneratedBlogPosts().forEach((post) => {
     mergedPosts.set(post.slug, post);
   });
+  getStaticOnlyBlogPosts().forEach((post) => {
+    if (!mergedPosts.has(post.slug)) {
+      mergedPosts.set(post.slug, post);
+    }
+  });
 
   blogPosts.length = 0;
   blogPosts.push(...mergedPosts.values());
+}
+
+function getStaticOnlyBlogPosts() {
+  return [
+    {
+      slug: "blog-linen-shirt-outfits-men",
+      title: "Linen Shirt Outfits for Men That Look Clean, Not Crumpled",
+      category: "Outfit Ideas",
+      date: "2026-04-25",
+      readTime: "8 min read",
+      excerpt: "Linen works best when the rest of the outfit keeps it sharp instead of sloppy.",
+      description:
+        "Linen shirt outfits for men built around easy proportions, cleaner fabrics, and warm-weather pieces that still look intentional.",
+      heroLabel: "Linen shirts",
+      tags: ["linen shirt outfits", "summer outfits men", "warm weather style", "outfit ideas"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-chino-outfits-men",
+      title: "Chino Outfits for Men That Feel Modern Instead of Default",
+      category: "Outfit Ideas",
+      date: "2026-04-25",
+      readTime: "9 min read",
+      excerpt:
+        "Chinos are still one of the easiest style upgrades, but only when the outfit around them is handled well.",
+      description:
+        "Modern chino outfits for men using cleaner footwear, better shirt choices, and sharper proportions that avoid the usual office-uniform look.",
+      heroLabel: "Chino outfits",
+      tags: ["chino outfits men", "casual office style", "mens chinos", "outfit ideas"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-merino-sweater-men",
+      title: "Why a Merino Sweater Is One of the Smartest Things a Man Can Own",
+      category: "Wardrobe Basics",
+      date: "2026-04-25",
+      readTime: "9 min read",
+      excerpt:
+        "Merino works because it layers cleanly, travels well, and sharpens an outfit without adding bulk.",
+      description:
+        "A practical guide to merino sweaters for men, including where they fit, what to wear with them, and why they outperform bulkier knitwear.",
+      heroLabel: "Merino sweater",
+      tags: ["merino sweater men", "knitwear guide", "wardrobe basics", "mens essentials"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-white-sneakers-business-casual-men",
+      title: "Can White Sneakers Work for Business Casual? Yes, With Rules",
+      category: "Style Guides",
+      date: "2026-04-25",
+      readTime: "8 min read",
+      excerpt:
+        "White sneakers can work in the office, but only when the rest of the outfit is doing enough work.",
+      description:
+        "A practical guide to wearing white sneakers with business casual outfits without making the office look feel too relaxed or unfinished.",
+      heroLabel: "White sneakers",
+      tags: ["white sneakers business casual", "office style men", "mens sneakers", "style guide"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-mens-watch-style-guide",
+      title: "The Simple Watch Rule That Makes Men's Outfits Look More Finished",
+      category: "Buying Guides",
+      date: "2026-04-25",
+      readTime: "9 min read",
+      excerpt:
+        "A watch still matters because it closes the outfit without asking for too much attention.",
+      description:
+        "A straightforward guide to men's watches, including why they still matter, which styles are easiest to wear, and how to match them to simple outfits.",
+      heroLabel: "Watch guide",
+      tags: ["mens watches", "minimalist watch", "accessories guide", "buying guide"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-overshirt-vs-jacket-men",
+      title: "Overshirt vs Jacket: What Men Should Actually Reach For First",
+      category: "Style Guides",
+      date: "2026-04-25",
+      readTime: "8 min read",
+      excerpt: "These two layers overlap, but they do not solve the same outfit problem.",
+      description:
+        "A practical guide to choosing between an overshirt and a jacket, with advice on layering, temperature, and which piece gives the outfit more range.",
+      heroLabel: "Layer choice",
+      tags: ["overshirt vs jacket", "mens layering", "casual outerwear", "style guide"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-fall-business-casual-men",
+      title: "Fall Business Casual for Men Without the Usual Stiffness",
+      category: "Outfit Ideas",
+      date: "2026-04-25",
+      readTime: "9 min read",
+      excerpt:
+        "Fall office outfits are better when they feel layered and grown-up, not corporate and overbuilt.",
+      description:
+        "Fall business casual outfits for men built with knitwear, cleaner trousers, and shoes that make the office look sharper without feeling overdressed.",
+      heroLabel: "Fall office",
+      tags: ["fall business casual men", "office outfits", "mens knitwear", "outfit ideas"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-coffee-date-outfits-men",
+      title: "Coffee Date Outfits for Men That Look Intentional Without Trying Too Hard",
+      category: "Outfit Ideas",
+      date: "2026-04-25",
+      readTime: "8 min read",
+      excerpt: "Coffee dates call for control, not costume. You want effort to show, but not strain.",
+      description:
+        "Coffee date outfits for men built around easy layers, cleaner shoes, and simple pieces that feel confident without looking overdone.",
+      heroLabel: "Coffee date",
+      tags: ["coffee date outfits men", "casual date style", "mens outfit ideas", "first date outfits"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-airport-outfits-men",
+      title: "Airport Outfits for Men That Stay Comfortable Without Looking Half-Asleep",
+      category: "Outfit Ideas",
+      date: "2026-04-25",
+      readTime: "9 min read",
+      excerpt: "Travel style works better when comfort is real but the outfit still has shape.",
+      description:
+        "Airport outfits for men built around comfortable layers, practical shoes, and cleaner proportions that still look put together in transit.",
+      heroLabel: "Airport outfits",
+      tags: ["airport outfits men", "travel style", "mens casual outfits", "outfit ideas"],
+      staticOnly: true,
+    },
+    {
+      slug: "blog-summer-wedding-guest-men",
+      title: "Summer Wedding Guest Style for Men That Looks Sharp in the Heat",
+      category: "Style Guides",
+      date: "2026-04-25",
+      readTime: "10 min read",
+      excerpt:
+        "Warm-weather wedding style is mostly about using lighter pieces without letting the outfit lose its formality.",
+      description:
+        "A practical guide to summer wedding guest outfits for men, including lighter fabrics, cleaner footwear, and warm-weather pieces that still look formal enough.",
+      heroLabel: "Summer wedding",
+      tags: ["summer wedding guest men", "formal summer style", "mens wedding outfits", "style guide"],
+      staticOnly: true,
+    },
+  ];
 }
 
 function writeOutput() {
@@ -1499,8 +1645,12 @@ function writeOutput() {
   writeFile("affiliate-disclosure.html", renderAffiliateDisclosurePage());
   writeFile("privacy.html", renderLegacyPrivacyRedirectPage());
   for (const pick of picks) writeFile(`pick-${pick.slug}.html`, renderPickPage(pick));
-  for (const post of blogPosts) writeFile(`${post.slug}.html`, renderBlogPost(post));
-  console.log(`Generated ${picks.length} pick pages and ${blogPosts.length} blog posts.`);
+  for (const post of blogPosts) {
+    if (!post.staticOnly) {
+      writeFile(`${post.slug}.html`, renderBlogPost(post));
+    }
+  }
+  console.log(`Generated ${picks.length} pick pages and ${blogPosts.length} blog index entries.`);
 }
 
 picks.push(
@@ -2363,6 +2513,226 @@ picks.push(
   },
 );
 blogPosts.push(
+  {
+    slug: "blog-simple-casual-outfit-formulas-men",
+    title: "Simple Casual Outfit Formulas for Men Who Want to Look Put Together",
+    category: "Outfit Ideas",
+    date: "2026-05-01",
+    readTime: "8 min read",
+    excerpt:
+      "Four easy casual outfit formulas built around clean shirts, reliable pants, simple layers, and shoes that do not overcomplicate the look.",
+    description:
+      "Simple casual outfit formulas for men using oxford shirts, tees, chinos, jeans, overshirts, sneakers, and boots.",
+    heroLabel: "Casual formulas",
+    tags: ["casual outfits", "mens outfit ideas", "outfit formulas", "everyday style"],
+    relatedPickSlugs: [
+      "banana-republic-slim-fit-ocbd-shirt",
+      "everlane-the-slim-fit-chino",
+      "new-balance-574-sneaker",
+    ],
+    sections: [
+      {
+        heading: "Start with formulas, not random pieces",
+        paragraphs: [
+          `A good casual outfit usually comes from a reliable structure, not from owning unusual clothes. When the shirt, pants, shoes, and outer layer all have clear roles, the outfit feels considered without looking forced.`,
+          `That is why formulas are useful. They give you a repeatable starting point, then you can change color, fabric, or footwear depending on the day.`,
+        ],
+      },
+      {
+        heading: "Formula 1: oxford shirt, chinos, classic sneakers",
+        paragraphs: [
+          `This is the cleanest casual formula for men who want to look sharper without feeling dressed up. The oxford shirt brings structure, chinos keep the line tidy, and classic sneakers keep the outfit relaxed.`,
+          `A dependable version starts with the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a>, the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a>, and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a>.`,
+        ],
+      },
+      {
+        heading: "Formula 2: plain tee, overshirt, straight jeans",
+        paragraphs: [
+          `When you want something more relaxed, build around a plain tee and an overshirt. The tee keeps the base simple, the overshirt adds shape, and straight or slim-straight jeans keep the outfit grounded.`,
+          `This formula works especially well for weekends, errands, casual lunches, and low-key evenings because it looks complete without needing much styling.`,
+        ],
+      },
+      {
+        heading: "Formula 3: knit polo, relaxed trousers, loafers",
+        paragraphs: [
+          `A knit polo is useful when a tee feels too casual but a button-down feels too formal. Pair it with relaxed trousers or clean chinos and loafers for a casual outfit that still has shape.`,
+          `The key is restraint. Avoid loud patterns and let the texture of the polo and the cleaner footwear do the work.`,
+        ],
+      },
+      {
+        heading: "Keep the palette easy to repeat",
+        paragraphs: [
+          `Navy, white, grey, olive, stone, denim blue, and brown are enough for most casual wardrobes. They mix easily and keep simple outfits from looking accidental.`,
+          `Once your colors cooperate, casual dressing becomes much faster. You are no longer rebuilding the outfit from scratch every time you get dressed.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-relaxed-weekend-outfits-men",
+    title: "Relaxed Weekend Outfits for Men That Still Look Sharp",
+    category: "Outfit Ideas",
+    date: "2026-05-01",
+    readTime: "8 min read",
+    excerpt:
+      "Weekend casual outfits that stay comfortable while still looking intentional enough for coffee, errands, lunch, and casual plans.",
+    description:
+      "Relaxed weekend outfit ideas for men with tees, overshirts, chinos, jeans, sneakers, fleece, and simple casual layers.",
+    heroLabel: "Weekend casual",
+    tags: ["weekend outfits", "casual menswear", "relaxed style", "mens outfit ideas"],
+    relatedPickSlugs: [
+      "roark-revival-open-road-overshirt",
+      "levis-511-slim-fit-jeans",
+      "nike-air-force-1-low-white",
+    ],
+    sections: [
+      {
+        heading: "Weekend style should be comfortable, not careless",
+        paragraphs: [
+          `The weekend is where many casual outfits lose structure. Comfort matters, but the outfit still needs a clear shape if you want to look put together outside the house.`,
+          `The fix is simple: keep one piece structured. That might be an overshirt, a clean pair of chinos, a denim jacket, or crisp sneakers. One sharper element is usually enough.`,
+        ],
+      },
+      {
+        heading: "Formula 1: overshirt, tee, jeans, white sneakers",
+        paragraphs: [
+          `This is one of the easiest weekend outfits because every piece feels familiar. A plain tee keeps it relaxed, jeans make it practical, white sneakers brighten the look, and the overshirt gives the outfit a frame.`,
+          `A layer like the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a> with <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> covers most casual weekend plans.`,
+        ],
+      },
+      {
+        heading: "Formula 2: hoodie with cleaner pants",
+        paragraphs: [
+          `A hoodie can work well if the rest of the outfit is controlled. Instead of pairing it with baggy sweatpants, wear it with chinos, dark denim, or casual trousers that hold their shape.`,
+          `That contrast is what makes the hoodie feel intentional rather than lazy. Keep the shoes clean and avoid oversized proportions everywhere at once.`,
+        ],
+      },
+      {
+        heading: "Formula 3: fleece, chinos, retro sneakers",
+        paragraphs: [
+          `For colder weekends, a fleece layer can look good when it is treated like casual outerwear rather than gym gear. Pair it with chinos and retro sneakers so the outfit feels outdoorsy but still edited.`,
+          `This works for errands, travel days, coffee runs, and casual walks because it balances warmth with a cleaner silhouette.`,
+        ],
+      },
+      {
+        heading: "Do less with accessories",
+        paragraphs: [
+          `Weekend outfits usually look better with fewer accessories. A watch, cap, belt, or simple sunglasses can help, but stacking too many small details makes a relaxed outfit feel busy.`,
+          `Let fit, fabric, and clean shoes carry the outfit first. Accessories should finish the look, not explain it.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-casual-summer-basics-men",
+    title: "Casual Summer Outfits for Men Built from Better Basics",
+    category: "Outfit Ideas",
+    date: "2026-05-01",
+    readTime: "8 min read",
+    excerpt:
+      "Warm-weather casual outfits built around breathable shirts, clean shorts or chinos, simple sneakers, and light layers.",
+    description:
+      "Casual summer outfit ideas for men using linen shirts, polos, chinos, clean sneakers, and easy warm-weather basics.",
+    heroLabel: "Summer basics",
+    tags: ["summer outfits", "casual outfits", "mens basics", "warm weather style"],
+    relatedPickSlugs: [
+      "muji-french-linen-shirt",
+      "nike-air-force-1-low-white",
+      "timex-weekender-watch",
+    ],
+    sections: [
+      {
+        heading: "Summer casual style needs breathing room",
+        paragraphs: [
+          `Warm-weather outfits fail when they rely on heavy fabrics, dark colors, or too many layers. Summer style works better when the pieces are lighter, the palette is cleaner, and the fit has enough room to move.`,
+          `That does not mean the outfit has to be loose or shapeless. It means choosing breathable fabric and simple combinations that still have a clear outline.`,
+        ],
+      },
+      {
+        heading: "Formula 1: linen shirt, chinos, white sneakers",
+        paragraphs: [
+          `A linen shirt is one of the easiest summer upgrades because it looks relaxed on purpose. Wear it open over a tee or buttoned with sleeves rolled, then pair it with light chinos and white sneakers.`,
+          `A piece like the <a href="./pick-muji-french-linen-shirt.html">Muji French linen shirt</a> with <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> creates a warm-weather outfit that feels casual without looking unfinished.`,
+        ],
+      },
+      {
+        heading: "Formula 2: knit polo with light trousers",
+        paragraphs: [
+          `A knit polo is a strong summer piece because it sits between a tee and a button-down. It gives the outfit texture and shape while still feeling relaxed enough for daytime plans.`,
+          `Pair it with light chinos, drawstring trousers, or tailored shorts depending on the setting. The cleaner the bottom half, the sharper the polo looks.`,
+        ],
+      },
+      {
+        heading: "Formula 3: tee, overshirt, breathable pants",
+        paragraphs: [
+          `On mild summer evenings, a lightweight overshirt can replace a jacket. Keep the base tee plain, choose pants that are not too heavy, and wear low-profile sneakers or loafers.`,
+          `The goal is a little structure without heat. If the layer feels bulky, it probably belongs to a different season.`,
+        ],
+      },
+      {
+        heading: "Use details sparingly",
+        paragraphs: [
+          `Summer outfits expose more of the basics, so small details matter. Clean sneakers, a simple watch like the <a href="./pick-timex-weekender-watch.html">Timex Weekender</a>, and shirts that sit well at the shoulder can do more than loud prints.`,
+          `Better basics keep summer dressing easy. You should look ready for the day, not like the outfit is fighting the weather.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-casual-layering-outfits-men",
+    title: "Casual Layering Outfits for Men: Easy Combinations That Work",
+    category: "Outfit Ideas",
+    date: "2026-05-01",
+    readTime: "8 min read",
+    excerpt:
+      "Simple casual layering ideas for men using tees, overshirts, denim jackets, merino sweaters, chinos, jeans, sneakers, and boots.",
+    description:
+      "Casual layering outfits for men with practical combinations for transitional weather, weekends, travel, and relaxed offices.",
+    heroLabel: "Casual layers",
+    tags: ["layering", "casual outfits", "mens layers", "transitional style"],
+    relatedPickSlugs: [
+      "uniqlo-merino-crew-neck-sweater",
+      "roark-revival-open-road-overshirt",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
+    ],
+    sections: [
+      {
+        heading: "Layering should make the outfit clearer",
+        paragraphs: [
+          `Good layering is not about adding more clothing. It is about giving a casual outfit shape, warmth, and texture without making it feel crowded.`,
+          `The easiest test is whether the base outfit still works when the outer layer comes off. If it does, the layers are probably doing their job.`,
+        ],
+      },
+      {
+        heading: "Formula 1: tee, overshirt, chinos",
+        paragraphs: [
+          `A tee and chinos can feel a little plain on their own. Add an overshirt and the outfit immediately gains structure without becoming formal.`,
+          `The <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a> works well in this role because it behaves like a light jacket while still feeling casual and easy to wear indoors.`,
+        ],
+      },
+      {
+        heading: "Formula 2: oxford shirt under a merino sweater",
+        paragraphs: [
+          `For a sharper casual layer, wear an oxford shirt under a lightweight merino sweater. The collar frames the neckline, the sweater softens the outfit, and the combination works with chinos, denim, or casual trousers.`,
+          `A simple knit like the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew neck</a> is useful because it adds warmth without bulk.`,
+        ],
+      },
+      {
+        heading: "Formula 3: denim jacket over a hoodie",
+        paragraphs: [
+          `A hoodie can look better when it has a structured outer layer over it. A denim jacket gives the outfit a clearer outline and stops the hoodie from looking too soft on its own.`,
+          `Keep the hoodie plain, the jeans or chinos clean, and the shoes simple. The combination works best when the layers are controlled instead of oversized everywhere.`,
+        ],
+      },
+      {
+        heading: "Finish with footwear that anchors the layers",
+        paragraphs: [
+          `Layered outfits need shoes with enough presence. Slim sneakers work for lighter combinations, while boots like the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain</a> can balance heavier knits, jackets, and denim.`,
+          `The point is visual weight. If the top half has texture and structure, the shoes should not feel like an afterthought.`,
+        ],
+      },
+    ],
+  },
   {
     slug: "blog-capsule-wardrobe-men",
     title: "The 20-Piece Men's Capsule Wardrobe That Covers Every Occasion",
