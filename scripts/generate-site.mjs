@@ -2520,9 +2520,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Four easy casual outfit formulas built around clean shirts, reliable pants, simple layers, and shoes that do not overcomplicate the look.",
+      "Four easy casual outfit formulas built around PrimeGent picks that already work together.",
     description:
-      "Simple casual outfit formulas for men using oxford shirts, tees, chinos, jeans, overshirts, sneakers, and boots.",
+      "Simple casual outfit formulas for men using PrimeGent picks including oxford shirts, chinos, jeans, overshirts, sneakers, and boots.",
     heroLabel: "Casual formulas",
     tags: ["casual outfits", "mens outfit ideas", "outfit formulas", "everyday style"],
     relatedPickSlugs: [
@@ -2546,17 +2546,17 @@ blogPosts.push(
         ],
       },
       {
-        heading: "Formula 2: plain tee, overshirt, straight jeans",
+        heading: "Formula 2: Roark overshirt, Levi's jeans, white sneakers",
         paragraphs: [
-          `When you want something more relaxed, build around a plain tee and an overshirt. The tee keeps the base simple, the overshirt adds shape, and straight or slim-straight jeans keep the outfit grounded.`,
-          `This formula works especially well for weekends, errands, casual lunches, and low-key evenings because it looks complete without needing much styling.`,
+          `When you want something more relaxed, build around the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a>. The layer adds shape, while <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> keep the outfit grounded.`,
+          `This formula works especially well for weekends, errands, casual lunches, and low-key evenings because every product in the outfit already lives inside the PrimeGent catalogue.`,
         ],
       },
       {
-        heading: "Formula 3: knit polo, relaxed trousers, loafers",
+        heading: "Formula 3: merino sweater, chinos, Chelsea boots",
         paragraphs: [
-          `A knit polo is useful when a tee feels too casual but a button-down feels too formal. Pair it with relaxed trousers or clean chinos and loafers for a casual outfit that still has shape.`,
-          `The key is restraint. Avoid loud patterns and let the texture of the polo and the cleaner footwear do the work.`,
+          `For a slightly sharper casual outfit, use the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew neck sweater</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a>. The sweater adds texture, while the chino keeps the line clean.`,
+          `Finish it with the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea boot</a> when you want the outfit to feel more intentional than a standard sneaker look.`,
         ],
       },
       {
@@ -2575,9 +2575,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Weekend casual outfits that stay comfortable while still looking intentional enough for coffee, errands, lunch, and casual plans.",
+      "Weekend casual outfits built from PrimeGent picks that stay comfortable while still looking intentional.",
     description:
-      "Relaxed weekend outfit ideas for men with tees, overshirts, chinos, jeans, sneakers, fleece, and simple casual layers.",
+      "Relaxed weekend outfit ideas for men using PrimeGent picks including overshirts, chinos, jeans, sneakers, fleece, and simple casual layers.",
     heroLabel: "Weekend casual",
     tags: ["weekend outfits", "casual menswear", "relaxed style", "mens outfit ideas"],
     relatedPickSlugs: [
@@ -2590,7 +2590,7 @@ blogPosts.push(
         heading: "Weekend style should be comfortable, not careless",
         paragraphs: [
           `The weekend is where many casual outfits lose structure. Comfort matters, but the outfit still needs a clear shape if you want to look put together outside the house.`,
-          `The fix is simple: keep one piece structured. That might be an overshirt, a clean pair of chinos, a denim jacket, or crisp sneakers. One sharper element is usually enough.`,
+          `The fix is simple: keep one PrimeGent pick doing the structural work. The <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a>, the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a>, or <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> can each make a relaxed outfit look more edited.`,
         ],
       },
       {
@@ -2601,16 +2601,16 @@ blogPosts.push(
         ],
       },
       {
-        heading: "Formula 2: hoodie with cleaner pants",
+        heading: "Formula 2: Better Sweater with cleaner pants",
         paragraphs: [
-          `A hoodie can work well if the rest of the outfit is controlled. Instead of pairing it with baggy sweatpants, wear it with chinos, dark denim, or casual trousers that hold their shape.`,
-          `That contrast is what makes the hoodie feel intentional rather than lazy. Keep the shoes clean and avoid oversized proportions everywhere at once.`,
+          `For a comfortable layer that still looks presentable, use the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater fleece jacket</a> as the main weekend layer.`,
+          `Pair it with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> or <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a>, then finish with <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a> for a weekend outfit that stays comfortable and clean.`,
         ],
       },
       {
-        heading: "Formula 3: fleece, chinos, retro sneakers",
+        heading: "Formula 3: fleece, chinos, New Balance 574s",
         paragraphs: [
-          `For colder weekends, a fleece layer can look good when it is treated like casual outerwear rather than gym gear. Pair it with chinos and retro sneakers so the outfit feels outdoorsy but still edited.`,
+          `For colder weekends, the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater</a> can look good when it is treated like casual outerwear rather than gym gear. Pair it with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a> so the outfit feels outdoorsy but still edited.`,
           `This works for errands, travel days, coffee runs, and casual walks because it balances warmth with a cleaner silhouette.`,
         ],
       },
@@ -2630,9 +2630,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Warm-weather casual outfits built around breathable shirts, clean shorts or chinos, simple sneakers, and light layers.",
+      "Warm-weather casual outfits built around PrimeGent picks like linen shirts, chinos, clean sneakers, and simple accessories.",
     description:
-      "Casual summer outfit ideas for men using linen shirts, polos, chinos, clean sneakers, and easy warm-weather basics.",
+      "Casual summer outfit ideas for men using PrimeGent picks including linen shirts, chinos, clean sneakers, and easy warm-weather accessories.",
     heroLabel: "Summer basics",
     tags: ["summer outfits", "casual outfits", "mens basics", "warm weather style"],
     relatedPickSlugs: [
@@ -2656,17 +2656,17 @@ blogPosts.push(
         ],
       },
       {
-        heading: "Formula 2: knit polo with light trousers",
+        heading: "Formula 2: linen shirt, chinos, sunglasses",
         paragraphs: [
-          `A knit polo is a strong summer piece because it sits between a tee and a button-down. It gives the outfit texture and shape while still feeling relaxed enough for daytime plans.`,
-          `Pair it with light chinos, drawstring trousers, or tailored shorts depending on the setting. The cleaner the bottom half, the sharper the polo looks.`,
+          `The <a href="./pick-muji-french-linen-shirt.html">Muji French linen shirt</a> can also carry a simple daytime outfit when the accessories stay controlled. Wear it with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials slim fit chino</a> if you want a value-driven version of the same clean formula.`,
+          `Finish with <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban Wayfarers</a> when the outfit needs a practical summer detail that is already part of the PrimeGent picks page.`,
         ],
       },
       {
-        heading: "Formula 3: tee, overshirt, breathable pants",
+        heading: "Formula 3: linen shirt, watch, white sneakers",
         paragraphs: [
-          `On mild summer evenings, a lightweight overshirt can replace a jacket. Keep the base tee plain, choose pants that are not too heavy, and wear low-profile sneakers or loafers.`,
-          `The goal is a little structure without heat. If the layer feels bulky, it probably belongs to a different season.`,
+          `On mild summer evenings, keep the outfit simple: the <a href="./pick-muji-french-linen-shirt.html">Muji French linen shirt</a>, <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a>, and the <a href="./pick-timex-weekender-watch.html">Timex Weekender</a>.`,
+          `The goal is a little structure without heat, using pieces already available from the PrimeGent picks catalogue.`,
         ],
       },
       {
@@ -2685,9 +2685,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Simple casual layering ideas for men using tees, overshirts, denim jackets, merino sweaters, chinos, jeans, sneakers, and boots.",
+      "Simple casual layering ideas for men using PrimeGent picks like overshirts, merino sweaters, chinos, jeans, sneakers, and boots.",
     description:
-      "Casual layering outfits for men with practical combinations for transitional weather, weekends, travel, and relaxed offices.",
+      "Casual layering outfits for men built from PrimeGent picks for transitional weather, weekends, travel, and relaxed offices.",
     heroLabel: "Casual layers",
     tags: ["layering", "casual outfits", "mens layers", "transitional style"],
     relatedPickSlugs: [
@@ -2718,10 +2718,10 @@ blogPosts.push(
         ],
       },
       {
-        heading: "Formula 3: denim jacket over a hoodie",
+        heading: "Formula 3: Better Sweater with jeans and sneakers",
         paragraphs: [
-          `A hoodie can look better when it has a structured outer layer over it. A denim jacket gives the outfit a clearer outline and stops the hoodie from looking too soft on its own.`,
-          `Keep the hoodie plain, the jeans or chinos clean, and the shoes simple. The combination works best when the layers are controlled instead of oversized everywhere.`,
+          `For a softer casual layer, use the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater fleece jacket</a> with <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a>.`,
+          `The fleece gives warmth, the jeans keep the outfit grounded, and the sneakers keep it relaxed. Each product link points to an existing PrimeGent pick.`,
         ],
       },
       {
