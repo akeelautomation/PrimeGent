@@ -2520,9 +2520,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Four easy casual outfit formulas built around PrimeGent picks that already work together.",
+      "Four casual outfit formulas built around specific PrimeGent product picks.",
     description:
-      "Simple casual outfit formulas for men using PrimeGent picks including oxford shirts, chinos, jeans, overshirts, sneakers, and boots.",
+      "Simple casual outfit formulas for men using specific linked PrimeGent product picks.",
     heroLabel: "Casual formulas",
     tags: ["casual outfits", "mens outfit ideas", "outfit formulas", "everyday style"],
     relatedPickSlugs: [
@@ -2532,38 +2532,38 @@ blogPosts.push(
     ],
     sections: [
       {
-        heading: "Start with formulas, not random pieces",
+        heading: "Use linked products only",
         paragraphs: [
-          `A good casual outfit usually comes from a reliable structure, not from owning unusual clothes. When the shirt, pants, shoes, and outer layer all have clear roles, the outfit feels considered without looking forced.`,
-          `That is why formulas are useful. They give you a repeatable starting point, then you can change color, fabric, or footwear depending on the day.`,
+          `These casual outfits are built around named product picks from PrimeGent. Each formula gives you a complete combination you can copy directly.`,
+          `The best starting point is simple: one shirt or layer, one pant, one shoe, and one optional accessory when the outfit needs a finishing detail.`,
         ],
       },
       {
-        heading: "Formula 1: oxford shirt, chinos, classic sneakers",
+        heading: "Formula 1: Banana Republic, Everlane, New Balance",
         paragraphs: [
-          `This is the cleanest casual formula for men who want to look sharper without feeling dressed up. The oxford shirt brings structure, chinos keep the line tidy, and classic sneakers keep the outfit relaxed.`,
-          `A dependable version starts with the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a>, the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a>, and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a>.`,
+          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `This is the cleanest casual formula in this article because all three linked products are simple, repeatable, and already live on the site.`,
         ],
       },
       {
-        heading: "Formula 2: Roark overshirt, Levi's jeans, white sneakers",
+        heading: "Formula 2: Roark, Levi's, Nike",
         paragraphs: [
-          `When you want something more relaxed, build around the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a>. The layer adds shape, while <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> keep the outfit grounded.`,
-          `This formula works especially well for weekends, errands, casual lunches, and low-key evenings because every product in the outfit already lives inside the PrimeGent catalogue.`,
+          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `This gives the outfit a stronger casual layer while keeping the rest of the look familiar and easy to wear.`,
         ],
       },
       {
-        heading: "Formula 3: merino sweater, chinos, Chelsea boots",
+        heading: "Formula 3: Uniqlo, Everlane, Thursday",
         paragraphs: [
-          `For a slightly sharper casual outfit, use the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew neck sweater</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a>. The sweater adds texture, while the chino keeps the line clean.`,
-          `Finish it with the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea boot</a> when you want the outfit to feel more intentional than a standard sneaker look.`,
+          `Wear the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>.`,
+          `This is the sharper casual option: sweater, chino, and boot, all linked to existing PrimeGent products.`,
         ],
       },
       {
-        heading: "Keep the palette easy to repeat",
+        heading: "Formula 4: Muji, Amazon Essentials, Nike",
         paragraphs: [
-          `Navy, white, grey, olive, stone, denim blue, and brown are enough for most casual wardrobes. They mix easily and keep simple outfits from looking accidental.`,
-          `Once your colors cooperate, casual dressing becomes much faster. You are no longer rebuilding the outfit from scratch every time you get dressed.`,
+          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials Slim Fit Chinos</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `This is the warm-weather casual version, using only product pages that already exist on your website.`,
         ],
       },
     ],
@@ -2575,9 +2575,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Weekend casual outfits built from PrimeGent picks that stay comfortable while still looking intentional.",
+      "Weekend casual outfit formulas built around specific PrimeGent product picks.",
     description:
-      "Relaxed weekend outfit ideas for men using PrimeGent picks including overshirts, chinos, jeans, sneakers, fleece, and simple casual layers.",
+      "Relaxed weekend outfit ideas for men using specific linked PrimeGent product picks.",
     heroLabel: "Weekend casual",
     tags: ["weekend outfits", "casual menswear", "relaxed style", "mens outfit ideas"],
     relatedPickSlugs: [
@@ -2587,38 +2587,38 @@ blogPosts.push(
     ],
     sections: [
       {
-        heading: "Weekend style should be comfortable, not careless",
+        heading: "Use products already on this site",
         paragraphs: [
-          `The weekend is where many casual outfits lose structure. Comfort matters, but the outfit still needs a clear shape if you want to look put together outside the house.`,
-          `The fix is simple: keep one PrimeGent pick doing the structural work. The <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a>, the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a>, or <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> can each make a relaxed outfit look more edited.`,
+          `The weekend outfits below are built from named PrimeGent product picks. Each formula is a direct combination, not a loose list of categories.`,
+          `The goal is simple: casual outfits readers can copy directly from the products on the site.`,
         ],
       },
       {
-        heading: "Formula 1: overshirt, tee, jeans, white sneakers",
+        heading: "Formula 1: Roark, Levi's, Nike",
         paragraphs: [
-          `This is one of the easiest weekend outfits because every piece feels familiar. A plain tee keeps it relaxed, jeans make it practical, white sneakers brighten the look, and the overshirt gives the outfit a frame.`,
-          `A layer like the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a> with <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> covers most casual weekend plans.`,
+          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `This is the easiest relaxed weekend outfit in the list because the linked products are casual but still clean.`,
         ],
       },
       {
-        heading: "Formula 2: Better Sweater with cleaner pants",
+        heading: "Formula 2: Patagonia, Everlane, New Balance",
         paragraphs: [
-          `For a comfortable layer that still looks presentable, use the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater fleece jacket</a> as the main weekend layer.`,
-          `Pair it with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> or <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a>, then finish with <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a> for a weekend outfit that stays comfortable and clean.`,
+          `Wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `This product combination works for cooler weekends, travel days, and casual errands.`,
         ],
       },
       {
-        heading: "Formula 3: fleece, chinos, New Balance 574s",
+        heading: "Formula 3: Patagonia, Levi's, New Balance",
         paragraphs: [
-          `For colder weekends, the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater</a> can look good when it is treated like casual outerwear rather than gym gear. Pair it with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a> so the outfit feels outdoorsy but still edited.`,
-          `This works for errands, travel days, coffee runs, and casual walks because it balances warmth with a cleaner silhouette.`,
+          `Wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `This keeps the outfit more relaxed than the chino version while still using only linked products from your site.`,
         ],
       },
       {
-        heading: "Do less with accessories",
+        heading: "Formula 4: Timex, Roark, Levi's",
         paragraphs: [
-          `Weekend outfits usually look better with fewer accessories. A watch, cap, belt, or simple sunglasses can help, but stacking too many small details makes a relaxed outfit feel busy.`,
-          `Let fit, fabric, and clean shoes carry the outfit first. Accessories should finish the look, not explain it.`,
+          `Add the <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a> to the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> and <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a>.`,
+          `This is the accessory version of the weekend outfit, and every product in the sentence links to a PrimeGent pick page.`,
         ],
       },
     ],
@@ -2630,9 +2630,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Warm-weather casual outfits built around PrimeGent picks like linen shirts, chinos, clean sneakers, and simple accessories.",
+      "Warm-weather casual outfit formulas built around specific PrimeGent product picks.",
     description:
-      "Casual summer outfit ideas for men using PrimeGent picks including linen shirts, chinos, clean sneakers, and easy warm-weather accessories.",
+      "Casual summer outfit ideas for men using specific linked PrimeGent product picks.",
     heroLabel: "Summer basics",
     tags: ["summer outfits", "casual outfits", "mens basics", "warm weather style"],
     relatedPickSlugs: [
@@ -2642,38 +2642,45 @@ blogPosts.push(
     ],
     sections: [
       {
-        heading: "Summer casual style needs breathing room",
+        heading: "Use linked summer products",
         paragraphs: [
-          `Warm-weather outfits fail when they rely on heavy fabrics, dark colors, or too many layers. Summer style works better when the pieces are lighter, the palette is cleaner, and the fit has enough room to move.`,
-          `That does not mean the outfit has to be loose or shapeless. It means choosing breathable fabric and simple combinations that still have a clear outline.`,
+          `These summer outfits use named PrimeGent product picks. Each formula is built from exact products instead of vague shopping suggestions.`,
+          `The formulas focus on warm-weather combinations using the site products directly.`,
         ],
       },
       {
-        heading: "Formula 1: linen shirt, chinos, white sneakers",
+        heading: "Formula 1: Muji, Everlane, Nike",
         paragraphs: [
-          `A linen shirt is one of the easiest summer upgrades because it looks relaxed on purpose. Wear it open over a tee or buttoned with sleeves rolled, then pair it with light chinos and white sneakers.`,
-          `A piece like the <a href="./pick-muji-french-linen-shirt.html">Muji French linen shirt</a> with <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> creates a warm-weather outfit that feels casual without looking unfinished.`,
+          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `This is the cleanest warm-weather outfit in the article, built only from linked product pages.`,
         ],
       },
       {
-        heading: "Formula 2: linen shirt, chinos, sunglasses",
+        heading: "Formula 2: Muji, Amazon Essentials, Ray-Ban",
         paragraphs: [
-          `The <a href="./pick-muji-french-linen-shirt.html">Muji French linen shirt</a> can also carry a simple daytime outfit when the accessories stay controlled. Wear it with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials slim fit chino</a> if you want a value-driven version of the same clean formula.`,
-          `Finish with <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban Wayfarers</a> when the outfit needs a practical summer detail that is already part of the PrimeGent picks page.`,
+          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials Slim Fit Chinos</a> and the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a>.`,
+          `This version uses the value chino pick and the sunglass pick already available on your website.`,
         ],
       },
       {
-        heading: "Formula 3: linen shirt, watch, white sneakers",
+        heading: "Formula 3: Muji, Nike, Timex",
         paragraphs: [
-          `On mild summer evenings, keep the outfit simple: the <a href="./pick-muji-french-linen-shirt.html">Muji French linen shirt</a>, <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a>, and the <a href="./pick-timex-weekender-watch.html">Timex Weekender</a>.`,
-          `The goal is a little structure without heat, using pieces already available from the PrimeGent picks catalogue.`,
+          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a> and the <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a>.`,
+          `This is a simple product trio for mild summer evenings when the outfit needs to stay light and clean.`,
         ],
       },
       {
-        heading: "Use details sparingly",
+        heading: "Formula 4: Coofandy, Amazon Essentials, Nike",
         paragraphs: [
-          `Summer outfits expose more of the basics, so small details matter. Clean sneakers, a simple watch like the <a href="./pick-timex-weekender-watch.html">Timex Weekender</a>, and shirts that sit well at the shoulder can do more than loud prints.`,
-          `Better basics keep summer dressing easy. You should look ready for the day, not like the outfit is fighting the weather.`,
+          `Wear the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials Slim Fit Chinos</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `This is the more relaxed shirt option for a warm day while keeping the rest of the outfit simple.`,
+        ],
+      },
+      {
+        heading: "Formula 5: Banana Republic, Everlane, Ray-Ban",
+        paragraphs: [
+          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a>.`,
+          `This is the sharper summer casual option, and each product link stays inside your website.`,
         ],
       },
     ],
@@ -2685,9 +2692,9 @@ blogPosts.push(
     date: "2026-05-01",
     readTime: "8 min read",
     excerpt:
-      "Simple casual layering ideas for men using PrimeGent picks like overshirts, merino sweaters, chinos, jeans, sneakers, and boots.",
+      "Casual layering outfit formulas built around specific PrimeGent product picks.",
     description:
-      "Casual layering outfits for men built from PrimeGent picks for transitional weather, weekends, travel, and relaxed offices.",
+      "Casual layering outfits for men using specific linked PrimeGent product picks.",
     heroLabel: "Casual layers",
     tags: ["layering", "casual outfits", "mens layers", "transitional style"],
     relatedPickSlugs: [
@@ -2697,38 +2704,38 @@ blogPosts.push(
     ],
     sections: [
       {
-        heading: "Layering should make the outfit clearer",
+        heading: "Use linked layering products",
         paragraphs: [
-          `Good layering is not about adding more clothing. It is about giving a casual outfit shape, warmth, and texture without making it feel crowded.`,
-          `The easiest test is whether the base outfit still works when the outer layer comes off. If it does, the layers are probably doing their job.`,
+          `These layering outfits use named PrimeGent product picks. Each formula combines exact products instead of vague alternatives.`,
+          `The formulas pair one layer with one pant and one shoe so the outfits stay easy to copy.`,
         ],
       },
       {
-        heading: "Formula 1: tee, overshirt, chinos",
+        heading: "Formula 1: Roark, Everlane, Nike",
         paragraphs: [
-          `A tee and chinos can feel a little plain on their own. Add an overshirt and the outfit immediately gains structure without becoming formal.`,
-          `The <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a> works well in this role because it behaves like a light jacket while still feeling casual and easy to wear indoors.`,
+          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `This is the lightest layering outfit in the article, and every product points to an existing pick page.`,
         ],
       },
       {
-        heading: "Formula 2: oxford shirt under a merino sweater",
+        heading: "Formula 2: Banana Republic, Uniqlo, Thursday",
         paragraphs: [
-          `For a sharper casual layer, wear an oxford shirt under a lightweight merino sweater. The collar frames the neckline, the sweater softens the outfit, and the combination works with chinos, denim, or casual trousers.`,
-          `A simple knit like the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew neck</a> is useful because it adds warmth without bulk.`,
+          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> under the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a>, then finish with the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Boot Company Captain Boot</a>.`,
+          `This formula uses only named products from your pick pages and keeps the layering advice tied to those links.`,
         ],
       },
       {
-        heading: "Formula 3: Better Sweater with jeans and sneakers",
+        heading: "Formula 3: Patagonia, Levi's, New Balance",
         paragraphs: [
-          `For a softer casual layer, use the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater fleece jacket</a> with <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a>.`,
-          `The fleece gives warmth, the jeans keep the outfit grounded, and the sneakers keep it relaxed. Each product link points to an existing PrimeGent pick.`,
+          `Wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `This is the relaxed layering outfit, built only from products already on your website.`,
         ],
       },
       {
-        heading: "Finish with footwear that anchors the layers",
+        heading: "Formula 4: Uniqlo, Everlane, Thursday",
         paragraphs: [
-          `Layered outfits need shoes with enough presence. Slim sneakers work for lighter combinations, while boots like the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain</a> can balance heavier knits, jackets, and denim.`,
-          `The point is visual weight. If the top half has texture and structure, the shoes should not feel like an afterthought.`,
+          `Wear the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>.`,
+          `This is the cleaner boot outfit, with every product name linked to a PrimeGent pick page.`,
         ],
       },
     ],
