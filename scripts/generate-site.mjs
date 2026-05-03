@@ -179,274 +179,6 @@ function buildLegacyEditorial(pick) {
 const picks = [];
 const blogPosts = [];
 
-picks.push(
-  {
-    slug: "banana-republic-slim-fit-ocbd-shirt",
-    name: "Banana Republic Slim Fit OCBD Shirt",
-    brandName: "Banana Republic",
-    category: "shirts",
-    priceBucket: "50-100",
-    priceLabel: "$80-$100",
-    brand: "mainstream",
-    styles: ["smart-casual", "office", "weekend"],
-    visual: "OCBD",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A clean oxford cloth button-down that sharpens up chinos, denim, or tailored trousers without feeling stiff.",
-    material: "Cotton oxford cloth",
-    fit: "Slim with room through the chest",
-    care: "Machine wash cold, hang dry for the cleanest collar roll",
-    who: {
-      bodyType:
-        "Great for average and athletic builds that need shape without a tight midsection.",
-      occasion:
-        "Office days, casual Fridays, dinner dates, and polished weekend outfits.",
-      styleNote:
-        "The collar sits well under lightweight knits and unstructured jackets.",
-    },
-    why: [
-      "The fabric has enough heft to drape cleanly but still looks relaxed untucked.",
-      "A classic collar roll gives it that easy Ivy look instead of a flat dress-shirt feel.",
-      "The slim fit works with chinos, denim, and trousers without needing immediate tailoring.",
-      "It is one of the easiest shirts to wear year-round because it layers well.",
-    ],
-    outfits: [
-      {
-        title: "Office Uniform",
-        description:
-          "Wear it with charcoal trousers, a brown belt, and loafers when you want business casual that still feels approachable.",
-      },
-      {
-        title: "Weekend Smart Casual",
-        description:
-          "Leave the shirt untucked with slim dark jeans, a field jacket, and white sneakers for a clean Saturday look.",
-      },
-      {
-        title: "Cold Weather Layer",
-        description:
-          "Use it under a merino crew neck with chinos and Chelsea boots so the collar frames the sweater instead of disappearing under it.",
-      },
-    ],
-    related: [
-      "dockers-alpha-khaki-slim-fit-chinos",
-      "thursday-scout-chelsea-boot",
-      "uniqlo-merino-crew-neck-sweater",
-    ],
-  },
-  {
-    slug: "levis-511-slim-fit-jeans",
-    name: "Levi's 511 Slim Fit Jeans",
-    brandName: "Levi's",
-    category: "pants",
-    priceBucket: "50-100",
-    priceLabel: "$50-$70",
-    brand: "mainstream",
-    styles: ["casual", "smart-casual", "weekend"],
-    visual: "511",
-    amazon: "https://www.amazon.com/dp/B00JHHB53W?tag=AFFILIATE_TAG",
-    description:
-      "The benchmark slim jean for men, cut clean through the thigh with a taper that looks current without chasing trends.",
-    material: "Cotton denim with a touch of stretch",
-    fit: "Slim through hip and thigh with a narrow leg",
-    care: "Wash inside out in cold water and air dry when possible",
-    who: {
-      bodyType:
-        "Best for slim to athletic builds, or anyone who wants a cleaner leg opening without going skinny.",
-      occasion:
-        "Daily wear, date nights, travel days, and casual office setups.",
-      styleNote:
-        "Dark washes feel more elevated than distressed finishes and are easier to dress up.",
-    },
-    why: [
-      "The cut is familiar and dependable, so it is easy to build outfits around.",
-      "Dark denim bridges casual and smart casual without looking try-hard.",
-      "A bit of stretch keeps the jean comfortable on long days and travel.",
-      "The taper works with boots, sneakers, and loafers without stacking awkwardly.",
-    ],
-    outfits: [
-      {
-        title: "Simple Everyday Look",
-        description:
-          "Pair them with a heavyweight white tee, white sneakers, and a canvas overshirt for an easy uniform.",
-      },
-      {
-        title: "Date Night Upgrade",
-        description:
-          "Add a black merino sweater and Chelsea boots when you want denim to read sharper after dark.",
-      },
-      {
-        title: "Travel Ready",
-        description:
-          "Use them with a henley, fleece jacket, and low-profile trainers for a comfortable airport outfit that still looks considered.",
-      },
-    ],
-    related: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "patagonia-better-sweater-fleece-jacket",
-      "nike-air-force-1-low-white",
-    ],
-  },
-  {
-    slug: "thursday-scout-chelsea-boot",
-    name: "Thursday Boot Company Scout Chelsea Boot",
-    brandName: "Thursday Boot Company",
-    category: "shoes",
-    priceBucket: "150-plus",
-    priceLabel: "$150-$200",
-    brand: "premium",
-    styles: ["smart-casual", "business-casual", "date-night"],
-    visual: "Boot",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A sleek Chelsea boot that gives jeans, chinos, and trousers a sharper finish without the formality of an oxford shoe.",
-    material: "Full-grain leather upper with leather lining",
-    fit: "Streamlined last with a close ankle opening",
-    care: "Brush regularly and condition the leather every few months",
-    who: {
-      bodyType:
-        "Works especially well for men who want a longer visual line through the leg.",
-      occasion:
-        "Dinner dates, creative office days, smart casual events, and fall weekends.",
-      styleNote:
-        "A slim shaft looks best with tapered trousers or jeans that break lightly over the top.",
-    },
-    why: [
-      "The shape is refined enough to elevate denim without becoming too formal.",
-      "A leather sole and quality upper make it look more expensive than the price suggests.",
-      "Chelsea boots slip on quickly, which makes them easy to wear as a default cold-weather shoe.",
-      "The silhouette instantly sharpens simple outfits like sweater-and-jeans combinations.",
-    ],
-    outfits: [
-      {
-        title: "Black-on-Charcoal",
-        description:
-          "Wear them with charcoal trousers, a black knit polo, and a wool overcoat for a clean evening outfit.",
-      },
-      {
-        title: "Weekend Layers",
-        description:
-          "Pair them with dark denim, an OCBD, and an overshirt when you want rugged pieces to still feel polished.",
-      },
-      {
-        title: "Business Casual Boot",
-        description:
-          "Use them with navy chinos and a merino sweater in place of loafers when the weather turns cooler.",
-      },
-    ],
-    related: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "boss-slim-fit-trousers",
-      "levis-511-slim-fit-jeans",
-    ],
-  },
-  {
-    slug: "uniqlo-merino-crew-neck-sweater",
-    name: "Uniqlo Merino Crew Neck Sweater",
-    brandName: "Uniqlo",
-    category: "basics",
-    priceBucket: "under-50",
-    priceLabel: "$40-$50",
-    brand: "value",
-    styles: ["minimal", "office", "smart-casual"],
-    visual: "Merino",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A lightweight merino layer that adds polish without bulk and works across three seasons.",
-    material: "Fine merino wool",
-    fit: "Trim but not tight through the body",
-    care: "Hand wash or use a wool cycle, then dry flat",
-    who: {
-      bodyType:
-        "Ideal for men who prefer a closer top layer that still leaves room for a tee or shirt underneath.",
-      occasion:
-        "Office layering, smart casual dinners, flights, and cool spring mornings.",
-      styleNote:
-        "Stick with navy, charcoal, or black if you want maximum versatility.",
-    },
-    why: [
-      "Merino regulates temperature better than a heavy cotton sweater, so it handles indoor and outdoor shifts well.",
-      "The lightweight gauge layers smoothly under jackets and coats.",
-      "It instantly makes a basic shirt-and-pants outfit look more intentional.",
-      "The price keeps it accessible enough to buy in more than one neutral color.",
-    ],
-    outfits: [
-      {
-        title: "Layered Office Look",
-        description:
-          "Wear it over an oxford shirt with chinos and loafers for a reliable business casual formula.",
-      },
-      {
-        title: "Minimal Evening Outfit",
-        description:
-          "Combine it with slim black jeans, a watch, and white sneakers for a low-effort date-night setup.",
-      },
-      {
-        title: "Transitional Weather",
-        description:
-          "Use it under a bomber or fleece jacket with dark trousers when you need warmth without heaviness.",
-      },
-    ],
-    related: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "dockers-alpha-khaki-slim-fit-chinos",
-      "fossil-minimalist-watch",
-    ],
-  },
-  {
-    slug: "nike-air-force-1-low-white",
-    name: "Nike Air Force 1 Low White",
-    brandName: "Nike",
-    category: "shoes",
-    priceBucket: "100-150",
-    priceLabel: "$100-$120",
-    brand: "mainstream",
-    styles: ["casual", "weekend", "sporty"],
-    visual: "AF1",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "The classic white sneaker with enough structure to anchor denim, cargos, or relaxed tailoring.",
-    material: "Leather upper with rubber cup sole",
-    fit: "True to size with a supportive platform feel",
-    care: "Wipe leather with a damp cloth and use a soft brush on the sole",
-    who: {
-      bodyType:
-        "The chunkier profile suits taller frames especially well but can work on anyone with straighter pants.",
-      occasion:
-        "Daily casual wear, travel, city weekends, and laid-back nights out.",
-      styleNote:
-        "Best with fuller pants or jeans that sit cleanly on the shoe instead of bunching.",
-    },
-    why: [
-      "The leather upper holds shape better than flimsy canvas sneakers.",
-      "The iconic silhouette gives casual outfits a recognizable anchor.",
-      "The thicker sole adds durability and comfort for long walking days.",
-      "It balances relaxed bottoms like straight jeans, cargos, and joggers well.",
-    ],
-    outfits: [
-      {
-        title: "Clean Weekend Uniform",
-        description:
-          "Pair them with dark jeans, a grey tee, and an overshirt for an easy weekend uniform.",
-      },
-      {
-        title: "Sporty Street Mix",
-        description:
-          "Wear them with tapered joggers, a hoodie, and a lightweight bomber when you want comfort without looking sloppy.",
-      },
-      {
-        title: "Summer Casual",
-        description:
-          "Use them with cropped chinos and a linen shirt for an easy warm-weather look that still feels polished.",
-      },
-    ],
-    related: [
-      "levis-511-slim-fit-jeans",
-      "muji-french-linen-shirt",
-      "roark-revival-open-road-overshirt",
-    ],
-  },
-);
-
 const testimonials = [
   {
     quote:
@@ -512,9 +244,9 @@ const editorialCategories = [
 ];
 
 const homeFeaturedPickSlugs = [
-  "muji-french-linen-shirt",
-  "everlane-the-slim-fit-chino",
-  "veja-v10-sneaker",
+  "coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt",
+  "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+  "oliver-cabell-low-1-sneaker-for-unisex-adult-buttery-italian-leather",
 ];
 
 function getLatestPosts(limit = 3) {
@@ -529,19 +261,32 @@ function getManualAffiliateCards() {
   try {
     const picksPage = readFileSync(path.join(root, "picks.html"), "utf8");
     const matches = picksPage.match(/<article class="card pick-card pick-card--affiliate"[\s\S]*?<\/article>/g);
-    return matches
-      ? matches
-          .map((card) =>
-            card.replace(
-              /<img class="pick-card__image"([^>]*?)>/g,
-              (match, attrs) =>
-                attrs.includes("onerror=")
-                  ? match
-                  : `<img class="pick-card__image"${attrs} onerror="this.onerror=null;this.src='./static/og-cover.svg'">`,
-            ),
-          )
-          .join("")
-      : "";
+    if (!matches) {
+      return "";
+    }
+
+    const validCardsByHref = new Map();
+    for (const card of matches) {
+      const href = card.match(/href="\.\/(pick-[^"]+\.html)"/)?.[1];
+      if (!href) continue;
+      const pickPath = path.join(root, href);
+      if (!existsSync(pickPath)) continue;
+      const pickPage = readFileSync(pickPath, "utf8");
+      if (pickPage.includes("https://www.amazon.com" + "/dp/")) continue;
+      validCardsByHref.set(href, card);
+    }
+
+    return [...validCardsByHref.values()]
+      .map((card) =>
+        card.replace(
+          /<img class="pick-card__image"([^>]*?)>/g,
+          (match, attrs) => {
+            const cleanAttrs = attrs.replace(/\s+onerror="[^"]*"/g, "");
+            return `<img class="pick-card__image"${cleanAttrs} onerror="this.onerror=null;this.src='./static/og-cover.svg'">`;
+          },
+        ),
+      )
+      .join("");
   } catch {
     return "";
   }
@@ -1321,7 +1066,7 @@ function renderGitignore() {
 }
 
 function renderEnvExample() {
-  return `# Copy this file to .env.local for local-only values.\n# Never put real secrets in .env.example or any other tracked file.\nAFFILIATE_TAG=yoursite-20\nEDITORIAL_API_URL=https://primegent.pages.dev/api/editorial\nOPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b:free\n# Only use a local OpenRouter key if you explicitly need direct local calls.\n# Preferred setup: keep the real key in Cloudflare Pages secrets instead.\n# OPENROUTER_API_KEY=\n`;
+  return `# Copy this file to .env.local for local-only values.\n# Never put real secrets in .env.example or any other tracked file.\nEDITORIAL_API_URL=https://primegent.pages.dev/api/editorial\nOPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b:free\n# Only use a local OpenRouter key if you explicitly need direct local calls.\n# Preferred setup: keep the real key in Cloudflare Pages secrets instead.\n# OPENROUTER_API_KEY=\n`;
 }
 
 function renderWrangler() {
@@ -1363,13 +1108,9 @@ For the affiliate publisher, copy \`.env.example\` to \`.env.local\` for local-o
 3. Re-run \`node scripts/generate-site.mjs\`.
 4. Verify the new article appears on \`blog.html\` and the corresponding \`blog-[slug].html\` page exists.
 
-## Amazon affiliate tag
+## Affiliate links
 
-The generated pick pages use placeholder Amazon URLs with \`AFFILIATE_TAG\`.
-
-1. Copy \`.env.example\` to \`.env.local\` and update \`AFFILIATE_TAG\` there if you want a local reference.
-2. Find and replace \`AFFILIATE_TAG\` across the generated HTML files and \`scripts/generate-site.mjs\`.
-3. Re-run the generator if you changed the source data file.
+Use only finalized affiliate URLs in product data. Do not commit placeholder Amazon product URLs or placeholder tracking tags.
 
 ## Secret safety
 
@@ -1658,218 +1399,6 @@ function writeOutput() {
 
 picks.push(
   {
-    slug: "fossil-minimalist-watch",
-    name: "Fossil Minimalist Watch",
-    brandName: "Fossil",
-    category: "accessories",
-    priceBucket: "100-150",
-    priceLabel: "$110-$140",
-    brand: "mainstream",
-    styles: ["minimal", "office", "date-night"],
-    visual: "Slim",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A sleek dress-casual watch that adds polish to business casual and minimalist outfits without luxury pricing.",
-    material: "Stainless steel case with leather strap",
-    fit: "Slim profile that sits neatly under a cuff",
-    care: "Keep the leather strap conditioned and store away from moisture",
-    who: {
-      bodyType:
-        "The thin case works well on most wrists, especially if you dislike bulky sports watches.",
-      occasion:
-        "Office wear, dinners, weddings, and polished everyday dressing.",
-      styleNote:
-        "A simple black or brown leather strap offers the most flexibility.",
-    },
-    why: [
-      "A slim watch looks more refined with shirts, knitwear, and tailoring.",
-      "The minimal dial keeps it versatile across casual and dressy settings.",
-      "It delivers a grown-up look without requiring a collector-level budget.",
-      "This is an easy finishing piece for men building a cleaner wardrobe.",
-    ],
-    outfits: [
-      {
-        title: "Business Casual Finish",
-        description:
-          "Wear it with trousers, a merino sweater, and loafers to pull a work look together.",
-      },
-      {
-        title: "Date Night Minimal",
-        description:
-          "Pair it with dark denim, Chelsea boots, and a fitted knit for understated polish.",
-      },
-      {
-        title: "Wedding Guest Backup",
-        description:
-          "Use it with tailored trousers and a crisp shirt when you need a clean accessory that does not dominate the outfit.",
-      },
-    ],
-    related: [
-      "boss-slim-fit-trousers",
-      "everlane-the-slim-fit-chino",
-      "banana-republic-slim-fit-ocbd-shirt",
-    ],
-  },
-  {
-    slug: "allen-edmonds-park-avenue-oxford",
-    name: "Allen Edmonds Park Avenue Oxford",
-    brandName: "Allen Edmonds",
-    category: "shoes",
-    priceBucket: "150-plus",
-    priceLabel: "$295-$425",
-    brand: "premium",
-    styles: ["office", "business-casual", "date-night"],
-    visual: "Oxford",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A classic cap-toe oxford that covers weddings, interviews, and the more formal end of business dressing.",
-    material: "Premium calfskin leather",
-    fit: "Dress-shoe last with structured support",
-    care: "Use cedar shoe trees, brush after wear, and rotate with other footwear",
-    who: {
-      bodyType:
-        "Works for any build because the low-profile shape extends the line of the leg.",
-      occasion:
-        "Formal offices, weddings, interviews, and events that require a true dress shoe.",
-      styleNote:
-        "Buy the best black pair you can afford if you only want one formal shoe.",
-    },
-    why: [
-      "This is the sort of shoe that keeps formal outfits from falling apart at the last step.",
-      "Goodyear welt construction makes it a long-term investment rather than a disposable pair.",
-      "A refined cap toe works with suiting and dressed-up separates alike.",
-      "Owning one real oxford saves you from trying to fake formality with sneakers or boots.",
-    ],
-    outfits: [
-      {
-        title: "Interview Standard",
-        description:
-          "Wear them with navy trousers, a white shirt, and a charcoal blazer for a sharp professional first impression.",
-      },
-      {
-        title: "Wedding Guest",
-        description:
-          "Pair them with a dark suit and a simple tie when the dress code calls for proper leather shoes.",
-      },
-      {
-        title: "Tailored Smart Casual",
-        description:
-          "Use them with wool trousers and a knit polo if you want a cleaner, dressier alternative to loafers.",
-      },
-    ],
-    related: [
-      "boss-slim-fit-trousers",
-      "fossil-minimalist-watch",
-      "banana-republic-slim-fit-ocbd-shirt",
-    ],
-  },
-  {
-    slug: "roark-revival-open-road-overshirt",
-    name: "Roark Revival Open Road Overshirt",
-    brandName: "Roark Revival",
-    category: "jackets",
-    priceBucket: "100-150",
-    priceLabel: "$95-$125",
-    brand: "premium",
-    styles: ["casual", "rugged", "travel"],
-    visual: "Overs",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A rugged overshirt that gives basics more texture and works as a flexible jacket in transitional weather.",
-    material: "Cotton twill or brushed cotton blend",
-    fit: "Relaxed enough to layer over tees and henleys",
-    care: "Machine wash cold and hang dry",
-    who: {
-      bodyType:
-        "Good for men who want a bit more structure through the shoulders and chest.",
-      occasion:
-        "Weekend wear, travel, casual dinners, and layered fall outfits.",
-      styleNote:
-        "Earth tones and washed neutrals make it easiest to pair with denim and chinos.",
-    },
-    why: [
-      "An overshirt adds depth to simple tee-and-pants outfits immediately.",
-      "It works as both a shirt layer and a light jacket, which makes it versatile for travel.",
-      "Textured cotton gives casual outfits a more intentional, masculine edge.",
-      "This is one of the easiest outer layers to style without overthinking.",
-    ],
-    outfits: [
-      {
-        title: "Weekend Standard",
-        description:
-          "Wear it over a white tee with dark jeans and sneakers for a dependable off-duty look.",
-      },
-      {
-        title: "Layered Fall Fit",
-        description:
-          "Pair it with a henley, chinos, and Chelsea boots when you want texture and warmth without a heavy coat.",
-      },
-      {
-        title: "Travel Uniform",
-        description:
-          "Use it with a merino tee and tapered pants for a comfortable but structured travel outfit.",
-      },
-    ],
-    related: [
-      "nike-air-force-1-low-white",
-      "levis-511-slim-fit-jeans",
-      "carhartt-wip-watch-hat-beanie",
-    ],
-  },
-  {
-    slug: "new-balance-574-sneaker",
-    name: "New Balance 574 Sneaker",
-    brandName: "New Balance",
-    category: "activewear",
-    priceBucket: "100-150",
-    priceLabel: "$85-$100",
-    brand: "mainstream",
-    styles: ["sporty", "casual", "travel"],
-    visual: "574",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A retro runner that bridges activewear comfort and everyday casual style better than most gym-first sneakers.",
-    material: "Suede and mesh upper",
-    fit: "Comfort-focused runner last",
-    care: "Brush suede gently and spot-clean the mesh panels",
-    who: {
-      bodyType:
-        "The moderate chunk works well on most men, especially with straight or tapered pants.",
-      occasion:
-        "Errands, travel, casual office days, and sporty weekend outfits.",
-      styleNote:
-        "Grey remains the most versatile color because it softens the retro look.",
-    },
-    why: [
-      "The cushioning makes it useful for long walking days.",
-      "Retro running shoes bring comfort without looking like pure gym footwear.",
-      "The silhouette works with joggers, jeans, and workwear-inspired trousers.",
-      "It is one of the easiest sporty shoes to integrate into a normal wardrobe.",
-    ],
-    outfits: [
-      {
-        title: "Sporty Weekend",
-        description:
-          "Wear them with tapered joggers, a hoodie, and a fleece jacket for a sharp casual-athletic mix.",
-      },
-      {
-        title: "Travel Comfort",
-        description:
-          "Pair them with stretch chinos and an overshirt when you want support without looking like you are headed to the gym.",
-      },
-      {
-        title: "Casual Everyday",
-        description:
-          "Use them with slim-straight jeans and a simple crew neck for an easy off-duty outfit.",
-      },
-    ],
-    related: [
-      "patagonia-better-sweater-fleece-jacket",
-      "amazon-essentials-slim-fit-chinos",
-      "carhartt-wip-watch-hat-beanie",
-    ],
-  },
-  {
     slug: "adidas-basic-3-stripes-tricot-track-suit",
     name: "adidas Men's Basic 3-Stripes Tricot Track Suit",
     brandName: "adidas",
@@ -1920,598 +1449,9 @@ picks.push(
       },
     ],
     related: [
-      "new-balance-574-sneaker",
-      "patagonia-better-sweater-fleece-jacket",
-      "timex-weekender-watch",
-    ],
-  },
-  {
-    slug: "muji-french-linen-shirt",
-    name: "Muji French Linen Shirt",
-    brandName: "Muji",
-    category: "shirts",
-    priceBucket: "50-100",
-    priceLabel: "$60-$80",
-    brand: "mainstream",
-    styles: ["minimal", "travel", "weekend"],
-    visual: "Linen",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A breathable linen shirt that keeps summer outfits sharp without feeling overdressed or fussy.",
-    material: "French linen",
-    fit: "Relaxed straight fit",
-    care: "Machine wash cool and let wrinkles settle naturally",
-    who: {
-      bodyType:
-        "The straight fit works well for most builds, especially if you prefer a breezier summer shirt.",
-      occasion:
-        "Warm-weather weekends, vacations, dinners outdoors, and resort travel.",
-      styleNote:
-        "White, stone, and pale blue are the easiest shades to build around.",
-    },
-    why: [
-      "Linen gives summer outfits texture and airflow that cotton poplin cannot match.",
-      "Muji keeps the styling clean and understated, which suits minimalist wardrobes.",
-      "The relaxed fit looks right in warm weather when slimmer shirts can feel rigid.",
-      "It works tucked or untucked depending on the occasion.",
-    ],
-    outfits: [
-      {
-        title: "Summer Smart Casual",
-        description:
-          "Wear it with slim chinos and loafers for dinner on a warm evening.",
-      },
-      {
-        title: "Vacation Uniform",
-        description:
-          "Pair it with tailored shorts, sunglasses, and leather sandals when you need something easy and sharp.",
-      },
-      {
-        title: "Clean City Heat",
-        description:
-          "Use it untucked with dark jeans and white sneakers for a balanced summer-in-the-city look.",
-      },
-    ],
-    related: [
-      "ray-ban-rb2140-wayfarer-sunglasses",
-      "timex-weekender-watch",
-      "everlane-the-slim-fit-chino",
-    ],
-  },
-);
-
-picks.push(
-  {
-    slug: "everlane-the-slim-fit-chino",
-    name: "Everlane The Slim Fit Chino",
-    brandName: "Everlane",
-    category: "pants",
-    priceBucket: "50-100",
-    priceLabel: "$88-$98",
-    brand: "premium",
-    styles: ["minimal", "smart-casual", "office"],
-    visual: "Ever",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A cleaner, slightly more elevated chino for men who want a minimal wardrobe with premium finishing.",
-    material: "Organic cotton twill",
-    fit: "Slim with a refined straight taper",
-    care: "Machine wash cold and line dry when possible",
-    who: {
-      bodyType:
-        "Good for slim and average frames that look best in a neat leg line with little excess fabric.",
-      occasion:
-        "Minimal offices, smart casual dinners, and pared-back daily wear.",
-      styleNote:
-        "These look best with equally clean pieces like knitwear, leather sneakers, and unstructured jackets.",
-    },
-    why: [
-      "The fabric and finishing feel more polished than entry-level chinos.",
-      "A simple minimal cut gives shoes and outerwear room to stand out.",
-      "The waistband and top block usually feel more refined than basic value options.",
-      "They are easy to integrate into a monochrome or neutral-heavy wardrobe.",
-    ],
-    outfits: [
-      {
-        title: "Minimal Office",
-        description:
-          "Pair them with a navy merino sweater, white shirt, and slim leather sneakers for a clean weekday setup.",
-      },
-      {
-        title: "Warm-Weather Smart Casual",
-        description:
-          "Wear them with a linen shirt and loafers when you need something light but still put together.",
-      },
-      {
-        title: "Layered Evening",
-        description:
-          "Use them with a bomber jacket and Chelsea boots for a sharp, streamlined night look.",
-      },
-    ],
-    related: [
-      "muji-french-linen-shirt",
-      "fossil-minimalist-watch",
-      "veja-v10-sneaker",
-    ],
-  },
-  {
-    slug: "madewell-slim-straight-jeans",
-    name: "Madewell Slim Straight Jeans",
-    brandName: "Madewell",
-    category: "pants",
-    priceBucket: "100-150",
-    priceLabel: "$118-$138",
-    brand: "premium",
-    styles: ["casual", "smart-casual", "minimal"],
-    visual: "Denim",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A slim-straight jean for men who want a modern silhouette without the squeeze of a narrow taper.",
-    material: "Premium cotton denim",
-    fit: "Slim through the seat with a straight leg below the knee",
-    care: "Wash sparingly in cold water and hang dry",
-    who: {
-      bodyType:
-        "Especially good for men with athletic thighs who find slim jeans restrictive below the seat.",
-      occasion:
-        "Daily casual wear, clean weekend outfits, and relaxed date nights.",
-      styleNote:
-        "The straighter lower leg pairs well with chunkier sneakers and service boots.",
-    },
-    why: [
-      "The fit looks current because it avoids both skinny jeans and oversized denim.",
-      "Premium denim tends to age better and hold shape longer.",
-      "A straight lower leg balances broader shoulders and athletic builds well.",
-      "It is an easy option if you want denim that feels grown-up.",
-    ],
-    outfits: [
-      {
-        title: "Modern Casual",
-        description:
-          "Wear them with a boxy tee, leather sneakers, and a field jacket for a clean weekend outfit.",
-      },
-      {
-        title: "Textured Fall Look",
-        description:
-          "Pair them with a merino sweater, beanie, and Chelsea boots when the weather cools down.",
-      },
-      {
-        title: "Relaxed Date Night",
-        description:
-          "Use them with a knit polo and suede jacket for a softer alternative to black denim.",
-      },
-    ],
-    related: [
-      "carhartt-wip-watch-hat-beanie",
-      "thursday-scout-chelsea-boot",
-      "fossil-minimalist-watch",
-    ],
-  },
-  {
-    slug: "veja-v10-sneaker",
-    name: "Veja V-10 Sneaker",
-    brandName: "Veja",
-    category: "shoes",
-    priceBucket: "150-plus",
-    priceLabel: "$150-$175",
-    brand: "premium",
-    styles: ["minimal", "smart-casual", "weekend"],
-    visual: "Veja",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A slightly elevated leather sneaker that works well with tailored casual outfits and neutral wardrobes.",
-    material: "Leather upper with rubber sole",
-    fit: "Structured low-top fit",
-    care: "Clean with a soft cloth and store with shoe trees if possible",
-    who: {
-      bodyType:
-        "The slightly substantial shape works well for most men, especially with straight or tapered pants.",
-      occasion:
-        "Weekend city wear, smart casual offices, and travel when you want one refined sneaker.",
-      styleNote:
-        "Pairs best with clean hems and simple color palettes.",
-    },
-    why: [
-      "The minimal design looks more premium than louder athletic sneakers.",
-      "It crosses over from denim to tailored trousers better than chunky runners do.",
-      "The leather upper keeps the shoe looking cleaner for longer.",
-      "A refined sneaker is one of the easiest ways to modernize classic wardrobe basics.",
-    ],
-    outfits: [
-      {
-        title: "Minimal Workday",
-        description:
-          "Wear them with a merino sweater and slim chinos for an office look that feels current but not too casual.",
-      },
-      {
-        title: "Travel Capsule",
-        description:
-          "Pair them with dark jeans, a tee, and a fleece jacket for a compact carry-on wardrobe.",
-      },
-      {
-        title: "Smart Weekend",
-        description:
-          "Use them with pleated trousers and a camp-collar shirt when you want relaxed polish.",
-      },
-    ],
-    related: [
-      "everlane-the-slim-fit-chino",
-      "uniqlo-merino-crew-neck-sweater",
-      "muji-french-linen-shirt",
-    ],
-  },
-  {
-    slug: "patagonia-better-sweater-fleece-jacket",
-    name: "Patagonia Better Sweater Fleece Jacket",
-    brandName: "Patagonia",
-    category: "jackets",
-    priceBucket: "100-150",
-    priceLabel: "$119-$139",
-    brand: "premium",
-    styles: ["casual", "travel", "rugged"],
-    visual: "Fleece",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A dependable fleece jacket that behaves like a casual cardigan and keeps layered outfits practical.",
-    material: "Recycled polyester fleece",
-    fit: "Standard fit with room for a light layer underneath",
-    care: "Machine wash cold and tumble dry low",
-    who: {
-      bodyType:
-        "Works for most builds because the fit is forgiving and the knit face keeps it from feeling bulky.",
-      occasion:
-        "Travel, remote-work days, chilly commutes, and casual outdoor weekends.",
-      styleNote:
-        "Stick to charcoal or navy if you want it to blend into city outfits more easily.",
-    },
-    why: [
-      "It gives you warmth without the puffiness of a casual down jacket.",
-      "The knit texture reads more polished than basic performance fleece.",
-      "Patagonia quality and repair culture make it a strong long-term buy.",
-      "This is the type of layer you actually keep by the door and wear often.",
-    ],
-    outfits: [
-      {
-        title: "Travel Layer",
-        description:
-          "Wear it over a tee with jeans and retro sneakers for an airport outfit that looks relaxed but clean.",
-      },
-      {
-        title: "Coffee Run Weekend",
-        description:
-          "Pair it with tapered joggers and a beanie when you want comfort that still has structure.",
-      },
-      {
-        title: "Layered Casual Office",
-        description:
-          "Use it over an oxford shirt and chinos on informal workdays in colder months.",
-      },
-    ],
-    related: [
-      "carhartt-wip-watch-hat-beanie",
-      "new-balance-574-sneaker",
-      "banana-republic-slim-fit-ocbd-shirt",
-    ],
-  },
-  {
-    slug: "boss-slim-fit-trousers",
-    name: "BOSS Slim Fit Trousers",
-    brandName: "BOSS",
-    category: "pants",
-    priceBucket: "150-plus",
-    priceLabel: "$150-$220",
-    brand: "premium",
-    styles: ["business-casual", "office", "date-night"],
-    visual: "Tailor",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "Tailored trousers that help men move from basic officewear into a more deliberate grown-up wardrobe.",
-    material: "Wool blend suiting fabric",
-    fit: "Slim tailored leg with a clean break",
-    care: "Dry clean and steam between wears",
-    who: {
-      bodyType:
-        "A good match for slimmer or average frames that benefit from a more tailored shape through the leg.",
-      occasion:
-        "Business casual offices, dinners, events, and formal-leaning smart casual settings.",
-      styleNote:
-        "Hem them with minimal break so the trouser keeps its intended line.",
-    },
-    why: [
-      "Tailored trousers instantly upgrade your top half, even if you are only wearing knitwear.",
-      "A slim but not skinny cut reads modern and professional.",
-      "Wool-blend fabric drapes better than cotton chinos when you want refinement.",
-      "They work with loafers, oxfords, and minimal sneakers depending on the context.",
-    ],
-    outfits: [
-      {
-        title: "Business Casual Standard",
-        description:
-          "Pair them with an OCBD, merino sweater, and leather loafers for a sharp weekday look.",
-      },
-      {
-        title: "Evening Smart Casual",
-        description:
-          "Wear them with a black knit crew neck and Chelsea boots for a simple dinner outfit.",
-      },
-      {
-        title: "Summer Tailoring",
-        description:
-          "Use them with a knit polo and loafers for polished warm-weather dressing without a full suit.",
-      },
-    ],
-    related: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "thursday-scout-chelsea-boot",
-      "allen-edmonds-park-avenue-oxford",
-    ],
-  },
-);
-
-picks.push(
-  {
-    slug: "dockers-alpha-khaki-slim-fit-chinos",
-    name: "Dockers Alpha Khaki Slim Fit Chinos",
-    brandName: "Dockers",
-    category: "pants",
-    priceBucket: "50-100",
-    priceLabel: "$55-$75",
-    brand: "mainstream",
-    styles: ["business-casual", "smart-casual", "office"],
-    visual: "Chino",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "Reliable slim chinos that work from office to weekend and offer a cleaner alternative to denim.",
-    material: "Cotton twill with stretch",
-    fit: "Slim with a moderate taper",
-    care: "Machine wash cold and remove promptly to reduce creasing",
-    who: {
-      bodyType:
-        "A strong option for most body types because the rise and leg opening feel balanced.",
-      occasion:
-        "Office days, family dinners, travel, and events where jeans feel too casual.",
-      styleNote:
-        "Mid-tone khaki and navy are the most versatile first colors to buy.",
-    },
-    why: [
-      "They dress up or down more easily than five-pocket pants.",
-      "The stretch keeps them comfortable at a desk or on the move.",
-      "A trim taper works well with loafers, sneakers, or Chelsea boots.",
-      "Dockers remains one of the safest entry points for men building a polished wardrobe.",
-    ],
-    outfits: [
-      {
-        title: "Modern Office Standard",
-        description:
-          "Wear them with an OCBD, merino sweater, and loafers for a dependable business casual look.",
-      },
-      {
-        title: "Weekend Upgrade",
-        description:
-          "Swap in a tee, lightweight overshirt, and white sneakers for an easy brunch outfit.",
-      },
-      {
-        title: "Travel Smart",
-        description:
-          "Pair them with a polo, belt, and flexible Chelsea boots when you want one pair of pants that can do everything on a trip.",
-      },
-    ],
-    related: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "uniqlo-merino-crew-neck-sweater",
-      "fossil-minimalist-watch",
-    ],
-  },
-  {
-    slug: "amazon-essentials-slim-fit-chinos",
-    name: "Amazon Essentials Slim Fit Chinos",
-    brandName: "Amazon Essentials",
-    category: "pants",
-    priceBucket: "under-50",
-    priceLabel: "$25-$35",
-    brand: "value",
-    styles: ["casual", "office", "travel"],
-    visual: "Value",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A budget-friendly chino that covers the basics and makes sense as a starter pair or backup travel option.",
-    material: "Cotton twill with elastane",
-    fit: "Slim with a straightforward leg line",
-    care: "Machine wash and tumble dry low",
-    who: {
-      bodyType:
-        "Best for men who want a trim leg but do not need a highly tailored top block.",
-      occasion:
-        "Starter workwear, backup office pants, everyday errands, and casual travel.",
-      styleNote:
-        "Use these to test fit and color preferences before spending on premium options.",
-    },
-    why: [
-      "The price makes it easy to buy multiple neutral colors without overthinking it.",
-      "The silhouette is simple enough to support basic wardrobe building.",
-      "They work especially well when your priorities are value and easy replacement.",
-      "This is a useful pick for men who need presentable pants fast.",
-    ],
-    outfits: [
-      {
-        title: "Starter Office Look",
-        description:
-          "Add a blue oxford shirt, brown belt, and simple loafers for a practical weekday outfit.",
-      },
-      {
-        title: "Low-Key Weekend",
-        description:
-          "Pair them with a henley and clean sneakers when you want something sharper than jeans.",
-      },
-      {
-        title: "Carry-On Capsule",
-        description:
-          "Use them with a merino sweater and white leather sneakers as the do-everything pair in a short-trip bag.",
-      },
-    ],
-    related: [
-      "timex-weekender-watch",
-      "muji-french-linen-shirt",
-      "new-balance-574-sneaker",
-    ],
-  },
-  {
-    slug: "carhartt-wip-watch-hat-beanie",
-    name: "Carhartt WIP Watch Hat Beanie",
-    brandName: "Carhartt WIP",
-    category: "accessories",
-    priceBucket: "under-50",
-    priceLabel: "$30-$40",
-    brand: "mainstream",
-    styles: ["casual", "rugged", "weekend"],
-    visual: "Beanie",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A chunky rib knit beanie that adds texture and warmth without veering into outdoors-only territory.",
-    material: "Acrylic knit",
-    fit: "Close on the head with a fold-over cuff",
-    care: "Hand wash cold and dry flat",
-    who: {
-      bodyType:
-        "Easy to wear on most head shapes because the cuff lets you adjust depth and profile.",
-      occasion:
-        "Cold weekends, travel, casual commutes, and layered winter outfits.",
-      styleNote:
-        "Muted olive, charcoal, and navy read more refined than loud logo colors.",
-    },
-    why: [
-      "The thicker rib texture gives simple jackets and sweaters more visual interest.",
-      "A well-shaped beanie can make winter layering look intentional instead of purely functional.",
-      "Carhartt WIP balances streetwear appeal with durable basics.",
-      "It is an easy accessory to build around neutral outerwear.",
-    ],
-    outfits: [
-      {
-        title: "Cold-Weather Casual",
-        description:
-          "Wear it with dark jeans, a fleece jacket, and suede boots for an easy winter weekend fit.",
-      },
-      {
-        title: "City Layering",
-        description:
-          "Pair it with an overshirt, hoodie, and straight trousers when you want texture without extra bulk.",
-      },
-      {
-        title: "Travel Uniform",
-        description:
-          "Use it with joggers, a heavyweight tee, and retro sneakers on a cold travel day.",
-      },
-    ],
-    related: [
-      "patagonia-better-sweater-fleece-jacket",
-      "new-balance-574-sneaker",
-      "levis-511-slim-fit-jeans",
-    ],
-  },
-  {
-    slug: "timex-weekender-watch",
-    name: "Timex Weekender Watch",
-    brandName: "Timex",
-    category: "accessories",
-    priceBucket: "under-50",
-    priceLabel: "$40-$50",
-    brand: "value",
-    styles: ["casual", "minimal", "weekend"],
-    visual: "Watch",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "A simple field-inspired watch that adds structure to casual outfits without feeling precious or expensive.",
-    material: "Brass case with fabric or leather strap options",
-    fit: "Compact wearable case size",
-    care: "Keep the case dry and swap straps to extend the life of the watch",
-    who: {
-      bodyType:
-        "Works especially well for men who prefer smaller, understated watches.",
-      occasion:
-        "Weekend wear, starter watch collections, casual offices, and travel.",
-      styleNote:
-        "A clean dial and neutral strap make it easier to match with most wardrobes.",
-    },
-    why: [
-      "It offers classic proportions instead of oversized trend-driven styling.",
-      "The watch instantly makes basics feel more finished.",
-      "Interchangeable straps give it more range than the price suggests.",
-      "It is a strong first watch for men who want form and function without luxury pricing.",
-    ],
-    outfits: [
-      {
-        title: "Everyday Basics",
-        description:
-          "Pair it with chinos, a white tee, and sneakers to make an otherwise simple outfit feel intentional.",
-      },
-      {
-        title: "Field-Inspired Casual",
-        description:
-          "Use it with raw denim, boots, and an overshirt for a practical rugged look.",
-      },
-      {
-        title: "Summer Minimal",
-        description:
-          "Wear it with a linen shirt, tailored shorts, and loafers when you want lightweight polish.",
-      },
-    ],
-    related: [
-      "amazon-essentials-slim-fit-chinos",
-      "muji-french-linen-shirt",
-      "nike-air-force-1-low-white",
-    ],
-  },
-  {
-    slug: "ray-ban-rb2140-wayfarer-sunglasses",
-    name: "Ray-Ban RB2140 Original Wayfarer Sunglasses",
-    brandName: "Ray-Ban",
-    category: "accessories",
-    priceBucket: "150-plus",
-    priceLabel: "$150-$180",
-    brand: "premium",
-    styles: ["minimal", "weekend", "travel"],
-    visual: "Shade",
-    amazon: "https://www.amazon.com/dp/ASIN?tag=AFFILIATE_TAG",
-    description:
-      "The most dependable sunglass silhouette around, with enough edge to improve almost any warm-weather outfit.",
-    material: "Acetate frame with glass or polycarbonate lenses",
-    fit: "Structured frame with medium coverage",
-    care: "Store in the hard case and clean lenses with a microfiber cloth",
-    who: {
-      bodyType:
-        "Works best on medium to slightly broader faces because the frame carries a strong line.",
-      occasion:
-        "Travel, summer weekends, driving, and city wear.",
-      styleNote:
-        "Black frames are the safest first buy, while tortoiseshell feels slightly softer.",
-    },
-    why: [
-      "The shape is classic enough to avoid dating quickly.",
-      "Wayfarers add definition to easy summer outfits that might otherwise look flat.",
-      "A premium frame feels better balanced on the face than disposable fashion sunglasses.",
-      "They work across casual, smart casual, and travel wardrobes.",
-    ],
-    outfits: [
-      {
-        title: "Summer Uniform",
-        description:
-          "Wear them with a linen shirt, slim chinos, and loafers for a clean vacation-ready outfit.",
-      },
-      {
-        title: "City Weekend",
-        description:
-          "Pair them with a tee, straight jeans, and white sneakers when you want a classic off-duty look.",
-      },
-      {
-        title: "Road Trip Layer",
-        description:
-          "Use them with a lightweight jacket, henley, and desert boots for transitional weather travel.",
-      },
-    ],
-    related: [
-      "muji-french-linen-shirt",
-      "timex-weekender-watch",
-      "everlane-the-slim-fit-chino",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
   },
 );
@@ -2530,44 +1470,44 @@ blogPosts.push(
     heroLabel: "Semi-classic",
     tags: ["casual semi classic", "mens outfit ideas", "chinos", "loafers", "smart casual"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "dockers-alpha-khaki-slim-fit-chinos",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant",
       "steve-madden-mens-rhodez",
-      "fossil-minimalist-watch",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
         heading: "Start with clean pieces, not formal pieces",
         paragraphs: [
           `A casual semi-classic outfit works best when the clothes look considered without becoming stiff. The point is not to dress like an office uniform. The point is to use familiar pieces from the PrimeGent catalog in a cleaner order: a button-down, a sharp pant, a refined shoe, and one quiet accessory when the outfit needs polish.`,
-          `That is why the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a>, <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a>, <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>, and <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist Watch</a> make a useful first formula. Every product is already on PrimeGent, and each one has a clear role.`,
+          `That is why the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a>, <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a>, <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>, and <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> make a useful first formula. Every product is already on PrimeGent, and each one has a clear role.`,
         ],
       },
       {
         heading: "Formula 1: OCBD, chinos, and penny loafers",
         paragraphs: [
-          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> with the <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a> and the <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>. This is the most direct casual semi-classic outfit because each product looks polished on its own, but none of them pushes the outfit into full dresswear.`,
-          `The shirt gives the outfit structure, the chinos keep the lower half clean, and the loafer brings a classic shape without needing a suit. If the outfit feels too plain, the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist Watch</a> adds just enough finish while staying inside the same calm style lane.`,
+          `Wear the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> with the <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a> and the <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>. This is the most direct casual semi-classic outfit because each product looks polished on its own, but none of them pushes the outfit into full dresswear.`,
+          `The shirt gives the outfit structure, the chinos keep the lower half clean, and the loafer brings a classic shape without needing a suit. If the outfit feels too plain, the <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> adds just enough finish while staying inside the same calm style lane.`,
         ],
       },
       {
         heading: "Formula 2: Trousers with a relaxed shirt",
         paragraphs: [
-          `For a slightly sharper version, use the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> with the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> and the <a href="./pick-ted-baker-mens-parliament.html">Ted Baker Parliament Penny Loafer</a>. This combination feels more evening-ready, but it still reads as casual because the shirt is approachable and the loafer is easy to wear.`,
-          `The useful move is keeping the product mix narrow. The <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> supply the line, while the <a href="./pick-ted-baker-mens-parliament.html">Ted Baker Parliament Penny Loafer</a> keeps the outfit classic without making it feel ceremonial.`,
+          `For a slightly sharper version, use the <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> with the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> and the <a href="./pick-ted-baker-mens-parliament.html">Ted Baker Parliament Penny Loafer</a>. This combination feels more evening-ready, but it still reads as casual because the shirt is approachable and the loafer is easy to wear.`,
+          `The useful move is keeping the product mix narrow. The <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> supply the line, while the <a href="./pick-ted-baker-mens-parliament.html">Ted Baker Parliament Penny Loafer</a> keeps the outfit classic without making it feel ceremonial.`,
         ],
       },
       {
         heading: "Use the watch to finish, not dominate",
         paragraphs: [
-          `The <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist Watch</a> is the right kind of accessory for this style because it supports the outfit instead of competing with it. With the <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a> and <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>, it makes the outfit feel intentional even when the rest of the look is simple.`,
+          `The <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> is the right kind of accessory for this style because it supports the outfit instead of competing with it. With the <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a> and <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>, it makes the outfit feel intentional even when the rest of the look is simple.`,
           `That matters for casual semi-classic dressing. The outfit should look like it belongs at dinner, on a casual office day, or at a clean weekend event without relying on loud details.`,
         ],
       },
       {
         heading: "Why these products work together",
         paragraphs: [
-          `The reason this formula is easy to repeat is that the products do different jobs. The <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> frames the upper half, the <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a> or <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> clean up the silhouette, and the loafers bring the classic part of the outfit.`,
+          `The reason this formula is easy to repeat is that the products do different jobs. The <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> frames the upper half, the <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a> or <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> clean up the silhouette, and the loafers bring the classic part of the outfit.`,
           `Nothing here requires products outside the website. The whole outfit can be built from PrimeGent picks, which keeps the recommendation practical and easy to follow.`,
         ],
       },
@@ -2586,44 +1526,44 @@ blogPosts.push(
     heroLabel: "Trousers boots",
     tags: ["semi classic casual", "mens outfits", "trousers", "chelsea boots", "casual style"],
     relatedPickSlugs: [
-      "boss-slim-fit-trousers",
-      "uniqlo-merino-crew-neck-sweater",
-      "thursday-scout-chelsea-boot",
-      "ray-ban-rb2140-wayfarer-sunglasses",
+      "plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
+      "ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit",
     ],
     sections: [
       {
         heading: "Build the outfit around one refined base",
         paragraphs: [
-          `For men who want casual clothing to look more grown-up, the easiest move is to start with a refined base from the site. The <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> do that immediately because they clean up the line of the outfit before any other product is added.`,
-          `From there, the outfit can stay relaxed with the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> and <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>. The result is casual, but the shape is much more controlled than a basic weekend outfit.`,
+          `For men who want casual clothing to look more grown-up, the easiest move is to start with a refined base from the site. The <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> do that immediately because they clean up the line of the outfit before any other product is added.`,
+          `From there, the outfit can stay relaxed with the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> and <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a>. The result is casual, but the shape is much more controlled than a basic weekend outfit.`,
         ],
       },
       {
         heading: "Formula 1: Trousers, merino, and Chelsea boots",
         paragraphs: [
-          `Wear the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> with the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>. This is the clearest semi-classic casual outfit in the group because the products share a clean, quiet tone.`,
+          `Wear the <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> with the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a>. This is the clearest semi-classic casual outfit in the group because the products share a clean, quiet tone.`,
           `The sweater softens the trousers, and the Chelsea boot keeps the outfit from feeling too office-heavy. It works well when a sneaker outfit feels too relaxed but a dress shoe outfit feels like too much.`,
         ],
       },
       {
         heading: "Formula 2: Oxford shirt under merino",
         paragraphs: [
-          `Layer the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> under the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a>, then keep the lower half simple with the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a>. Add the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a> when you want the outfit to feel finished.`,
+          `Layer the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> under the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a>, then keep the lower half simple with the <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a>. Add the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a> when you want the outfit to feel finished.`,
           `This formula uses classic product categories, but it stays casual because the knitwear lowers the formality and the boot adds texture.`,
         ],
       },
       {
         heading: "Add sunglasses when the outfit is daytime",
         paragraphs: [
-          `For daytime wear, the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a> make sense with the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> and <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>. The shape is classic enough to match the outfit without making the recommendation feel forced.`,
-          `The important part is restraint. The <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a> should finish the outfit, while the trousers, sweater, and boots still do the main work.`,
+          `For daytime wear, the <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> make sense with the <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> and <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a>. The shape is classic enough to match the outfit without making the recommendation feel forced.`,
+          `The important part is restraint. The <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> should finish the outfit, while the trousers, sweater, and boots still do the main work.`,
         ],
       },
       {
         heading: "Keep the product list disciplined",
         paragraphs: [
-          `This article works because every recommendation stays inside the PrimeGent product catalog. The <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a>, <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a>, <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a>, <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>, and <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a> are enough to build the look.`,
+          `This article works because every recommendation stays inside the PrimeGent product catalog. The <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a>, <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a>, <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a>, <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a>, and <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> are enough to build the look.`,
           `That is also the buying lesson. Semi-classic casual style does not need a long shopping list. It needs a few clean products that cooperate.`,
         ],
       },
@@ -2642,44 +1582,44 @@ blogPosts.push(
     heroLabel: "Casual days",
     tags: ["casual men outfit", "weekend outfits", "mens sneakers", "jeans", "overshirts"],
     relatedPickSlugs: [
-      "roark-revival-open-road-overshirt",
-      "levis-511-slim-fit-jeans",
-      "new-balance-574-sneaker",
-      "timex-weekender-watch",
+      "zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
         heading: "Make casual look intentional",
         paragraphs: [
-          `A good casual men outfit should feel easy, but it still needs structure. PrimeGent already has the pieces to do that without reaching outside the website: the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a>, <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a>, <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>, and <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a>.`,
+          `A good casual men outfit should feel easy, but it still needs structure. PrimeGent already has the pieces to do that without reaching outside the website: the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a>, <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a>, <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>, and <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a>.`,
           `That combination is casual, but it is not random. The overshirt gives the outfit shape, the jeans keep it familiar, the sneaker makes it wearable, and the watch adds a simple finishing point.`,
         ],
       },
       {
         heading: "Formula 1: Overshirt, slim jeans, and New Balance",
         paragraphs: [
-          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>. This is the easiest casual formula here because every product is relaxed but still neat.`,
-          `The <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> makes the outfit feel layered even when the rest is simple. The <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a> keeps the outfit comfortable enough for a full day.`,
+          `Wear the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> with the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>. This is the easiest casual formula here because every product is relaxed but still neat.`,
+          `The <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> makes the outfit feel layered even when the rest is simple. The <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a> keeps the outfit comfortable enough for a full day.`,
         ],
       },
       {
         heading: "Formula 2: Fleece, jeans, and white sneakers",
         paragraphs: [
-          `For cooler weather, wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>. This gives the outfit a cleaner casual base while staying very wearable.`,
-          `The fleece makes sense for errands and travel days, while the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a> keeps the lower half bright and simple.`,
+          `For cooler weather, wear the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> with the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>. This gives the outfit a cleaner casual base while staying very wearable.`,
+          `The fleece makes sense for errands and travel days, while the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a> keeps the lower half bright and simple.`,
         ],
       },
       {
         heading: "Use the watch when the outfit needs a small lift",
         paragraphs: [
-          `The <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a> works especially well with the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> and <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a>. It is casual enough to match the outfit but still gives the look a finished detail.`,
+          `The <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> works especially well with the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> and <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a>. It is casual enough to match the outfit but still gives the look a finished detail.`,
           `That small detail matters for an easy dinner or casual meet-up. The outfit still feels relaxed, but it looks chosen instead of thrown together.`,
         ],
       },
       {
         heading: "Keep every piece useful on its own",
         paragraphs: [
-          `The strongest part of this casual formula is that each product works outside the full outfit. The <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> can rotate with the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a>, the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a>, the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>, or the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `The strongest part of this casual formula is that each product works outside the full outfit. The <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> can rotate with the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a>, the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a>, the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>, or the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
           `That is what makes the product recommendations natural: they solve the outfit, but they also earn repeat wear.`,
         ],
       },
@@ -2728,7 +1668,7 @@ blogPosts.push(
       {
         heading: "Use caps and beanies as practical finishers",
         paragraphs: [
-          `The <a href="./pick-npjy-baseball-cap-golf-dad-hat-adjustable-original-classic-low-profile-cotton-hat-unconstructed-plain-cap-men-women.html">NPJY Low Profile Cotton Dad Hat</a> works with the <a href="./pick-jmierr-mens-casual-cotton-hooded-collar-drawstring-hoodies-pullover-sweatshirts-casual-long-sleeve-shirts.html">JMIERR Hooded Collar Pullover</a> when the outfit is built for a mild day. For colder weather, use the <a href="./pick-carhartt-wip-watch-hat-beanie.html">Carhartt WIP Watch Hat Beanie</a> with the <a href="./pick-hanes-men-s-sweatshirt.html">Hanes Men's Sweatshirt</a>.`,
+          `The <a href="./pick-npjy-baseball-cap-golf-dad-hat-adjustable-original-classic-low-profile-cotton-hat-unconstructed-plain-cap-men-women.html">NPJY Low Profile Cotton Dad Hat</a> works with the <a href="./pick-jmierr-mens-casual-cotton-hooded-collar-drawstring-hoodies-pullover-sweatshirts-casual-long-sleeve-shirts.html">JMIERR Hooded Collar Pullover</a> when the outfit is built for a mild day. For colder weather, use the <a href="./pick-npjy-baseball-cap-golf-dad-hat-adjustable-original-classic-low-profile-cotton-hat-unconstructed-plain-cap-men-women.html">NPJY Classic Cotton Dad Cap</a> with the <a href="./pick-hanes-men-s-sweatshirt.html">Hanes Men's Sweatshirt</a>.`,
           `Both accessories are already PrimeGent picks, and both support the outfit without changing its relaxed purpose.`,
         ],
       },
@@ -2757,9 +1697,9 @@ blogPosts.push(
     heroLabel: "Casual formulas",
     tags: ["casual outfits", "mens outfit ideas", "outfit formulas", "everyday style"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "everlane-the-slim-fit-chino",
-      "new-balance-574-sneaker",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
     ],
     sections: [
       {
@@ -2770,30 +1710,30 @@ blogPosts.push(
         ],
       },
       {
-        heading: "Formula 1: Banana Republic, Everlane, New Balance",
+        heading: "Formula 1: Oxford Shirt, Chino, Retro Sneaker",
         paragraphs: [
-          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `Wear the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>.`,
           `This is the cleanest casual formula in this article because all three linked products are simple, repeatable, and already live on the site.`,
         ],
       },
       {
         heading: "Formula 2: Roark, Levi's, Nike",
         paragraphs: [
-          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `Wear the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> with the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
           `This gives the outfit a stronger casual layer while keeping the rest of the look familiar and easy to wear.`,
         ],
       },
       {
         heading: "Formula 3: Uniqlo, Everlane, Thursday",
         paragraphs: [
-          `Wear the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>.`,
+          `Wear the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a>.`,
           `This is the sharper casual option: sweater, chino, and boot, all linked to existing PrimeGent products.`,
         ],
       },
       {
         heading: "Formula 4: Muji, Amazon Essentials, Nike",
         paragraphs: [
-          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials Slim Fit Chinos</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `Wear the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
           `This is the warm-weather casual version, using only product pages that already exist on your website.`,
         ],
       },
@@ -2812,9 +1752,9 @@ blogPosts.push(
     heroLabel: "Weekend casual",
     tags: ["weekend outfits", "casual menswear", "relaxed style", "mens outfit ideas"],
     relatedPickSlugs: [
-      "roark-revival-open-road-overshirt",
-      "levis-511-slim-fit-jeans",
-      "nike-air-force-1-low-white",
+      "zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "nike-men-s-court-vision-low-next-nature-shoes",
     ],
     sections: [
       {
@@ -2827,28 +1767,28 @@ blogPosts.push(
       {
         heading: "Formula 1: Roark, Levi's, Nike",
         paragraphs: [
-          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `Wear the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> with the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
           `This is the easiest relaxed weekend outfit in the list because the linked products are casual but still clean.`,
         ],
       },
       {
         heading: "Formula 2: Patagonia, Everlane, New Balance",
         paragraphs: [
-          `Wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `Wear the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>.`,
           `This product combination works for cooler weekends, travel days, and casual errands.`,
         ],
       },
       {
         heading: "Formula 3: Patagonia, Levi's, New Balance",
         paragraphs: [
-          `Wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `Wear the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> with the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>.`,
           `This keeps the outfit more relaxed than the chino version while still using only linked products from your site.`,
         ],
       },
       {
         heading: "Formula 4: Timex, Roark, Levi's",
         paragraphs: [
-          `Add the <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a> to the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> and <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a>.`,
+          `Add the <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> to the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> and <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a>.`,
           `This is the accessory version of the weekend outfit, and every product in the sentence links to a PrimeGent pick page.`,
         ],
       },
@@ -2867,9 +1807,9 @@ blogPosts.push(
     heroLabel: "Summer basics",
     tags: ["summer outfits", "casual outfits", "mens basics", "warm weather style"],
     relatedPickSlugs: [
-      "muji-french-linen-shirt",
-      "nike-air-force-1-low-white",
-      "timex-weekender-watch",
+      "coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt",
+      "nike-men-s-court-vision-low-next-nature-shoes",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
@@ -2882,35 +1822,35 @@ blogPosts.push(
       {
         heading: "Formula 1: Muji, Everlane, Nike",
         paragraphs: [
-          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `Wear the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
           `This is the cleanest warm-weather outfit in the article, built only from linked product pages.`,
         ],
       },
       {
         heading: "Formula 2: Muji, Amazon Essentials, Ray-Ban",
         paragraphs: [
-          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials Slim Fit Chinos</a> and the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a>.`,
+          `Wear the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a>.`,
           `This version uses the value chino pick and the sunglass pick already available on your website.`,
         ],
       },
       {
         heading: "Formula 3: Muji, Nike, Timex",
         paragraphs: [
-          `Wear the <a href="./pick-muji-french-linen-shirt.html">Muji French Linen Shirt</a> with the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a> and the <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a>.`,
+          `Wear the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> with the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a> and the <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a>.`,
           `This is a simple product trio for mild summer evenings when the outfit needs to stay light and clean.`,
         ],
       },
       {
         heading: "Formula 4: Coofandy, Amazon Essentials, Nike",
         paragraphs: [
-          `Wear the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> with the <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials Slim Fit Chinos</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `Wear the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
           `This is the more relaxed shirt option for a warm day while keeping the rest of the outfit simple.`,
         ],
       },
       {
-        heading: "Formula 5: Banana Republic, Everlane, Ray-Ban",
+        heading: "Formula 5: Oxford Shirt, Chino, Sunglasses",
         paragraphs: [
-          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a>.`,
+          `Wear the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a>.`,
           `This is the sharper summer casual option, and each product link stays inside your website.`,
         ],
       },
@@ -2929,8 +1869,8 @@ blogPosts.push(
     heroLabel: "Casual layers",
     tags: ["layering", "casual outfits", "mens layers", "transitional style"],
     relatedPickSlugs: [
-      "uniqlo-merino-crew-neck-sweater",
-      "roark-revival-open-road-overshirt",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
+      "zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket",
       "thursday-boot-company-captain-men-s-lace-up-boot",
     ],
     sections: [
@@ -2944,28 +1884,28 @@ blogPosts.push(
       {
         heading: "Formula 1: Roark, Everlane, Nike",
         paragraphs: [
-          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `Wear the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
           `This is the lightest layering outfit in the article, and every product points to an existing pick page.`,
         ],
       },
       {
-        heading: "Formula 2: Banana Republic, Uniqlo, Thursday",
+        heading: "Formula 2: Oxford Shirt, Sweater, Boot",
         paragraphs: [
-          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> under the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a>, then finish with the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Boot Company Captain Boot</a>.`,
+          `Wear the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> under the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a>, then finish with the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Boot Company Captain Boot</a>.`,
           `This formula uses only named products from your pick pages and keeps the layering advice tied to those links.`,
         ],
       },
       {
         heading: "Formula 3: Patagonia, Levi's, New Balance",
         paragraphs: [
-          `Wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>.`,
+          `Wear the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> with the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>.`,
           `This is the relaxed layering outfit, built only from products already on your website.`,
         ],
       },
       {
         heading: "Formula 4: Uniqlo, Everlane, Thursday",
         paragraphs: [
-          `Wear the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> with the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane The Slim Fit Chino</a> and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>.`,
+          `Wear the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> with the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a>.`,
           `This is the cleaner boot outfit, with every product name linked to a PrimeGent pick page.`,
         ],
       },
@@ -2984,16 +1924,16 @@ blogPosts.push(
     heroLabel: "20-piece plan",
     tags: ["capsule wardrobe", "wardrobe basics", "outfit planning", "mens essentials"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "levis-511-slim-fit-jeans",
-      "veja-v10-sneaker",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "oliver-cabell-low-1-sneaker-for-unisex-adult-buttery-italian-leather",
     ],
     sections: [
       {
         heading: "Why a capsule wardrobe works better than random shopping",
         paragraphs: [
           `Most men do not need more clothes. They need fewer pieces that cooperate with each other. A capsule wardrobe solves the real problem, which is not variety but friction. When your shirts, pants, outerwear, and shoes live in the same visual universe, getting dressed becomes a quick decision instead of a daily negotiation. That matters more than people realize because confidence often comes from knowing the outfit is handled before the day begins.`,
-          `A good capsule also protects your budget. When every purchase has a job, impulse buys stand out immediately. That is why basics like a crisp <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">OCBD shirt</a> or dark slim denim matter more than trendy statement pieces. They repeat easily, anchor multiple situations, and let you look consistent without dressing identically every day.`,
+          `A good capsule also protects your budget. When every purchase has a job, impulse buys stand out immediately. That is why basics like a crisp <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> or dark slim denim matter more than trendy statement pieces. They repeat easily, anchor multiple situations, and let you look consistent without dressing identically every day.`,
         ],
       },
       {
@@ -3007,7 +1947,7 @@ blogPosts.push(
         heading: "The 20 pieces that cover real life",
         paragraphs: [
           `A practical capsule should include four shirts, four knit or tee layers, three pairs of pants, two jackets, three shoes, and four accessories. In practice that might mean one oxford shirt, one linen shirt, two tees, a merino sweater, dark jeans, slim chinos, tailored trousers, white sneakers, Chelsea boots, loafers, an overshirt, and a lightweight fleece. You are not chasing perfect math here. You are building coverage.`,
-          `The reason categories matter is balance. Too many tops with not enough shoes creates repetition. Too many shoes with weak pants options leaves you wearing the same jeans constantly. If you want a strong starting structure, the combination of <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">slim chinos</a>, <a href="./pick-levis-511-slim-fit-jeans.html">dark jeans</a>, and one pair of refined trousers covers more ground than most men expect.`,
+          `The reason categories matter is balance. Too many tops with not enough shoes creates repetition. Too many shoes with weak pants options leaves you wearing the same jeans constantly. If you want a strong starting structure, the combination of <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a>, <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a>, and one pair of refined trousers covers more ground than most men expect.`,
         ],
       },
       {
@@ -3021,7 +1961,7 @@ blogPosts.push(
         heading: "Rotate by season, not by identity",
         paragraphs: [
           `Men often make the mistake of building entirely separate wardrobes for summer, winter, work, and weekends. A capsule works better when the identity stays constant and the fabrics rotate. In warm weather you swap merino for linen. In cold weather you add a fleece, heavier knitwear, and boots. The outfit logic stays almost identical, which keeps your style coherent across the year.`,
-          `That approach also cuts down on storage clutter. Your <a href="./pick-muji-french-linen-shirt.html">linen shirt</a> and sunglasses step in when temperatures rise, while the fleece jacket and beanie take over in colder months. The core stays stable: good pants, versatile shirts, clean shoes, and one or two reliable finishing pieces.`,
+          `That approach also cuts down on storage clutter. Your <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> and sunglasses step in when temperatures rise, while the fleece jacket and beanie take over in colder months. The core stays stable: good pants, versatile shirts, clean shoes, and one or two reliable finishing pieces.`,
         ],
       },
       {
@@ -3046,9 +1986,9 @@ blogPosts.push(
     heroLabel: "Office decoded",
     tags: ["business casual", "office style", "mens style guide", "workwear"],
     relatedPickSlugs: [
-      "dockers-alpha-khaki-slim-fit-chinos",
-      "boss-slim-fit-trousers",
-      "fossil-minimalist-watch",
+      "dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant",
+      "plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
@@ -3061,7 +2001,7 @@ blogPosts.push(
       {
         heading: "The easiest business casual formula",
         paragraphs: [
-          `If you want the safest modern business casual formula, begin with an oxford shirt, slim chinos or wool trousers, and leather loafers or sleek boots. Add a lightweight sweater when needed. That combination works because every piece is familiar, but the proportions and texture keep it from feeling old. A shirt like the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a> is especially useful because it straddles relaxed and polished well.`,
+          `If you want the safest modern business casual formula, begin with an oxford shirt, slim chinos or wool trousers, and leather loafers or sleek boots. Add a lightweight sweater when needed. That combination works because every piece is familiar, but the proportions and texture keep it from feeling old. A shirt like the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> is especially useful because it straddles relaxed and polished well.`,
           `The key is restraint. Men often overcorrect with flashy blazers, aggressive patterns, or hyper-shiny shoes when the actual move is quieter. Neutral pants, a clean collar, and a quality knit communicate more authority than trying too hard to look dressed up. Business casual rewards confidence through control, not noise.`,
         ],
       },
@@ -3076,7 +2016,7 @@ blogPosts.push(
         heading: "Fit matters more than dressiness",
         paragraphs: [
           `A common office mistake is assuming that more formal pieces automatically make a stronger impression. In practice, poor fit ruins business casual faster than slightly casual choices do. Baggy chinos, puddling trousers, or a shirt that tents out at the waist will make you look off even if every category is technically correct. Clean lines always read more current and more competent.`,
-          `That is why a refined pair of <a href="./pick-boss-slim-fit-trousers.html">slim trousers</a> or a well-cut chino matters so much. They create the line of the entire outfit. Shoes and accessories then reinforce it. If you only upgrade one thing in a weak work wardrobe, upgrade the pants and hem length first.`,
+          `That is why a refined pair of <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> or a well-cut chino matters so much. They create the line of the entire outfit. Shoes and accessories then reinforce it. If you only upgrade one thing in a weak work wardrobe, upgrade the pants and hem length first.`,
         ],
       },
       {
@@ -3108,16 +2048,16 @@ blogPosts.push(
     heroLabel: "8 outfit formulas",
     tags: ["white sneakers", "outfit ideas", "mens casual style", "smart casual"],
     relatedPickSlugs: [
-      "nike-air-force-1-low-white",
-      "veja-v10-sneaker",
-      "everlane-the-slim-fit-chino",
+      "nike-men-s-court-vision-low-next-nature-shoes",
+      "oliver-cabell-low-1-sneaker-for-unisex-adult-buttery-italian-leather",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
     ],
     sections: [
       {
         heading: "Why white sneakers work so well",
         paragraphs: [
           `White sneakers sit in the sweet spot between casual and polished. They are more refined than running shoes but less rigid than dress shoes, which is why they plug into so many outfits. The problem is that men often rely on the shoes alone to make the outfit feel modern. White sneakers help, but they are not magic. The pants, hem, and top layer still decide whether the result looks intentional or lazy.`,
-          `The safest versions are clean leather pairs with minimal branding. That is why options like the <a href="./pick-nike-air-force-1-low-white.html">Air Force 1</a> or the more pared-back <a href="./pick-veja-v10-sneaker.html">Veja V-10</a> show up so often in sharp casual wardrobes. They are neutral enough to support different aesthetics without disappearing entirely.`,
+          `The safest versions are clean leather pairs with minimal branding. That is why options like the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a> or the more pared-back <a href="./pick-oliver-cabell-low-1-sneaker-for-unisex-adult-buttery-italian-leather.html">Oliver Cabell Low 1 Leather Sneaker</a> show up so often in sharp casual wardrobes. They are neutral enough to support different aesthetics without disappearing entirely.`,
         ],
       },
       {
@@ -3130,7 +2070,7 @@ blogPosts.push(
       {
         heading: "Outfits 3 and 4: chinos for easy polish",
         paragraphs: [
-          `Khaki or olive chinos with white sneakers and an oxford shirt is one of the most repeatable smart casual outfits a man can own. It feels clean, current, and easy. Use a trim chino like the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> or a dependable entry like the Dockers Alpha. Then keep the shirt simple and either tuck it lightly or leave it untucked if the length allows.`,
+          `Khaki or olive chinos with white sneakers and an oxford shirt is one of the most repeatable smart casual outfits a man can own. It feels clean, current, and easy. Use a trim chino like the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> or a dependable entry like the Dockers Signature Straight Khaki. Then keep the shirt simple and either tuck it lightly or leave it untucked if the length allows.`,
           `For a softer version, swap the oxford for a lightweight knit or merino crew neck. This is one of the best transitional-weather combinations because it gives you the polish of chinos with the comfort of sneakers. If your office is relaxed, it can even serve as business casual when the shoes are spotless and the sweater fits well.`,
         ],
       },
@@ -3170,9 +2110,9 @@ blogPosts.push(
     heroLabel: "Fit first",
     tags: ["fit guide", "mens style", "tailoring", "wardrobe basics"],
     relatedPickSlugs: [
-      "levis-511-slim-fit-jeans",
-      "banana-republic-slim-fit-ocbd-shirt",
-      "boss-slim-fit-trousers",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free",
     ],
     sections: [
       {
@@ -3186,14 +2126,14 @@ blogPosts.push(
         heading: "What good shirt fit actually looks like",
         paragraphs: [
           `A shirt should sit cleanly across the shoulders, allow you to move, and narrow slightly through the torso without pulling at the buttons. Men often accept one of two extremes: either a boxy body with excess fabric at the waist or an over-tight slim fit that strains across the chest and upper arm. Neither looks sharp. The goal is a clean line, not compression.`,
-          `An oxford shirt is a useful benchmark because the structure makes fit problems obvious. If the shoulder seam drops too far, the shirt will look sloppy even when tucked in. If it pinches the chest, the collar and placket start to distort. That is why a shirt like the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a> is only good if the underlying cut matches your frame.`,
+          `An oxford shirt is a useful benchmark because the structure makes fit problems obvious. If the shoulder seam drops too far, the shirt will look sloppy even when tucked in. If it pinches the chest, the collar and placket start to distort. That is why a shirt like the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> is only good if the underlying cut matches your frame.`,
         ],
       },
       {
         heading: "Pants create the foundation of the whole outfit",
         paragraphs: [
           `Trouser fit is where many outfits fail. The rise, room through the thigh, taper, and hem all change how the rest of the clothing reads. If the pants are too tight, every shoe looks clumsy and every top feels overbuilt. If they are too loose, sharper pieces above the waist lose definition. This is why getting one or two reliable pant cuts matters so much.`,
-          `Start with the seat and thigh, then evaluate the lower leg. Many men buy pants based on how narrow the ankle looks in the mirror, which is backward. The top half needs to fit first. A strong option like the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511</a> or a clean chino only works when the thigh is comfortable and the hem complements the shoe.`,
+          `Start with the seat and thigh, then evaluate the lower leg. Many men buy pants based on how narrow the ankle looks in the mirror, which is backward. The top half needs to fit first. A strong option like the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> or a clean chino only works when the thigh is comfortable and the hem complements the shoe.`,
         ],
       },
       {
@@ -3207,7 +2147,7 @@ blogPosts.push(
         heading: "Tailoring is a force multiplier",
         paragraphs: [
           `Many men hear tailoring and imagine a full bespoke process. In reality, basic alterations solve a large share of fit problems. Hemming trousers, tapering a leg slightly, shortening sleeves, or taking in excess waist fabric on a shirt can make affordable clothing look dramatically stronger. Tailoring does not need to be constant. It just needs to be targeted.`,
-          `That is especially true for office clothing. A pair of <a href="./pick-boss-slim-fit-trousers.html">slim trousers</a> with the right break and a shirt sleeve that ends cleanly at the wrist will look more expensive than the brand tag suggests. Fit gives clothes authority. Tailoring is how you secure it.`,
+          `That is especially true for office clothing. A pair of <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> with the right break and a shirt sleeve that ends cleanly at the wrist will look more expensive than the brand tag suggests. Fit gives clothes authority. Tailoring is how you secure it.`,
         ],
       },
       {
@@ -3232,9 +2172,9 @@ blogPosts.push(
     heroLabel: "Color system",
     tags: ["color guide", "mens wardrobe", "style basics", "capsule wardrobe"],
     relatedPickSlugs: [
-      "muji-french-linen-shirt",
-      "uniqlo-merino-crew-neck-sweater",
-      "ray-ban-rb2140-wayfarer-sunglasses",
+      "coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
+      "ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit",
     ],
     sections: [
       {
@@ -3248,7 +2188,7 @@ blogPosts.push(
         heading: "Build a neutral foundation first",
         paragraphs: [
           `Your first layer of wardrobe color should be foundational: dark bottoms, light tops, and one or two mid-tone outer layers. Dark denim, charcoal trousers, navy chinos, white and grey tees, pale blue shirts, and a navy or olive overshirt cover a huge amount of ground. This creates a stable base where nearly everything can mix without friction.`,
-          `That is why basics like a <a href="./pick-uniqlo-merino-crew-neck-sweater.html">navy merino sweater</a> or a pale <a href="./pick-muji-french-linen-shirt.html">linen shirt</a> are so useful. They live inside the neutral zone but still give variation through texture and lightness. Once the foundation is solid, introducing accent colors becomes much safer.`,
+          `That is why basics like a <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> or a pale <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> are so useful. They live inside the neutral zone but still give variation through texture and lightness. Once the foundation is solid, introducing accent colors becomes much safer.`,
         ],
       },
       {
@@ -3269,7 +2209,7 @@ blogPosts.push(
         heading: "Adjust by season without losing coherence",
         paragraphs: [
           `Summer wardrobes naturally shift lighter. Stone, off-white, pale blue, washed olive, and sun-faded neutrals feel right when the weather is warm. Winter lets you lean into charcoal, navy, dark olive, black, and richer browns. But the overall logic should stay consistent. Seasonal dressing works best when it is the same wardrobe language expressed through different fabric weights and values.`,
-          `A pair of <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">classic sunglasses</a> or a crisp linen shirt makes sense in summer because they lighten the look. In winter, the same man might move toward fleece, dark denim, and a beanie. The style identity stays intact because the palette stays disciplined.`,
+          `A pair of <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> or a crisp linen shirt makes sense in summer because they lighten the look. In winter, the same man might move toward fleece, dark denim, and a beanie. The style identity stays intact because the palette stays disciplined.`,
         ],
       },
       {
@@ -3297,9 +2237,9 @@ blogPosts.push(
     heroLabel: "5 boot formulas",
     tags: ["chelsea boots", "outfit ideas", "mens shoes", "smart casual"],
     relatedPickSlugs: [
-      "thursday-scout-chelsea-boot",
-      "boss-slim-fit-trousers",
-      "madewell-slim-straight-jeans",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
+      "plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
     ],
     sections: [
       {
@@ -3313,7 +2253,7 @@ blogPosts.push(
         heading: "Look 1: dark jeans and a sweater",
         paragraphs: [
           `This is the easiest entry point. Pair dark slim or slim-straight jeans with a merino sweater and dark leather Chelsea boots. The boot sharpens the denim, while the sweater smooths out the top half. It is one of the best date-night uniforms a man can own because it feels masculine, straightforward, and not overdone.`,
-          `Keep the colors tight. Black, charcoal, navy, and dark indigo all work well here. If you want a reliable starting point, copy the pairing of the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Chelsea boot</a> with dark denim and a crew neck knit.`,
+          `Keep the colors tight. Black, charcoal, navy, and dark indigo all work well here. If you want a reliable starting point, copy the pairing of the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a> with dark denim and a crew neck knit.`,
         ],
       },
       {
@@ -3334,7 +2274,7 @@ blogPosts.push(
         heading: "Look 4: tailored trousers and knitwear",
         paragraphs: [
           `For a dressier interpretation, wear Chelsea boots with tailored trousers and a fine-gauge knit. This can replace loafers when you want a bit more edge or need more coverage in colder weather. The look depends on clean trouser lines and a boot with a refined profile. Chunky soles change the entire message and read much more casual.`,
-          `A pair of <a href="./pick-boss-slim-fit-trousers.html">slim wool trousers</a>, a black crew neck, and Chelsea boots is one of the most efficient evening outfits a man can build. It is understated, flattering, and easy to repeat in different colors.`,
+          `A pair of <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a>, a black crew neck, and Chelsea boots is one of the most efficient evening outfits a man can build. It is understated, flattering, and easy to repeat in different colors.`,
         ],
       },
       {
@@ -3359,9 +2299,9 @@ blogPosts.push(
     heroLabel: "Dress code clarity",
     tags: ["smart casual", "dress code", "mens style guide", "outfit formulas"],
     relatedPickSlugs: [
-      "everlane-the-slim-fit-chino",
-      "thursday-scout-chelsea-boot",
-      "fossil-minimalist-watch",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
@@ -3375,7 +2315,7 @@ blogPosts.push(
         heading: "The easiest way to build smart casual outfits",
         paragraphs: [
           `Start from the pants. Chinos, clean dark denim, or tailored casual trousers give you the right base. Then add a structured but not overly formal top such as an oxford shirt, knit polo, or fine-gauge sweater. Finish with shoes that are clean and intentional: leather sneakers, loafers, or Chelsea boots. This formula works because every piece shares the same level of polish.`,
-          `A combination like <a href="./pick-everlane-the-slim-fit-chino.html">slim chinos</a>, a merino sweater, and minimal sneakers captures the idea perfectly. So does dark denim with an OCBD and Chelsea boots. In both cases the outfit looks sharper than ordinary casual wear, but it does not look like you are trying to smuggle tailoring into the room.`,
+          `A combination like <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a>, a merino sweater, and minimal sneakers captures the idea perfectly. So does dark denim with an OCBD and Chelsea boots. In both cases the outfit looks sharper than ordinary casual wear, but it does not look like you are trying to smuggle tailoring into the room.`,
         ],
       },
       {
@@ -3421,9 +2361,9 @@ blogPosts.push(
     heroLabel: "10 easy fixes",
     tags: ["style mistakes", "mens wardrobe", "fit", "shopping habits"],
     relatedPickSlugs: [
-      "levis-511-slim-fit-jeans",
-      "ray-ban-rb2140-wayfarer-sunglasses",
-      "timex-weekender-watch",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
@@ -3437,7 +2377,7 @@ blogPosts.push(
         heading: "Mistakes 3 and 4: ignoring fit and hem length",
         paragraphs: [
           `Poor fit remains the biggest style killer because it undermines everything else at once. Baggy tops, tight thighs, collapsing shoulders, and overlong sleeves all signal that the clothes are wearing you. Men often assume this is a brand issue when it is really a proportion issue. Start by getting the shoulder, seat, and thigh right, then tailor the easier details.`,
-          `Hem length deserves its own mention because it affects shoes and overall silhouette more than most men realize. Too much stacking makes even expensive shoes look clumsy. A clean hem above or just on the shoe instantly modernizes denim and chinos. That is part of why dependable fits like the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511</a> remain so useful.`,
+          `Hem length deserves its own mention because it affects shoes and overall silhouette more than most men realize. Too much stacking makes even expensive shoes look clumsy. A clean hem above or just on the shoe instantly modernizes denim and chinos. That is part of why dependable fits like the <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> remain so useful.`,
         ],
       },
       {
@@ -3451,7 +2391,7 @@ blogPosts.push(
         heading: "Mistakes 7 and 8: overdoing color and underusing accessories",
         paragraphs: [
           `Another common mistake is introducing too many colors without a base. The outfit starts competing with itself, especially when the colors have no shared temperature or value. A disciplined neutral foundation solves most of this. Once the core works, one accent is enough. Good style often looks simple because the palette is controlled.`,
-          `At the same time, many men ignore accessories completely. A watch, sunglasses, belt, or beanie can add finish and personality without changing the whole outfit. The key is moderation. A <a href="./pick-timex-weekender-watch.html">simple field watch</a> or <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">classic sunglasses</a> does more for an outfit than several louder pieces piled on together.`,
+          `At the same time, many men ignore accessories completely. A watch, sunglasses, belt, or beanie can add finish and personality without changing the whole outfit. The key is moderation. A <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> or <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> does more for an outfit than several louder pieces piled on together.`,
         ],
       },
       {
@@ -3483,16 +2423,16 @@ blogPosts.push(
     heroLabel: "Summer formulas",
     tags: ["summer outfits", "linen shirt", "mens style", "warm weather"],
     relatedPickSlugs: [
-      "muji-french-linen-shirt",
-      "ray-ban-rb2140-wayfarer-sunglasses",
-      "nike-air-force-1-low-white",
+      "coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt",
+      "ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit",
+      "nike-men-s-court-vision-low-next-nature-shoes",
     ],
     sections: [
       {
         heading: "Summer style starts with fabric, not trends",
         paragraphs: [
           `Men often struggle in summer because they try to dress the same way they do in cooler months, just with fewer layers. The better approach is to change the fabric story entirely. Linen, lightweight cotton, open weaves, and looser silhouettes allow the outfit to breathe while still looking intentional. If the fabric is wrong, no amount of styling fixes the discomfort or the visual heaviness.`,
-          `This is why a piece like the <a href="./pick-muji-french-linen-shirt.html">Muji French linen shirt</a> earns its place so quickly. It offers airflow, texture, and a relaxed polish that a basic poplin shirt cannot match. Summer style improves the moment you stop fighting the season.`,
+          `This is why a piece like the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> earns its place so quickly. It offers airflow, texture, and a relaxed polish that a basic poplin shirt cannot match. Summer style improves the moment you stop fighting the season.`,
         ],
       },
       {
@@ -3506,7 +2446,7 @@ blogPosts.push(
         heading: "Outfit 2: tee, straight jeans, and white sneakers",
         paragraphs: [
           `For casual summer days in the city, you do not need much more than a heavyweight tee, clean straight or slim-straight jeans, and white sneakers. The trick is fit and color. Mid-weight denim with a clean hem still works in summer if the cut breathes and the top half is simple. White sneakers lighten the outfit and keep it seasonal.`,
-          `This is where the <a href="./pick-nike-air-force-1-low-white.html">Air Force 1</a> works well, especially if you want a slightly sturdier silhouette under straight-leg denim. Add sunglasses and a watch, and the whole outfit looks more considered without becoming busy.`,
+          `This is where the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a> works well, especially if you want a slightly sturdier silhouette under straight-leg denim. Add sunglasses and a watch, and the whole outfit looks more considered without becoming busy.`,
         ],
       },
       {
@@ -3520,7 +2460,7 @@ blogPosts.push(
         heading: "Outfit 4: travel-ready summer layers",
         paragraphs: [
           `Airports, trains, and long days moving through a city require a different kind of summer outfit. Start with a breathable tee, stretch chinos, and supportive sneakers, then add a light overshirt for air-conditioned spaces. This gives you enough adaptability without carrying a heavy layer you will regret by noon.`,
-          `A pair of classic <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Wayfarers</a> earns its keep here because it turns practical travel clothing into a more finished look. Summer accessories matter because the outfits themselves are often simpler.`,
+          `A pair of classic <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> earns its keep here because it turns practical travel clothing into a more finished look. Summer accessories matter because the outfits themselves are often simpler.`,
         ],
       },
       {
@@ -3545,9 +2485,9 @@ blogPosts.push(
     heroLabel: "Budget strategy",
     tags: ["budget style", "thrift", "buying guide", "affordable menswear"],
     relatedPickSlugs: [
-      "amazon-essentials-slim-fit-chinos",
-      "timex-weekender-watch",
-      "uniqlo-merino-crew-neck-sweater",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
     ],
     sections: [
       {
@@ -3561,7 +2501,7 @@ blogPosts.push(
         heading: "Know where to save and where to spend",
         paragraphs: [
           `You can save on tees, some knitwear, starter chinos, and simple accessories without much downside if the fit is right. You should be more careful with shoes, outerwear, and tailoring-adjacent pieces because low quality shows faster there. That does not mean you need luxury. It means you should allocate money toward the categories that affect polish and longevity most clearly.`,
-          `For example, <a href="./pick-amazon-essentials-slim-fit-chinos.html">budget chinos</a> can make sense early on, especially if you are still learning your preferred fit. A slim watch or merino sweater from a value-focused brand can also work hard. But a bad dress shoe or a flimsy jacket tends to drag the whole outfit down.`,
+          `For example, <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> can make sense early on, especially if you are still learning your preferred fit. A slim watch or merino sweater from a value-focused brand can also work hard. But a bad dress shoe or a flimsy jacket tends to drag the whole outfit down.`,
         ],
       },
       {
@@ -3575,7 +2515,7 @@ blogPosts.push(
         heading: "Build from affordable workhorses",
         paragraphs: [
           `A budget wardrobe gets strong quickly when it has a few workhorses. Think one clean chino, one dark jean, one oxford shirt, one merino sweater, one versatile sneaker, and one inexpensive watch. That lineup covers interviews, dates, errands, travel, and casual offices better than a larger pile of trend pieces ever will.`,
-          `Picks like the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a> or a <a href="./pick-timex-weekender-watch.html">Timex Weekender</a> work because they give you a polished baseline at a manageable price. Budget style is rarely about one perfect purchase. It is about stacking dependable choices.`,
+          `Picks like the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> or a <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> work because they give you a polished baseline at a manageable price. Budget style is rarely about one perfect purchase. It is about stacking dependable choices.`,
         ],
       },
       {
@@ -3600,9 +2540,9 @@ blogPosts.push(
     heroLabel: "Weekend formulas",
     tags: ["weekend outfits", "casual menswear", "outfit ideas", "relaxed style"],
     relatedPickSlugs: [
-      "levis-511-slim-fit-jeans",
-      "new-balance-574-sneaker",
-      "roark-revival-open-road-overshirt",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
+      "zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket",
     ],
     sections: [
       {
@@ -3615,7 +2555,7 @@ blogPosts.push(
       {
         heading: "Formula 1: dark jeans, tee, and overshirt",
         paragraphs: [
-          `This is the easiest weekend outfit to repeat. Start with dark or mid-wash jeans, add a plain tee, then finish with an overshirt that gives the look some edge and structure. The overshirt matters because it sharpens a simple base without making the outfit feel formal. A piece like the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a> does exactly that.`,
+          `This is the easiest weekend outfit to repeat. Start with dark or mid-wash jeans, add a plain tee, then finish with an overshirt that gives the look some edge and structure. The overshirt matters because it sharpens a simple base without making the outfit feel formal. A piece like the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> does exactly that.`,
           `Keep the tee simple and the fit clean through the leg. Once the silhouette is working, the outfit feels deliberate even though the ingredients are basic. This is what good casual style usually is: not inventive, just controlled.`,
         ],
       },
@@ -3623,7 +2563,7 @@ blogPosts.push(
         heading: "Formula 2: chinos, sweatshirt, and retro sneakers",
         paragraphs: [
           `If you want a softer weekend look, use chinos instead of denim and pair them with a clean crewneck sweatshirt. This gives you comfort without turning the outfit into gym wear. The trick is avoiding sloppy fleece and overly long hems. A sweatshirt should skim the body, not swallow it.`,
-          `Retro runners like the <a href="./pick-new-balance-574-sneaker.html">New Balance 574</a> work well here because they feel relaxed but still classic. The combination of chinos, a crewneck, and heritage sneakers is casual in the best sense: easy, masculine, and hard to get wrong.`,
+          `Retro runners like the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a> work well here because they feel relaxed but still classic. The combination of chinos, a crewneck, and heritage sneakers is casual in the best sense: easy, masculine, and hard to get wrong.`,
         ],
       },
       {
@@ -3637,7 +2577,7 @@ blogPosts.push(
         heading: "Keep the shoes and outerwear aligned",
         paragraphs: [
           `Weekend outfits often fail when the shoes and outerwear belong to different worlds. A clean overshirt with aggressive gym shoes feels mismatched. So does sleek footwear under a bulky athletic hoodie. Try to keep the visual weight consistent from top to bottom.`,
-          `That is why steady pieces like <a href="./pick-levis-511-slim-fit-jeans.html">dark slim jeans</a> and classic sneakers show up so often in good casual wardrobes. They are flexible, but they still have enough shape to keep the outfit coherent. Weekend dressing gets easy once your basics stop fighting each other.`,
+          `That is why steady pieces like <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and classic sneakers show up so often in good casual wardrobes. They are flexible, but they still have enough shape to keep the outfit coherent. Weekend dressing gets easy once your basics stop fighting each other.`,
         ],
       },
     ],
@@ -3655,9 +2595,9 @@ blogPosts.push(
     heroLabel: "Date-night casual",
     tags: ["date night outfits", "casual style", "mens outfit ideas", "smart casual"],
     relatedPickSlugs: [
-      "thursday-scout-chelsea-boot",
-      "banana-republic-slim-fit-ocbd-shirt",
-      "uniqlo-merino-crew-neck-sweater",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
     ],
     sections: [
       {
@@ -3671,14 +2611,14 @@ blogPosts.push(
         heading: "Formula 1: dark jeans, merino sweater, and Chelsea boots",
         paragraphs: [
           `This is one of the strongest casual date outfits a man can own. Dark jeans keep the look grounded, a fine-gauge sweater adds polish, and Chelsea boots sharpen the silhouette without making it feel office-like. The result is streamlined, masculine, and versatile enough for most restaurants or bars.`,
-          `A simple knit like the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a> works especially well because it looks clean without feeling precious. Add the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea boot</a> and the whole outfit reads more confident immediately.`,
+          `A simple knit like the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> works especially well because it looks clean without feeling precious. Add the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a> and the whole outfit reads more confident immediately.`,
         ],
       },
       {
         heading: "Formula 2: open-collar oxford, chinos, and loafers",
         paragraphs: [
           `If the setting is a little brighter or more polished, an open-collar oxford shirt with chinos is hard to beat. It feels grown-up without feeling formal. Keep the shirt neat, the chinos trim, and the shoes clean. This formula works because every piece has some structure, but none of them feel ceremonial.`,
-          `An OCBD like the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic oxford</a> is ideal because it lands between dress shirt and casual button-down. That middle ground is exactly what casual date-night dressing needs.`,
+          `An OCBD like the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> is ideal because it lands between dress shirt and casual button-down. That middle ground is exactly what casual date-night dressing needs.`,
         ],
       },
       {
@@ -3711,8 +2651,8 @@ blogPosts.push(
     tags: ["black jeans", "casual outfits", "mens denim", "outfit ideas"],
     relatedPickSlugs: [
       "thursday-boot-company-captain-men-s-lace-up-boot",
-      "nike-air-force-1-low-white",
-      "patagonia-better-sweater-fleece-jacket",
+      "nike-men-s-court-vision-low-next-nature-shoes",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
     ],
     sections: [
       {
@@ -3733,13 +2673,13 @@ blogPosts.push(
         heading: "Formula 2: black jeans, gray knitwear, and white sneakers",
         paragraphs: [
           `If you want a softer, more modern look, pair black jeans with a gray sweater or knit polo and clean white sneakers. The contrast is still strong, but it feels lighter than the boots version. This is a great everyday uniform because it works for coffee meetings, casual offices, and weekends alike.`,
-          `A dependable white sneaker like the <a href="./pick-nike-air-force-1-low-white.html">Air Force 1</a> can work well here as long as it stays clean. Black denim makes the shoes stand out more, so maintenance matters.`,
+          `A dependable white sneaker like the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a> can work well here as long as it stays clean. Black denim makes the shoes stand out more, so maintenance matters.`,
         ],
       },
       {
         heading: "Formula 3: black jeans and textured outerwear",
         paragraphs: [
-          `Black jeans also pair well with textured jackets because they let the outer layer take the focus. Fleece, suede, denim jackets, and overshirts all benefit from the clean base that black denim creates. Something like the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater</a> gives the outfit dimension without adding noise.`,
+          `Black jeans also pair well with textured jackets because they let the outer layer take the focus. Fleece, suede, denim jackets, and overshirts all benefit from the clean base that black denim creates. Something like the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> gives the outfit dimension without adding noise.`,
           `This is where black jeans become especially practical in cooler weather. They make casual layers feel more intentional than standard light-wash denim usually does, and they are easy to dress up a notch with better footwear if needed.`,
         ],
       },
@@ -3766,7 +2706,7 @@ blogPosts.push(
     tags: ["polo shirt outfits", "casual menswear", "smart casual", "wardrobe basics"],
     relatedPickSlugs: [
       "coofandy-mens-long-sleeve-polo-shirts-classic-casual-button-polo-tee-lightweight-collared-golf-shirt",
-      "dockers-alpha-khaki-slim-fit-chinos",
+      "dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant",
       "cole-haan-men-s-grand-crosscourt-traveler-sneaker",
     ],
     sections: [
@@ -3781,7 +2721,7 @@ blogPosts.push(
         heading: "Formula 1: polo, chinos, and leather sneakers",
         paragraphs: [
           `This is probably the strongest all-purpose polo outfit. A fitted polo with slim chinos and leather sneakers looks clean, modern, and effortless. It works for casual offices, dates, and everyday wear because every piece is relaxed but still controlled.`,
-          `Use a dependable chino like the <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha</a> and finish with low-profile shoes such as the <a href="./pick-cole-haan-men-s-grand-crosscourt-traveler-sneaker.html">Cole Haan Grand Crosscourt Traveler</a>. That combination gives the polo enough support to feel intentional.`,
+          `Use a dependable chino like the <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a> and finish with low-profile shoes such as the <a href="./pick-cole-haan-men-s-grand-crosscourt-traveler-sneaker.html">Cole Haan Grand Crosscourt Traveler</a>. That combination gives the polo enough support to feel intentional.`,
         ],
       },
       {
@@ -3821,8 +2761,8 @@ blogPosts.push(
     tags: ["spring outfits", "casual layers", "mens style", "transitional weather"],
     relatedPickSlugs: [
       "tacvasen-mens-lightweight-windbreaker-full-zip-up-laydown-collar-jackets-light-casual-coat-with-zip-pockets",
-      "everlane-the-slim-fit-chino",
-      "new-balance-574-sneaker",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
     ],
     sections: [
       {
@@ -3836,7 +2776,7 @@ blogPosts.push(
         heading: "Formula 1: tee, overshirt, chinos, sneakers",
         paragraphs: [
           `This is the textbook spring casual outfit because it handles changing temperatures so well. A plain tee keeps the base easy, an overshirt adds structure, chinos keep the outfit clean, and sneakers finish it in a relaxed way. The effect is balanced and easy to wear from morning to evening.`,
-          `A trim pair like the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> helps the whole outfit look sharper, especially when paired with classic sneakers like the <a href="./pick-new-balance-574-sneaker.html">New Balance 574</a>. Spring outfits depend heavily on proportion, so clean pants matter.`,
+          `A trim pair like the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> helps the whole outfit look sharper, especially when paired with classic sneakers like the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>. Spring outfits depend heavily on proportion, so clean pants matter.`,
         ],
       },
       {
@@ -3875,8 +2815,8 @@ blogPosts.push(
     heroLabel: "Office casual",
     tags: ["casual office outfits", "business casual", "mens workwear", "outfit ideas"],
     relatedPickSlugs: [
-      "dockers-alpha-khaki-slim-fit-chinos",
-      "banana-republic-slim-fit-ocbd-shirt",
+      "dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
       "cole-haan-men-s-grand-crosscourt-traveler-sneaker",
     ],
     sections: [
@@ -3891,7 +2831,7 @@ blogPosts.push(
         heading: "Formula 1: oxford shirt, chinos, and leather sneakers",
         paragraphs: [
           `This is one of the safest relaxed-office outfits because it reads competent immediately. A good oxford shirt gives the outfit shape, chinos keep it grounded, and low-profile sneakers remove some formality. The overall effect is modern and easy without looking underdressed.`,
-          `A piece like the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a> with <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha chinos</a> handles most office environments that lean casual but still client-aware.`,
+          `A piece like the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> with <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a> handles most office environments that lean casual but still client-aware.`,
         ],
       },
       {
@@ -3931,8 +2871,8 @@ blogPosts.push(
     tags: ["hoodie outfits", "casual style", "mens streetwear", "outfit ideas"],
     relatedPickSlugs: [
       "hanes-men-s-sweatshirt",
-      "levis-511-slim-fit-jeans",
-      "new-balance-574-sneaker",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
     ],
     sections: [
       {
@@ -3946,7 +2886,7 @@ blogPosts.push(
         heading: "Formula 1: hoodie, jeans, and retro sneakers",
         paragraphs: [
           `This is the simplest version and usually the strongest. Use a plain hoodie in a neutral color, pair it with dark or mid-wash jeans, and finish with heritage sneakers. The goal is not to reinvent anything. It is to keep every piece calm enough that the silhouette does the work.`,
-          `A basic layer like the <a href="./pick-hanes-men-s-sweatshirt.html">Hanes sweatshirt</a> with <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a> already gets you most of the way there.`,
+          `A basic layer like the <a href="./pick-hanes-men-s-sweatshirt.html">Hanes sweatshirt</a> with <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a> already gets you most of the way there.`,
         ],
       },
       {
@@ -3985,9 +2925,9 @@ blogPosts.push(
     heroLabel: "Monochrome casual",
     tags: ["monochrome outfits", "casual menswear", "color strategy", "outfit ideas"],
     relatedPickSlugs: [
-      "patagonia-better-sweater-fleece-jacket",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
       "thursday-boot-company-captain-men-s-lace-up-boot",
-      "everlane-the-slim-fit-chino",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
     ],
     sections: [
       {
@@ -4001,7 +2941,7 @@ blogPosts.push(
         heading: "Formula 1: all-black with texture",
         paragraphs: [
           `Black is the easiest monochrome palette because it feels sharp immediately. Use black jeans or trousers, a charcoal or washed-black knit, and black or dark-brown boots. Once you add texture through fleece, denim, suede, or knitwear, the outfit stops feeling one-note and starts feeling deliberate.`,
-          `A layer like the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater</a> over dark trousers or jeans is a good example. It keeps the outfit inside one dark family while still giving it dimension.`,
+          `A layer like the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> over dark trousers or jeans is a good example. It keeps the outfit inside one dark family while still giving it dimension.`,
         ],
       },
       {
@@ -4015,7 +2955,7 @@ blogPosts.push(
         heading: "Formula 3: stone, cream, and olive neutrals",
         paragraphs: [
           `Monochrome does not have to mean dark. Light neutral outfits built around stone, cream, sand, or olive can feel especially sharp in spring and summer. The key is keeping the colors within the same mood so the outfit still reads as one system.`,
-          `A clean chino like the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> with tonal knitwear and boots like the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain</a> can create a casual outfit that feels elevated without any loud styling moves.`,
+          `A clean chino like the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> with tonal knitwear and boots like the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain</a> can create a casual outfit that feels elevated without any loud styling moves.`,
         ],
       },
       {
@@ -4040,9 +2980,9 @@ blogPosts.push(
     heroLabel: "Travel casual",
     tags: ["travel outfits", "casual menswear", "airport style", "outfit ideas"],
     relatedPickSlugs: [
-      "everlane-the-slim-fit-chino",
-      "new-balance-574-sneaker",
-      "patagonia-better-sweater-fleece-jacket",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
     ],
     sections: [
       {
@@ -4056,14 +2996,14 @@ blogPosts.push(
         heading: "Formula 1: stretch chinos, tee, overshirt, sneakers",
         paragraphs: [
           `This is one of the best all-purpose travel uniforms because it works in nearly every setting. Stretch chinos move better than rigid denim, a tee keeps the base simple, an overshirt gives you temperature control, and classic sneakers stay comfortable through walking and waiting.`,
-          `A reliable foundation like the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a> with <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a> handles airports and city arrival days especially well.`,
+          `A reliable foundation like the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> with <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a> handles airports and city arrival days especially well.`,
         ],
       },
       {
         heading: "Formula 2: fleece layer for cold planes and early mornings",
         paragraphs: [
           `A light fleece is one of the most useful travel layers because it packs warmth without much bulk. Planes, trains, and terminals often run colder than expected, and a fleece keeps you covered without making the outfit heavy or stiff.`,
-          `A piece like the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater</a> also looks better than a random hoodie when you walk straight from transit into a cafe or casual dinner.`,
+          `A piece like the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> also looks better than a random hoodie when you walk straight from transit into a cafe or casual dinner.`,
         ],
       },
       {
@@ -4095,9 +3035,9 @@ blogPosts.push(
     heroLabel: "Overshirt outfits",
     tags: ["overshirt outfits", "casual layers", "mens outfit ideas", "wardrobe basics"],
     relatedPickSlugs: [
-      "roark-revival-open-road-overshirt",
-      "levis-511-slim-fit-jeans",
-      "everlane-the-slim-fit-chino",
+      "zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
     ],
     sections: [
       {
@@ -4111,14 +3051,14 @@ blogPosts.push(
         heading: "Formula 1: overshirt, tee, jeans, sneakers",
         paragraphs: [
           `This is the standard overshirt outfit for a reason. A plain tee keeps the base quiet, jeans keep it grounded, and sneakers keep the mood easy. The overshirt is the piece that makes the outfit feel finished.`,
-          `A solid option like the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Open Road overshirt</a> with <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> creates a dependable everyday look with almost no effort.`,
+          `A solid option like the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> with <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> creates a dependable everyday look with almost no effort.`,
         ],
       },
       {
         heading: "Formula 2: overshirt with chinos for cleaner casual",
         paragraphs: [
           `If you want the outfit to feel a little sharper, swap the jeans for chinos. That one change makes the overshirt look more intentional and moves the whole combination toward smart casual. It is ideal for dinners, casual offices, and daytime social plans.`,
-          `A clean pair like the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane chino</a> gives the overshirt enough support that the look still feels polished.`,
+          `A clean pair like the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> gives the overshirt enough support that the look still feels polished.`,
         ],
       },
       {
@@ -4150,9 +3090,9 @@ blogPosts.push(
     heroLabel: "Everyday casual",
     tags: ["everyday outfits", "casual menswear", "mens outfit ideas", "outfit formulas"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "everlane-the-slim-fit-chino",
-      "new-balance-574-sneaker",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
     ],
     sections: [
       {
@@ -4166,7 +3106,7 @@ blogPosts.push(
         heading: "Formula 1: oxford shirt, chinos, sneakers",
         paragraphs: [
           `This is one of the strongest everyday combinations because it stays casual while still looking complete. An oxford shirt has enough structure to elevate the outfit, chinos keep the silhouette clean, and sneakers stop the whole thing from feeling too polished.`,
-          `A reliable version starts with the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a>, the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane slim fit chino</a>, and <a href="./pick-new-balance-574-sneaker.html">New Balance 574s</a>.`,
+          `A reliable version starts with the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a>, the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a>, and <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a>.`,
         ],
       },
       {
@@ -4206,8 +3146,8 @@ blogPosts.push(
     tags: ["denim jacket outfits", "casual layers", "mens outfit ideas", "casual style"],
     relatedPickSlugs: [
       "levi-s-men-s-trucker",
-      "dockers-alpha-khaki-slim-fit-chinos",
-      "nike-air-force-1-low-white",
+      "dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant",
+      "nike-men-s-court-vision-low-next-nature-shoes",
     ],
     sections: [
       {
@@ -4221,7 +3161,7 @@ blogPosts.push(
         heading: "Formula 1: denim jacket, white tee, chinos",
         paragraphs: [
           `This is one of the cleanest ways to wear the piece because the colors stay straightforward and the silhouette stays sharp. A white or off-white tee keeps the base bright, chinos make the look cleaner than jeans, and the jacket becomes the visual anchor.`,
-          `A classic layer like the <a href="./pick-levi-s-men-s-trucker.html">Levi's Trucker jacket</a> with <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha khakis</a> and <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> is a strong low-effort formula.`,
+          `A classic layer like the <a href="./pick-levi-s-men-s-trucker.html">Levi's Trucker jacket</a> with <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a> and <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a> is a strong low-effort formula.`,
         ],
       },
       {
@@ -4260,9 +3200,9 @@ blogPosts.push(
     heroLabel: "Brunch outfits",
     tags: ["brunch outfits", "casual menswear", "weekend style", "outfit ideas"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "amazon-essentials-slim-fit-chinos",
-      "nike-air-force-1-low-white",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "nike-men-s-court-vision-low-next-nature-shoes",
     ],
     sections: [
       {
@@ -4276,7 +3216,7 @@ blogPosts.push(
         heading: "Formula 1: oxford shirt, chinos, white sneakers",
         paragraphs: [
           `This is the easiest brunch formula because it feels polished without looking stiff. The oxford shirt brings structure, chinos keep the outfit clean, and white sneakers make sure it still feels casual.`,
-          `A setup built around the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a>, <a href="./pick-amazon-essentials-slim-fit-chinos.html">Amazon Essentials slim fit chinos</a>, and <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a> already lands in the right zone.`,
+          `A setup built around the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a>, <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a>, and <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a> already lands in the right zone.`,
         ],
       },
       {
@@ -4316,7 +3256,7 @@ blogPosts.push(
     tags: ["casual friday", "office style", "casual menswear", "outfit ideas"],
     relatedPickSlugs: [
       "coofandy-mens-long-sleeve-polo-shirts-classic-casual-button-polo-tee-lightweight-collared-golf-shirt",
-      "boss-slim-fit-trousers",
+      "plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free",
       "cole-haan-men-s-grand-crosscourt-traveler-sneaker",
     ],
     sections: [
@@ -4331,7 +3271,7 @@ blogPosts.push(
         heading: "Formula 1: polo, tailored trousers, minimalist sneakers",
         paragraphs: [
           `This is one of the most reliable Casual Friday outfits because it feels easier than a dress shirt but still sharp enough for work. A polo keeps the collar, tailored trousers keep the shape, and understated sneakers modernize the look without making it sloppy.`,
-          `A combination like the <a href="./pick-coofandy-mens-long-sleeve-polo-shirts-classic-casual-button-polo-tee-lightweight-collared-golf-shirt.html">COOFANDY long-sleeve polo</a>, <a href="./pick-boss-slim-fit-trousers.html">BOSS slim fit trousers</a>, and <a href="./pick-cole-haan-men-s-grand-crosscourt-traveler-sneaker.html">Cole Haan Crosscourt sneakers</a> fits that balance well.`,
+          `A combination like the <a href="./pick-coofandy-mens-long-sleeve-polo-shirts-classic-casual-button-polo-tee-lightweight-collared-golf-shirt.html">COOFANDY long-sleeve polo</a>, <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a>, and <a href="./pick-cole-haan-men-s-grand-crosscourt-traveler-sneaker.html">Cole Haan Crosscourt sneakers</a> fits that balance well.`,
         ],
       },
       {
@@ -4370,9 +3310,9 @@ blogPosts.push(
     heroLabel: "Minimal casual",
     tags: ["minimal style", "casual menswear", "neutral outfits", "outfit ideas"],
     relatedPickSlugs: [
-      "muji-french-linen-shirt",
-      "madewell-slim-straight-jeans",
-      "nike-air-force-1-low-white",
+      "coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "nike-men-s-court-vision-low-next-nature-shoes",
     ],
     sections: [
       {
@@ -4386,7 +3326,7 @@ blogPosts.push(
         heading: "Formula 1: linen shirt, straight jeans, white sneakers",
         paragraphs: [
           `This is a strong minimal outfit because each piece is straightforward and familiar, but together they look clean and deliberate. A linen shirt adds quiet texture, straight jeans keep the shape grounded, and white sneakers keep the finish light.`,
-          `A clean version might use the <a href="./pick-muji-french-linen-shirt.html">MUJI French linen shirt</a>, <a href="./pick-madewell-slim-straight-jeans.html">Madewell slim straight jeans</a>, and <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1s</a>.`,
+          `A clean version might use the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a>, <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a>, and <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low</a>.`,
         ],
       },
       {
@@ -4425,8 +3365,8 @@ blogPosts.push(
     heroLabel: "Loafer outfits",
     tags: ["loafer outfits", "smart casual", "mens shoes", "outfit ideas"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "dockers-alpha-khaki-slim-fit-chinos",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant",
       "cole-haan-men-s-go-to-plain-toe",
     ],
     sections: [
@@ -4441,7 +3381,7 @@ blogPosts.push(
         heading: "Formula 1: oxford shirt, chinos, loafers",
         paragraphs: [
           `This is the easiest entry point because it gives the loafers the right amount of support. A crisp shirt, controlled trouser line, and clean leather shoe create a combination that feels polished without looking stiff.`,
-          `A dependable setup built around the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a>, <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha chinos</a>, and a sleek leather loafer will handle dinners, casual offices, and weekend plans with almost no adjustment.`,
+          `A dependable setup built around the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a>, <a href="./pick-dockers-mens-straight-fit-signature-lux-cotton-stretch-khaki-pant.html">Dockers Signature Straight Khaki</a>, and a sleek leather loafer will handle dinners, casual offices, and weekend plans with almost no adjustment.`,
         ],
       },
       {
@@ -4481,8 +3421,8 @@ blogPosts.push(
     tags: ["light jacket outfits", "casual layers", "mens jackets", "outfit ideas"],
     relatedPickSlugs: [
       "amazon-essentials-men-s-relaxed-fit-stretch-cotton-utility-jacket",
-      "everlane-the-slim-fit-chino",
-      "new-balance-574-sneaker",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
     ],
     sections: [
       {
@@ -4496,7 +3436,7 @@ blogPosts.push(
         heading: "Formula 1: tee, chinos, cotton jacket",
         paragraphs: [
           `This is the cleanest everyday version because the pieces are simple and easy to repeat. A plain tee keeps the base quiet, chinos provide the line, and the jacket acts as the frame.`,
-          `A straightforward piece like the <a href="./pick-amazon-essentials-men-s-relaxed-fit-stretch-cotton-utility-jacket.html">Amazon Essentials utility jacket</a> over the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane chino</a> works because it gives the outfit presence without trying too hard.`,
+          `A straightforward piece like the <a href="./pick-amazon-essentials-men-s-relaxed-fit-stretch-cotton-utility-jacket.html">Amazon Essentials utility jacket</a> over the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a> works because it gives the outfit presence without trying too hard.`,
         ],
       },
       {
@@ -4535,9 +3475,9 @@ blogPosts.push(
     heroLabel: "Rainy day",
     tags: ["rainy day style", "mens outerwear", "casual boots", "style guide"],
     relatedPickSlugs: [
-      "patagonia-better-sweater-fleece-jacket",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
       "thursday-boot-company-captain-men-s-lace-up-boot",
-      "levis-511-slim-fit-jeans",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
     ],
     sections: [
       {
@@ -4551,14 +3491,14 @@ blogPosts.push(
         heading: "Start with darker, sturdier foundations",
         paragraphs: [
           `Dark denim and matte boots are usually the easiest rainy-day base because they hide splash marks better and keep the outfit looking grounded. Straight or slim denim works especially well because it sits cleanly over boots without bunching.`,
-          `A reliable pairing like <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a> and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain boot</a> gives you that balance of weather-readiness and normal-looking style.`,
+          `A reliable pairing like <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a> and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain boot</a> gives you that balance of weather-readiness and normal-looking style.`,
         ],
       },
       {
         heading: "Keep the outer layer clean and functional",
         paragraphs: [
           `Rain outfits fall apart when the jacket becomes too technical for the rest of the clothes. Clean fleeces, simple shell layers, and restrained field jackets tend to blend into a casual wardrobe much better than loud sport outerwear.`,
-          `Even a practical layer like the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater</a> works best when the rest of the outfit stays simple and controlled.`,
+          `Even a practical layer like the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> works best when the rest of the outfit stays simple and controlled.`,
         ],
       },
       {
@@ -4590,9 +3530,9 @@ blogPosts.push(
     heroLabel: "Better basics",
     tags: ["elevated basics", "wardrobe essentials", "mens style", "casual basics"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "uniqlo-merino-crew-neck-sweater",
-      "fossil-minimalist-watch",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
@@ -4606,14 +3546,14 @@ blogPosts.push(
         heading: "Start with the pieces that touch everything else",
         paragraphs: [
           `The smartest upgrades are the items that interact with the largest share of the wardrobe. A strong oxford shirt, a good merino knit, and one clean accessory will show up across far more outfits than a statement jacket ever will.`,
-          `That is why pieces like the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a> or the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a> tend to earn their place so quickly. They make everything around them look more settled.`,
+          `That is why pieces like the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> or the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a> tend to earn their place so quickly. They make everything around them look more settled.`,
         ],
       },
       {
         heading: "Fabric and surface finish matter more than logos",
         paragraphs: [
           `When an outfit is simple, the eye notices texture and finish immediately. Crisp oxford cloth, smooth merino, matte leather, and denim with some body all make basics feel more serious without making them feel formal.`,
-          `That is also why a restrained accessory such as the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist watch</a> works better than louder jewelry or oversized hardware in a simple outfit.`,
+          `That is also why a restrained accessory such as the <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> works better than louder jewelry or oversized hardware in a simple outfit.`,
         ],
       },
       {
@@ -4645,9 +3585,9 @@ blogPosts.push(
     heroLabel: "Dinner casual",
     tags: ["dinner outfits", "casual menswear", "date style", "outfit ideas"],
     relatedPickSlugs: [
-      "uniqlo-merino-crew-neck-sweater",
-      "levis-511-slim-fit-jeans",
-      "thursday-scout-chelsea-boot",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
+      "levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall",
+      "thursday-boot-company-captain-men-s-lace-up-boot",
     ],
     sections: [
       {
@@ -4661,7 +3601,7 @@ blogPosts.push(
         heading: "Formula 1: merino sweater, dark jeans, Chelsea boots",
         paragraphs: [
           `This combination works because every piece feels easy on its own, but together they look composed. The knit adds softness, the denim keeps the outfit grounded, and the boots bring enough polish for the evening.`,
-          `A setup with the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a>, <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 jeans</a>, and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea boot</a> lands in that sweet spot naturally.`,
+          `A setup with the <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a>, <a href="./pick-levi-s-men-s-514-straight-fit-cut-jeans-also-available-in-big-tall.html">Levi&#39;s 514 Straight Jeans</a>, and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain Boot</a> lands in that sweet spot naturally.`,
         ],
       },
       {
@@ -4700,9 +3640,9 @@ blogPosts.push(
     heroLabel: "Weekend uniform",
     tags: ["spring outfits", "weekend style", "wardrobe basics", "mens casual"],
     relatedPickSlugs: [
-      "roark-revival-open-road-overshirt",
-      "everlane-the-slim-fit-chino",
-      "ray-ban-rb2140-wayfarer-sunglasses",
+      "zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket",
+      "amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant",
+      "ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit",
     ],
     sections: [
       {
@@ -4716,14 +3656,14 @@ blogPosts.push(
         heading: "The core formula: tee, chinos, overshirt, sneakers",
         paragraphs: [
           `This is one of the easiest spring combinations because it covers comfort, structure, and mild weather in one move. The tee keeps things casual, chinos clean up the line, and the overshirt brings enough shape to make the outfit feel finished.`,
-          `A useful version starts with the <a href="./pick-roark-revival-open-road-overshirt.html">Roark overshirt</a> and the <a href="./pick-everlane-the-slim-fit-chino.html">Everlane chino</a>, then lets understated sneakers and sunglasses finish the rest.`,
+          `A useful version starts with the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a> and the <a href="./pick-amazon-essentials-mens-slim-fit-wrinkle-resistant-flat-front-chino-pant.html">Amazon Essentials Wrinkle-Resistant Chino</a>, then lets understated sneakers and sunglasses finish the rest.`,
         ],
       },
       {
         heading: "Why accessories matter more in spring",
         paragraphs: [
           `Because the clothes are lighter, accessories become more visible. A pair of sunglasses, a clean watch, or a better belt can quietly upgrade the whole outfit without adding weight.`,
-          `That is where classics like the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban Wayfarer</a> keep earning space. They do not change the outfit's identity, but they do sharpen the final impression.`,
+          `That is where classics like the <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> keep earning space. They do not change the outfit's identity, but they do sharpen the final impression.`,
         ],
       },
       {
@@ -4755,9 +3695,9 @@ blogPosts.push(
     heroLabel: "Daytime date",
     tags: ["daytime date outfits", "mens style", "casual date style", "outfit ideas"],
     relatedPickSlugs: [
-      "banana-republic-slim-fit-ocbd-shirt",
-      "new-balance-574-sneaker",
-      "fossil-minimalist-watch",
+      "alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket",
+      "hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
     ],
     sections: [
       {
@@ -4771,14 +3711,14 @@ blogPosts.push(
         heading: "Formula 1: oxford shirt, chinos, clean sneakers",
         paragraphs: [
           `This formula works because it feels social without trying too hard. The shirt brings polish, the chinos keep the line tidy, and the sneakers stop the outfit from becoming stiff.`,
-          `A combination built around the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic OCBD</a> and clean casual sneakers such as the <a href="./pick-new-balance-574-sneaker.html">New Balance 574</a> usually gets the tone right immediately.`,
+          `A combination built around the <a href="./pick-alimens-gentle-mens-solid-oxford-shirt-long-sleeve-dress-shirt-work-casual-button-down-shirts-with-pocket.html">Alimens &amp; Gentle Oxford Button-Down</a> and clean casual sneakers such as the <a href="./pick-hopelong-retro-tennis-shoes-trainers-skateboard-shoes-lace-up-sneakers-lightweight-comfort-walking-footwear-for-women-men.html">Hopelong Retro Tennis Sneaker</a> usually gets the tone right immediately.`,
         ],
       },
       {
         heading: "Let one small accessory do the finishing",
         paragraphs: [
           `A simple accessory can help a daytime outfit feel complete without making it look styled to death. The key is choosing something restrained enough that it disappears into the overall look.`,
-          `A watch like the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist</a> works because it supports the outfit instead of becoming the conversation.`,
+          `A watch like the <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> works because it supports the outfit instead of becoming the conversation.`,
         ],
       },
       {
@@ -4810,9 +3750,9 @@ blogPosts.push(
     heroLabel: "Summer nights",
     tags: ["summer night outfits", "smart casual", "mens summer style", "outfit ideas"],
     relatedPickSlugs: [
-      "muji-french-linen-shirt",
-      "boss-slim-fit-trousers",
-      "ray-ban-rb2140-wayfarer-sunglasses",
+      "coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt",
+      "plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free",
+      "ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit",
     ],
     sections: [
       {
@@ -4826,7 +3766,7 @@ blogPosts.push(
         heading: "Formula 1: linen shirt with sharper trousers",
         paragraphs: [
           `One of the easiest warm-evening combinations is a linen shirt with trim trousers and simple loafers or sleek sneakers. The shirt keeps the outfit breathable, while the trousers add enough shape to make it feel evening-ready.`,
-          `A piece like the <a href="./pick-muji-french-linen-shirt.html">MUJI French linen shirt</a> paired with <a href="./pick-boss-slim-fit-trousers.html">BOSS slim-fit trousers</a> gets that balance right without forcing the outfit into formal territory.`,
+          `A piece like the <a href="./pick-coofandy-men-s-linen-shirts-short-sleeve-casual-shirts-button-down-shirt-for-men-beach-summer-wedding-shirt.html">COOFANDY Linen Short Sleeve Button Down Shirt</a> paired with <a href="./pick-plaid-plain-men-s-slim-fit-dress-pants-stretch-khaki-pants-wrinkle-free.html">Plaid&amp;Plain Slim Dress Pant</a> gets that balance right without forcing the outfit into formal territory.`,
         ],
       },
       {
@@ -4865,9 +3805,9 @@ blogPosts.push(
     heroLabel: "Accessory guide",
     tags: ["mens accessories", "buying guide", "watches", "sunglasses"],
     relatedPickSlugs: [
-      "fossil-minimalist-watch",
-      "ray-ban-rb2140-wayfarer-sunglasses",
-      "carhartt-wip-watch-hat-beanie",
+      "burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men",
+      "ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit",
+      "npjy-baseball-cap-golf-dad-hat-adjustable-original-classic-low-profile-cotton-hat-unconstructed-plain-cap-men-women",
     ],
     sections: [
       {
@@ -4881,21 +3821,21 @@ blogPosts.push(
         heading: "A simple watch is usually the best first move",
         paragraphs: [
           `Watches help because they bring intention to an outfit without changing its category. A clean dial and restrained strap can make even basic casual clothes feel more settled.`,
-          `That is also why something like the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist watch</a> tends to work across many different outfits. It does not ask the rest of the wardrobe to do anything special.`,
+          `That is also why something like the <a href="./pick-burei-men-wrist-watches-fashion-minimalist-analog-quartz-waterproof-watches-for-men.html">BUREI Minimalist Quartz Watch</a> tends to work across many different outfits. It does not ask the rest of the wardrobe to do anything special.`,
         ],
       },
       {
         heading: "Sunglasses should fit the face and the wardrobe",
         paragraphs: [
           `Sunglasses are one of the fastest ways to improve a daytime outfit, but only when the frame shape and finish feel consistent with the clothes. Loud novelty frames can dominate a simple outfit in the wrong way.`,
-          `Classic shapes such as the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban Wayfarer</a> keep showing up because they sharpen the look without forcing a complete style shift.`,
+          `Classic shapes such as the <a href="./pick-ray-ban-rb3016-clubmaster-sunglasses-for-men-for-women-bundle-with-accessory-eyewear-kit.html">Ray-Ban Clubmaster Sunglasses</a> keep showing up because they sharpen the look without forcing a complete style shift.`,
         ],
       },
       {
         heading: "Cold-weather accessories are better when they stay plain",
         paragraphs: [
           `Beanies, scarves, and gloves should usually keep a low profile. Their job is to support the outfit and the weather, not become the main event.`,
-          `That is why a clean option like the <a href="./pick-carhartt-wip-watch-hat-beanie.html">Carhartt WIP beanie</a> works better than something louder in most everyday wardrobes.`,
+          `That is why a clean option like the <a href="./pick-npjy-baseball-cap-golf-dad-hat-adjustable-original-classic-low-profile-cotton-hat-unconstructed-plain-cap-men-women.html">NPJY Classic Cotton Dad Cap</a> works better than something louder in most everyday wardrobes.`,
         ],
       },
       {
@@ -4920,8 +3860,8 @@ blogPosts.push(
     heroLabel: "Transitional weather",
     tags: ["transitional weather", "wardrobe basics", "layering", "mens essentials"],
     relatedPickSlugs: [
-      "roark-revival-open-road-overshirt",
-      "uniqlo-merino-crew-neck-sweater",
+      "zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket",
+      "amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater",
       "thursday-boot-company-captain-men-s-lace-up-boot",
     ],
     sections: [
@@ -4936,7 +3876,7 @@ blogPosts.push(
         heading: "Build around three adaptable pieces",
         paragraphs: [
           `Most men can solve transitional weather with an overshirt, a lightweight knit, and one dependable pair of boots or sturdy sneakers. Those three categories cover a surprising amount of range when the colors and fit stay controlled.`,
-          `Pieces like the <a href="./pick-roark-revival-open-road-overshirt.html">Roark overshirt</a>, <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo merino crew</a>, and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain</a> are useful because they do not feel locked to one exact forecast.`,
+          `Pieces like the <a href="./pick-zity-men-s-flannel-hoodie-shirts-casual-button-down-plaid-shirt-jackets-for-men-long-sleeve-stylish-hooded-with-pocket.html">ZITY Hooded Flannel Shirt Jacket</a>, <a href="./pick-amazon-essentials-men-s-long-sleeve-soft-touch-waffle-stitch-crewneck-sweater.html">Amazon Essentials Waffle Crewneck Sweater</a>, and the <a href="./pick-thursday-boot-company-captain-men-s-lace-up-boot.html">Thursday Captain</a> are useful because they do not feel locked to one exact forecast.`,
         ],
       },
       {

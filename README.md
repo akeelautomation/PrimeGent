@@ -32,13 +32,9 @@ For the affiliate publisher, copy `.env.example` to `.env.local` for local-only 
 3. Re-run `node scripts/generate-site.mjs`.
 4. Verify the new article appears on `blog.html` and the corresponding `blog-[slug].html` page exists.
 
-## Amazon affiliate tag
+## Affiliate links
 
-The generated pick pages use placeholder Amazon URLs with `AFFILIATE_TAG`.
-
-1. Copy `.env.example` to `.env.local` and update `AFFILIATE_TAG` there if you want a local reference.
-2. Find and replace `AFFILIATE_TAG` across the generated HTML files and `scripts/generate-site.mjs`.
-3. Re-run the generator if you changed the source data file.
+Use only finalized affiliate URLs in product data. Do not commit placeholder Amazon product URLs or placeholder tracking tags.
 
 ## Secret safety
 
