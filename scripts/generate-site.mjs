@@ -534,7 +534,10 @@ function getManualAffiliateCards() {
           .map((card) =>
             card.replace(
               /<img class="pick-card__image"([^>]*?)>/g,
-              '<img class="pick-card__image"$1 onerror="this.onerror=null;this.src=\'./static/og-cover.svg\'">',
+              (match, attrs) =>
+                attrs.includes("onerror=")
+                  ? match
+                  : `<img class="pick-card__image"${attrs} onerror="this.onerror=null;this.src='./static/og-cover.svg'">`,
             ),
           )
           .join("")
@@ -2512,6 +2515,234 @@ picks.push(
     ],
   },
 );
+
+blogPosts.push(
+  {
+    slug: "blog-casual-semi-classic-outfits-men-chinos-loafers",
+    title: "Casual Semi-Classic Outfits for Men: Chinos, Loafers, and Clean Shirts",
+    category: "Outfit Ideas",
+    date: "2026-05-03",
+    readTime: "8 min read",
+    excerpt:
+      "Two polished casual formulas built only from PrimeGent product picks, with shirts, chinos, loafers, and simple accessories doing the work.",
+    description:
+      "Casual semi-classic outfit ideas for men using only linked PrimeGent products already available on the site.",
+    heroLabel: "Semi-classic",
+    tags: ["casual semi classic", "mens outfit ideas", "chinos", "loafers", "smart casual"],
+    relatedPickSlugs: [
+      "banana-republic-slim-fit-ocbd-shirt",
+      "dockers-alpha-khaki-slim-fit-chinos",
+      "steve-madden-mens-rhodez",
+      "fossil-minimalist-watch",
+    ],
+    sections: [
+      {
+        heading: "Start with clean pieces, not formal pieces",
+        paragraphs: [
+          `A casual semi-classic outfit works best when the clothes look considered without becoming stiff. The point is not to dress like an office uniform. The point is to use familiar pieces from the PrimeGent catalog in a cleaner order: a button-down, a sharp pant, a refined shoe, and one quiet accessory when the outfit needs polish.`,
+          `That is why the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a>, <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a>, <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>, and <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist Watch</a> make a useful first formula. Every product is already on PrimeGent, and each one has a clear role.`,
+        ],
+      },
+      {
+        heading: "Formula 1: OCBD, chinos, and penny loafers",
+        paragraphs: [
+          `Wear the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> with the <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a> and the <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>. This is the most direct casual semi-classic outfit because each product looks polished on its own, but none of them pushes the outfit into full dresswear.`,
+          `The shirt gives the outfit structure, the chinos keep the lower half clean, and the loafer brings a classic shape without needing a suit. If the outfit feels too plain, the <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist Watch</a> adds just enough finish while staying inside the same calm style lane.`,
+        ],
+      },
+      {
+        heading: "Formula 2: Trousers with a relaxed shirt",
+        paragraphs: [
+          `For a slightly sharper version, use the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> with the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> and the <a href="./pick-ted-baker-mens-parliament.html">Ted Baker Parliament Penny Loafer</a>. This combination feels more evening-ready, but it still reads as casual because the shirt is approachable and the loafer is easy to wear.`,
+          `The useful move is keeping the product mix narrow. The <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> supply the line, while the <a href="./pick-ted-baker-mens-parliament.html">Ted Baker Parliament Penny Loafer</a> keeps the outfit classic without making it feel ceremonial.`,
+        ],
+      },
+      {
+        heading: "Use the watch to finish, not dominate",
+        paragraphs: [
+          `The <a href="./pick-fossil-minimalist-watch.html">Fossil Minimalist Watch</a> is the right kind of accessory for this style because it supports the outfit instead of competing with it. With the <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a> and <a href="./pick-steve-madden-mens-rhodez.html">Steve Madden Rhodez Penny Loafer</a>, it makes the outfit feel intentional even when the rest of the look is simple.`,
+          `That matters for casual semi-classic dressing. The outfit should look like it belongs at dinner, on a casual office day, or at a clean weekend event without relying on loud details.`,
+        ],
+      },
+      {
+        heading: "Why these products work together",
+        paragraphs: [
+          `The reason this formula is easy to repeat is that the products do different jobs. The <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> frames the upper half, the <a href="./pick-dockers-alpha-khaki-slim-fit-chinos.html">Dockers Alpha Khaki Slim Fit Chinos</a> or <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> clean up the silhouette, and the loafers bring the classic part of the outfit.`,
+          `Nothing here requires products outside the website. The whole outfit can be built from PrimeGent picks, which keeps the recommendation practical and easy to follow.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-semi-classic-casual-men-outfit-ideas-trousers-boots",
+    title: "Semi-Classic Casual Men Outfit Ideas Built Around Trousers and Boots",
+    category: "Outfit Ideas",
+    date: "2026-05-03",
+    readTime: "8 min read",
+    excerpt:
+      "A cleaner casual outfit guide using only PrimeGent products: trousers, merino knitwear, oxford shirts, boots, and subtle accessories.",
+    description:
+      "Semi-classic casual outfit ideas for men built only from existing PrimeGent product pages.",
+    heroLabel: "Trousers boots",
+    tags: ["semi classic casual", "mens outfits", "trousers", "chelsea boots", "casual style"],
+    relatedPickSlugs: [
+      "boss-slim-fit-trousers",
+      "uniqlo-merino-crew-neck-sweater",
+      "thursday-scout-chelsea-boot",
+      "ray-ban-rb2140-wayfarer-sunglasses",
+    ],
+    sections: [
+      {
+        heading: "Build the outfit around one refined base",
+        paragraphs: [
+          `For men who want casual clothing to look more grown-up, the easiest move is to start with a refined base from the site. The <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> do that immediately because they clean up the line of the outfit before any other product is added.`,
+          `From there, the outfit can stay relaxed with the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> and <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>. The result is casual, but the shape is much more controlled than a basic weekend outfit.`,
+        ],
+      },
+      {
+        heading: "Formula 1: Trousers, merino, and Chelsea boots",
+        paragraphs: [
+          `Wear the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> with the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a> and the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>. This is the clearest semi-classic casual outfit in the group because the products share a clean, quiet tone.`,
+          `The sweater softens the trousers, and the Chelsea boot keeps the outfit from feeling too office-heavy. It works well when a sneaker outfit feels too relaxed but a dress shoe outfit feels like too much.`,
+        ],
+      },
+      {
+        heading: "Formula 2: Oxford shirt under merino",
+        paragraphs: [
+          `Layer the <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a> under the <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a>, then keep the lower half simple with the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a>. Add the <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a> when you want the outfit to feel finished.`,
+          `This formula uses classic product categories, but it stays casual because the knitwear lowers the formality and the boot adds texture.`,
+        ],
+      },
+      {
+        heading: "Add sunglasses when the outfit is daytime",
+        paragraphs: [
+          `For daytime wear, the <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a> make sense with the <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a> and <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>. The shape is classic enough to match the outfit without making the recommendation feel forced.`,
+          `The important part is restraint. The <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a> should finish the outfit, while the trousers, sweater, and boots still do the main work.`,
+        ],
+      },
+      {
+        heading: "Keep the product list disciplined",
+        paragraphs: [
+          `This article works because every recommendation stays inside the PrimeGent product catalog. The <a href="./pick-banana-republic-slim-fit-ocbd-shirt.html">Banana Republic Slim Fit OCBD Shirt</a>, <a href="./pick-uniqlo-merino-crew-neck-sweater.html">Uniqlo Merino Crew Neck Sweater</a>, <a href="./pick-boss-slim-fit-trousers.html">BOSS Slim Fit Trousers</a>, <a href="./pick-thursday-scout-chelsea-boot.html">Thursday Scout Chelsea Boot</a>, and <a href="./pick-ray-ban-rb2140-wayfarer-sunglasses.html">Ray-Ban RB2140 Original Wayfarer Sunglasses</a> are enough to build the look.`,
+          `That is also the buying lesson. Semi-classic casual style does not need a long shopping list. It needs a few clean products that cooperate.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-casual-men-outfit-ideas-weekends-errands-dinners",
+    title: "Casual Men Outfit Ideas for Weekends, Errands, and Easy Dinners",
+    category: "Outfit Ideas",
+    date: "2026-05-03",
+    readTime: "8 min read",
+    excerpt:
+      "Relaxed outfit formulas using only PrimeGent picks, including overshirts, jeans, fleece, sneakers, and watches.",
+    description:
+      "Casual men outfit ideas for weekends and relaxed evenings using only existing PrimeGent products.",
+    heroLabel: "Casual days",
+    tags: ["casual men outfit", "weekend outfits", "mens sneakers", "jeans", "overshirts"],
+    relatedPickSlugs: [
+      "roark-revival-open-road-overshirt",
+      "levis-511-slim-fit-jeans",
+      "new-balance-574-sneaker",
+      "timex-weekender-watch",
+    ],
+    sections: [
+      {
+        heading: "Make casual look intentional",
+        paragraphs: [
+          `A good casual men outfit should feel easy, but it still needs structure. PrimeGent already has the pieces to do that without reaching outside the website: the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a>, <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a>, <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>, and <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a>.`,
+          `That combination is casual, but it is not random. The overshirt gives the outfit shape, the jeans keep it familiar, the sneaker makes it wearable, and the watch adds a simple finishing point.`,
+        ],
+      },
+      {
+        heading: "Formula 1: Overshirt, slim jeans, and New Balance",
+        paragraphs: [
+          `Wear the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>. This is the easiest casual formula here because every product is relaxed but still neat.`,
+          `The <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> makes the outfit feel layered even when the rest is simple. The <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a> keeps the outfit comfortable enough for a full day.`,
+        ],
+      },
+      {
+        heading: "Formula 2: Fleece, jeans, and white sneakers",
+        paragraphs: [
+          `For cooler weather, wear the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a> with the <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> and the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>. This gives the outfit a cleaner casual base while staying very wearable.`,
+          `The fleece makes sense for errands and travel days, while the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a> keeps the lower half bright and simple.`,
+        ],
+      },
+      {
+        heading: "Use the watch when the outfit needs a small lift",
+        paragraphs: [
+          `The <a href="./pick-timex-weekender-watch.html">Timex Weekender Watch</a> works especially well with the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a> and <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a>. It is casual enough to match the outfit but still gives the look a finished detail.`,
+          `That small detail matters for an easy dinner or casual meet-up. The outfit still feels relaxed, but it looks chosen instead of thrown together.`,
+        ],
+      },
+      {
+        heading: "Keep every piece useful on its own",
+        paragraphs: [
+          `The strongest part of this casual formula is that each product works outside the full outfit. The <a href="./pick-levis-511-slim-fit-jeans.html">Levi's 511 Slim Fit Jeans</a> can rotate with the <a href="./pick-patagonia-better-sweater-fleece-jacket.html">Patagonia Better Sweater Fleece Jacket</a>, the <a href="./pick-roark-revival-open-road-overshirt.html">Roark Revival Open Road Overshirt</a>, the <a href="./pick-new-balance-574-sneaker.html">New Balance 574 Sneaker</a>, or the <a href="./pick-nike-air-force-1-low-white.html">Nike Air Force 1 Low White</a>.`,
+          `That is what makes the product recommendations natural: they solve the outfit, but they also earn repeat wear.`,
+        ],
+      },
+    ],
+  },
+  {
+    slug: "blog-relaxed-casual-men-outfits-hoodies-cargo-sneakers",
+    title: "Relaxed Casual Men Outfits Built Around Hoodies, Cargo Pants, and Sneakers",
+    category: "Outfit Ideas",
+    date: "2026-05-03",
+    readTime: "8 min read",
+    excerpt:
+      "A relaxed casual outfit guide using only PrimeGent picks, from hoodies and cargo pants to sneakers, caps, and beanies.",
+    description:
+      "Relaxed casual men outfits built from existing PrimeGent product pages only.",
+    heroLabel: "Relaxed casual",
+    tags: ["casual men outfit", "hoodie outfits", "cargo pants", "sneakers", "relaxed style"],
+    relatedPickSlugs: [
+      "jmierr-mens-casual-cotton-hooded-collar-drawstring-hoodies-pullover-sweatshirts-casual-long-sleeve-shirts",
+      "match-men-s-casual-cargo-pants",
+      "converse-unisex-adult-chuck-taylor-all-star-low-top-sneaker",
+      "npjy-baseball-cap-golf-dad-hat-adjustable-original-classic-low-profile-cotton-hat-unconstructed-plain-cap-men-women",
+    ],
+    sections: [
+      {
+        heading: "Relaxed does not have to mean careless",
+        paragraphs: [
+          `A relaxed casual men outfit can still look deliberate when the products work together. The <a href="./pick-jmierr-mens-casual-cotton-hooded-collar-drawstring-hoodies-pullover-sweatshirts-casual-long-sleeve-shirts.html">JMIERR Hooded Collar Pullover</a>, <a href="./pick-match-men-s-casual-cargo-pants.html">Match Casual Cargo Pant</a>, and <a href="./pick-converse-unisex-adult-chuck-taylor-all-star-low-top-sneaker.html">Converse Chuck Taylor All Star Low Top Sneaker</a> give you a simple base from products already on PrimeGent.`,
+          `The hoodie brings softness, the cargo pant adds utility, and the sneaker keeps the outfit grounded. Nothing in the formula needs to come from outside the site.`,
+        ],
+      },
+      {
+        heading: "Formula 1: Hoodie, cargo pant, and Converse",
+        paragraphs: [
+          `Wear the <a href="./pick-jmierr-mens-casual-cotton-hooded-collar-drawstring-hoodies-pullover-sweatshirts-casual-long-sleeve-shirts.html">JMIERR Hooded Collar Pullover</a> with the <a href="./pick-match-men-s-casual-cargo-pants.html">Match Casual Cargo Pant</a> and the <a href="./pick-converse-unisex-adult-chuck-taylor-all-star-low-top-sneaker.html">Converse Chuck Taylor All Star Low Top Sneaker</a>. This is the most relaxed outfit in the article, but it still has a clear shape.`,
+          `The <a href="./pick-match-men-s-casual-cargo-pants.html">Match Casual Cargo Pant</a> gives the outfit more visual interest than a plain sweatpant, while the <a href="./pick-converse-unisex-adult-chuck-taylor-all-star-low-top-sneaker.html">Converse Chuck Taylor All Star Low Top Sneaker</a> keeps the look familiar.`,
+        ],
+      },
+      {
+        heading: "Formula 2: Sweatshirt with cleaner sneakers",
+        paragraphs: [
+          `For a slightly cleaner version, wear the <a href="./pick-hanes-men-s-sweatshirt.html">Hanes Men's Sweatshirt</a> with the <a href="./pick-wrangler-authentics-men-s-regular-tapered-cargo-pant.html">Wrangler Authentics Regular Tapered Cargo Pant</a> and the <a href="./pick-nike-men-s-court-vision-low-next-nature-shoes.html">Nike Court Vision Low Next Nature Shoes</a>.`,
+          `This product mix still reads casual, but the cleaner sneaker and tapered cargo pant make the outfit easier to wear outside the house.`,
+        ],
+      },
+      {
+        heading: "Use caps and beanies as practical finishers",
+        paragraphs: [
+          `The <a href="./pick-npjy-baseball-cap-golf-dad-hat-adjustable-original-classic-low-profile-cotton-hat-unconstructed-plain-cap-men-women.html">NPJY Low Profile Cotton Dad Hat</a> works with the <a href="./pick-jmierr-mens-casual-cotton-hooded-collar-drawstring-hoodies-pullover-sweatshirts-casual-long-sleeve-shirts.html">JMIERR Hooded Collar Pullover</a> when the outfit is built for a mild day. For colder weather, use the <a href="./pick-carhartt-wip-watch-hat-beanie.html">Carhartt WIP Watch Hat Beanie</a> with the <a href="./pick-hanes-men-s-sweatshirt.html">Hanes Men's Sweatshirt</a>.`,
+          `Both accessories are already PrimeGent picks, and both support the outfit without changing its relaxed purpose.`,
+        ],
+      },
+      {
+        heading: "Why this casual formula works",
+        paragraphs: [
+          `The outfit succeeds because every linked product has a practical job. The <a href="./pick-jmierr-mens-casual-cotton-hooded-collar-drawstring-hoodies-pullover-sweatshirts-casual-long-sleeve-shirts.html">JMIERR Hooded Collar Pullover</a> and <a href="./pick-hanes-men-s-sweatshirt.html">Hanes Men's Sweatshirt</a> handle the upper half, the <a href="./pick-match-men-s-casual-cargo-pants.html">Match Casual Cargo Pant</a> and <a href="./pick-wrangler-authentics-men-s-regular-tapered-cargo-pant.html">Wrangler Authentics Regular Tapered Cargo Pant</a> keep the lower half useful, and the sneakers make the outfit easy to wear.`,
+          `The result is relaxed casual style built only from products already on your website, with the product mentions placed where they naturally help the reader copy the outfit.`,
+        ],
+      },
+    ],
+  },
+);
+
 blogPosts.push(
   {
     slug: "blog-simple-casual-outfit-formulas-men",
