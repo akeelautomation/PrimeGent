@@ -10,6 +10,15 @@ const root = process.env.PUBLISHER_SYNC_ROOT
   ? path.resolve(process.env.PUBLISHER_SYNC_ROOT)
   : path.resolve(__dirname, "..");
 const port = Number.parseInt(process.env.PUBLISHER_SYNC_PORT || "8791", 10);
+const googleAnalyticsTag = `<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9M5G41HTBK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9M5G41HTBK');
+    </script>`;
 
 const corsHeaders = {
   "access-control-allow-origin": "*",
@@ -409,6 +418,7 @@ function buildGeneratedArticlePage(post, catalog) {
     <meta name="twitter:title" content="${escapeHtml(post.title)} | PrimeGent">
     <meta name="twitter:description" content="${escapeHtml(post.description)}">
     <meta name="twitter:image" content="https://primegent.pages.dev/static/og-cover.svg">
+    ${googleAnalyticsTag}
   </head>
   <body data-page="blog" class="page-article">
     <header class="site-header">

@@ -4,6 +4,15 @@ import path from "node:path";
 const root = process.cwd();
 const siteUrl = "https://primegent.pages.dev";
 const ogImage = `${siteUrl}/static/og-cover.svg`;
+const googleAnalyticsTag = `<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9M5G41HTBK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9M5G41HTBK');
+    </script>`;
 
 function writeFile(relativePath, content) {
   const absolutePath = path.join(root, relativePath);
@@ -466,6 +475,7 @@ function renderHead({
     <meta name="twitter:description" content="${escapeHtml(description)}">
     <meta name="twitter:image" content="${escapeHtml(imageUrl)}">
     <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}">
+    ${googleAnalyticsTag}
     ${extraHead}
     <script type="application/ld+json">${safeJson(schema)}</script>
   `;
@@ -887,6 +897,7 @@ function renderLegacyPrivacyRedirectPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>PrimeGent Privacy Policy Redirect</title>
         <link rel="canonical" href="${siteUrl}/privacy-policy.html">
+        ${googleAnalyticsTag}
       </head>
       <body>
         <p>Redirecting to <a href="./privacy-policy.html">the PrimeGent privacy policy</a>.</p>
@@ -906,6 +917,7 @@ function renderRedirectPage(targetPath, title) {
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>${escapeHtml(title)}</title>
         <link rel="canonical" href="${canonicalUrl}">
+        ${googleAnalyticsTag}
       </head>
       <body>
         <p>Redirecting to <a href="${targetPath}">${escapeHtml(title)}</a>.</p>
