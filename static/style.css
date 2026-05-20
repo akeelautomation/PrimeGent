@@ -512,6 +512,8 @@ body.menu-open .mobile-menu__panel{transform:translateX(0)}
 .card-visual--basics{background:linear-gradient(160deg,rgba(107,101,86,.56),rgba(24,23,20,.96))}
 .card-visual--activewear{background:linear-gradient(160deg,rgba(73,77,83,.58),rgba(18,19,21,.96))}
 .card-visual--article{background:linear-gradient(160deg,rgba(67,74,62,.58),rgba(21,22,18,.96))}
+.blog-card__thumb{min-height:0;aspect-ratio:16/10;padding:0}
+.blog-card__thumb::after{background:linear-gradient(180deg,transparent 48%,rgba(12,16,15,.28))}
 
 .pick-card__body,.blog-card__body{
   display:flex;
@@ -727,6 +729,11 @@ label{
 .article-grid{grid-template-columns:minmax(0,2.3fr) minmax(17rem,.9fr);align-items:start}
 .article-grid--post{grid-template-columns:minmax(0,2.5fr) minmax(17rem,.9fr)}
 .article-content{display:grid;gap:1.2rem}
+.generated-blog-image{display:grid;place-items:center;overflow:hidden;margin:0 0 .6rem;border-radius:18px;background:rgba(17,16,13,.22);border:1px solid rgba(184,154,103,.14)}
+.generated-blog-image img{display:block;width:100%;max-height:min(72vh,720px);object-fit:contain}
+.product-mention-box{padding:1rem;border:1px solid rgba(184,154,103,.18);border-radius:14px;background:rgba(184,154,103,.07)}
+.product-mention-box h3{margin:0 0 .7rem;color:var(--color-gold);font-size:.86rem;text-transform:uppercase;letter-spacing:.16em}
+.product-mention-box p{margin:.55rem 0 0}
 .sidebar{display:grid;gap:1.2rem;position:sticky;top:6rem}
 .bullet-list{margin:0;padding-left:1.1rem}
 .bullet-list li+li{margin-top:.55rem}

@@ -1,4 +1,5 @@
 .wrangler/
+.blog-generator-tmp/
 node_modules/
 .env
 .env.*

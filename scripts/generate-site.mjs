@@ -321,11 +321,13 @@ function renderPickCard(pick) {
 }
 
 function renderBlogCard(post) {
+  const thumbnail = post.image
+    ? `<div class="card-visual card-visual--article blog-card__thumb" aria-hidden="true"><img src="${escapeHtml(post.image)}" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='./static/og-cover.svg'"></div>`
+    : `<div class="card-visual card-visual--article blog-card__thumb" aria-hidden="true"><img src="./static/og-cover.svg" alt="" loading="lazy" decoding="async"></div>`;
+
   return `
     <article class="card blog-card" data-blog-card data-category="${post.category.toLowerCase().replaceAll(" ", "-")}" data-title="${escapeHtml(post.title.toLowerCase())}" data-tags="${escapeHtml(post.tags.join("|").toLowerCase())}">
-      <div class="card-visual card-visual--article" aria-hidden="true">
-        <span>${escapeHtml(post.heroLabel)}</span>
-      </div>
+      ${thumbnail}
       <div class="blog-card__body">
         <div class="blog-card__eyebrow">
           <span class="badge">${escapeHtml(post.category)}</span>
@@ -996,12 +998,19 @@ function renderPickPage(pick) {
 }
 
 function renderBlogPost(post) {
+  const articleImage = post.image || ogImage;
+  const articleImageAlt = post.imageAlt || post.title;
+  const relatedProducts = (post.relatedPickSlugs || [])
+    .map((slug) => getPickMap().get(slug))
+    .filter(Boolean);
   return renderPage({
     pageId: "blog",
     title: `${post.title} | PrimeGent`,
     description: post.description,
     canonicalPath: `${post.slug}.html`,
     ogType: "article",
+    imageUrl: articleImage,
+    imageAlt: articleImageAlt,
     extraHead: `<meta property="article:published_time" content="${post.date}"><meta property="article:author" content="PrimeGent Editorial"><meta property="article:section" content="${escapeHtml(post.category)}">`,
     schema: {
       "@context": "https://schema.org",
@@ -1012,7 +1021,7 @@ function renderBlogPost(post) {
       dateModified: post.date,
       author: { "@type": "Organization", name: "PrimeGent Editorial" },
       publisher: { "@type": "Organization", name: "PrimeGent" },
-      image: ogImage,
+      image: articleImage,
       mainEntityOfPage: `${siteUrl}/${post.slug}.html`,
       articleSection: post.category,
       keywords: post.tags.join(", "),
@@ -1033,8 +1042,8 @@ function renderBlogPost(post) {
         </section>
         <section class="section section--tight">
           <div class="container article-grid article-grid--post">
-            <article class="article-content card card--prose" data-article-content>${renderArticleContent(post)}</article>
-            <aside class="sidebar"><div class="card sidebar-card"><h2>Quick context</h2><p>${escapeHtml(post.description)}</p></div><div class="card sidebar-card"><h2>Tags</h2><div class="tag-row">${post.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div></div></aside>
+            <article class="article-content card card--prose" data-article-content>${post.image ? `<figure class="generated-blog-image"><img src="${escapeHtml(post.image)}" alt="${escapeHtml(articleImageAlt)}" loading="eager" decoding="async"></figure>` : ""}${renderArticleContent(post)}</article>
+            <aside class="sidebar"><div class="card sidebar-card"><h2>Quick context</h2><p>${escapeHtml(post.description)}</p></div><div class="card sidebar-card"><h2>Tags</h2><div class="tag-row">${post.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div></div>${relatedProducts.length ? `<div class="card sidebar-card"><h2>Related picks</h2><ul class="bullet-list">${relatedProducts.map((product) => `<li><a href="./pick-${escapeHtml(product.slug)}.html">${escapeHtml(product.name)}</a></li>`).join("")}</ul></div>` : ""}</aside>
           </div>
         </section>
       </main>
@@ -1062,11 +1071,11 @@ function renderRobots() {
 }
 
 function renderGitignore() {
-  return `.wrangler/\nnode_modules/\n.env\n.env.*\n!.env.example\n.dev.vars\n.dev.vars.*\n.envrc\n`;
+  return `.wrangler/\n.blog-generator-tmp/\nnode_modules/\n.env\n.env.*\n!.env.example\n.dev.vars\n.dev.vars.*\n.envrc\n`;
 }
 
 function renderEnvExample() {
-  return `# Copy this file to .env.local for local-only values.\n# Never put real secrets in .env.example or any other tracked file.\nEDITORIAL_API_URL=https://primegent.pages.dev/api/editorial\nOPENROUTER_MODEL=nvidia/nemotron-3-super-120b-a12b:free\n# Only use a local OpenRouter key if you explicitly need direct local calls.\n# Preferred setup: keep the real key in Cloudflare Pages secrets instead.\n# OPENROUTER_API_KEY=\n`;
+  return `# Copy this file to .env.local for local-only values.\n# Never put real secrets in .env.example or any other tracked file.\n\n# Affiliate publisher\nEDITORIAL_API_URL=https://primegent.pages.dev/api/editorial\nOPENROUTER_MODEL=google/gemini-2.5-flash-lite\nOPENROUTER_FALLBACK_MODELS=openai/gpt-4o-mini,qwen/qwen3-vl-8b-instruct,google/gemma-4-26b-a4b-it:free\n# OPENROUTER_API_KEY=\n\n# Blog maker image uploads\nR2_BUCKET_NAME=\nR2_ENDPOINT=\nR2_ACCESS_KEY_ID=\nR2_SECRET_ACCESS_KEY=\nR2_PUBLIC_BASE_URL=\nR2_UPLOAD_ATTEMPTS=6\nR2_UPLOAD_TIMEOUT_MS=45000\nR2_UPLOAD_RETRY_BASE_MS=750\nOPENROUTER_MIN_REQUEST_INTERVAL_MS=25000\nOPENROUTER_RETRY_COOLDOWN_MS=90000\nBLOG_GENERATOR_TIMEOUT_MS=2700000\n`;
 }
 
 function renderWrangler() {
@@ -1183,6 +1192,8 @@ function normalizeGeneratedBlogPost(post, fallbackIndex) {
     description:
       truncate(normalizeCopy(post?.description) || normalizeCopy(post?.excerpt) || `Generated article ${fallbackIndex + 1}`, 220),
     heroLabel: truncate(normalizeCopy(post?.heroLabel) || "Generated post", 24),
+    image: normalizeCopy(post?.image),
+    imageAlt: normalizeCopy(post?.imageAlt) || title,
     tags: (Array.isArray(post?.tags) ? post.tags : [])
       .map((tag) => normalizeCopy(tag))
       .filter(Boolean)

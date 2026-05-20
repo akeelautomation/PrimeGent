@@ -1,0 +1,9 @@
+{
+  "name": "primegent",
+  "private": true,
+  "scripts": {
+    "blog:app": "node tools/blog-admin/server.js",
+    "publisher:sync": "node tools/publisher-sync-server.mjs",
+    "site:generate": "node scripts/generate-site.mjs"
+  }
+}
