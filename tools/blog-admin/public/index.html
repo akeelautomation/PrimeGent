@@ -3,71 +3,410 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PrimeGent Blog Maker</title>
+    <title>PrimeGent Admin Dashboard</title>
+    <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" href="/site/static/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Space+Grotesk:wght@400..700&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="/admin/style.css" />
   </head>
   <body>
-    <main class="shell">
-      <section class="hero">
-        <p class="eyebrow">PrimeGent blog desk</p>
-        <h1>Turn outfit photos into useful 1100-1200 word style posts.</h1>
-        <p class="subhead">
-          Queue menswear or outfit images. The local server runs a small concurrent batch, sends each image to R2,
-          asks OpenRouter for a practical style topic, writes each blog page, and adds every card to the PrimeGent journal.
-        </p>
-      </section>
+    <div class="admin-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/admin" aria-label="PrimeGent admin home">
+          <span class="brand-mark">PG</span>
+          <span>
+            <strong>PrimeGent</strong>
+            <small>Admin</small>
+          </span>
+        </a>
 
-      <section class="workspace">
-        <form id="uploadForm" class="card uploader">
-          <label class="dropzone" for="imageInput">
-            <input id="imageInput" name="image" type="file" accept="image/*" multiple required />
-            <span class="drop-title">Drop or choose outfit images</span>
-            <span class="drop-note">Batch mode runs up to 3 images at once. JPG, PNG, or WEBP under 12 MB each.</span>
-          </label>
+        <nav class="admin-nav" aria-label="Admin sections">
+          <button class="nav-item is-active" type="button" data-panel-target="overview">Overview</button>
+          <button class="nav-item" type="button" data-panel-target="blog-maker">AI Blog Maker</button>
+          <button class="nav-item" type="button" data-panel-target="content">Content</button>
+          <button class="nav-item" type="button" data-panel-target="affiliate">Affiliate Picks</button>
+          <button class="nav-item" type="button" data-panel-target="publisher">Article Publisher</button>
+          <button class="nav-item" type="button" data-panel-target="adsense">AdSense</button>
+          <button class="nav-item" type="button" data-panel-target="seo">SEO</button>
+          <button class="nav-item" type="button" data-panel-target="settings">Settings</button>
+        </nav>
 
-          <label class="keyword-field" for="keywordInput">
-            <span>Keywords or phrases</span>
-            <textarea
-              id="keywordInput"
-              name="keywords"
-              rows="5"
-              placeholder="smart casual men&#10;linen shirt outfits&#10;summer date night style"
-            ></textarea>
-            <span class="keyword-note">
-              Optional. The writer will use some exact phrases and some close variants when they fit naturally.
-            </span>
-          </label>
+        <div class="sidebar-card">
+          <span class="label">Local server</span>
+          <strong id="serverState">Checking</strong>
+          <small>This dashboard is for local publishing and operational checks.</small>
+        </div>
+      </aside>
 
-          <div id="previewWrap" class="preview-wrap" hidden></div>
-
-          <div class="queue-actions">
-            <button id="submitButton" type="submit">Start Batch</button>
-            <button id="stopButton" class="danger-button" type="button" disabled>Stop</button>
-            <button id="clearButton" class="ghost-button" type="button">Clear Queue</button>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Website Operations</p>
+            <h1>Admin Dashboard</h1>
           </div>
-          <p id="status" class="status" role="status"></p>
-        </form>
-
-        <section class="card results" aria-live="polite">
-          <div class="results-head">
-            <div>
-              <h2>Batch Queue</h2>
-              <p id="summary" class="empty">Generated blog pages, word counts, R2 image URLs, and run logs will appear here.</p>
-            </div>
-            <a class="site-preview-link" href="/site/blog.html" target="_blank" rel="noreferrer">Open Updated Journal</a>
+          <div class="topbar-actions">
+            <a class="button ghost" href="/site/" target="_blank" rel="noreferrer">Preview Site</a>
+            <a class="button ghost" href="/site/blog.html" target="_blank" rel="noreferrer">Open Journal</a>
+            <button id="refreshAuditButton" class="button dark" type="button">Refresh Audit</button>
           </div>
+        </header>
 
-          <div id="queueList" class="queue-list" hidden></div>
+        <section class="notice">
+          <strong>Local admin:</strong>
+          Use this screen to generate posts, manage generated article records, publish affiliate products, and audit the public files before deployment.
         </section>
-      </section>
-    </main>
+
+        <section id="overview" class="panel is-active" data-panel="overview">
+          <div class="metric-grid">
+            <article class="metric-card">
+              <span class="label">Blog Pages</span>
+              <strong id="blogPageCount">--</strong>
+              <small id="generatedPostCount">Generated posts loading</small>
+            </article>
+            <article class="metric-card">
+              <span class="label">Pick Pages</span>
+              <strong id="pickPageCount">--</strong>
+              <small id="pickCardCount">Product cards loading</small>
+            </article>
+            <article class="metric-card">
+              <span class="label">Categories</span>
+              <strong id="categoryCount">--</strong>
+              <small>Generated article taxonomy</small>
+            </article>
+            <article class="metric-card">
+              <span class="label">Policy Pages</span>
+              <strong id="policyScore">--</strong>
+              <small>About, contact, privacy, disclosure</small>
+            </article>
+            <article class="metric-card">
+              <span class="label">Ad Signals</span>
+              <strong id="adSignalCount">--</strong>
+              <small id="adSignalStatus">Checking monetization files</small>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Readiness</span>
+                  <h2>Publishing Checklist</h2>
+                </div>
+                <span id="readinessBadge" class="badge">Audit pending</span>
+              </div>
+              <div id="readinessList" class="checklist"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Generated Content</span>
+                  <h2>Category Distribution</h2>
+                </div>
+              </div>
+              <div id="categoryBars" class="bar-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="blog-maker" class="panel" data-panel="blog-maker">
+          <div class="split-grid">
+            <form id="uploadForm" class="card uploader">
+              <div class="card-head">
+                <div>
+                  <span class="label">AI Blog Maker</span>
+                  <h2>Generate Posts From Outfit Photos</h2>
+                </div>
+              </div>
+
+              <label class="dropzone" for="imageInput">
+                <input id="imageInput" name="image" type="file" accept="image/*" multiple required />
+                <span class="drop-title">Drop or choose outfit images</span>
+                <span class="drop-note">Batch mode runs up to 3 images at once. JPG, PNG, or WEBP under 12 MB each.</span>
+              </label>
+
+              <label class="field" for="keywordInput">
+                <span>Keywords or phrases</span>
+                <textarea
+                  id="keywordInput"
+                  name="keywords"
+                  rows="5"
+                  placeholder="smart casual men&#10;linen shirt outfits&#10;summer date night style"
+                ></textarea>
+                <small>Optional. The writer uses exact phrases and close variants only when they fit naturally.</small>
+              </label>
+
+              <div id="previewWrap" class="preview-wrap" hidden></div>
+
+              <div class="action-row">
+                <button id="submitButton" class="button primary" type="submit">Start Batch</button>
+                <button id="stopButton" class="button danger" type="button" disabled>Stop</button>
+                <button id="clearButton" class="button ghost" type="button">Clear Queue</button>
+              </div>
+              <p id="status" class="status" role="status"></p>
+            </form>
+
+            <section class="card results" aria-live="polite">
+              <div class="card-head">
+                <div>
+                  <span class="label">Generator Queue</span>
+                  <h2>Batch Results</h2>
+                  <p id="summary" class="muted">Generated blog pages, word counts, R2 image URLs, and run logs will appear here.</p>
+                </div>
+              </div>
+              <div id="queueList" class="queue-list" hidden></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="content" class="panel" data-panel="content">
+          <div class="dashboard-grid">
+            <article class="card editor-card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Generated Posts</span>
+                  <h2>Edit or Remove Generated Articles</h2>
+                </div>
+              </div>
+
+              <label class="field" for="postSelect">
+                <span>Choose post</span>
+                <select id="postSelect"></select>
+                <small>Saving updates blog/generated-posts.json and regenerates the static site.</small>
+              </label>
+
+              <form id="postEditorForm" class="post-editor" hidden>
+                <div class="settings-grid">
+                  <label class="field" for="editTitle">
+                    <span>Title</span>
+                    <input id="editTitle" name="title" type="text" required />
+                  </label>
+                  <label class="field" for="editCategory">
+                    <span>Category</span>
+                    <input id="editCategory" name="category" type="text" required />
+                  </label>
+                  <label class="field" for="editDate">
+                    <span>Date</span>
+                    <input id="editDate" name="date" type="date" required />
+                  </label>
+                  <label class="field" for="editReadTime">
+                    <span>Read time</span>
+                    <input id="editReadTime" name="readTime" type="text" />
+                  </label>
+                </div>
+
+                <label class="field" for="editExcerpt">
+                  <span>Excerpt</span>
+                  <textarea id="editExcerpt" name="excerpt" rows="3" required></textarea>
+                </label>
+
+                <label class="field" for="editDescription">
+                  <span>Description</span>
+                  <textarea id="editDescription" name="description" rows="3"></textarea>
+                </label>
+
+                <div class="settings-grid">
+                  <label class="field" for="editHeroLabel">
+                    <span>Hero label</span>
+                    <input id="editHeroLabel" name="heroLabel" type="text" />
+                  </label>
+                  <label class="field" for="editImage">
+                    <span>Image URL</span>
+                    <input id="editImage" name="image" type="text" />
+                  </label>
+                </div>
+
+                <label class="field" for="editImageAlt">
+                  <span>Image alt text</span>
+                  <textarea id="editImageAlt" name="imageAlt" rows="2"></textarea>
+                </label>
+
+                <label class="field" for="editTags">
+                  <span>Tags</span>
+                  <textarea id="editTags" name="tags" rows="3"></textarea>
+                  <small>One tag per line.</small>
+                </label>
+
+                <label class="field" for="editRelated">
+                  <span>Related pick slugs</span>
+                  <textarea id="editRelated" name="relatedPickSlugs" rows="3"></textarea>
+                  <small>One pick slug per line, without the pick- prefix.</small>
+                </label>
+
+                <label class="field" for="editSections">
+                  <span>Sections JSON</span>
+                  <textarea id="editSections" name="sections" rows="12"></textarea>
+                  <small>Array of objects with heading and paragraphs.</small>
+                </label>
+
+                <div class="action-row">
+                  <button id="savePostButton" class="button primary" type="submit">Save Post</button>
+                  <button id="deletePostButton" class="button danger" type="button">Delete Post</button>
+                  <a id="openPostButton" class="button ghost" href="#" target="_blank" rel="noreferrer">Open Post</a>
+                </div>
+                <p id="postEditorStatus" class="status" role="status"></p>
+              </form>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Publishing</span>
+                  <h2>Site Actions</h2>
+                </div>
+              </div>
+              <div class="button-grid">
+                <button id="regenerateButton" class="button dark" type="button">Regenerate Static Site</button>
+                <a class="button ghost" href="/site/blog.html" target="_blank" rel="noreferrer">Open Journal</a>
+                <a class="button ghost" href="/site/picks.html" target="_blank" rel="noreferrer">Open Picks</a>
+                <a class="button ghost" href="/site/sitemap.xml" target="_blank" rel="noreferrer">Open Sitemap</a>
+              </div>
+              <pre id="actionLog" class="log" hidden></pre>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Recent Files</span>
+                  <h2>Recently Modified Blog Pages</h2>
+                </div>
+              </div>
+              <div id="recentPosts" class="file-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="affiliate" class="panel" data-panel="affiliate">
+          <div class="dashboard-grid">
+            <article class="card publisher-frame-card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Product Publisher</span>
+                  <h2>Amazon Affiliate Pick Builder</h2>
+                </div>
+              </div>
+              <iframe class="publisher-frame" title="Affiliate product publisher" src="/affiliate-admin/"></iframe>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Picks Page</span>
+                  <h2>Publishing Checks</h2>
+                </div>
+                <span id="picksBadge" class="badge">Audit pending</span>
+              </div>
+              <div id="picksChecklist" class="checklist"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="publisher" class="panel" data-panel="publisher">
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <span class="label">Article Publisher</span>
+                <h2>Catalog-Based Blog Drafts</h2>
+              </div>
+            </div>
+            <p class="muted">
+              The existing article publisher remains available as a site tool. Start the publisher sync server before publishing drafts into blog.html.
+            </p>
+            <div class="button-grid">
+              <a class="button dark" href="/site/publisher.html" target="_blank" rel="noreferrer">Open Article Publisher</a>
+              <a class="button ghost" href="/site/picks.html" target="_blank" rel="noreferrer">Review Product Catalog</a>
+            </div>
+          </article>
+        </section>
+
+        <section id="adsense" class="panel" data-panel="adsense">
+          <div class="dashboard-grid">
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Monetization</span>
+                  <h2>AdSense Setup</h2>
+                </div>
+              </div>
+              <div class="settings-grid">
+                <label class="field" for="publisherId">
+                  <span>Publisher ID</span>
+                  <input id="publisherId" type="text" placeholder="pub-0000000000000000" />
+                </label>
+                <label class="field" for="adClientId">
+                  <span>Ad client</span>
+                  <input id="adClientId" type="text" placeholder="ca-pub-0000000000000000" />
+                </label>
+                <label class="field" for="leaderboardSlot">
+                  <span>Leaderboard slot ID</span>
+                  <input id="leaderboardSlot" type="text" placeholder="1234567890" />
+                </label>
+                <label class="field" for="rectangleSlot">
+                  <span>Rectangle slot ID</span>
+                  <input id="rectangleSlot" type="text" placeholder="0987654321" />
+                </label>
+              </div>
+              <div class="action-row">
+                <button id="saveAdsenseSettings" class="button primary" type="button">Save Locally</button>
+                <button id="copyAdsenseSnippet" class="button ghost" type="button">Copy Snippet</button>
+                <button id="copyAdsTxt" class="button ghost" type="button">Copy ads.txt Line</button>
+              </div>
+              <pre id="adsenseSnippet" class="log"></pre>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Policy Guardrails</span>
+                  <h2>Placement Rules</h2>
+                </div>
+              </div>
+              <ul class="plain-list">
+                <li>Use only neutral labels such as Advertisement or Sponsored Links near ad units.</li>
+                <li>Keep ads separated from navigation, buttons, and dense image grids.</li>
+                <li>Do not auto-refresh pages or ad containers.</li>
+                <li>Keep original editorial content visibly more substantial than ad placements.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="seo" class="panel" data-panel="seo">
+          <div class="dashboard-grid">
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Search</span>
+                  <h2>SEO Assets</h2>
+                </div>
+              </div>
+              <div id="seoAssets" class="checklist"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-head">
+                <div>
+                  <span class="label">Structured Data</span>
+                  <h2>Schema and Metadata</h2>
+                </div>
+              </div>
+              <div id="schemaSummary" class="plain-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="settings" class="panel" data-panel="settings">
+          <article class="card">
+            <div class="card-head">
+              <div>
+                <span class="label">Environment</span>
+                <h2>Required Keys</h2>
+              </div>
+            </div>
+            <div id="environmentList" class="checklist"></div>
+          </article>
+        </section>
+      </main>
+    </div>
 
     <script src="/admin/app.js" type="module"></script>
   </body>

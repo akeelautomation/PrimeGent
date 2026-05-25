@@ -1049,6 +1049,9 @@ const TITLE_STYLE_HINTS = [
   "sharp and compact",
 ];
 
+const SEARCH_DISCOVERY_COPY =
+  "Optimize for Pinterest, Facebook, and Google discovery while staying natural. Use concrete menswear keyword phrases with garments, outfit types, seasons, settings, or use cases, such as smart casual polo outfit, linen shirt outfits for men, chinos outfit ideas, men's summer loafers, office casual outfits, or weekend denim jacket outfit. Avoid generic titles like Mastering Men's Style, Elevate Your Look, The Ultimate Style Guide, and How to Dress Better unless the title also contains a specific garment and occasion.";
+
 function buildVarietyToken() {
   if (globalThis.crypto?.randomUUID) {
     return globalThis.crypto.randomUUID().slice(0, 8);
@@ -1111,16 +1114,19 @@ function buildBriefs(catalog, titles, description, lockedTitles = []) {
 
 function buildTags(title, products) {
   const candidateTags = [cleanText(title)];
+  const titleWords = tokenize(title).filter((word) => word.length > 2 && !["the", "and", "for", "with", "your"].includes(word));
+
+  for (const size of [4, 3, 2]) {
+    for (let index = 0; index <= titleWords.length - size; index += 1) {
+      candidateTags.push(titleWords.slice(index, index + size).join(" "));
+    }
+  }
 
   products.forEach((product) => {
     candidateTags.push(product.categoryLabel);
     product.tags.slice(0, 2).forEach((tag) => candidateTags.push(tag));
     product.styles.slice(0, 2).forEach((style) => candidateTags.push(style.replace(/-/g, " ")));
   });
-
-  tokenize(title)
-    .slice(0, 2)
-    .forEach((word) => candidateTags.push(word));
 
   return uniqueList(candidateTags, 5);
 }
@@ -1215,7 +1221,7 @@ function buildPublisherMessages(briefs) {
     {
       role: "system",
       content:
-        "You write concise men's style blog drafts for PrimeGent. Respond with valid JSON only. No markdown fences. Do not invent products, brands, links, prices, or availability. The prose paragraphs must stay editorial and generic; do not mention exact product names or brands in the article body. Concrete product promotion must happen only through the product_mentions array using the provided product_id values. When a title is not locked, you must create a fresh, natural title that fits the requested description and feels non-formulaic.",
+        `You write concise men's style blog drafts for PrimeGent. Respond with valid JSON only. No markdown fences. Do not invent products, brands, links, prices, or availability. The prose paragraphs must stay editorial and generic; do not mention exact product names or brands in the article body. Concrete product promotion must happen only through the product_mentions array using the provided product_id values. When a title is not locked, you must create a fresh, natural title that fits the requested description and feels non-formulaic. ${SEARCH_DISCOVERY_COPY}`,
     },
     {
       role: "user",
@@ -1248,16 +1254,18 @@ Rules:
 - "title" is required and must be at most 96 characters.
 - If a brief includes a non-empty "locked_title", return that exact text as the title.
 - If "locked_title" is empty, create a fresh original title that fits the description, focus, and matched products.
+- Generated titles must include a concrete keyword phrase with a garment, outfit type, occasion, season, or wardrobe problem.
 - Generated titles must feel natural, specific, and different from each other in both wording and structure.
 - Avoid recycling stock patterns like repeating the same opener or ending across the batch.
 - Use "title_style_hint" and "variety_token" only as hidden cues to vary the title. Do not mention them in the title or article body.
 - "dek" must be 1 sentence, max 170 characters.
 - "summary" must be 1-2 sentences, max 220 characters.
 - "category" must be one of: "Style Guides", "Wardrobe Basics", "Outfit Ideas", "Buying Guides".
-- "tags" must contain 3 to 5 short strings.
+- "tags" must contain 3 to 5 short keyword phrases, not generic single words.
 - Each article "sections" array must contain 4 or 5 objects.
 - Each section object must have exactly these keys: "heading", "paragraphs", "product_mentions".
 - "paragraphs" must contain 2 short paragraphs.
+- At least 2 section headings per article must contain searchable menswear terms, such as a garment, outfit formula, setting, season, fit issue, or color.
 - "product_mentions" must contain 1 or 2 objects.
 - Every "product_id" must match one of the brief's provided products exactly.
 - Use the product_mentions to place products naturally. Do not create product names inside the editorial paragraphs.
@@ -1295,7 +1303,7 @@ function buildTitleMessages(briefs) {
     {
       role: "system",
       content:
-        "You write titles for men's style blog articles for PrimeGent. Respond with valid JSON only. No markdown fences. When a title is not locked, choose a fresh, natural title that fits the request and does not sound templated or repetitive.",
+        `You write titles for men's style blog articles for PrimeGent. Respond with valid JSON only. No markdown fences. When a title is not locked, choose a fresh, natural title that fits the request and does not sound templated or repetitive. ${SEARCH_DISCOVERY_COPY}`,
     },
     {
       role: "user",
@@ -1309,9 +1317,11 @@ Rules:
 - Every title must be at most 96 characters.
 - If a brief includes a non-empty "locked_title", return that exact text.
 - If "locked_title" is empty, create one fresh original title that fits the description, focus, and matched products.
+- Every generated title must include a concrete search phrase with a garment, outfit type, occasion, season, or wardrobe problem.
 - Keep the titles varied. Do not reuse the same opener, structure, or ending across the batch.
 - Use "title_style_hint" and "variety_token" only as hidden cues to vary phrasing. Do not mention them.
 - Avoid clickbait, all-caps, brackets, numbering, and obvious template phrases.
+- Avoid generic social headlines such as "Mastering Men's Style", "Elevate Your Look", "The Ultimate Style Guide", and "How to Dress Better".
 
 Input briefs:
 ${JSON.stringify(
