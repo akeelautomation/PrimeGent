@@ -1,4 +1,159 @@
 const PICKS_PER_PAGE = 10;
+const STYLE_MATCH_LANES = {
+  evening: {
+    title: "Evening Out",
+    copy: "A sharper casual lane built around controlled fit, darker anchors, and one polished detail.",
+    chips: ["Dinner-ready", "Clean layers", "Quiet polish"],
+    picksUrl: "./picks.html?style=smart-casual",
+    image: "./static/images/style-match-evening-out.png",
+    imageAlt: "Evening Out outfit with dark knitwear, tailored trousers, and brown loafers",
+    articles: [
+      { title: "Casual Dinner Outfits for Men That Do Not Feel Overdressed", url: "./blog-dinner-outfits-men.html" },
+      { title: "Smart Casual Summer Night Outfits for Men", url: "./blog-smart-casual-summer-night-men.html" },
+      {
+        title: "Casual Men Outfit Ideas for Weekends, Errands, and Easy Dinners",
+        url: "./blog-casual-men-outfit-ideas-weekends-errands-dinners.html",
+      },
+      { title: "Loafer Outfits for Men", url: "./blog-loafer-outfits-men.html" },
+    ],
+  },
+  travel: {
+    title: "Travel Ready",
+    copy: "A practical lane for movement, comfort, and layers that still look intentional after a long day.",
+    chips: ["Easy layers", "Clean comfort", "Packable pieces"],
+    picksUrl: "./picks.html?style=travel",
+    image: "./static/images/style-match-travel-ready.png",
+    imageAlt: "Travel Ready outfit with light layers, a travel jacket, trousers, and clean sneakers",
+    articles: [
+      { title: "Casual Travel Outfits for Men", url: "./blog-casual-travel-outfits-men.html" },
+      { title: "Airport Outfits for Men", url: "./blog-airport-outfits-men.html" },
+      { title: "Relaxed Weekend Outfits for Men That Still Look Sharp", url: "./blog-relaxed-weekend-outfits-men.html" },
+      { title: "Rainy Day Style for Men Without Looking Overbuilt", url: "./blog-rainy-day-style-men.html" },
+    ],
+  },
+  office: {
+    title: "Office Casual",
+    copy: "A work-ready lane that softens the dress code without losing structure, proportion, or capable polish.",
+    chips: ["Workday shape", "Soft structure", "Refined basics"],
+    picksUrl: "./picks.html?style=office",
+    image: "./static/images/style-match-office-casual.png",
+    imageAlt: "Office Casual outfit with a blazer, knit polo, chinos, and loafers",
+    articles: [
+      { title: "Casual Office Outfits for Men", url: "./blog-casual-office-outfits-men.html" },
+      { title: "Casual Friday Outfits for Men", url: "./blog-casual-friday-outfits-men.html" },
+      {
+        title: "White Sneakers Business Casual Men",
+        url: "./blog-white-sneakers-business-casual-men.html",
+      },
+      { title: "Fall Business Casual Men", url: "./blog-fall-business-casual-men.html" },
+    ],
+  },
+  weekend: {
+    title: "Weekend Uniform",
+    copy: "A low-effort lane for relaxed plans, built from familiar pieces that still keep shape.",
+    chips: ["Repeatable", "Relaxed shape", "Off-duty"],
+    picksUrl: "./picks.html?style=weekend",
+    image: "./static/images/style-match-weekend-uniform.png",
+    imageAlt: "Weekend Uniform outfit with denim, a relaxed overshirt, and casual sneakers",
+    articles: [
+      { title: "Weekend Casual Outfits for Men", url: "./blog-weekend-casual-outfits-men.html" },
+      { title: "A Spring Weekend Uniform for Men That Works Every Time", url: "./blog-spring-weekend-uniform-men.html" },
+      { title: "Relaxed Weekend Outfits for Men That Still Look Sharp", url: "./blog-relaxed-weekend-outfits-men.html" },
+      { title: "Casual Brunch Outfits for Men", url: "./blog-casual-brunch-outfits-men.html" },
+    ],
+  },
+  warm: {
+    title: "Warm Weather Smart Casual",
+    copy: "A breathable lane that keeps summer outfits crisp through linen, lighter colors, and cleaner proportions.",
+    chips: ["Breathable", "Summer polish", "Light texture"],
+    picksUrl: "./picks.html?style=smart-casual",
+    image: "./static/images/style-match-warm-weather.png",
+    imageAlt: "Warm Weather Smart Casual outfit with linen, light trousers, and summer loafers",
+    articles: [
+      { title: "Linen Shirt Outfits for Men That Look Clean, Not Crumpled", url: "./blog-linen-shirt-outfits-men.html" },
+      { title: "Linen Shirt Outfit Ideas for Men", url: "./blog-linen-shirt-outfit-ideas-for-men.html" },
+      { title: "Summer Mens Outfits", url: "./blog-summer-mens-outfits.html" },
+      {
+        title: "Warm Weather Casual Outfits Men Linen Light Sneakers",
+        url: "./blog-warm-weather-casual-outfits-men-linen-light-sneakers.html",
+      },
+    ],
+  },
+  smart: {
+    title: "Smart Casual",
+    copy: "A balanced lane for cleaner daily dressing when you want polish without looking formal.",
+    chips: ["Balanced", "Versatile", "Clean basics"],
+    picksUrl: "./picks.html?style=smart-casual",
+    image: "./static/images/style-match-smart-casual.png",
+    imageAlt: "Smart Casual outfit with a textured jacket, knitwear, chinos, and leather sneakers",
+    articles: [
+      { title: "Smart Casual Explained", url: "./blog-smart-casual-explained.html" },
+      {
+        title: "Smart Casual Outfit Formulas for Modern Men",
+        url: "./blog-smart-casual-outfit-formulas-for-modern-men.html",
+      },
+      { title: "Mastering the Modern Smart Casual Look", url: "./blog-mastering-the-modern-smart-casual-look.html" },
+      {
+        title: "Smart Casual Sweater and Chinos Outfit",
+        url: "./blog-smart-casual-sweater-and-chinos-outfit.html",
+      },
+    ],
+  },
+};
+
+const lastStyleMatchArticleByLane = {};
+const STYLE_MATCH_BEST_KEY = "primegentStyleMatchBest";
+const STYLE_MATCH_CATEGORY_LABELS = {
+  occasion: "occasion",
+  sharpness: "sharpness",
+  "first-reach": "key piece",
+  fit: "fit",
+  weather: "weather",
+};
+const STYLE_MATCH_SCORE_PROFILES = {
+  evening: {
+    occasion: { primary: ["evening-out"], acceptable: ["weekend", "workday"] },
+    sharpness: { primary: ["polished"], acceptable: ["smart-casual"] },
+    "first-reach": { primary: ["knitwear"], acceptable: ["light-layers", "denim"] },
+    fit: { primary: ["clean-slim"], acceptable: ["relaxed-shaped"] },
+    weather: { primary: ["cool", "mild"], acceptable: ["warm", "rainy"] },
+  },
+  travel: {
+    occasion: { primary: ["travel"], acceptable: ["weekend"] },
+    sharpness: { primary: ["relaxed", "smart-casual"], acceptable: ["polished"] },
+    "first-reach": { primary: ["light-layers"], acceptable: ["denim", "knitwear"] },
+    fit: { primary: ["relaxed-shaped"], acceptable: ["roomy-easy"] },
+    weather: { primary: ["rainy", "cool"], acceptable: ["mild"] },
+  },
+  office: {
+    occasion: { primary: ["workday"], acceptable: ["evening-out"] },
+    sharpness: { primary: ["polished"], acceptable: ["smart-casual"] },
+    "first-reach": { primary: ["knitwear"], acceptable: ["light-layers"] },
+    fit: { primary: ["clean-slim"], acceptable: ["relaxed-shaped"] },
+    weather: { primary: ["mild", "cool"], acceptable: ["rainy"] },
+  },
+  weekend: {
+    occasion: { primary: ["weekend"], acceptable: ["travel"] },
+    sharpness: { primary: ["relaxed"], acceptable: ["smart-casual"] },
+    "first-reach": { primary: ["denim"], acceptable: ["light-layers", "knitwear"] },
+    fit: { primary: ["roomy-easy", "relaxed-shaped"], acceptable: ["clean-slim"] },
+    weather: { primary: ["mild", "cool"], acceptable: ["warm", "rainy"] },
+  },
+  warm: {
+    occasion: { primary: ["weekend"], acceptable: ["travel", "evening-out"] },
+    sharpness: { primary: ["smart-casual"], acceptable: ["polished", "relaxed"] },
+    "first-reach": { primary: ["linen"], acceptable: ["light-layers"] },
+    fit: { primary: ["clean-slim", "relaxed-shaped"], acceptable: ["roomy-easy"] },
+    weather: { primary: ["warm"], acceptable: ["mild"] },
+  },
+  smart: {
+    occasion: { primary: ["weekend", "workday"], acceptable: ["evening-out"] },
+    sharpness: { primary: ["smart-casual"], acceptable: ["polished"] },
+    "first-reach": { primary: ["knitwear", "light-layers"], acceptable: ["denim", "linen"] },
+    fit: { primary: ["clean-slim", "relaxed-shaped"], acceptable: ["roomy-easy"] },
+    weather: { primary: ["mild"], acceptable: ["cool", "warm"] },
+  },
+};
 
 function readPicksStateFromURL() {
   const params = new URLSearchParams(window.location.search);
@@ -324,6 +479,285 @@ function initBlogPage() {
   });
 }
 
+function getStyleMatchLaneKey(answers) {
+  if (answers.occasion === "evening-out") {
+    return "evening";
+  }
+
+  if (answers.occasion === "travel") {
+    return "travel";
+  }
+
+  if (answers.occasion === "workday" || answers.sharpness === "polished") {
+    return "office";
+  }
+
+  if (answers.weather === "warm" || answers["first-reach"] === "linen") {
+    return "warm";
+  }
+
+  if (
+    answers.sharpness === "relaxed" ||
+    answers.fit === "roomy-easy" ||
+    (answers.occasion === "weekend" && ["denim", "light-layers"].includes(answers["first-reach"]))
+  ) {
+    return "weekend";
+  }
+
+  return "smart";
+}
+
+function pickStyleMatchArticle(laneKey) {
+  const lane = STYLE_MATCH_LANES[laneKey] || STYLE_MATCH_LANES.smart;
+  const previousUrl = lastStyleMatchArticleByLane[laneKey];
+  const articlePool =
+    lane.articles.length > 1 && previousUrl
+      ? lane.articles.filter((article) => article.url !== previousUrl)
+      : lane.articles;
+  const article = articlePool[Math.floor(Math.random() * articlePool.length)] || lane.articles[0];
+  lastStyleMatchArticleByLane[laneKey] = article.url;
+  return article;
+}
+
+function getStyleMatchTier(score) {
+  if (score >= 90) return "Locked in";
+  if (score >= 75) return "Strong match";
+  if (score >= 60) return "One tweak away";
+  return "Experimental fit";
+}
+
+function getStyleMatchBest() {
+  try {
+    const stored = Number.parseInt(window.sessionStorage.getItem(STYLE_MATCH_BEST_KEY) || "0", 10);
+    return Number.isFinite(stored) ? stored : 0;
+  } catch {
+    return 0;
+  }
+}
+
+function setStyleMatchBest(score) {
+  try {
+    window.sessionStorage.setItem(STYLE_MATCH_BEST_KEY, String(score));
+  } catch {
+    // Session storage is optional; the game should still work without it.
+  }
+}
+
+function scoreStyleMatch(laneKey, answers) {
+  const profile = STYLE_MATCH_SCORE_PROFILES[laneKey] || STYLE_MATCH_SCORE_PROFILES.smart;
+  const breakdown = Object.keys(STYLE_MATCH_CATEGORY_LABELS).map((key) => {
+    const rule = profile[key] || { primary: [], acceptable: [] };
+    const answer = answers[key];
+    const points = rule.primary.includes(answer) ? 20 : rule.acceptable.includes(answer) ? 14 : 8;
+
+    return {
+      key,
+      label: STYLE_MATCH_CATEGORY_LABELS[key],
+      points,
+    };
+  });
+  const total = breakdown.reduce((sum, item) => sum + item.points, 0);
+  const strongest = breakdown.reduce((best, item) => (item.points > best.points ? item : best), breakdown[0]);
+  const weakest = breakdown.reduce((low, item) => (item.points < low.points ? item : low), breakdown[0]);
+
+  return { total, breakdown, strongest, weakest };
+}
+
+function initStyleMatchGame() {
+  const game = document.querySelector("[data-style-match]");
+
+  if (!game) {
+    return;
+  }
+
+  const questions = Array.from(game.querySelectorAll("[data-style-match-question]"));
+  const progressLabel = game.querySelector("[data-style-match-progress-label]");
+  const progressBar = game.querySelector("[data-style-match-progress-bar]");
+  const feedback = game.querySelector("[data-style-match-feedback]");
+  const backButton = game.querySelector("[data-style-match-back]");
+  const emptyState = game.querySelector("[data-style-match-empty]");
+  const readyState = game.querySelector("[data-style-match-ready]");
+  const title = game.querySelector("[data-style-match-title]");
+  const copy = game.querySelector("[data-style-match-copy]");
+  const chips = game.querySelector("[data-style-match-chips]");
+  const resultImage = game.querySelector("[data-style-match-image]");
+  const scoreValue = game.querySelector("[data-style-match-score]");
+  const scoreBar = game.querySelector("[data-style-match-score-bar]");
+  const tier = game.querySelector("[data-style-match-tier]");
+  const bestScore = game.querySelector("[data-style-match-best]");
+  const coach = game.querySelector("[data-style-match-coach]");
+  const articleTitle = game.querySelector("[data-style-match-article-title]");
+  const articleLink = game.querySelector("[data-style-match-article]");
+  const picksLink = game.querySelector("[data-style-match-picks]");
+  const resetButton = game.querySelector("[data-style-match-reset]");
+  const answers = {};
+  let currentStep = 0;
+  let advanceTimer;
+  let scoreAnimationFrame;
+
+  const answeredCount = () => Object.keys(answers).length;
+
+  const setScoreDisplay = (score) => {
+    if (scoreValue) scoreValue.textContent = String(score);
+    if (scoreBar) scoreBar.style.width = `${score}%`;
+  };
+
+  const animateScore = (targetScore) => {
+    window.cancelAnimationFrame(scoreAnimationFrame);
+    const start = window.performance.now();
+    const duration = 700;
+
+    const tick = (time) => {
+      const progress = Math.min((time - start) / duration, 1);
+      const eased = 1 - (1 - progress) ** 3;
+      const current = Math.round(targetScore * eased);
+
+      setScoreDisplay(current);
+
+      if (progress < 1) {
+        scoreAnimationFrame = window.requestAnimationFrame(tick);
+      }
+    };
+
+    setScoreDisplay(0);
+    scoreAnimationFrame = window.requestAnimationFrame(tick);
+  };
+
+  const setFeedback = (message, isActive = false) => {
+    if (!feedback) return;
+    feedback.textContent = message;
+    feedback.classList.toggle("is-active", isActive);
+  };
+
+  const renderStep = (message = "Make your next move.") => {
+    const total = questions.length || 1;
+    const progress = Math.max(answeredCount(), currentStep) / total;
+
+    questions.forEach((question, index) => {
+      const isActive = index === currentStep;
+      const key = question.dataset.question;
+
+      question.hidden = !isActive;
+      question.classList.toggle("is-active", isActive);
+      question.querySelectorAll("[data-style-choice]").forEach((choice) => {
+        const selected = answers[key] === choice.dataset.styleChoice;
+        choice.classList.toggle("is-selected", selected);
+        choice.setAttribute("aria-pressed", selected ? "true" : "false");
+      });
+    });
+
+    if (progressLabel) progressLabel.textContent = `${Math.min(currentStep + 1, total)}/${total}`;
+    if (progressBar) progressBar.style.width = `${Math.round(progress * 100)}%`;
+    if (backButton) backButton.disabled = currentStep === 0;
+    setFeedback(message, false);
+    emptyState?.classList.remove("hidden");
+    readyState?.classList.add("hidden");
+  };
+
+  const renderResult = () => {
+    if (Object.keys(answers).length !== questions.length) {
+      renderStep("Finish the five moves to lock your score.");
+      return;
+    }
+
+    const laneKey = getStyleMatchLaneKey(answers);
+    const lane = STYLE_MATCH_LANES[laneKey] || STYLE_MATCH_LANES.smart;
+    const article = pickStyleMatchArticle(laneKey);
+    const scored = scoreStyleMatch(laneKey, answers);
+    const previousBest = getStyleMatchBest();
+    const nextBest = Math.max(previousBest, scored.total);
+
+    if (nextBest !== previousBest) {
+      setStyleMatchBest(nextBest);
+    }
+
+    if (title) title.textContent = lane.title;
+    if (copy) copy.textContent = lane.copy;
+    if (chips) {
+      chips.innerHTML = lane.chips.map((chip) => `<span class="tag">${chip}</span>`).join("");
+    }
+    if (resultImage) {
+      resultImage.src = lane.image;
+      resultImage.alt = lane.imageAlt || `${lane.title} outfit recommendation`;
+    }
+    if (articleTitle) articleTitle.textContent = article.title;
+    if (articleLink) articleLink.href = article.url;
+    if (picksLink) picksLink.href = lane.picksUrl;
+    if (tier) tier.textContent = getStyleMatchTier(scored.total);
+    if (bestScore) bestScore.textContent = String(nextBest);
+    if (coach) {
+      const weakNote =
+        scored.weakest.points === 20 ? "no weak category" : scored.weakest.label;
+      coach.textContent = `Strongest category: ${scored.strongest.label}. Biggest tweak: ${weakNote}.`;
+    }
+    if (progressLabel) progressLabel.textContent = `${questions.length}/${questions.length}`;
+    if (progressBar) progressBar.style.width = "100%";
+    animateScore(scored.total);
+
+    emptyState?.classList.add("hidden");
+    readyState?.classList.remove("hidden");
+    setFeedback("Score locked. Try again to beat it.", true);
+  };
+
+  questions.forEach((question) => {
+    const key = question.dataset.question;
+    const choices = Array.from(question.querySelectorAll("[data-style-choice]"));
+
+    choices.forEach((choice) => {
+      choice.addEventListener("click", () => {
+        window.clearTimeout(advanceTimer);
+        choices.forEach((item) => {
+          item.classList.remove("is-selected");
+          item.setAttribute("aria-pressed", "false");
+        });
+
+        choice.classList.add("is-selected");
+        choice.setAttribute("aria-pressed", "true");
+        answers[key] = choice.dataset.styleChoice;
+        setFeedback(choice.dataset.styleFeedback || "Good move.", true);
+
+        if (answeredCount() === questions.length && currentStep === questions.length - 1) {
+          advanceTimer = window.setTimeout(renderResult, 280);
+          return;
+        }
+
+        if (currentStep < questions.length - 1) {
+          advanceTimer = window.setTimeout(() => {
+            currentStep += 1;
+            renderStep("Make your next move.");
+          }, 280);
+        }
+      });
+    });
+  });
+
+  backButton?.addEventListener("click", () => {
+    window.clearTimeout(advanceTimer);
+
+    if (currentStep > 0) {
+      currentStep -= 1;
+      renderStep("Change the previous move.");
+    }
+  });
+
+  resetButton?.addEventListener("click", () => {
+    window.clearTimeout(advanceTimer);
+    window.cancelAnimationFrame(scoreAnimationFrame);
+    Object.keys(answers).forEach((key) => delete answers[key]);
+    game.querySelectorAll("[data-style-choice]").forEach((choice) => {
+      choice.classList.remove("is-selected");
+      choice.setAttribute("aria-pressed", "false");
+    });
+    currentStep = 0;
+    setScoreDisplay(0);
+    renderStep("Make your first move.");
+  });
+
+  if (bestScore) bestScore.textContent = String(getStyleMatchBest());
+  setScoreDisplay(0);
+  renderStep("Make your first move.");
+}
+
 function initNavigation() {
   const pageId = document.body.dataset.page;
   document.querySelectorAll("[data-nav-link]").forEach((link) => {
@@ -466,6 +900,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNavigation();
   initPicksPage();
   initBlogPage();
+  initStyleMatchGame();
   initShareButtons();
   initBackToTop();
   initReadingProgress();

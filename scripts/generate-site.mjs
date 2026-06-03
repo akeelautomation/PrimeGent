@@ -361,6 +361,7 @@ function renderHeader() {
         </a>
         <nav class="desktop-nav" aria-label="Primary">
           <a href="./index.html" data-nav-link="home">Home</a>
+          <a href="./style-match.html" data-nav-link="style-match">Style Match</a>
           <a href="./picks.html" data-nav-link="picks">Outfits</a>
           <a href="./blog.html" data-nav-link="blog">Journal</a>
           <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
@@ -384,6 +385,7 @@ function renderHeader() {
           </div>
           <nav class="mobile-nav" aria-label="Mobile primary">
             <a href="./index.html" data-nav-link="home">Home</a>
+            <a href="./style-match.html" data-nav-link="style-match">Style Match</a>
             <a href="./picks.html" data-nav-link="picks">Outfits</a>
             <a href="./blog.html" data-nav-link="blog">Journal</a>
             <a href="./privacy-policy.html" data-nav-link="privacy">Privacy</a>
@@ -407,6 +409,7 @@ function renderFooter() {
         </div>
         <div>
           <h2>Explore</h2>
+          <a href="./style-match.html">Style match</a>
           <a href="./blog.html">Journal</a>
           <a href="./picks.html">Curated picks</a>
         </div>
@@ -543,6 +546,177 @@ function renderRelatedPicks(relatedSlugs) {
     .join("");
 }
 
+function renderStyleMatchGame() {
+  const questions = [
+    {
+      key: "occasion",
+      label: "Where are you dressing for?",
+      choices: [
+        ["workday", "Workday", "Workday points toward structure and polish."],
+        ["weekend", "Weekend", "Weekend keeps the lane easy and repeatable."],
+        ["evening-out", "Evening out", "Evening out adds sharper intent."],
+        ["travel", "Travel", "Travel rewards comfort with clean layers."],
+      ],
+    },
+    {
+      key: "sharpness",
+      label: "How sharp should it feel?",
+      choices: [
+        ["relaxed", "Relaxed", "Relaxed makes the fit easier to wear."],
+        ["smart-casual", "Smart casual", "Smart casual balances effort and ease."],
+        ["polished", "Polished", "Polish raises the outfit score fast."],
+      ],
+    },
+    {
+      key: "first-reach",
+      label: "What do you reach for first?",
+      choices: [
+        ["knitwear", "Knitwear", "Knitwear gives the look texture."],
+        ["linen", "Linen", "Linen keeps warm-weather outfits crisp."],
+        ["denim", "Denim", "Denim brings weekend utility."],
+        ["light-layers", "Light layers", "Light layers make the outfit more adaptable."],
+      ],
+    },
+    {
+      key: "fit",
+      label: "What fit feels most natural?",
+      choices: [
+        ["clean-slim", "Clean and slim", "Clean fit keeps the result sharper."],
+        ["relaxed-shaped", "Relaxed but shaped", "Shaped ease is a strong daily move."],
+        ["roomy-easy", "Roomy and easy", "Roomy ease pushes the lane more casual."],
+      ],
+    },
+    {
+      key: "weather",
+      label: "What weather are you dressing around?",
+      choices: [
+        ["warm", "Warm", "Warm weather rewards lighter fabrics."],
+        ["mild", "Mild", "Mild weather leaves room for balance."],
+        ["cool", "Cool", "Cool weather makes layers useful."],
+        ["rainy", "Rainy", "Rainy weather gives practical pieces an edge."],
+      ],
+    },
+  ];
+
+  return `
+        <section class="section style-match" data-style-match>
+          <div class="container style-match__shell">
+            <div class="section-heading style-match__heading">
+              <div>
+                <p class="eyebrow">Style match</p>
+                <h2>Find your strongest outfit lane</h2>
+              </div>
+              <p>Answer five quick choices and PrimeGent will point you toward the right outfit logic and picks.</p>
+            </div>
+            <div class="style-match__grid">
+              <div class="style-match__questions">
+                <div class="style-match__gamebar">
+                  <div>
+                    <p class="eyebrow">Score challenge</p>
+                    <strong data-style-match-progress-label>1/5</strong>
+                  </div>
+                  <div class="style-match__progress" aria-hidden="true">
+                    <span data-style-match-progress-bar></span>
+                  </div>
+                </div>
+                <div class="style-match__feedback" data-style-match-feedback aria-live="polite">Make your first move.</div>
+                ${questions
+                  .map(
+                    (question, index) => `
+                      <fieldset class="style-match__question" data-style-match-question data-question="${question.key}">
+                        <legend><span>${String(index + 1).padStart(2, "0")}</span>${escapeHtml(question.label)}</legend>
+                        <div class="style-match__choices">
+                          ${question.choices
+                            .map(
+                              ([value, label, feedback]) => `
+                                <button class="style-match__choice" type="button" data-style-choice="${value}" data-style-feedback="${escapeHtml(feedback)}" aria-pressed="false">${escapeHtml(label)}</button>
+                              `,
+                            )
+                            .join("")}
+                        </div>
+                      </fieldset>
+                    `,
+                  )
+                  .join("")}
+                <div class="style-match__nav">
+                  <button class="style-match__back" type="button" data-style-match-back>Back</button>
+                </div>
+              </div>
+              <aside class="style-match__result card" aria-live="polite" data-style-match-result>
+                <div class="style-match__result-empty" data-style-match-empty>
+                  <p class="eyebrow">Score challenge</p>
+                  <h3>Beat your style score</h3>
+                  <p>Make five moves. The game scores how tightly your choices match the final lane, then gives you an outfit image, a guide, and matching picks.</p>
+                </div>
+                <div class="style-match__result-ready hidden" data-style-match-ready>
+                  <p class="eyebrow">Your result</p>
+                  <figure class="style-match__image">
+                    <img src="./static/images/style-match-smart-casual.png" alt="" loading="lazy" decoding="async" data-style-match-image>
+                  </figure>
+                  <div class="style-match__score">
+                    <div>
+                      <span data-style-match-tier>Strong match</span>
+                      <strong><span data-style-match-score>0</span>/100</strong>
+                    </div>
+                    <div class="style-match__score-track" aria-hidden="true">
+                      <span data-style-match-score-bar></span>
+                    </div>
+                    <p>Best this session: <strong data-style-match-best>0</strong></p>
+                  </div>
+                  <h3 data-style-match-title></h3>
+                  <p data-style-match-copy></p>
+                  <div class="tag-row" data-style-match-chips></div>
+                  <div class="style-match__coach">
+                    <span>Style coach</span>
+                    <p data-style-match-coach></p>
+                  </div>
+                  <div class="style-match__article-note">
+                    <span>Recommended read</span>
+                    <strong data-style-match-article-title></strong>
+                  </div>
+                  <div class="style-match__actions">
+                    <a class="btn btn-primary" href="./blog.html" data-style-match-article>Read the guide</a>
+                    <a class="btn btn-ghost" href="./picks.html" data-style-match-picks>Browse matching picks</a>
+                  </div>
+                  <button class="style-match__reset" type="button" data-style-match-reset>Beat your score</button>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+  `;
+}
+
+function renderStyleMatchPromo({ compact = false } = {}) {
+  return `
+        <section class="section${compact ? " section--tight" : ""} style-match-promo-section">
+          <div class="container">
+            <div class="style-match-promo card">
+              <div>
+                <p class="eyebrow">Style match</p>
+                <h2>${compact ? "Find your outfit lane next" : "Turn your next outfit problem into a quick match"}</h2>
+                <p>${compact ? "Answer five quick choices and get a PrimeGent lane with a matching read and curated picks." : "The PrimeGent mini game gives readers a fast style lane, then sends them to one matching article and filtered picks that fit the result."}</p>
+              </div>
+              <a class="btn btn-primary" href="./style-match.html">Play Style Match</a>
+            </div>
+          </div>
+        </section>
+  `;
+}
+
+function renderArticleGamePromo() {
+  return `
+            <aside class="article-game-callout">
+              <div>
+                <p class="eyebrow">Style match</p>
+                <h2>Not sure which outfit lane fits you?</h2>
+                <p>Answer five quick choices and PrimeGent will match you with a style lane, one fitting article, and curated picks.</p>
+              </div>
+              <a class="btn btn-primary" href="./style-match.html">Play Style Match</a>
+            </aside>
+  `;
+}
+
 function renderArticleContent(post) {
   return post.sections
     .map(
@@ -606,6 +780,8 @@ function renderIndexPage() {
             </div>
           </div>
         </section>
+
+        ${renderStyleMatchPromo()}
 
         <section class="section section--soft">
           <div class="container">
@@ -701,6 +877,34 @@ function renderPicksPage() {
             <div class="card-grid card-grid--picks" data-picks-grid>${allCards}</div>
           </div>
         </section>
+      </main>
+    `,
+  });
+}
+
+function renderStyleMatchPage() {
+  return renderPage({
+    pageId: "style-match",
+    title: "PrimeGent Style Match | Men's Outfit Mini Game",
+    description:
+      "Play the PrimeGent Style Match mini game to find a men's outfit lane, matching style article, and curated clothing picks.",
+    canonicalPath: "style-match.html",
+    ogType: "website",
+    schema: webPageSchema({
+      name: "PrimeGent Style Match",
+      description: "A five-question men's outfit mini game that recommends a style lane, article, and curated picks.",
+      pathName: "style-match.html",
+    }),
+    body: `
+      <main>
+        <section class="page-hero">
+          <div class="container page-hero__content">
+            <p class="eyebrow">PrimeGent mini game</p>
+            <h1>Play Style Match</h1>
+            <p>Pick five quick answers and get a style lane with one matching guide and curated picks. Reset it whenever you want a new recommendation.</p>
+          </div>
+        </section>
+        ${renderStyleMatchGame()}
       </main>
     `,
   });
@@ -1054,7 +1258,7 @@ function renderBlogPost(post) {
         </section>
         <section class="section section--tight">
           <div class="container article-grid article-grid--post">
-            <article class="article-content card card--prose" data-article-content>${post.image ? `<figure class="generated-blog-image"><img src="${escapeHtml(post.image)}" alt="${escapeHtml(articleImageAlt)}" loading="eager" decoding="async"></figure>` : ""}${renderArticleContent(post)}</article>
+            <article class="article-content card card--prose" data-article-content>${post.image ? `<figure class="generated-blog-image"><img src="${escapeHtml(post.image)}" alt="${escapeHtml(articleImageAlt)}" loading="eager" decoding="async"></figure>` : ""}${renderArticleGamePromo()}${renderArticleContent(post)}</article>
             <aside class="sidebar"><div class="card sidebar-card"><h2>Quick context</h2><p>${escapeHtml(post.description)}</p></div><div class="card sidebar-card"><h2>Tags</h2><div class="tag-row">${post.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div></div>${relatedProducts.length ? `<div class="card sidebar-card"><h2>Related picks</h2><ul class="bullet-list">${relatedProducts.map((product) => `<li><a href="./pick-${escapeHtml(product.slug)}.html">${escapeHtml(product.name)}</a></li>`).join("")}</ul></div>` : ""}</aside>
           </div>
         </section>
@@ -1066,6 +1270,7 @@ function renderBlogPost(post) {
 function renderSitemap() {
   const urls = [
     "",
+    "style-match.html",
     "blog.html",
     "picks.html",
     "about.html",
@@ -1403,6 +1608,7 @@ function writeOutput() {
   writeFile("static/favicon.svg", renderFavicon());
   writeFile("static/og-cover.svg", renderOgCover());
   writeFile("index.html", renderIndexPage());
+  writeFile("style-match.html", renderStyleMatchPage());
   writeFile("picks.html", renderPicksPage());
   writeFile("blog.html", renderBlogPage());
   writeFile("blog/index.html", renderRedirectPage("../blog.html", "the PrimeGent journal"));
